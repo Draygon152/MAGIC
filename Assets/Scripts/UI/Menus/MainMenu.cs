@@ -1,3 +1,5 @@
+#undef DEBUG
+
 using UnityEngine;
 
 public class MainMenu : Menu<MainMenu>
@@ -20,8 +22,10 @@ public class MainMenu : Menu<MainMenu>
 
         // Uncomment when testing quitting functionality from within
         // Unity's editor, since Application.Quit() does nothing there
-        // UnityEditor.EditorApplication.isPlaying = false;
-
+#if (DEBUG)
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
