@@ -6,7 +6,7 @@
             "id": "f8e55857-6979-48d5-9fbd-3e800ec6c41f",
             "actions": [
                 {
-                    "name": "Forwards",
+                    "name": "Forward",
                     "type": "PassThrough",
                     "id": "66bfbc97-730d-438c-a3a9-42f60fb13d35",
                     "expectedControlType": "Button",
@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Right",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "becf59f8-ca87-4540-b237-13871d4912b1",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -32,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forwards",
+                    "action": "Forward",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forwards",
+                    "action": "Forward",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,7 +54,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forwards",
+                    "action": "Forward",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -72,7 +72,7 @@
                 {
                     "name": "negative",
                     "id": "1c58a4a0-f8e4-47e9-9339-88d02f2ac74a",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -83,7 +83,7 @@
                 {
                     "name": "positive",
                     "id": "1cff8e4d-91f0-4416-b52f-948d2f96e401",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

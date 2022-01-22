@@ -1,36 +1,41 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float moveSpeed = 8f; //Controls the movement speed of player.
-    [SerializeField] private float turnSpeed = 360f; //Controls the turn speed of player.
+    [SerializeField] private float turnSpeed = 720f; //Controls the turn speed of player.
 
-    private PlayerControls inputControls; //The action map that is reading in the player's input
+    private PlayerControls PlayerControlsMap; //The Action Map that we created (Called PlayerControls) that is reading in the player's input
     private Vector3 inputDirection; //Vector to gather our WASD keys input.
 
     private void Awake()
     {
         //init the player controls action map
-        inputControls = new PlayerControls();
+        PlayerControlsMap = new PlayerControls();
+        rb = this.GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
         //Enabling control for the player
-        inputControls.Enable();
+        PlayerControlsMap.Enable();
     }
 
     private void OnDisable()
     {
         //Disabling control for the player
-        inputControls.Disable();
+        PlayerControlsMap.Disable();
     }
 
     private void Update()
     {
-        //Gathers our input from WASD Keys, set in the Input Manager system in Unity. 
-        inputDirection = new Vector3(inputControls.Move.Forwards.ReadValue<float>(), 0, inputControls.Move.Right.ReadValue<float>());
+        //Gathers our input from WASD Keys, set in the Input Manager system in Unity.
+        //Since we're in Orthographic View:
+        //In here, the X-axis should refer to our Right Input Actions "A to move left, D to move right in the X-axis".
+        //...and Z-axis would refer to our Y-axis movements "W to move up, S to move down".
+        inputDirection = new Vector3(PlayerControlsMap.Move.Right.ReadValue<float>(), 0, PlayerControlsMap.Move.Forward.ReadValue<float>());
         Turn();
     }
 
