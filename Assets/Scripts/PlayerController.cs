@@ -6,12 +6,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 8f; //Controls the movement speed of player.
     [SerializeField] private float turnSpeed = 360f; //Controls the turn speed of player.
 
+    private PlayerControls inputControls; //The action map that is reading in the player's input
     private Vector3 inputDirection; //Vector to gather our WASD keys input.
+
+    private void Awake()
+    {
+        //init the player controls action map
+        inputControls = new PlayerControls();
+    }
+
+    private void OnEnable()
+    {
+        //Enabling control for the player
+        inputControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        //Disabling control for the player
+        inputControls.Disable();
+    }
 
     private void Update()
     {
         //Gathers our input from WASD Keys, set in the Input Manager system in Unity. 
-        inputDirection = new Vector3(Input.GetAxis("HorizontalKey"), 0, Input.GetAxis("VerticalKey"));
+        inputDirection = new Vector3(inputControls.Move.Forwards.ReadValue<float>(), 0, inputControls.Move.Right.ReadValue<float>());
         Turn();
     }
 
