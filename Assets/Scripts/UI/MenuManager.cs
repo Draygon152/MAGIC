@@ -14,7 +14,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance
     {
         get;
-        set;
+        private set;
     }
 
 
@@ -24,8 +24,16 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("MenuManager Awake");
 
-        Instance = this;
-        MainMenu.Open();
+        if (Instance != null)
+            Destroy(gameObject);
+
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            MainMenu.Open();
+        }
     }
 
 
