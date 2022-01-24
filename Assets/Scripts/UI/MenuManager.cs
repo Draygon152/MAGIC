@@ -14,7 +14,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance
     {
         get;
-        set;
+        private set;
     }
 
 
