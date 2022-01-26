@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     public MainMenu mainMenuPrefab;
     public OptionsMenu optionsMenuPrefab;
+    public LobbyMenu lobbyMenuPrefab;
     public PauseMenu pauseMenuPrefab;
 
     private Stack<Menu> menuStack = new Stack<Menu>();
