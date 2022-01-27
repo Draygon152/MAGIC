@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,14 +13,21 @@ public class CountdownTimer : MonoBehaviour
     int timeRemaining;
 
     private bool timerStarted;
-    private CancellationTokenSource canceller;
+    private CancellationTokenSource cts;
 
 
-    private void Awake()
+    private void Start()
     {
         timerStarted = false;
+        cts = new CancellationTokenSource();
 
         HideCountDown();
+    }
+
+
+    private void OnDisable()
+    {
+        cts.Cancel();
     }
 
 
@@ -31,36 +37,47 @@ public class CountdownTimer : MonoBehaviour
     }
 
 
-    // Entry point for asynchronous code. Return type of void allows for
-    // method to wait for asynchronous methods to complete, but cannot
-    // catch exceptions in the same way as "async Task" declared methods
+    // Async entry point
     public async void BeginCountDown()
     {
+        Debug.Log("Countdown Started");
+
         // Reset CountDownText to the length of the timer
         CountDownText.text = $"{timerLength}";
 
-        // Reset value of timeRemaining to length of timer
-        timeRemaining = timerLength;
-        
         timerStarted = true;
         ShowCountDown();
 
-        // Wait until task timerTick finishes before running timerTick again
-        while (timeRemaining != 0)
-            await TimerTick();
+        // Get cancellation token
+        CancellationToken ctkn = cts.Token;
 
-        Debug.Log("Countdown Ended");
+
+        // Wait until task timerTick finishes before running timerTick again
+        try
+        {
+            // Reset value of timeRemaining to length of timer
+            for (timeRemaining = timerLength; timeRemaining > 0;)
+                await TimerTick(ctkn);
+        }
+
+        catch
+        {
+            Debug.Log("Countdown Cancelled");
+        }
+
+        if (timeRemaining == 0)
+        {
+            Debug.Log("Countdown Finished");
+
+            EventManager.Instance.Notify(Event.EventTypes.GameStart);
+        }
     }
 
 
     // "async Task" represents a single operation that can run asynchronously
-    private async Task TimerTick()
+    private async Task TimerTick(CancellationToken ctkn)
     {
-        // Task not complete until 1 second has passed
-        float nextSecondEndTime = Time.time + 1;
-
-        while (Time.time < nextSecondEndTime)
-            await Task.Yield();
+        await Task.Delay(1000, ctkn);
 
         // Update timeRemaining and timerText
         timeRemaining -= 1;
@@ -72,6 +89,10 @@ public class CountdownTimer : MonoBehaviour
     {
         timerStarted = false;
         HideCountDown();
+
+        cts.Cancel();
+        cts.Dispose();
+        cts = new CancellationTokenSource();
     }
 
 

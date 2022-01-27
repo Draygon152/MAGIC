@@ -5,21 +5,30 @@ public class LobbyMenu : Menu<LobbyMenu>
 {
     [SerializeField] private Toggle Player1Ready;
     [SerializeField] private Toggle Player2Ready;
+    [SerializeField] private ElementSelector P1ElementSelector;
+    [SerializeField] private ElementSelector P2ElementSelector;
     [SerializeField] private CountdownTimer timer;
 
     private bool player1IsReady;
     private bool player2IsReady;
 
 
-    protected override void Awake()
+    private void Start()
     {
-        Debug.Log("LobbyMenu Awake");
-
-        // Call the Awake() function of Menu
-        base.Awake();
-
         player1IsReady = false;
         player2IsReady = false;
+    }
+
+
+    public void Player1SelectedElement()
+    {
+        Player1Ready.interactable = true;
+    }
+
+
+    public void Player2SelectedElement()
+    {
+        Player2Ready.interactable = true;
     }
 
 
@@ -28,6 +37,8 @@ public class LobbyMenu : Menu<LobbyMenu>
         // If the toggle has just been activated
         if (Player1Ready.isOn == true)
         {
+            P1ElementSelector.DisableAllElementButtons();
+
             // Set Player1 readystate to true
             player1IsReady = true;
 
@@ -39,6 +50,8 @@ public class LobbyMenu : Menu<LobbyMenu>
         // If the toggle has just been deactivated
         else if (Player1Ready.isOn == false)
         {
+            P1ElementSelector.EnableAllElementButtons();
+
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
                 timer.StopCountDown();
@@ -54,6 +67,8 @@ public class LobbyMenu : Menu<LobbyMenu>
         // If the toggle has just been activated
         if (Player2Ready.isOn == true)
         {
+            P2ElementSelector.DisableAllElementButtons();
+
             // Set Player2 readystate to true
             player2IsReady = true;
 
@@ -65,6 +80,8 @@ public class LobbyMenu : Menu<LobbyMenu>
         // If the toggle has just been deactivated
         else if (Player2Ready.isOn == false)
         {
+            P2ElementSelector.EnableAllElementButtons();
+
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
                 timer.StopCountDown();
