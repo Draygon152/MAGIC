@@ -35,6 +35,11 @@ public class HealthManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
+
+            //This is a temp line to prevent error
+            //Liz feel free to move/change this line
+            //however is necessary
+            EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
         }
     }
 }

@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private const int NUMBER_OF_WAVES = 1; //The total number of waves the player will play through
+    [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 2; //The number of enemies remaining that will
+                                                                               //trigger the next wave, if it is two then
+                                                                               //the next wave will spawn when two enemies 
+                                                                               //are remaining
+
     [SerializeField] private GameObject playerPrefab; //THe prefab for the player
     [SerializeField] private Transform playerSpawnPoint; //The tranform for where to spawn the player
     [SerializeField] private GameObject playerCamera; //The camera that follows the players
+    [SerializeField] private GameObject enemyPrefab; //The prefab for the enemies
+    [SerializeField] private List<Transform> enemySpawnPoints; //A list of spawn points for the enemies
 
     private GameObject players; //A variable to store the player, will likely become an array later
                                 //when muiltiplayer is implemented
+    private int playerCount; //The number of players currently alive in the game
+    private int enemyCount; //The number of enemies currently alive in the game
+    private int waveNumber; //A variable for keeping track of the wave number in the game
     
     //Defining an enum for the different game states
     private enum gameState
@@ -28,24 +39,39 @@ public class GameManager : MonoBehaviour
     static public GameManager Instance
     {
         get;
-        set;
+        private set;
     }
 
     void Awake()
     {
+        Debug.Log("Game Manager Start");
+
         //Set the game state to start when the game begins
         state = gameState.start;
 
         //Set up Instance
         Instance = this;
+
+        //Initialize the couting variables
+        //They can be init to 0, since they will be
+        //increment whenever either one is spawned
+        playerCount = 0;
+        enemyCount = 0;
+
+        //initialize wave number to 0, will be set to one in StartGame
+        waveNumber = 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //Initialize the reference to the menu manager
-        menuSystem = MenuManager.Instance;
-        Debug.Log(menuSystem == null);
+        Debug.Log("Game Manager Start");
+
+        //Subscribe to events
+        //EventManager.Instance;
+        EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
+        EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
+
     }
 
     // Update is called once per frame
@@ -58,17 +84,110 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Starting Game");
-        //hide the menu manager
-        MenuManager.Instance.CloseMenu(MainMenu.Instance);
 
         //spawn in the players
         players = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation) as GameObject;
+        playerCount++;
 
         //Set the camera to follow the player
         playerCamera.GetComponent<CameraSystem>().enabled = true;
         playerCamera.GetComponent<CameraSystem>().player = players.transform;
 
+        //spawn in the first wave
+        //Might change later to start a countdown to the first wave
+        SpawnWave();
+
         //set the game state to playing
         state = gameState.playing;
+
+    }
+
+    //End the game
+    //
+    // bool WinOrLose - A boolean value that is true if the player won the game and false if they lost
+    private void EndGame(bool WinOrLose)
+    {
+        //check if the player won or lost and trigger the corresponding event
+        //and update the game state
+        if (WinOrLose)
+        {
+            Debug.Log("Player Victorious");
+
+            state = gameState.victory;
+            EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
+        }
+        else
+        {
+            Debug.Log("Player Defeated");
+
+            state = gameState.defeat;
+            EventManager.Instance.Notify(Event.EventTypes.PlayerDefeat);
+        }
+    }
+
+    //The listener for the PlayerDeath event
+    public void OnPlayerDeath()
+    {
+        //Some code will be added later for determining which player died
+        //for now there is only one player so that player must of died
+        //Set the camera to stop following that player
+        playerCamera.GetComponent<CameraSystem>().enabled = false;
+
+
+        //decrement playerCount
+        playerCount--;
+
+        //Check if players are still alive
+        if (playerCount <= 0)
+        {
+            //The player lost
+            EndGame(false);
+        }
+    }
+
+    //The listener for the EnemyDeath event
+    public void onEnemyDeath()
+    {
+        //decrement enemyCount
+        enemyCount--;
+
+        //check if final wave
+        if (waveNumber >= NUMBER_OF_WAVES)
+        {
+            //On final wave
+            //don't spawn more waves
+            //Check if player has won
+            if (enemyCount <= 0)
+            {
+                //The player won the game, trigger the event
+                EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
+            }
+        }
+        else
+        {
+            //There are more waves to spawn
+            //check if they are ready to spawn
+            if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
+            {
+                //ready to spawn next wave
+                SpawnWave();
+            }
+        }
+    }
+
+    //Spawn the next wave of enemies
+    private void SpawnWave()
+    {
+        //spawn in the enemies
+        Instantiate(enemyPrefab, enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+
+        //increment wave number
+        waveNumber++;
+    }
+
+    void OnDestroy()
+    {
+        //Marking the GameManager as nonexistent
+        Instance = null;
     }
 }

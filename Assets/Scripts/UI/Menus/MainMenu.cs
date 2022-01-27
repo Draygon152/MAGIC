@@ -8,7 +8,6 @@ public class MainMenu : Menu<MainMenu>
     {
         LobbyMenu.Open();
         // Fill in game start or additional gamemode selection menu code here
-        GameManager.Instance.StartGame();
     }
 
 

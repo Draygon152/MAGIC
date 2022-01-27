@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &139958504
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7673720306573731817, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_Name
+      value: EventManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673720306573731818, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 839377b7883b08548b7667dffd7465fb, type: 3}
 --- !u!1 &217983016
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +209,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &297780242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 297780243}
+  m_Layer: 0
+  m_Name: EnemySpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &297780243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297780242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.02, y: 0.5, z: 35.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &527720929
 PrefabInstance:
@@ -570,17 +657,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 3990407462579761780, guid: 4ba9512012c1a104f93194064e7d5635, type: 3}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1325060571}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 8107796699639736997, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
+      objectReference: {fileID: 773196374174004151, guid: c00409dff5fccdb4792ae9f1580526cc, type: 3}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: playerSpawnPoint
       value: 
       objectReference: {fileID: 217983017}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: enemySpawnPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: enemySpawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 297780243}
     - target: {fileID: 816934397636797242, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: m_Name
       value: GameManager
