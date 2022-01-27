@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Game Manager Start");
+        Debug.Log("Game Manager Awake");
 
         //Set the game state to start when the game begins
         state = gameState.start;
@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
         //EventManager.Instance;
         EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
+        EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, onEnemyDeath);
 
     }
 
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
     //The listener for the PlayerDeath event
     public void OnPlayerDeath()
     {
+        Debug.Log("Player has died");
         //Some code will be added later for determining which player died
         //for now there is only one player so that player must of died
         //Set the camera to stop following that player
@@ -148,23 +150,28 @@ public class GameManager : MonoBehaviour
     //The listener for the EnemyDeath event
     public void onEnemyDeath()
     {
+        Debug.Log("Enemy has died");
+
         //decrement enemyCount
         enemyCount--;
 
         //check if final wave
         if (waveNumber >= NUMBER_OF_WAVES)
         {
+            Debug.Log("Final wave");
+            Debug.Log(enemyCount);
             //On final wave
             //don't spawn more waves
             //Check if player has won
             if (enemyCount <= 0)
             {
                 //The player won the game, trigger the event
-                EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
+                EndGame(true);
             }
         }
         else
         {
+            Debug.Log("Not final wave");
             //There are more waves to spawn
             //check if they are ready to spawn
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
@@ -180,6 +187,7 @@ public class GameManager : MonoBehaviour
     {
         //spawn in the enemies
         Instantiate(enemyPrefab, enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+        enemyCount++;
 
         //increment wave number
         waveNumber++;
