@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3275903192345200077}
   - component: {fileID: 6511053656032553584}
   - component: {fileID: 502454111672126949}
-  - component: {fileID: 4593205343361822145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4593205343361822145
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 419303023603588595}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5654103120361798294
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,12 +91,12 @@ GameObject:
   m_Component:
   - component: {fileID: 146512776262495366}
   - component: {fileID: 8496697790604772030}
-  - component: {fileID: 4806038965302703285}
-  - component: {fileID: 1183401574670890039}
   - component: {fileID: 1890200579}
-  m_Layer: 0
+  - component: {fileID: 1183401574670890039}
+  - component: {fileID: 86483295079533102}
+  m_Layer: 7
   m_Name: ArcaneBlast!
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 5654103120361798294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 504.6, y: 2.11, z: 200}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3275903192345200077}
   m_Father: {fileID: 0}
@@ -141,9 +127,36 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4806038965302703285
+--- !u!114 &1890200579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654103120361798294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfDamage: 1
+  currentSpell: {fileID: 1183401574670890039}
+--- !u!114 &1183401574670890039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654103120361798294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellToCast: {fileID: 11400000, guid: eb16ea8cd5753bc45ae0f3203a33a373, type: 2}
+--- !u!54 &86483295079533102
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,30 +172,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1183401574670890039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654103120361798294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpellToCast: {fileID: 11400000, guid: eb16ea8cd5753bc45ae0f3203a33a373, type: 2}
---- !u!114 &1890200579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654103120361798294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amountOfDamage: 1
-  currentSpell: {fileID: 1183401574670890039}
