@@ -6,8 +6,7 @@ public class MainMenu : Menu<MainMenu>
 {
     public void PlayGamePressed()
     {
-        // Fill in game start or additional gamemode selection menu code here
-        GameManager.Instance.StartGame();
+        LobbyMenu.Open();
     }
 
 

@@ -92,6 +92,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Spells",
+            "id": "6860277a-6316-474b-9ae4-bc89b64c60b3",
+            "actions": [
+                {
+                    "name": "Cast",
+                    "type": "Button",
+                    "id": "2e4487ff-cfcd-4579-b852-1ed7dfb357c5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2a6b8f07-6142-4652-936a-f04c4ca0d197",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
