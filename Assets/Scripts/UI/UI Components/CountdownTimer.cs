@@ -5,15 +5,14 @@ using System.Threading.Tasks;
 
 public class CountdownTimer : MonoBehaviour
 {
-    [SerializeField] private Text CountDownText;
+    [SerializeField] private Text CountDownText;            // Holds current time remaining
     [SerializeField] private Image CountDownTextBackground;
 
-    // Time remaining in seconds
-    [SerializeField] private int timerLength;
-    int timeRemaining;
+    [SerializeField] private int timerLength; // Max length of timer
+    int timeRemaining;                        // Time remaining in seconds
 
     private bool timerStarted;
-    private CancellationTokenSource cts;
+    private CancellationTokenSource cts;      // Used for cancelling async Tasks
 
 
     private void Start()
@@ -51,7 +50,6 @@ public class CountdownTimer : MonoBehaviour
         // Get cancellation token
         CancellationToken ctkn = cts.Token;
 
-
         // Wait until task timerTick finishes before running timerTick again
         try
         {
@@ -85,6 +83,7 @@ public class CountdownTimer : MonoBehaviour
     }
 
 
+    // Stops current countdown
     public void StopCountDown()
     {
         timerStarted = false;
@@ -96,6 +95,7 @@ public class CountdownTimer : MonoBehaviour
     }
 
 
+    // Displays countdown UI elements
     private void ShowCountDown()
     {
         CountDownText.gameObject.SetActive(true);
@@ -103,6 +103,7 @@ public class CountdownTimer : MonoBehaviour
     }
 
 
+    // Hides countdown UI elements
     private void HideCountDown()
     {
         CountDownText.gameObject.SetActive(false);

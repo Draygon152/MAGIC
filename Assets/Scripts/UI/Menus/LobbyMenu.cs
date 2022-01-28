@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class LobbyMenu : Menu<LobbyMenu>
 {
     [SerializeField] private Toggle Player1Ready;
     [SerializeField] private Toggle Player2Ready;
-    [SerializeField] private ElementSelector P1ElementSelector;
+    [SerializeField] private ElementSelector P1ElementSelector; // UI elements for players to select Elemental Affinity
     [SerializeField] private ElementSelector P2ElementSelector;
-    [SerializeField] private CountdownTimer timer;
+    [SerializeField] private Button MainMenuButton;
+    [SerializeField] private CountdownTimer timer; // Timer, provides countdown, game starts when countdown reaches 0
 
     private bool player1IsReady;
     private bool player2IsReady;
@@ -17,6 +19,9 @@ public class LobbyMenu : Menu<LobbyMenu>
     {
         player1IsReady = false;
         player2IsReady = false;
+
+        // Subscribe GameStartedListener to GameStart event
+        EventManager.Instance.Subscribe(Event.EventTypes.GameStart, GameStartedListener);
     }
 
 
@@ -44,7 +49,10 @@ public class LobbyMenu : Menu<LobbyMenu>
 
             // If Player2 is also ready, start countdown
             if (player2IsReady)
+            {
                 timer.BeginCountDown();
+                MainMenuButton.interactable = false;
+            }
         }
 
         // If the toggle has just been deactivated
@@ -54,7 +62,10 @@ public class LobbyMenu : Menu<LobbyMenu>
 
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
+            {
                 timer.StopCountDown();
+                MainMenuButton.interactable = true;
+            }
 
             // Set Player1's readystate to false
             player1IsReady = false;
@@ -74,7 +85,10 @@ public class LobbyMenu : Menu<LobbyMenu>
 
             // If Player1 is also ready, start countdown
             if (player1IsReady)
+            {
                 timer.BeginCountDown();
+                MainMenuButton.interactable = false;
+            }
         }
 
         // If the toggle has just been deactivated
@@ -84,10 +98,28 @@ public class LobbyMenu : Menu<LobbyMenu>
 
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
+            {
                 timer.StopCountDown();
+                MainMenuButton.interactable = true;
+            }
 
             // Set Player2's readystate to false
             player2IsReady = false;
         }
+    }
+
+
+    public void ReturnToMainMenu()
+    {
+        // Remove subscription to GameStart event
+        EventManager.Instance.Unsubscribe(Event.EventTypes.GameStart, GameStartedListener);
+
+        Close();
+    }
+
+
+    private void GameStartedListener()
+    {
+        MenuManager.Instance.CloseAllMenus();
     }
 }

@@ -39,6 +39,7 @@ public class HealthManager : MonoBehaviour
             //This is a temp line to prevent error
             //Liz feel free to move/change this line
             //however is necessary
+            //EventManager.Instance.Notify(Event.EventTypes.PlayerDeath);
             EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
         }
     }
