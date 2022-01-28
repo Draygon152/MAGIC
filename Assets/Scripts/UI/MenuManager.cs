@@ -136,4 +136,12 @@ public class MenuManager : MonoBehaviour
         if (menuStack.Count > 0)
             menuStack.Peek().gameObject.SetActive(true);
     }
+
+
+    // Closes all open menus
+    public void CloseAllMenus()
+    {
+        while (menuStack.Count > 0)
+            CloseTopMenu();
+    }
 }
