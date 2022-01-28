@@ -6,15 +6,16 @@ TagManager:
   tags:
   - Enemy
   - Object
+  - Spell
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Spell
   - 
   - 
   - 

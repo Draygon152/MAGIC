@@ -12,9 +12,10 @@ public class DamageGiverManager : MonoBehaviour
         player.LoseHealth(amountOfDamage);
     }
 
-    public void DamageEnemy(EnemyHealthManager enemy)
+    public void DamageEnemy(EnemyHealthManager enemy, int Dmg = 1)
     {
-        enemy.LoseHealth(amountOfDamage);
+
+        enemy.LoseHealth(Dmg);
     }
 
     public void DamageObject(ObjectHealthManager obj)

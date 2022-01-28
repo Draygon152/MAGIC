@@ -114,6 +114,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Spells"",
+            ""id"": ""6860277a-6316-474b-9ae4-bc89b64c60b3"",
+            ""actions"": [
+                {
+                    ""name"": ""Cast"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e4487ff-cfcd-4579-b852-1ed7dfb357c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2a6b8f07-6142-4652-936a-f04c4ca0d197"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -122,6 +150,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Move = asset.FindActionMap("Move", throwIfNotFound: true);
         m_Move_Forward = m_Move.FindAction("Forward", throwIfNotFound: true);
         m_Move_Right = m_Move.FindAction("Right", throwIfNotFound: true);
+        // Spells
+        m_Spells = asset.FindActionMap("Spells", throwIfNotFound: true);
+        m_Spells_Cast = m_Spells.FindAction("Cast", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,9 +249,46 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public MoveActions @Move => new MoveActions(this);
+
+    // Spells
+    private readonly InputActionMap m_Spells;
+    private ISpellsActions m_SpellsActionsCallbackInterface;
+    private readonly InputAction m_Spells_Cast;
+    public struct SpellsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public SpellsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Cast => m_Wrapper.m_Spells_Cast;
+        public InputActionMap Get() { return m_Wrapper.m_Spells; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SpellsActions set) { return set.Get(); }
+        public void SetCallbacks(ISpellsActions instance)
+        {
+            if (m_Wrapper.m_SpellsActionsCallbackInterface != null)
+            {
+                @Cast.started -= m_Wrapper.m_SpellsActionsCallbackInterface.OnCast;
+                @Cast.performed -= m_Wrapper.m_SpellsActionsCallbackInterface.OnCast;
+                @Cast.canceled -= m_Wrapper.m_SpellsActionsCallbackInterface.OnCast;
+            }
+            m_Wrapper.m_SpellsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Cast.started += instance.OnCast;
+                @Cast.performed += instance.OnCast;
+                @Cast.canceled += instance.OnCast;
+            }
+        }
+    }
+    public SpellsActions @Spells => new SpellsActions(this);
     public interface IMoveActions
     {
         void OnForward(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+    }
+    public interface ISpellsActions
+    {
+        void OnCast(InputAction.CallbackContext context);
     }
 }
