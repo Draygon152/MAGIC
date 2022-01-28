@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     public MainMenu mainMenuPrefab;
     public OptionsMenu optionsMenuPrefab;
+    public LobbyMenu lobbyMenuPrefab;
     public PauseMenu pauseMenuPrefab;
 
     private Stack<Menu> menuStack = new Stack<Menu>();
@@ -24,8 +25,16 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("MenuManager Awake");
 
-        Instance = this;
-        MainMenu.Open();
+        if (Instance != null)
+            Destroy(gameObject);
+
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            MainMenu.Open();
+        }
     }
 
 

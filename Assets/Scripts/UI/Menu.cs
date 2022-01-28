@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Base class for all game menus, Singleton
+// Base class for all menus, Singleton
 public abstract class Menu<T> : Menu where T : Menu<T>
 {
     // Property with public read-access, private write-access
@@ -19,7 +19,7 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     // virtual to allow for overloading and specifying functionality in children
     protected virtual void Awake()
     {
-        // Set Instance to refer to the current instantiation of this class
+        // Set Instance to refer to current instance
         Instance = (T)this;
     }
 
