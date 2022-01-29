@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
-  m_Name: LickOfFire
+  m_Name: Icicle
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 3
   timeBetweenCasts: 3
   numInstances: -1
   castSpeed: 0.1
-  spellSpeed: 9
-  spellLifetime: 0.75
-  radius: 0.4
+  spellSpeed: 10
+  spellLifetime: 0.5
+  radius: 0.5
   self: 0
