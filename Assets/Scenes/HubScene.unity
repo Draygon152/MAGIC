@@ -650,7 +650,7 @@ PrefabInstance:
     - target: {fileID: 811485582123301815, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
       propertyPath: spellToCast
       value: 
-      objectReference: {fileID: 1143649094900738364, guid: 32300b4c9302b8842b9ded892c64cceb, type: 3}
+      objectReference: {fileID: 1283671639810638623, guid: a9fefbbad55a3d446b9e121397e6ff9f, type: 3}
     - target: {fileID: 3891170637809442976, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.176

@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castlocation: {fileID: 3891170637809442976}
-  spellToCast: {fileID: 1183401574670890039, guid: 5acae642f1466774da8f55d53ad9eb50, type: 3}
+  spellToCast: {fileID: 4168642566499989740, guid: 8fab2742017d775489da061a2ae4c954, type: 3}
 --- !u!114 &2141222732
 MonoBehaviour:
   m_ObjectHideFlags: 0
