@@ -10,13 +10,20 @@ public class PlayerGivesDamage : DamageGiverManager
         {
             Debug.Log("Collided Object!");
             ObjectHealthManager obj = collision.gameObject.GetComponentInParent<ObjectHealthManager>();
-            DamageObject(obj);
+            if (obj != null)
+            { 
+                DamageObject(obj, 0);
+            }
+            
         }
         if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("Collided Enemy!");
             EnemyHealthManager enemy = collision.gameObject.GetComponentInParent<EnemyHealthManager>();
-            DamageEnemy(enemy);
+            if (enemy != null)
+            {
+                DamageEnemy(enemy, 0);
+            }
         }
     }
 }
