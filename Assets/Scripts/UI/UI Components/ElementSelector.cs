@@ -6,10 +6,12 @@ public class ElementSelector : MonoBehaviour
 {
     [SerializeField] private Text SelectedElementText;
     [SerializeField] private List<Button> ButtonList;
+    [SerializeField] private Element SelectedElement;
 
-    private void ChangeSelectedElement(string newElementText)
+    public void ChangeSelectedElement(Element selectedElement)
     {
-        SelectedElementText.text = $"CURRENTLY SELECTED: {newElementText}";
+        SelectedElement = selectedElement;
+        SelectedElementText.text = $"CURRENTLY SELECTED: {selectedElement.GetElementName()}";
 
         // TODO: Add event notification code to notify other objects which element a player selected
     }
