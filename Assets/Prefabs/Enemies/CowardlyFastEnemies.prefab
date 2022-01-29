@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4084294476649512066}
   - component: {fileID: 4084294476649512065}
   m_Layer: 0
-  m_Name: CowardButFastEnemies
+  m_Name: CowardlyFastEnemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
