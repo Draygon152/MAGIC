@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObjectGivesDamage : DamageGiverManager
 {
+    [SerializeField] private int damageDealt;
+
     // This function checks if player collided to Object
     private void OnCollisionEnter(Collision collision)
     {
@@ -11,7 +13,7 @@ public class ObjectGivesDamage : DamageGiverManager
         {
             Debug.Log("Collided!");
             PlayerHealthManager player = collision.gameObject.GetComponentInParent<PlayerHealthManager>();
-            DamagePlayer(player);
+            DamagePlayer(player, damageDealt);
         }
     }
 }

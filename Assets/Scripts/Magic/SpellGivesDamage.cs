@@ -12,7 +12,7 @@ public class SpellGivesDamage : DamageGiverManager
         {
             Debug.Log("Collided Object!");
             ObjectHealthManager obj = collision.gameObject.GetComponentInParent<ObjectHealthManager>();
-            DamageObject(obj);
+            DamageObject(obj, currentSpell.SpellToCast.damage);
             Destroy(gameObject); //destroy the spell when it collides
         }
         if (collision.gameObject.tag == "Enemy")
