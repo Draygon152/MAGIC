@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1109,7 +1109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990407462579761780, guid: 4ba9512012c1a104f93194064e7d5635, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ba9512012c1a104f93194064e7d5635, type: 3}
@@ -1123,6 +1123,10 @@ PrefabInstance:
     - target: {fileID: 834763634104051657, guid: 676cdca0cbaead14b9fa48e9c7afbd69, type: 3}
       propertyPath: m_Name
       value: LawsonTheCylinder
+      objectReference: {fileID: 0}
+    - target: {fileID: 834763634104051657, guid: 676cdca0cbaead14b9fa48e9c7afbd69, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3934561799296824368, guid: 676cdca0cbaead14b9fa48e9c7afbd69, type: 3}
       propertyPath: m_RootOrder
@@ -1195,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3291662041956837919, guid: e9931c21da860d14f941405b134f23e4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3647697611610394460, guid: e9931c21da860d14f941405b134f23e4, type: 3}
       propertyPath: m_RootOrder
@@ -1260,7 +1264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869154099352159274, guid: 1c93e895a63afb84a9c4646c22f4dd9d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5762238364892774092, guid: 1c93e895a63afb84a9c4646c22f4dd9d, type: 3}
       propertyPath: target
@@ -1430,7 +1434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8022932198237945814, guid: 305c21d6ab4c30f4f8a62313d82e3c7b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8087271317450648121, guid: 305c21d6ab4c30f4f8a62313d82e3c7b, type: 3}
       propertyPath: target

@@ -1,23 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowToTarget : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody objRigidbody;
-    [SerializeField]
-    private Transform target;
-    [SerializeField]
-    private float speed;
-    [SerializeField]
-    private float turnSpeed;
-    [SerializeField]
-    private float distanceFromTarget;
-    [SerializeField]
-    private float tooCloseToTarget;
-    [SerializeField]
-    private bool cowardly;
+    [SerializeField] private Rigidbody objRigidbody;
+    [SerializeField] private Transform target;
+    [SerializeField] private float speed;
+    [SerializeField] private float turnSpeed;
+    [SerializeField] private float distanceFromTarget;
+    [SerializeField] private float tooCloseToTarget;
+    [SerializeField] private bool cowardly;
 
     private void Start()
     {
@@ -26,9 +17,7 @@ public class FollowToTarget : MonoBehaviour
         // If tooCloseToTarget is greater than distanceFromTarget, it will adjust the distance to be
         // greater than tooCloseToTarget to avoid object from jittering. This occurs ONLY if cowardly is enabled.
         if (distanceFromTarget <= tooCloseToTarget && cowardly)
-        {
             distanceFromTarget = tooCloseToTarget + 0.5f;
-        }
     }
 
     private void Update()
