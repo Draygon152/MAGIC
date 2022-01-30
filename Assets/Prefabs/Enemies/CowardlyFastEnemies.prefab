@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4084294476649512067}
   - component: {fileID: 4084294476649512066}
   - component: {fileID: 4084294476649512065}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: CowardlyFastEnemies
   m_TagString: Enemy
   m_Icon: {fileID: 0}
