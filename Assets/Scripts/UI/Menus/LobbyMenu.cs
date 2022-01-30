@@ -19,9 +19,6 @@ public class LobbyMenu : Menu<LobbyMenu>
     {
         player1IsReady = false;
         player2IsReady = false;
-
-        // Subscribe GameStartedListener to GameStart event
-        EventManager.Instance.Subscribe(Event.EventTypes.GameStart, GameStartedListener);
     }
 
 
@@ -111,15 +108,6 @@ public class LobbyMenu : Menu<LobbyMenu>
 
     public void ReturnToMainMenu()
     {
-        // Remove subscription to GameStart event
-        EventManager.Instance.Unsubscribe(Event.EventTypes.GameStart, GameStartedListener);
-
         Close();
-    }
-
-
-    private void GameStartedListener()
-    {
-        MenuManager.Instance.CloseAllMenus();
     }
 }

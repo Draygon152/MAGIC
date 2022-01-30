@@ -71,17 +71,25 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
         EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, onEnemyDeath);
-
     }
 
     //A function to start the game
     public void StartGame()
     {
         Debug.Log("Starting Game");
-
+        
         //spawn in the players
         players = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
         playerCount++;
+
+        LobbyMenu.Close();
+        HUD.Open();
+
+        // Grab Player HealthManagers
+        HealthManager P1HealthManager = players.GetComponent<HealthManager>();
+
+        P1HealthManager.setPlayerHealthMethod = HUD.Instance.SetP1CurHealth;
+        P1HealthManager.setPlayerMaxHealthMethod = HUD.Instance.SetP1MaxHealth;
 
         //Set the camera to follow the player
         playerCamera.GetComponent<CameraSystem>().enabled = true;
@@ -93,7 +101,6 @@ public class GameManager : MonoBehaviour
 
         //set the game state to playing
         state = gameState.playing;
-
     }
 
     //End the game

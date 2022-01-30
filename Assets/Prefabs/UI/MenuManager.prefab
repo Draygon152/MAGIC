@@ -46,4 +46,5 @@ MonoBehaviour:
   mainMenuPrefab: {fileID: 1453953993, guid: e7a1d7b5033b0f14493ddd61a7f13c7d, type: 3}
   optionsMenuPrefab: {fileID: 3760760129832242299, guid: 6b459b0e52609d245bdc92206160f1cc, type: 3}
   lobbyMenuPrefab: {fileID: 1430357344395387687, guid: ecb04d465a223cc478cb7376f629b9cd, type: 3}
+  hudPrefab: {fileID: 5071869309287445843, guid: 07d6bce025642ca4a8d2d5b38638fedd, type: 3}
   pauseMenuPrefab: {fileID: 0}

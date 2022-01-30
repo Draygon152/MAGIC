@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1430357343775589311}
   - component: {fileID: 1430357343775589310}
   - component: {fileID: 1430357343775589305}
+  - component: {fileID: 3237687992574813796}
   m_Layer: 5
   m_Name: IceButton
   m_TagString: Untagged
@@ -123,10 +124,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357345092175608}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 3237687992574813796}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ICE
@@ -144,6 +145,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3237687992574813796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357343775589307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176c40072bbb4304083c819fb90cc9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357343872489748
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +220,7 @@ MonoBehaviour:
   - {fileID: 1430357344518236548}
   - {fileID: 1430357345555724891}
   - {fileID: 1430357344612093085}
+  SelectedElement: {fileID: 0}
 --- !u!1 &1430357343885769838
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +233,7 @@ GameObject:
   - component: {fileID: 1430357343885769874}
   - component: {fileID: 1430357343885769837}
   - component: {fileID: 1430357343885769836}
+  - component: {fileID: 4085366229801391792}
   m_Layer: 5
   m_Name: WindButton
   m_TagString: Untagged
@@ -330,10 +345,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357345092175608}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 4085366229801391792}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: WIND
@@ -351,6 +366,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4085366229801391792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357343885769838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6492a56f18535bd4692a9ec9cce78bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357344011470209
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,8 +444,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: e659f60fe46f2b24883c92860d6ab6ca, type: 3}
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -442,6 +469,7 @@ GameObject:
   - component: {fileID: 1430357344047247395}
   - component: {fileID: 1430357344047247394}
   - component: {fileID: 1430357344047247421}
+  - component: {fileID: 4862726934039573275}
   m_Layer: 5
   m_Name: LightningButton
   m_TagString: Untagged
@@ -553,10 +581,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357345092175608}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 4862726934039573275}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: LIGHTNING
@@ -574,6 +602,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4862726934039573275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357344047247423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acaec9d1ec9040489adcf140c801d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357344066681247
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +626,7 @@ GameObject:
   - component: {fileID: 1430357344066681219}
   - component: {fileID: 1430357344066681218}
   - component: {fileID: 1430357344066681245}
+  - component: {fileID: 147438737094742131}
   m_Layer: 5
   m_Name: ArcaneButton
   m_TagString: Untagged
@@ -697,10 +738,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357343872489754}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 147438737094742131}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ARCANE
@@ -718,6 +759,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &147438737094742131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357344066681247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7052a64648a294b44813e60ef7f79b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357344114539801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,8 +1085,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: e659f60fe46f2b24883c92860d6ab6ca, type: 3}
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -1183,6 +1236,7 @@ GameObject:
   - component: {fileID: 1430357344518236554}
   - component: {fileID: 1430357344518236549}
   - component: {fileID: 1430357344518236548}
+  - component: {fileID: 5144239343937661110}
   m_Layer: 5
   m_Name: LightningButton
   m_TagString: Untagged
@@ -1294,10 +1348,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357343872489754}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 5144239343937661110}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: LIGHTNING
@@ -1315,6 +1369,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5144239343937661110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357344518236550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acaec9d1ec9040489adcf140c801d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357344606143780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1393,7 @@ GameObject:
   - component: {fileID: 1430357344606143784}
   - component: {fileID: 1430357344606143787}
   - component: {fileID: 1430357344606143786}
+  - component: {fileID: 2765054776213114826}
   m_Layer: 5
   m_Name: IceButton
   m_TagString: Untagged
@@ -1438,10 +1505,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357343872489754}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2765054776213114826}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ICE
@@ -1459,6 +1526,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2765054776213114826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357344606143780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176c40072bbb4304083c819fb90cc9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357344612093087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,6 +1550,7 @@ GameObject:
   - component: {fileID: 1430357344612093059}
   - component: {fileID: 1430357344612093058}
   - component: {fileID: 1430357344612093085}
+  - component: {fileID: 5767866185806970446}
   m_Layer: 5
   m_Name: WindButton
   m_TagString: Untagged
@@ -1582,10 +1662,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357343872489754}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 5767866185806970446}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: WIND
@@ -1603,6 +1683,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5767866185806970446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357344612093087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6492a56f18535bd4692a9ec9cce78bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357344781427463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,6 +1808,7 @@ GameObject:
   - component: {fileID: 1430357344936558470}
   - component: {fileID: 1430357344936558465}
   - component: {fileID: 1430357344936558464}
+  - component: {fileID: 6979533330735716559}
   m_Layer: 5
   m_Name: ArcaneButton
   m_TagString: Untagged
@@ -1827,10 +1920,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357345092175608}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 6979533330735716559}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ARCANE
@@ -1848,6 +1941,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6979533330735716559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357344936558466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7052a64648a294b44813e60ef7f79b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357345047194845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1965,7 @@ GameObject:
   - component: {fileID: 1430357345047194817}
   - component: {fileID: 1430357345047194816}
   - component: {fileID: 1430357345047194819}
+  - component: {fileID: 5607537095233955989}
   m_Layer: 5
   m_Name: NatureButton
   m_TagString: Untagged
@@ -1971,10 +2077,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357345092175608}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 5607537095233955989}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: NATURE
@@ -1992,6 +2098,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5607537095233955989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357345047194845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c98ec39a88e2f34b94a6c157ec22ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357345092175610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2173,7 @@ MonoBehaviour:
   - {fileID: 1430357344047247421}
   - {fileID: 1430357345047194819}
   - {fileID: 1430357343885769836}
+  SelectedElement: {fileID: 0}
 --- !u!1 &1430357345094933768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,6 +2186,7 @@ GameObject:
   - component: {fileID: 1430357345094933772}
   - component: {fileID: 1430357345094933775}
   - component: {fileID: 1430357345094933774}
+  - component: {fileID: 5095893630437138206}
   m_Layer: 5
   m_Name: FireButton
   m_TagString: Untagged
@@ -2178,10 +2298,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357343872489754}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 5095893630437138206}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: FIRE
@@ -2199,6 +2319,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5095893630437138206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357345094933768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326a43ea6f0c5d644864892907838832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357345129806567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,12 +2472,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: e659f60fe46f2b24883c92860d6ab6ca, type: 3}
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 50
+    m_MaxSize: 70
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2495,12 +2627,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: e659f60fe46f2b24883c92860d6ab6ca, type: 3}
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 50
+    m_MaxSize: 70
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2772,6 +2904,7 @@ GameObject:
   - component: {fileID: 1430357345555724889}
   - component: {fileID: 1430357345555724888}
   - component: {fileID: 1430357345555724891}
+  - component: {fileID: 6249268624820676772}
   m_Layer: 5
   m_Name: NatureButton
   m_TagString: Untagged
@@ -2883,10 +3016,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357343872489754}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 6249268624820676772}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: NATURE
@@ -2904,6 +3037,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6249268624820676772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357345555724885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c98ec39a88e2f34b94a6c157ec22ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357345638735495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2970,7 +3115,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
@@ -3093,6 +3238,7 @@ GameObject:
   - component: {fileID: 1430357345764104350}
   - component: {fileID: 1430357345764104345}
   - component: {fileID: 1430357345764104344}
+  - component: {fileID: 1469875755366880892}
   m_Layer: 5
   m_Name: FireButton
   m_TagString: Untagged
@@ -3204,10 +3350,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1430357345092175608}
         m_TargetAssemblyTypeName: ElementSelector, Assembly-CSharp
         m_MethodName: ChangeSelectedElement
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1469875755366880892}
+          m_ObjectArgumentAssemblyTypeName: Element, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: FIRE
@@ -3225,6 +3371,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1469875755366880892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430357345764104346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326a43ea6f0c5d644864892907838832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1430357345864131663
 GameObject:
   m_ObjectHideFlags: 0
@@ -3291,7 +3449,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
@@ -3370,12 +3528,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: e659f60fe46f2b24883c92860d6ab6ca, type: 3}
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
-    m_MaxSize: 50
+    m_MaxSize: 70
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3573,6 +3731,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}
+--- !u!4 &1430357345477866808 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6072304469572764377, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}
+  m_PrefabInstance: {fileID: 5160156312028510177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1430357345477866809 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6072304469572764376, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}
@@ -3584,8 +3747,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee550127171df8a4d8313fff7db8a810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1430357345477866808 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6072304469572764377, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}
-  m_PrefabInstance: {fileID: 5160156312028510177}
-  m_PrefabAsset: {fileID: 0}

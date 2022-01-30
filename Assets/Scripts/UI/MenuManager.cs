@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     public MainMenu mainMenuPrefab;
     public OptionsMenu optionsMenuPrefab;
     public LobbyMenu lobbyMenuPrefab;
+    public HUD hudPrefab;
     public PauseMenu pauseMenuPrefab;
 
     private Stack<Menu> menuStack = new Stack<Menu>();
@@ -141,7 +142,11 @@ public class MenuManager : MonoBehaviour
     // Closes all open menus
     public void CloseAllMenus()
     {
-        while (menuStack.Count > 0)
+        Debug.Log("Closing All Menus");
+
+        int openMenus = menuStack.Count;
+
+        for (int i = 0; i < openMenus; i++)
             CloseTopMenu();
     }
 }
