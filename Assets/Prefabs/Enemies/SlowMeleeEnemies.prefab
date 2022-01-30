@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4115890081935968877}
   - component: {fileID: 2306212067314150636}
   - component: {fileID: 4602983501476658035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlowMeleeEnemies
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3291662041956837919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 512.89, y: 0.6467266, z: 193}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -160,4 +160,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d192b729b42964f47ae5c9180228c2e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfDamage: 5
+  damageDealt: 3

@@ -1,21 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealthManager : HealthManager
 {
-    /*
-    // Currently, LoseHealth() deletes the player since it dies when reached to 0.
-    // However, deleting a player object will cause an error because of the camera looking for it.
+    public delegate void UpdateHealthBar(int newCurrentHealth);
+    public delegate void UpdateHealthBarMax(int newMaxHealth);
 
-    // LoseHealth() substracts Player's health according to the number of damage.
-    public override void LoseHealth(int numDamage)
+    public UpdateHealthBar setHealthBarValue;  // Contains pointer to function responsible for setting HealthBar's current value
+    public UpdateHealthBarMax setHealthBarMax; // Contains pointer to function responsible for setting HealthBar max
+
+
+
+    protected override void Start()
     {
-        currentHealth -= numDamage;
+        base.Start();
+
+        InitializeHealthBar();
+    }
+
+
+    private void InitializeHealthBar()
+    {
+        setHealthBarMax(maxHealth);
+        setHealthBarValue(currentHealth);
+    }
+
+
+    public void GainHealth(int healAmount)
+    {
+        currentHealth += healAmount;
+
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        setHealthBarValue(currentHealth);
+    }
+
+
+    public override void LoseHealth(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+        Debug.Log($"Health of {gameObject.tag} after damage: {currentHealth}");
+
+        // If health becomes 0 or less, player dies
         if (currentHealth <= 0)
         {
-            //Trigger an event when Player reaches 0 (for example, a gameover screens)
+            currentHealth = 0;
+            setHealthBarValue(currentHealth);
+
+            // If the player runs out of hp, disable the player instead of destroying, to 
+            gameObject.SetActive(false);
+
+            EventManager.Instance.Notify(Event.EventTypes.PlayerDeath);
         }
+
+        // If health is not yet empty, just update HealthBar
+        else
+            setHealthBarValue(currentHealth);
     }
-    */
 }

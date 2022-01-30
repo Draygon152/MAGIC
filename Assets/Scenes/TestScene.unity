@@ -344,7 +344,7 @@ PrefabInstance:
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: enemyPrefab
       value: 
-      objectReference: {fileID: 3291662041956837919, guid: e9931c21da860d14f941405b134f23e4, type: 3}
+      objectReference: {fileID: 8022932198237945814, guid: 305c21d6ab4c30f4f8a62313d82e3c7b, type: 3}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: playerCamera
       value: 
