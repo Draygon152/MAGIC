@@ -1,8 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealthManager : HealthManager
 {
-    // Currently empty as we do not know if more will added to the Enemy health manager.
+    public override void LoseHealth(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+
+        Debug.Log($"Health of {gameObject.tag} after damage: {currentHealth}");
+
+        // If health becomes 0 or less, enemy destroyed
+        if (currentHealth <= 0)
+        {
+            // TODO: Implement option to spawn a higher-tier spell drop at location of death
+
+            Destroy(gameObject);
+        }
+    }
 }

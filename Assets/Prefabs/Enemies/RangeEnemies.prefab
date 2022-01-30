@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7606771018075893156}
   - component: {fileID: 5762238364892774092}
   - component: {fileID: 7606771018075892831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RangeEnemies
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3869154099352159274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 515.88, y: 2.73, z: 197.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

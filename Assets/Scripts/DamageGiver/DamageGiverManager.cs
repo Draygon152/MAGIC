@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageGiverManager : MonoBehaviour
@@ -20,6 +18,4 @@ public class DamageGiverManager : MonoBehaviour
     {
         obj.LoseHealth(amountOfDamage);
     }
-
-    
 }

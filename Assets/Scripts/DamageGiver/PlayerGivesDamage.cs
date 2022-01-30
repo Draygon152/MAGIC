@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerGivesDamage : DamageGiverManager
 {
+    [SerializeField] private int damageDealt;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Object")
@@ -11,19 +11,15 @@ public class PlayerGivesDamage : DamageGiverManager
             Debug.Log("Collided Object!");
             ObjectHealthManager obj = collision.gameObject.GetComponentInParent<ObjectHealthManager>();
             if (obj != null)
-            { 
-                DamageObject(obj, 0);
-            }
-            
+                DamageObject(obj, damageDealt);            
         }
-        if (collision.gameObject.tag == "Enemy")
+
+        else if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("Collided Enemy!");
             EnemyHealthManager enemy = collision.gameObject.GetComponentInParent<EnemyHealthManager>();
             if (enemy != null)
-            {
-                DamageEnemy(enemy, 0);
-            }
+                DamageEnemy(enemy, damageDealt);
         }
     }
 }

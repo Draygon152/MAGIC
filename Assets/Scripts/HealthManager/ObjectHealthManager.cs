@@ -1,8 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectHealthManager : HealthManager
 {
-    // Currently empty as we do not know if more will added to the object health manager.
+    public override void LoseHealth(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+        Debug.Log($"Health of {gameObject.tag} after damage: {currentHealth}");
+
+        // If health becomes 0 or less, object destroyed
+        if (currentHealth <= 0)
+        {
+            // TODO: Implement code to spawn in a spell drop at current object location
+
+            Destroy(gameObject);
+        }
+    }
 }
