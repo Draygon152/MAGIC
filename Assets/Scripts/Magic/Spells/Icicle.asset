@@ -20,4 +20,4 @@ MonoBehaviour:
   spellLifetime: 0.5
   radius: 0.5
   self: 0
-  element: ICICLE
+  element: 2

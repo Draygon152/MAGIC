@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Spell", menuName = "Magic Spells")]    //Allows us to make different spells using this template
@@ -13,5 +11,5 @@ public class SpellTemplate : ScriptableObject
     public float spellLifetime; //how long the spell will exist before fading out of existance (if it does not hit anything)
     public float radius;
     public float self; //1 should be on self, 0 will be aoe (check speed, if speed is 0)
-    public string element;
+    public Element.ElementTypes element;
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class LobbyMenu : Menu<LobbyMenu>
 {
@@ -13,6 +12,8 @@ public class LobbyMenu : Menu<LobbyMenu>
 
     private bool player1IsReady;
     private bool player2IsReady;
+
+
 
     private void Start()
     {
@@ -82,7 +83,7 @@ public class LobbyMenu : Menu<LobbyMenu>
             // If Player1 is also ready, start countdown
             if (player1IsReady)
             {
-                timer.BeginCountDown(P1ElementSelector.SelectedElement, P2ElementSelector.SelectedElement) ;
+                timer.BeginCountDown(P1ElementSelector.SelectedElement, P2ElementSelector.SelectedElement);
                 MainMenuButton.interactable = false;
             }
         }

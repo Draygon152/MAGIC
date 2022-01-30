@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         // Set up Instance
         Instance = this;
 
-        // Initialize the couting variables
+        // Initialize the counting variables
         // They can be init to 0, since they will be
         // increment whenever either one is spawned
         playerCount = 0;

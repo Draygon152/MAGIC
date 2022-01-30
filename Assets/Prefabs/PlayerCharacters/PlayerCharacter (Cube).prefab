@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3891170637809442976}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Castlocation
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 811485582123301815}
   - component: {fileID: 2141222732}
   - component: {fileID: 2141222733}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: PlayerCharacter (Cube)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castlocation: {fileID: 3891170637809442976}
-  spellToCast: {fileID: 1183401574670890039, guid: 5acae642f1466774da8f55d53ad9eb50, type: 3}
+  listOfSpells: {fileID: 6968269123128102929, guid: 5f2ed3c238cb42b4eb8f32903443279f, type: 3}
 --- !u!114 &2141222732
 MonoBehaviour:
   m_ObjectHideFlags: 0
