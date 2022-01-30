@@ -5,17 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Object
   - Spell
+  - Object
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Enemy
   - Water
   - UI
-  - Enemy
   - Spell
+  - Player
   - 
   - 
   - 

@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 7448496652583062774}
   - component: {fileID: 7448496652583062537}
   - component: {fileID: 7448496652583062536}
-  m_Layer: 3
+  - component: {fileID: -808706260154843315}
+  m_Layer: 7
   m_Name: PlayerModel (Cube)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -157,3 +158,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageDealt: 0
+--- !u!114 &-808706260154843315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773196374174004151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e48d3f77000230468a0e34d135e7a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castlocation: {fileID: 0}
+  listOfSpells: {fileID: 0}

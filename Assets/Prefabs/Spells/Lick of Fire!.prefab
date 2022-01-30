@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2136776055221182091}
   - component: {fileID: 9212381763832852993}
   - component: {fileID: 1143649094900738364}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Lick of Fire!
   m_TagString: Spell
   m_Icon: {fileID: 0}
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfDamage: 1
   currentSpell: {fileID: 1143649094900738364}
 --- !u!135 &2136776055221182091
 SphereCollider:
@@ -102,7 +101,7 @@ GameObject:
   - component: {fileID: 6896711068649033838}
   - component: {fileID: 8830498122230551020}
   - component: {fileID: 8846976266071502556}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

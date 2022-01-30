@@ -20,3 +20,4 @@ MonoBehaviour:
   spellLifetime: 0.5
   radius: 0.25
   self: 0
+  element: 4

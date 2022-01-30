@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 764186951880043644}
   - component: {fileID: 6058550441114949735}
   - component: {fileID: 993484231405839084}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4010534871351054278}
   - component: {fileID: 8426058328256498343}
   - component: {fileID: 9038533609854566010}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Zap!
   m_TagString: Spell
   m_Icon: {fileID: 0}
@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfDamage: 1
   currentSpell: {fileID: 9038533609854566010}
 --- !u!135 &4010534871351054278
 SphereCollider:

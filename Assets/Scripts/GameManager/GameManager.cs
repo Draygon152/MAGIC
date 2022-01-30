@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         // Set up Instance
         Instance = this;
 
-        // Initialize the couting variables
+        // Initialize the counting variables
         // They can be init to 0, since they will be
         // increment whenever either one is spawned
         playerCount = 0;
@@ -70,14 +70,14 @@ public class GameManager : MonoBehaviour
 
         // Subscribe to events
         // EventManager.Instance;
-        EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
+        // EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
         EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, onEnemyDeath);
     }
 
 
     // A function to start the game
-    public void StartGame()
+    public void StartGame(Element P1Element, Element P2Element)
     {
         Debug.Log("Starting Game");
         
@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
 
         // Grab Player HealthManagers
         PlayerHealthManager P1HealthManager = players.GetComponent<PlayerHealthManager>();
+
+        players.GetComponent<MagicCasting>().SetElement(P1Element);
 
         P1HealthManager.setHealthBarValue = HUD.Instance.SetP1CurHealth;
         P1HealthManager.setHealthBarMax = HUD.Instance.SetP1MaxHealth;
@@ -165,6 +167,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Final wave");
             Debug.Log(enemyCount);
+
             // On final wave
             // don't spawn more waves
             // Check if player has won
@@ -177,6 +180,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Not final wave");
+
             // There are more waves to spawn
             // check if they are ready to spawn
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
@@ -198,6 +202,7 @@ public class GameManager : MonoBehaviour
         // increment wave number
         waveNumber++;
     }
+
 
     void OnDestroy()
     {

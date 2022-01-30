@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 977516265271820148}
   - component: {fileID: 2034339780931982386}
   - component: {fileID: 1283671639810638623}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Gust!
   m_TagString: Spell
   m_Icon: {fileID: 0}
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfDamage: 1
   currentSpell: {fileID: 1283671639810638623}
 --- !u!135 &977516265271820148
 SphereCollider:
@@ -102,7 +101,7 @@ GameObject:
   - component: {fileID: 5164905041160482516}
   - component: {fileID: 3571158374836727695}
   - component: {fileID: 3180219834339945032}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

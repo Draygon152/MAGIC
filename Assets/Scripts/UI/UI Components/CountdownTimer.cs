@@ -37,7 +37,7 @@ public class CountdownTimer : MonoBehaviour
 
 
     // Async entry point
-    public async void BeginCountDown()
+    public async void BeginCountDown(Element P1Element, Element P2Element)
     {
         Debug.Log("Countdown Started");
 
@@ -67,7 +67,8 @@ public class CountdownTimer : MonoBehaviour
         {
             Debug.Log("Countdown Finished");
 
-            EventManager.Instance.Notify(Event.EventTypes.GameStart);
+            //EventManager.Instance.Notify(Event.EventTypes.GameStart(P1Element, P2Element)); If eventsystem uses delegates, uncomment
+            GameManager.Instance.StartGame(P1Element, P2Element);
         }
     }
 

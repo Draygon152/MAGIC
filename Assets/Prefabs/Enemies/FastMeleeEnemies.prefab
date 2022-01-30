@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8087271317450648121}
   - component: {fileID: 8087271317450648112}
   - component: {fileID: 8087271317450648115}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: FastMeleeEnemies
   m_TagString: Enemy
   m_Icon: {fileID: 0}

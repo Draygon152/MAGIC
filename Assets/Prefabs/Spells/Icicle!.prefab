@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3505147786375613751}
   - component: {fileID: 3439179079183242776}
   - component: {fileID: 3734783212764867891}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4340044990302965715}
   - component: {fileID: 5440809600669924990}
   - component: {fileID: 4168642566499989740}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Icicle!
   m_TagString: Spell
   m_Icon: {fileID: 0}
@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfDamage: 1
   currentSpell: {fileID: 4168642566499989740}
 --- !u!135 &4340044990302965715
 SphereCollider:
