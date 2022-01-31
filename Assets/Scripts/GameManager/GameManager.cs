@@ -183,9 +183,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void onReset()
+    private void onReset() //To reset the game.
     {
         state = gameState.start;
+
+        playerCamera.GetComponent<CameraSystem>().enabled = false;
+        Destroy(players);
+        
     }
 
     //Spawn the next wave of enemies
