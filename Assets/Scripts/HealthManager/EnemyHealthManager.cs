@@ -13,6 +13,7 @@ public class EnemyHealthManager : HealthManager
         {
             // TODO: Implement option to spawn a higher-tier spell drop at location of death
 
+			EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
             Destroy(gameObject);
         }
     }
