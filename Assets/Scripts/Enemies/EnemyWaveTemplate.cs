@@ -27,6 +27,7 @@ public class EnemyWaveTemplate : ScriptableObject
     */
     public int SpawnWave()
     {
+        Debug.Log("Spawning Wave");
         //Spawn in all enemies in this wave
         for (int index = 0; index < enemyPrefab.Count; index++)
         {
