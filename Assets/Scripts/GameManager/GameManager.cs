@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
                                                                                // the next wave will spawn when two enemies 
                                                                                // are remaining
 
-    [SerializeField] private GameObject playerPrefab;           // The prefab for the player
-    [SerializeField] private Transform playerSpawnPoint;        // The transform for where to spawn the player
-    [SerializeField] private CameraSystem cameraFollowsPlayers; // The system responsible for haveing the camera follow the player
+    [SerializeField] private GameObject playerPrefab;    // The prefab for the player
+    [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
+    [SerializeField] private CameraSystem gameCamera;        // The system responsible for having the camera follow the player
 
     [SerializeField] private List <EnemyWaveTemplate> Waves; // A list of scriptable objects representing the waves that 
                                                                             // needs to be spawned into the game
@@ -97,8 +97,8 @@ public class GameManager : MonoBehaviour
         P1HealthManager.setHealthBarMax = HUD.Instance.SetP1MaxHealth;
 
         // Set the camera to follow the player
-        cameraFollowsPlayers.enabled = true;
-        cameraFollowsPlayers.player = players.transform;
+        gameCamera.enabled = true;
+        gameCamera.player = players.transform;
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
             state = gameState.victory;
             EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
         }
+
         else
         {
             Debug.Log("Player Defeated");
@@ -140,7 +141,7 @@ public class GameManager : MonoBehaviour
         // Some code will be added later for determining which player died
         // for now there is only one player so that player must of died
         // Set the camera to stop following that player
-        cameraFollowsPlayers.enabled = false;
+        gameCamera.enabled = false;
 
 
         // decrement playerCount
@@ -166,8 +167,8 @@ public class GameManager : MonoBehaviour
         // check if final wave
         if (waveNumber >= Waves.Count)
         {
-            Debug.Log("Final wave");
-            Debug.Log(enemyCount);
+            Debug.Log("Final Wave");
+            Debug.Log($"Enemies Left: {enemyCount}");
 
             // On final wave
             // don't spawn more waves
@@ -178,6 +179,7 @@ public class GameManager : MonoBehaviour
                 EndGame(true);
             }
         }
+
         else
         {
             Debug.Log("Not final wave");
@@ -192,6 +194,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 
     void OnDestroy()
     {

@@ -298,41 +298,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087263695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.6, z: 5}
+  m_LocalPosition: {x: 3, y: 0.6, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1335849790
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1335849791}
-  m_Layer: 0
-  m_Name: ESPAWN1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1335849791
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335849790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 1, z: 20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1346240812
 PrefabInstance:
@@ -341,6 +311,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1924702231}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: gameCamera
+      value: 
+      objectReference: {fileID: 1924702231}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: enemyPrefab
       value: 
@@ -354,9 +332,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8107796699639736997, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: Waves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: playerSpawnPoint
       value: 
       objectReference: {fileID: 1087263696}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: Waves.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 60767877d81b34c5b90d93fd36c58411, type: 2}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: Waves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ebfae3234e281ee44952c733d0c8ca16, type: 2}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: cameraFollowsPlayers
+      value: 
+      objectReference: {fileID: 1924702231}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: enemySpawnPoints.Array.size
       value: 1
@@ -364,7 +358,7 @@ PrefabInstance:
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: enemySpawnPoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1335849791}
+      objectReference: {fileID: 0}
     - target: {fileID: 816934397636797242, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -639,6 +633,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5053994992518861486, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
   m_PrefabInstance: {fileID: 1924702229}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1924702231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5053994992518861484, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
+  m_PrefabInstance: {fileID: 1924702229}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924702230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466389ba2cab53d41bb9a9397e38495e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5455589396568493679
 PrefabInstance:
   m_ObjectHideFlags: 0
