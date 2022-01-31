@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab; //The prefab for the enemies
     [SerializeField] private List<Transform> enemySpawnPoints; //A list of spawn points for the enemies
 
+
     private GameObject players; //A variable to store the player, will likely become an array later
                                 //when multiplayer is implemented
     private int playerCount; //The number of players currently alive in the game
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         victory, //When all enemies have been defeated and players have won, in victory menu
         defeat //When both player have died, in defeat menu
     }
+
     private gameState state; //A variable for storing the current game state
 
 
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
         EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, onEnemyDeath);
+        EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, onReset);
 
     }
 
@@ -107,12 +110,17 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Victorious");
 
+
+            victoryGameOver.Open(); //Activates the Victory Screen UI.
+
             state = gameState.victory;
             EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
         }
         else
         {
             Debug.Log("Player Defeated");
+
+            defeatGameOver.Open(); //Activates the Defeat Screen UI.
 
             state = gameState.defeat;
             EventManager.Instance.Notify(Event.EventTypes.PlayerDefeat);
@@ -173,6 +181,11 @@ public class GameManager : MonoBehaviour
                 SpawnWave();
             }
         }
+    }
+
+    private void onReset()
+    {
+        state = gameState.start;
     }
 
     //Spawn the next wave of enemies
