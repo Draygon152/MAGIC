@@ -14,11 +14,9 @@ public class ElementList : MonoBehaviour
 
     public BaseSpell Return_Spell(Element.ElementTypes CurrentElement) //Current Element is the selected element for the player
     {
-        Debug.Log(GustSpell);
         switch(CurrentElement)
         {
             case Element.ElementTypes.Arcane:
-                Debug.Log("ARCANE TEST");
                 Debug.Log(ArcaneSpell);
                 return ArcaneSpell;
             case Element.ElementTypes.Wind:

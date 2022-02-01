@@ -9,9 +9,13 @@ public class BaseSpell : MonoBehaviour
     public SpellTemplate SpellToCast;
     private SphereCollider spellCollider;
     private Rigidbody spellBody;
+    public Effects spellEffect;
+    public GameObject player;
+    public GameObject hitLocation;
 
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player");
         spellCollider = GetComponent<SphereCollider>();
         spellCollider.isTrigger = true;
         spellCollider.radius = SpellToCast.radius;
@@ -32,7 +36,10 @@ public class BaseSpell : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        hitLocation = collision.gameObject;
         Destroy(gameObject); //destroy the spell when it collides
-        print("COLLISION DETECTED"); //testing purpose
+        spellEffect.Base_Effects(SpellToCast.element, player, hitLocation, this);
     }
 }
+
+//MAKE THE LIGHTNING AFFECT APPLICABLE EVEN IF IT DOES NOT COLLIDE

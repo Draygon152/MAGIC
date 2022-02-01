@@ -3,7 +3,7 @@ using UnityEngine;
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField] private Transform castlocation; // set the location of where the spell is cast from
-    private BaseSpell spellToCast; // placeholder
+    private BaseSpell spellToCast;
     [SerializeField] private ElementList listOfSpells;
     private Element SelectedElement;
     private PlayerControls PlayerControlsspells;
@@ -36,7 +36,7 @@ public class MagicCasting : MonoBehaviour
 
     void Update()
     {
-        castingtime = 1f; // spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
+        castingtime = spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
         bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
         if (!casting && cast_button_down)     // if the player is not casting and the cast button is pressed
         {
@@ -60,8 +60,6 @@ public class MagicCasting : MonoBehaviour
     public void SetElement(Element SE) // SE = Selected Element
     {
         SelectedElement = SE;
-        print(SE);
-        print(listOfSpells.Return_Spell(SelectedElement.GetElementType()));
         spellToCast = listOfSpells.Return_Spell(SelectedElement.GetElementType());
 
     }
