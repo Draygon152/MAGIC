@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
     [SerializeField] private CameraSystem gameCamera;        // The system responsible for having the camera follow the player
 
-    [SerializeField] private List <EnemyWaveTemplate> Waves; // A list of scriptable objects representing the waves that 
-                                                                            // needs to be spawned into the game
+    [SerializeField] private List <EnemyWaveTemplate> waves; // A list of scriptable objects representing the waves that 
+                                                             // needs to be spawned into the game
 
     private GameObject players; // A variable to store the player, will likely become an array later
                                 // when multiplayer is implemented
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         {
             return playerData;
         }
-        private set;
+        private set { }
     }
 
 
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         // EventManager.Instance;
         // EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
-        EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, onEnemyDeath);
+        EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, OnEnemyDeath);
         EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, OnReset);
     }
 
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += Waves[waveNumber].SpawnWave();
+        enemyCount += waves[waveNumber].SpawnWave();
         waveNumber++;
 
         // set the game state to playing
@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
 
 
     // The listener for the EnemyDeath event
-    public void onEnemyDeath()
+    public void OnEnemyDeath()
     {
         Debug.Log("Enemy has died");
 
@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
         enemyCount--;
 
         // check if final wave
-        if (waveNumber >= Waves.Count)
+        if (waveNumber >= waves.Count)
         {
             Debug.Log("Final Wave");
             Debug.Log($"Enemies Left: {enemyCount}");
@@ -216,32 +216,19 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += Waves[waveNumber].SpawnWave();
+                enemyCount += waves[waveNumber].SpawnWave();
                 waveNumber++;
             }
         }
     }
 
 
-    private void OnReset() //To reset the game.
+    private void OnReset() // To reset the game.
     {
         state = gameState.start;
 
-        playerCamera.GetComponent<CameraSystem>().enabled = false;
+        gameCamera.GetComponent<CameraSystem>().enabled = false;
         Destroy(players);
-        
-    }
-
-
-    //Spawn the next wave of enemies
-    private void SpawnWave()
-    {
-        //spawn in the enemies
-        Instantiate(enemyPrefab, enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-        enemyCount++;
-
-        //increment wave number
-        waveNumber++;
     }
 
 
