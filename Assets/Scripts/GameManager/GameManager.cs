@@ -98,9 +98,11 @@ public class GameManager : MonoBehaviour
         PlayerHealthManager P1HealthManager = players.GetComponent<PlayerHealthManager>();
 
         players.GetComponent<MagicCasting>().SetElement(P1Element);
+        BaseSpell startingSpell = players.GetComponent<MagicCasting>().returnSpell();
 
         P1HealthManager.setHealthBarValue = HUD.Instance.SetP1CurHealth;
         P1HealthManager.setHealthBarMax = HUD.Instance.SetP1MaxHealth;
+        HUD.Instance.setP1SpellInfo(startingSpell);
 
         // Set the camera to follow the player
         gameCamera.enabled = true;
