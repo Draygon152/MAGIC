@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through
     [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 2; // The number of enemies remaining that will
                                                                                // trigger the next wave, if it is two then
                                                                                // the next wave will spawn when two enemies 
@@ -22,7 +23,8 @@ public class GameManager : MonoBehaviour
     private int waveNumber;  // A variable for keeping track of the wave number in the game
 
     private PlayerData playerData; // playerData is a scriptable object that will carry a player gameObject instance (clone)
-    
+
+
     // Defining an enum for the different game states
     private enum gameState
     {
@@ -40,6 +42,17 @@ public class GameManager : MonoBehaviour
     static public GameManager Instance
     {
         get;
+        private set;
+    }
+
+
+    // Gets Scriptable Object but not set
+    public PlayerData GetPlayerData
+    {
+        get
+        {
+            return playerData;
+        }
         private set;
     }
 
@@ -75,6 +88,7 @@ public class GameManager : MonoBehaviour
         // EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
         EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, onEnemyDeath);
+        EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, OnReset);
     }
 
 
@@ -128,6 +142,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Victorious");
 
+
+            victoryGameOver.Open(); //Activates the Victory Screen UI.
+
             state = gameState.victory;
             EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
         }
@@ -135,6 +152,8 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Player Defeated");
+
+            defeatGameOver.Open(); //Activates the Defeat Screen UI.
 
             state = gameState.defeat;
             EventManager.Instance.Notify(Event.EventTypes.PlayerDefeat);
@@ -204,20 +223,31 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private void OnReset() //To reset the game.
+    {
+        state = gameState.start;
+
+        playerCamera.GetComponent<CameraSystem>().enabled = false;
+        Destroy(players);
+        
+    }
+
+
+    //Spawn the next wave of enemies
+    private void SpawnWave()
+    {
+        //spawn in the enemies
+        Instantiate(enemyPrefab, enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+        enemyCount++;
+
+        //increment wave number
+        waveNumber++;
+    }
+
+
     void OnDestroy()
     {
         // Marking the GameManager as nonexistent
         Instance = null;
     }
-    
-    // Gets Scriptable Object but not set
-    public PlayerData GetPlayerData
-    {
-        get 
-        {
-            return playerData;
-        }
-        private set { }
-    }
-
 }

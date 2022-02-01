@@ -10,6 +10,8 @@ public class MenuManager : MonoBehaviour
     public LobbyMenu lobbyMenuPrefab;
     public HUD hudPrefab;
     public PauseMenu pauseMenuPrefab;
+    public victoryGameOver victoryMenuPrefab;
+    public defeatGameOver defeatMenuPrefab;
 
     private Stack<Menu> menuStack = new Stack<Menu>();
 

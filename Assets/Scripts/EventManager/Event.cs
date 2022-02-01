@@ -9,6 +9,7 @@ public sealed class Event
         PlayerDeath,
         EnemyDeath,
         PlayerVictory,
-        PlayerDefeat
+        PlayerDefeat,
+        ResetGame
     }
 }
