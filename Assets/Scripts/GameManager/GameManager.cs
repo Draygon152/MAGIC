@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     private int playerCount; // The number of players currently alive in the game
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
+
+    private PlayerData playerData; // playerData is a scriptable object that will carry a player gameObject instance (clone)
     
     // Defining an enum for the different game states
     private enum gameState
@@ -84,6 +86,10 @@ public class GameManager : MonoBehaviour
         // spawn in the players
         players = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
         playerCount++;
+
+        // Create a PlayerData instance and initialize the player clone in a variable
+        playerData = ScriptableObject.CreateInstance("PlayerData") as PlayerData;
+        playerData.Initialize(players);
 
         LobbyMenu.Close();
         HUD.Open();
@@ -201,4 +207,15 @@ public class GameManager : MonoBehaviour
         // Marking the GameManager as nonexistent
         Instance = null;
     }
+    
+    // Gets Scriptable Object but not set
+    public PlayerData GetPlayerData
+    {
+        get 
+        {
+            return playerData;
+        }
+        private set { }
+    }
+
 }

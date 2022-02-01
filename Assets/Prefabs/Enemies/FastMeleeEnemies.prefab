@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objRigidbody: {fileID: 8087271317450648126}
-  target: {fileID: 0}
+  target: {fileID: 4716117005724028398, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
   speed: 7
   turnSpeed: 720
   distanceFromTarget: 1
