@@ -3,17 +3,30 @@ using UnityEngine;
 public class FollowToTarget : MonoBehaviour
 {
     [SerializeField] private Rigidbody objRigidbody;
-    [SerializeField] private Transform target;
     [SerializeField] private float speed;
     [SerializeField] private float turnSpeed;
     [SerializeField] private float distanceFromTarget;
     [SerializeField] private float tooCloseToTarget;
     [SerializeField] private bool cowardly;
 
+    private GameManager gameManager;
+    private Transform target;
+
     private void Start()
     {
         objRigidbody = GetComponent<Rigidbody>();
 
+        // Access the player prefab clone
+        gameManager = GameManager.Instance;
+        PlayerData playerData = gameManager.GetPlayerData;
+        // Added this if statement because playerData is initially null when the game starts. GameObject causes an error if
+        // playerData is null so do not delete this.
+        if (playerData != null)
+        { 
+            GameObject playerObject = playerData.playerOne;
+            target = playerObject.transform;
+        }
+        
         // If tooCloseToTarget is greater than distanceFromTarget, it will adjust the distance to be
         // greater than tooCloseToTarget to avoid object from jittering. This occurs ONLY if cowardly is enabled.
         if (distanceFromTarget <= tooCloseToTarget && cowardly)
@@ -27,20 +40,20 @@ public class FollowToTarget : MonoBehaviour
 
     private void FixedUpdate()
     {
-       GoToTarget();
+        GoToTarget();
     }
-    
+
     // LookAtTarget() rotates object to face its target.
     private void LookAtTarget()
     {
         if (target != null)
-        { 
+        {
             Vector3 relativePos = target.position - transform.position;
             Quaternion rotate = Quaternion.LookRotation(relativePos, Vector3.up);  // Rotate object to face target.
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotate, turnSpeed * Time.deltaTime); // Rotate object smoothly.
         }
     }
-    
+
     // GoToTarget() moves object towards its target at a certain distance.
     private void GoToTarget()
     {
