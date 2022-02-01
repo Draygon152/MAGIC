@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through
     [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 2; // The number of enemies remaining that will
                                                                                // trigger the next wave, if it is two then
                                                                                // the next wave will spawn when two enemies 
                                                                                // are remaining
 
-    [SerializeField] private GameObject playerPrefab;          // The prefab for the player
-    [SerializeField] private Transform playerSpawnPoint;       // The transform for where to spawn the player
-    [SerializeField] private GameObject playerCamera;          // The camera that follows the players
-    [SerializeField] private GameObject enemyPrefab;           // The prefab for the enemies
-    [SerializeField] private List<Transform> enemySpawnPoints; // A list of spawn points for the enemies
+    [SerializeField] private GameObject playerPrefab;    // The prefab for the player
+    [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
+    [SerializeField] private CameraSystem gameCamera;        // The system responsible for having the camera follow the player
+
+    [SerializeField] private List <EnemyWaveTemplate> Waves; // A list of scriptable objects representing the waves that 
+                                                                            // needs to be spawned into the game
 
     private GameObject players; // A variable to store the player, will likely become an array later
                                 // when multiplayer is implemented
@@ -97,12 +97,13 @@ public class GameManager : MonoBehaviour
         P1HealthManager.setHealthBarMax = HUD.Instance.SetP1MaxHealth;
 
         // Set the camera to follow the player
-        playerCamera.GetComponent<CameraSystem>().enabled = true;
-        playerCamera.GetComponent<CameraSystem>().player = players.transform;
+        gameCamera.enabled = true;
+        gameCamera.player = players.transform;
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        SpawnWave();
+        enemyCount += Waves[waveNumber].SpawnWave();
+        waveNumber++;
 
         // set the game state to playing
         state = gameState.playing;
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
             state = gameState.victory;
             EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
         }
+
         else
         {
             Debug.Log("Player Defeated");
@@ -139,7 +141,7 @@ public class GameManager : MonoBehaviour
         // Some code will be added later for determining which player died
         // for now there is only one player so that player must of died
         // Set the camera to stop following that player
-        playerCamera.GetComponent<CameraSystem>().enabled = false;
+        gameCamera.enabled = false;
 
 
         // decrement playerCount
@@ -163,10 +165,10 @@ public class GameManager : MonoBehaviour
         enemyCount--;
 
         // check if final wave
-        if (waveNumber >= NUMBER_OF_WAVES)
+        if (waveNumber >= Waves.Count)
         {
-            Debug.Log("Final wave");
-            Debug.Log(enemyCount);
+            Debug.Log("Final Wave");
+            Debug.Log($"Enemies Left: {enemyCount}");
 
             // On final wave
             // don't spawn more waves
@@ -177,6 +179,7 @@ public class GameManager : MonoBehaviour
                 EndGame(true);
             }
         }
+
         else
         {
             Debug.Log("Not final wave");
@@ -186,21 +189,10 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                SpawnWave();
+                enemyCount += Waves[waveNumber].SpawnWave();
+                waveNumber++;
             }
         }
-    }
-
-
-    // Spawn the next wave of enemies
-    private void SpawnWave()
-    {
-        // spawn in the enemies
-        Instantiate(enemyPrefab, enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-        enemyCount++;
-
-        // increment wave number
-        waveNumber++;
     }
 
 
