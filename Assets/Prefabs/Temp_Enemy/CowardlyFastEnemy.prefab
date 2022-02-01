@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1872983717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: typeName
+      value: Cowardly Fast Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -62,14 +66,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_PrefabInstance: {fileID: 4307587729955198427}
   m_PrefabAsset: {fileID: 0}
---- !u!33 &-1807203886115163478
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5116422693680626878}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!136 &2564757440284933023
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -84,3 +80,11 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!33 &-1807203886115163478
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5116422693680626878}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}

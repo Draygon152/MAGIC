@@ -10,7 +10,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject playerPrefab;    // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private CameraSystem gameCamera;        // The system responsible for having the camera follow the player
+    [SerializeField] private GameObject camera; //The camera for the game, I hope to not need the full camer
+                                                //and only have gameCamera (the CameraSystem on camera), but I 
+                                                //have time before the first play test    
+    
+    private CameraSystem gameCamera; // The system responsible for having the camera follow the player
 
     [SerializeField] private List <EnemyWaveTemplate> Waves; // A list of scriptable objects representing the waves that 
                                                                             // needs to be spawned into the game
@@ -60,6 +64,9 @@ public class GameManager : MonoBehaviour
 
         // initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
+
+        //get the CameraSystem
+        gameCamera = camera.GetComponent<CameraSystem>();
     }
 
 
@@ -102,7 +109,7 @@ public class GameManager : MonoBehaviour
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += Waves[waveNumber].SpawnWave();
+        enemyCount += Waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
         waveNumber++;
 
         // set the game state to playing
@@ -189,7 +196,7 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += Waves[waveNumber].SpawnWave();
+                enemyCount += Waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
                 waveNumber++;
             }
         }
