@@ -2,6 +2,8 @@ public class HUD : Menu<HUD>
 {
     public HealthBar Player1HealthBar;
     public HealthBar Player2HealthBar;
+    public SelectedSpellUI Player1SpellUI;
+    public SelectedSpellUI Player2SpellUI;
 
 
 
@@ -26,5 +28,15 @@ public class HUD : Menu<HUD>
     public void SetP2MaxHealth(int maxHealth)
     {
         Player2HealthBar.SetMaxHealth(maxHealth);
+    }
+
+    public void setP1SpellInfo(BaseSpell spellSelected)
+    {
+        Player1SpellUI.changeSpellText(spellSelected);
+    }
+
+    public void setP2SpellInfo(BaseSpell spellSelected)
+    {
+        Player2SpellUI.changeSpellText(spellSelected); ;
     }
 }

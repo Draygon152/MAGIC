@@ -61,9 +61,11 @@ public class MagicCasting : MonoBehaviour
     {
         SelectedElement = SE;
         spellToCast = listOfSpells.Return_Spell(SelectedElement.GetElementType());
-
     }
-
+    public BaseSpell returnSpell()
+    {
+        return spellToCast;
+    }
 
     void CastCurrentSpell()
     {

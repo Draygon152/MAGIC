@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LickOfFire
   m_EditorClassIdentifier: 
   damage: 2
-  timeBetweenCasts: 3
+  timeBetweenCasts: 1
   numInstances: -1
   castSpeed: 0.1
-  spellSpeed: 9
+  spellSpeed: 11
   spellLifetime: 0.75
   radius: 0.4
   self: 0

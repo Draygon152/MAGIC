@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Icicle
   m_EditorClassIdentifier: 
   damage: 3
-  timeBetweenCasts: 3
+  timeBetweenCasts: 1.5
   numInstances: -1
   castSpeed: 0.1
   spellSpeed: 10
-  spellLifetime: 0.5
+  spellLifetime: 1
   radius: 0.5
   self: 0
   element: 2
