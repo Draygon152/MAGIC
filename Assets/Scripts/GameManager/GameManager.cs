@@ -107,6 +107,8 @@ public class GameManager : MonoBehaviour
         gameCamera.enabled = true;
         gameCamera.player = players.transform;
 
+        //Set the direction for the 
+
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
         enemyCount += Waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());

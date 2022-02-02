@@ -9,7 +9,7 @@ public class EnemyHealthBillboard : MonoBehaviour
     //LateUpdate is required so that the camera moves before rotating the health bar
     void LateUpdate()
     {
-        this.transform.LookAt(camera.position + camera.forward);
+        this.transform.LookAt(this.transform.position + camera.rotation * Vector3.forward);
     }
 
     public void SetCamera(Transform cameraToLookAt)
