@@ -1,3 +1,5 @@
+//Worked on by Angel
+
 using UnityEngine;
 
 public class MagicCasting : MonoBehaviour

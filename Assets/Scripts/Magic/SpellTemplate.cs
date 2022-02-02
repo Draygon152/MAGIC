@@ -1,3 +1,5 @@
+//Worked on by Angel
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Spell", menuName = "Magic Spells")]    //Allows us to make different spells using this template
