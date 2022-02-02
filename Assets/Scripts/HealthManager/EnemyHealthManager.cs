@@ -14,7 +14,7 @@ public class EnemyHealthManager : HealthManager
         //Initialize health bar
         healthBar.InitializeHealthBar(maxHealth);
 
-        EventManager.Instance.Subscribe(Event.EventTypes.GameOver, Despawn);
+        EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, Despawn);
     }
 
     public override void LoseHealth(int damageAmount)
