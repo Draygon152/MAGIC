@@ -155,7 +155,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Victorious");
 
-
             VictoryGameOver.Open(); //Activates the Victory Screen UI.
 
             state = gameState.victory;

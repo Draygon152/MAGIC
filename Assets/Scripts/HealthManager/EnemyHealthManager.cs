@@ -31,9 +31,6 @@ public class EnemyHealthManager : HealthManager
 
 			EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
             Destroy(gameObject);
-
-            //Fire the enemy death event to inform other system of the death of an enemy
-            EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
         }
     }
 }

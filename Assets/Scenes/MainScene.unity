@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2653,15 +2653,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068057553741342569, guid: cce84ef7d812b0b4fa6787c4bb6d8ea1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.4905281
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4068057553741342569, guid: cce84ef7d812b0b4fa6787c4bb6d8ea1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.42882192
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4068057553741342569, guid: cce84ef7d812b0b4fa6787c4bb6d8ea1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.94619775
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4068057553741342569, guid: cce84ef7d812b0b4fa6787c4bb6d8ea1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2698,7 +2698,7 @@ PrefabInstance:
     - target: {fileID: 4068057553741342574, guid: cce84ef7d812b0b4fa6787c4bb6d8ea1, type: 3}
       propertyPath: victoryMenuPrefab
       value: 
-      objectReference: {fileID: 134777943, guid: bc8e6d9e06908784995ee401b35eb754, type: 3}
+      objectReference: {fileID: 7165132019708756955, guid: 0d8e16afe900c12478d9f3c2ec2d74f3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cce84ef7d812b0b4fa6787c4bb6d8ea1, type: 3}
 --- !u!1001 &531917824
@@ -8719,7 +8719,7 @@ PrefabInstance:
       objectReference: {fileID: 217983017}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: waves.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: Waves.Array.data[0]
