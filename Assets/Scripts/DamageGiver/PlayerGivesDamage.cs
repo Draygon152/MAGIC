@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Written by Liz
 public class PlayerGivesDamage : DamageGiverManager
 {
     [SerializeField] private int damageDealt;

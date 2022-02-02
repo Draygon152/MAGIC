@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//Written primarily by Liz
+//Modified slightly by Kevin
 public class PlayerHealthManager : HealthManager
 {
     public delegate void UpdateHealthBar(int newCurrentHealth);

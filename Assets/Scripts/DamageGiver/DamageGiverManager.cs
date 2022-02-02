@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Written by Liz
 public class DamageGiverManager : MonoBehaviour
 {
     // When a game object (either a player, enemy, or physical object) causes damage to a different
