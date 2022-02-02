@@ -11,7 +11,7 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private Image CountDownTextBackground;
 
     [SerializeField] private int timerLength; // Max length of timer
-    int timeRemaining;                        // Time remaining in seconds
+    private int timeRemaining;                        // Time remaining in seconds
 
     private bool timerStarted;
     private CancellationTokenSource cts;      // Used for cancelling async Tasks

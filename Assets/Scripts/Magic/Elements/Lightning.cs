@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 public class Lightning : Element
 {
     public override string GetElementName()

@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 public class Nature : Element
 {
     public override string GetElementName()
