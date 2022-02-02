@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 // Sealed class to hold EventTypes enum
 public sealed class Event
 {

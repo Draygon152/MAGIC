@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 using System.Collections.Generic;
 using UnityEngine;
 using System;

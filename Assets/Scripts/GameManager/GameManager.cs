@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
         playerData = ScriptableObject.CreateInstance("PlayerData") as PlayerData;
         playerData.Initialize(players);
 
+        // Plan to move LobbyMenu.Close() to CountdownTimer to prevent circular dependency with GameManager
         LobbyMenu.Close();
         HUD.Open();
 
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
 
         P1HealthManager.setHealthBarValue = HUD.Instance.SetP1CurHealth;
         P1HealthManager.setHealthBarMax = HUD.Instance.SetP1MaxHealth;
-        HUD.Instance.setP1SpellInfo(startingSpell);
+        HUD.Instance.SetP1SpellInfo(startingSpell);
 
         // Set the camera to follow the player
         gameCamera.enabled = true;
@@ -143,7 +144,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player Victorious");
 
 
-            victoryGameOver.Open(); //Activates the Victory Screen UI.
+            VictoryGameOver.Open(); //Activates the Victory Screen UI.
 
             state = gameState.victory;
             EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
@@ -153,7 +154,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Defeated");
 
-            defeatGameOver.Open(); //Activates the Defeat Screen UI.
+            DefeatGameOver.Open(); //Activates the Defeat Screen UI.
 
             state = gameState.defeat;
             EventManager.Instance.Notify(Event.EventTypes.PlayerDefeat);

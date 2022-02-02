@@ -1,4 +1,4 @@
-using UnityEngine;
+// Written by Kevin Chao
 
 public class OptionsMenu : Menu<OptionsMenu>
 {

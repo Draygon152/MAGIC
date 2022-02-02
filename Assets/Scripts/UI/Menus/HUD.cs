@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 public class HUD : Menu<HUD>
 {
     public HealthBar Player1HealthBar;
@@ -30,13 +32,15 @@ public class HUD : Menu<HUD>
         Player2HealthBar.SetMaxHealth(maxHealth);
     }
 
-    public void setP1SpellInfo(BaseSpell spellSelected)
+
+    public void SetP1SpellInfo(BaseSpell spellSelected)
     {
         Player1SpellUI.changeSpellText(spellSelected);
     }
 
-    public void setP2SpellInfo(BaseSpell spellSelected)
+
+    public void SetP2SpellInfo(BaseSpell spellSelected)
     {
-        Player2SpellUI.changeSpellText(spellSelected); ;
+        Player2SpellUI.changeSpellText(spellSelected);
     }
 }

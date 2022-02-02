@@ -1,6 +1,6 @@
-using UnityEngine;
+// Written by Marc Hagoriles
 
-public class victoryGameOver : Menu<victoryGameOver>
+public class VictoryGameOver : Menu<VictoryGameOver>
 {
     public void ReturnToMainMenuPressed()
     {

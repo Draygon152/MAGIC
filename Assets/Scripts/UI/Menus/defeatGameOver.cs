@@ -1,6 +1,6 @@
-using UnityEngine;
+// Written by Marc Hagoriles
 
-public class defeatGameOver : Menu<defeatGameOver>
+public class DefeatGameOver : Menu<DefeatGameOver>
 {
     public void ReturnToMainMenuPressed()
     {
