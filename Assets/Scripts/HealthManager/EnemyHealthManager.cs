@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//Written primarily by Liz
+//Modify slightly by Lawson
 public class EnemyHealthManager : HealthManager
 {
     [SerializeField] private EnemyHealthBar healthBar;

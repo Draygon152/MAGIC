@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a87f78eb6d2ea5097850bf5dd4a4deca, type: 3}
-  m_Name: TestWave_2
+  m_Name: Wave_2
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 8022932198237945814, guid: 305c21d6ab4c30f4f8a62313d82e3c7b, type: 3}
+  - {fileID: 8071810307828470206, guid: e972f7063c1f345f98f5f498ccd98b4d, type: 3}
+  - {fileID: 6233107874321950843, guid: e6193b84c491b2170938e68cbe6326db, type: 3}
   enemySpawnPoints:
-  - {fileID: 3744957841082246635, guid: 0b6975f90d06f8d7cbc05f3b7db64804, type: 3}
+  - {fileID: 825776167332693110, guid: 6fe08bfd8a29f5e4fa3b82e5e5739b9a, type: 3}
+  - {fileID: 57702196861316979, guid: f14f544b1ca1f2a42bcb6f67b54c5e35, type: 3}

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//Written primarily by Marc
+//Modify slightly by Lawson
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;

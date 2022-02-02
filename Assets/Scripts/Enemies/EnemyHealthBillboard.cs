@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Written by Lawson McCoy
 public class EnemyHealthBillboard : MonoBehaviour
 {
     [SerializeField] private Transform camera; //A reference to the camera the health bar needs to face

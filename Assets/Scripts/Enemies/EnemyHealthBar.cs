@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//written by Lawson McCoy
 public class EnemyHealthBar : MonoBehaviour
 {
     [SerializeField] private Slider healthBarValue;

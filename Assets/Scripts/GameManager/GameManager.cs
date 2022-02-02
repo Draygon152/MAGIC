@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Lawson made the Game Manager and wrote most of the code
+//Everyone else has contributed at least one line of code however
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through

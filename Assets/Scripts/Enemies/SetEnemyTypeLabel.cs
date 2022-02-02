@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Written by Lawson McCoy
 public class SetEnemyTypeLabel : MonoBehaviour
 {
     [SerializeField] private TMP_Text label; //The text object that displays the enemy's type

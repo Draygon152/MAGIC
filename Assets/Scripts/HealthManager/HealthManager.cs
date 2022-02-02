@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Written by Liz
 public abstract class HealthManager : MonoBehaviour
 {
     [SerializeField] protected int startingHealth;
