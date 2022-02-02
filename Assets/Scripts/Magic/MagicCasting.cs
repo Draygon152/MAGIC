@@ -1,3 +1,5 @@
+//worked on by Angel
+
 using UnityEngine;
 
 public class MagicCasting : MonoBehaviour
@@ -59,6 +61,7 @@ public class MagicCasting : MonoBehaviour
 
     public void SetElement(Element SE) // SE = Selected Element
     {
+<<<<<<< Updated upstream
         SelectedElement = SE;
         print(SE);
         print(listOfSpells.Return_Spell(SelectedElement.GetElementType()));
@@ -66,6 +69,16 @@ public class MagicCasting : MonoBehaviour
 
     }
 
+=======
+        SelectedElement = SE; //set element of the player
+        spellToCast = listOfSpells.Return_Spell(SelectedElement.GetElementType()); //set the base spell that corresponds with the element
+    }
+
+    public BaseSpell returnSpell() //use if another class needs to know the spell currently being used
+    {
+        return spellToCast; 
+    }
+>>>>>>> Stashed changes
 
     void CastCurrentSpell()
     {

@@ -1,3 +1,5 @@
+//Worked on by Angel
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +34,13 @@ public class BaseSpell : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+<<<<<<< Updated upstream
         Destroy(gameObject); //destroy the spell when it collides
         print("COLLISION DETECTED"); //testing purpose
+=======
+        hitLocation = collision.gameObject; //collect info on the enemy/object collided
+        Destroy(gameObject); //destroy the spell when it collides
+        spellEffect.Base_Effects(SpellToCast.element, player, hitLocation, this); //use any applicable effects
+>>>>>>> Stashed changes
     }
 }
