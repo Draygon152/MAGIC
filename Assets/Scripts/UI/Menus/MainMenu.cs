@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 #undef DEBUG
 
 using UnityEngine;

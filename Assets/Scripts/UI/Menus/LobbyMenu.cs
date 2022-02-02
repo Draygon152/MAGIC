@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 using UnityEngine;
 using UnityEngine.UI;
 

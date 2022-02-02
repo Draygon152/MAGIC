@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through
     [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 2; // The number of enemies remaining that will
                                                                                // trigger the next wave, if it is two then
                                                                                // the next wave will spawn when two enemies 
@@ -16,15 +17,18 @@ public class GameManager : MonoBehaviour
     
     private CameraSystem gameCamera; // The system responsible for having the camera follow the player
 
-    [SerializeField] private List <EnemyWaveTemplate> Waves; // A list of scriptable objects representing the waves that 
-                                                                            // needs to be spawned into the game
+    [SerializeField] private List <EnemyWaveTemplate> waves; // A list of scriptable objects representing the waves that 
+                                                             // needs to be spawned into the game
 
     private GameObject players; // A variable to store the player, will likely become an array later
                                 // when multiplayer is implemented
     private int playerCount; // The number of players currently alive in the game
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
-    
+
+    private PlayerData playerData; // playerData is a scriptable object that will carry a player gameObject instance (clone)
+
+
     // Defining an enum for the different game states
     private enum gameState
     {
@@ -43,6 +47,17 @@ public class GameManager : MonoBehaviour
     {
         get;
         private set;
+    }
+
+
+    // Gets Scriptable Object but not set
+    public PlayerData GetPlayerData
+    {
+        get
+        {
+            return playerData;
+        }
+        private set { }
     }
 
 
@@ -79,7 +94,8 @@ public class GameManager : MonoBehaviour
         // EventManager.Instance;
         // EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
-        EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, onEnemyDeath);
+        EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, OnEnemyDeath);
+        EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, OnReset);
     }
 
 
@@ -92,6 +108,11 @@ public class GameManager : MonoBehaviour
         players = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
         playerCount++;
 
+        // Create a PlayerData instance and initialize the player clone in a variable
+        playerData = ScriptableObject.CreateInstance("PlayerData") as PlayerData;
+        playerData.Initialize(players);
+
+        // Plan to move LobbyMenu.Close() to CountdownTimer to prevent circular dependency with GameManager
         LobbyMenu.Close();
         HUD.Open();
 
@@ -99,9 +120,11 @@ public class GameManager : MonoBehaviour
         PlayerHealthManager P1HealthManager = players.GetComponent<PlayerHealthManager>();
 
         players.GetComponent<MagicCasting>().SetElement(P1Element);
+        BaseSpell startingSpell = players.GetComponent<MagicCasting>().returnSpell();
 
         P1HealthManager.setHealthBarValue = HUD.Instance.SetP1CurHealth;
         P1HealthManager.setHealthBarMax = HUD.Instance.SetP1MaxHealth;
+        HUD.Instance.SetP1SpellInfo(startingSpell);
 
         // Set the camera to follow the player
         gameCamera.enabled = true;
@@ -111,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += Waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
+        enemyCount += waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
         waveNumber++;
 
         // set the game state to playing
@@ -129,6 +152,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Victorious");
 
+
+            VictoryGameOver.Open(); //Activates the Victory Screen UI.
+
             state = gameState.victory;
             EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
         }
@@ -136,6 +162,8 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Player Defeated");
+
+            DefeatGameOver.Open(); //Activates the Defeat Screen UI.
 
             state = gameState.defeat;
             EventManager.Instance.Notify(Event.EventTypes.PlayerDefeat);
@@ -166,7 +194,7 @@ public class GameManager : MonoBehaviour
 
 
     // The listener for the EnemyDeath event
-    public void onEnemyDeath()
+    public void OnEnemyDeath()
     {
         Debug.Log("Enemy has died");
 
@@ -174,7 +202,7 @@ public class GameManager : MonoBehaviour
         enemyCount--;
 
         // check if final wave
-        if (waveNumber >= Waves.Count)
+        if (waveNumber >= waves.Count)
         {
             Debug.Log("Final Wave");
             Debug.Log($"Enemies Left: {enemyCount}");
@@ -198,10 +226,19 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += Waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
+                enemyCount += waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
                 waveNumber++;
             }
         }
+    }
+
+
+    private void OnReset() // To reset the game.
+    {
+        state = gameState.start;
+
+        gameCamera.GetComponent<CameraSystem>().enabled = false;
+        Destroy(players);
     }
 
 

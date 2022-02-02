@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 using UnityEngine;
 
 // Base class for all menus, Singleton

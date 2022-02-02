@@ -1,6 +1,8 @@
+// Written by Kevin Chao
+
 using System.Collections;
 using UnityEngine;
-using System;
+
 
 public class EventManagerTester : MonoBehaviour
 {

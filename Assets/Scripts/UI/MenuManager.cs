@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +9,13 @@ public class MenuManager : MonoBehaviour
 {
     public MainMenu mainMenuPrefab;
     public OptionsMenu optionsMenuPrefab;
+    public VideoOptions videoOptionsPrefab;
+    public SoundOptions soundOptionsPrefab;
     public LobbyMenu lobbyMenuPrefab;
     public HUD hudPrefab;
     public PauseMenu pauseMenuPrefab;
+    public VictoryGameOver victoryMenuPrefab;
+    public DefeatGameOver defeatMenuPrefab;
 
     private Stack<Menu> menuStack = new Stack<Menu>();
 

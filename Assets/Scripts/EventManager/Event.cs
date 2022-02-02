@@ -1,3 +1,5 @@
+// Written by Kevin Chao
+
 // Sealed class to hold EventTypes enum
 public sealed class Event
 {
@@ -9,6 +11,7 @@ public sealed class Event
         PlayerDeath,
         EnemyDeath,
         PlayerVictory,
-        PlayerDefeat
+        PlayerDefeat,
+        ResetGame
     }
 }
