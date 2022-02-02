@@ -38,7 +38,7 @@ public class MagicCasting : MonoBehaviour
 
     void Update()
     {
-        castingtime = 1f; // spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
+        castingtime = spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
         bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
         if (!casting && cast_button_down)     // if the player is not casting and the cast button is pressed
         {
