@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+// Written by Angel Rubio
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +7,13 @@ public class SelectedSpellUI : MonoBehaviour
 {
     [SerializeField] private Text SelectedSpellText;
 
-    void awake()
+
+
+    private void Awake()
     {
         SelectedSpellText.text = $"Testing SpellUI";
     }
+
 
     public void changeSpellText(BaseSpell spellInfo)
     {
