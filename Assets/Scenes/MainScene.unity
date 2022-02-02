@@ -8719,7 +8719,7 @@ PrefabInstance:
       objectReference: {fileID: 217983017}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: waves.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: Waves.Array.data[0]
@@ -8729,6 +8729,10 @@ PrefabInstance:
       propertyPath: waves.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 60767877d81b34c5b90d93fd36c58411, type: 2}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: waves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ebfae3234e281ee44952c733d0c8ca16, type: 2}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: enemySpawnPoints.Array.size
       value: 1

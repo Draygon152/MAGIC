@@ -3,7 +3,6 @@ using UnityEngine;
 //Written by Liz
 public abstract class HealthManager : MonoBehaviour
 {
-    [SerializeField] protected int startingHealth;
     [SerializeField] protected int maxHealth;
     protected int currentHealth;
 
@@ -12,7 +11,7 @@ public abstract class HealthManager : MonoBehaviour
     // Initialize current object's health to startingHealth
     protected virtual void Start()
     {
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
         Debug.Log($"Current {gameObject.tag} Health: {currentHealth}");
     }
 

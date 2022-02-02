@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through
-    [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 2; // The number of enemies remaining that will
+    [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 1; // The number of enemies remaining that will
                                                                                // trigger the next wave, if it is two then
                                                                                // the next wave will spawn when two enemies 
                                                                                // are remaining
