@@ -158,7 +158,6 @@ public class GameManager : MonoBehaviour
             VictoryGameOver.Open(); //Activates the Victory Screen UI.
 
             state = gameState.victory;
-            EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
         }
 
         else
@@ -168,8 +167,9 @@ public class GameManager : MonoBehaviour
             DefeatGameOver.Open(); //Activates the Defeat Screen UI.
 
             state = gameState.defeat;
-            EventManager.Instance.Notify(Event.EventTypes.PlayerDefeat);
         }
+
+        EventManager.Instance.Notify(Event.EventTypes.GameOver);
     }
 
 
