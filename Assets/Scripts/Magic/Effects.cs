@@ -2,29 +2,22 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Effects : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-=======
-    //Effects is only for the base level spells atm
-
-    private GameObject playerinfo; //the player
-    private GameObject entity; //the enemy/object that the spell collided with
-    [SerializeField] private SpellGivesDamage ouch; 
-    private BaseSpell currentSpell; //spell being used
+    private GameObject playerinfo;
+    private GameObject entity;
+    [SerializeField] private SpellGivesDamage ouch;
+    private BaseSpell currentSpell;
 
     public void Base_Effects(Element.ElementTypes currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
     {
         playerinfo = player;
         entity = locationEntity;
         currentSpell = passedSpell;
-        switch (currentElement) //check to see what element corresponds with the element of the spell, then cast the corresponding effect
+        switch (currentElement)
         {
             case Element.ElementTypes.Arcane:
                 arcaneEffect();
@@ -68,13 +61,10 @@ public class Effects : MonoBehaviour
     {
         Vector3 direction = entity.transform.position - playerinfo.transform.position;
         entity.GetComponent<Rigidbody>().AddForce(direction * 100);
-        //pushes the enemy away from the point of collision
->>>>>>> Stashed changes
     }
 
-    // Update is called once per frame
-    void Update()
+    void iceEffect()
     {
-        
+        print("TESTING1");
     }
 }

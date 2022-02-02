@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ArcaneBlast
   m_EditorClassIdentifier: 
   damage: 4
-  timeBetweenCasts: 4
+  timeBetweenCasts: 2
   numInstances: -1
   castSpeed: 0.1
   spellSpeed: 8
-  spellLifetime: 0.35
+  spellLifetime: 0.45
   radius: 1
   self: 0
-  element: ARCANE
+  element: 0

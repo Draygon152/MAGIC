@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 public class SelectedSpellUI : MonoBehaviour
 {
-    [SerializeField] private Text SelectedSpellText; //the text that displays the spell being used
+    [SerializeField] private Text SelectedSpellText;
 
     void awake()
     {
-        SelectedSpellText.text = $"Testing SpellUI"; //default text
+        SelectedSpellText.text = $"Testing SpellUI";
     }
 
     public void changeSpellText(BaseSpell spellInfo)

@@ -3,7 +3,11 @@ guid: 899e08e487fdd9a4a9a3e0abfd5a147b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - SpellToCast: {instanceID: 0}
+  - spellEffect: {instanceID: 0}
+  - player: {fileID: 8107796699639736997, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
+  - hitLocation: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
