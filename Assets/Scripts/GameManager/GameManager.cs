@@ -237,7 +237,12 @@ public class GameManager : MonoBehaviour
 
     private void OnReset() // To reset the game.
     {
+        //reset the game state
         state = gameState.start;
+        enemyCount = 0;
+        playerCount = 0;
+        waveNumber = 0;
+        
 
         gameCamera.GetComponent<CameraSystem>().enabled = false;
         Destroy(players);
