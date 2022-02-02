@@ -196,8 +196,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
+      - m_Target: {fileID: 8775308228494136343}
+        m_TargetAssemblyTypeName: DefeatGameOver, Assembly-CSharp
         m_MethodName: ReturnToMainMenuPressed
         m_Mode: 1
         m_Arguments:
