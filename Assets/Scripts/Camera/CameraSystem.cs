@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//written by Marc
 public class CameraSystem : MonoBehaviour
 {
 

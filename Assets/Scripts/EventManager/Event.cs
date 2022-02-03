@@ -10,8 +10,7 @@ public sealed class Event
         GameUnpaused,
         PlayerDeath,
         EnemyDeath,
-        PlayerVictory,
-        PlayerDefeat,
+        GameOver,
         ResetGame
     }
 }

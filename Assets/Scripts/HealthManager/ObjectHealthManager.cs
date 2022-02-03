@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Written by Liz
 public class ObjectHealthManager : HealthManager
 {
     public override void LoseHealth(int damageAmount)

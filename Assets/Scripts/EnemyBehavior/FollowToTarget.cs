@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//written by Liz
 public class FollowToTarget : MonoBehaviour
 {
     [SerializeField] private Rigidbody objRigidbody;

@@ -1,11 +1,38 @@
 using UnityEngine;
 
+//Written primarily by Liz
+//Modify slightly by Lawson
 public class EnemyHealthManager : HealthManager
 {
+    [SerializeField] private EnemyHealthBar healthBar;
+
+
+
+    protected override void Start()
+    {
+        //Call HealthManager start first
+        base.Start();
+
+        //Initialize health bar
+        healthBar.InitializeHealthBar(maxHealth);
+
+        EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, Despawn);
+    }
+
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.Unsubscribe(Event.EventTypes.ResetGame, Despawn);
+    }
+
+
     public override void LoseHealth(int damageAmount)
     {
         currentHealth -= damageAmount;
 
+        //update the health bar
+        healthBar.UpdateHealth(currentHealth);
+        
         Debug.Log($"Health of {gameObject.tag} after damage: {currentHealth}");
 
         // If health becomes 0 or less, enemy destroyed
@@ -16,5 +43,12 @@ public class EnemyHealthManager : HealthManager
 			EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
             Destroy(gameObject);
         }
+    }
+
+
+    //despawn the enmey when the game is over
+    public void Despawn()
+    {
+        Destroy(gameObject);
     }
 }

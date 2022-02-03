@@ -1,7 +1,11 @@
 using UnityEngine;
 
+//Written primarily by Liz
+//Modified slightly by Kevin
 public class PlayerHealthManager : HealthManager
 {
+    [SerializeField] protected int startingHealth; //health the player starts at after res
+
     public delegate void UpdateHealthBar(int newCurrentHealth);
     public delegate void UpdateHealthBarMax(int newMaxHealth);
 

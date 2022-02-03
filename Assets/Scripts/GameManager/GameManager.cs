@@ -1,17 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Lawson made the Game Manager and wrote most of the code
+//Everyone else has contributed at least one line of code however
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through
-    [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 2; // The number of enemies remaining that will
+    [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 1; // The number of enemies remaining that will
                                                                                // trigger the next wave, if it is two then
                                                                                // the next wave will spawn when two enemies 
                                                                                // are remaining
 
     [SerializeField] private GameObject playerPrefab;    // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private CameraSystem gameCamera;        // The system responsible for having the camera follow the player
+    [SerializeField] private GameObject camera; //The camera for the game, I hope to not need the full camer
+                                                //and only have gameCamera (the CameraSystem on camera), but I 
+                                                //have time before the first play test    
+    
+    private CameraSystem gameCamera; // The system responsible for having the camera follow the player
 
     [SerializeField] private List <EnemyWaveTemplate> waves; // A list of scriptable objects representing the waves that 
                                                              // needs to be spawned into the game
@@ -75,6 +82,9 @@ public class GameManager : MonoBehaviour
 
         // initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
+
+        //get the CameraSystem
+        gameCamera = camera.GetComponent<CameraSystem>();
     }
 
 
@@ -123,9 +133,11 @@ public class GameManager : MonoBehaviour
         gameCamera.enabled = true;
         gameCamera.player = players.transform;
 
+        //Set the direction for the 
+
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += waves[waveNumber].SpawnWave();
+        enemyCount += waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
         waveNumber++;
 
         // set the game state to playing
@@ -143,11 +155,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Victorious");
 
-
             VictoryGameOver.Open(); //Activates the Victory Screen UI.
 
             state = gameState.victory;
-            EventManager.Instance.Notify(Event.EventTypes.PlayerVictory);
         }
 
         else
@@ -157,8 +167,9 @@ public class GameManager : MonoBehaviour
             DefeatGameOver.Open(); //Activates the Defeat Screen UI.
 
             state = gameState.defeat;
-            EventManager.Instance.Notify(Event.EventTypes.PlayerDefeat);
         }
+
+        EventManager.Instance.Notify(Event.EventTypes.GameOver);
     }
 
 
@@ -217,7 +228,7 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += waves[waveNumber].SpawnWave();
+                enemyCount += waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
                 waveNumber++;
             }
         }
@@ -226,7 +237,12 @@ public class GameManager : MonoBehaviour
 
     private void OnReset() // To reset the game.
     {
+        //reset the game state
         state = gameState.start;
+        enemyCount = 0;
+        playerCount = 0;
+        waveNumber = 0;
+        
 
         gameCamera.GetComponent<CameraSystem>().enabled = false;
         Destroy(players);

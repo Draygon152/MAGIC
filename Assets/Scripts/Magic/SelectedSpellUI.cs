@@ -1,5 +1,7 @@
-// Written by Angel Rubio
+//Worked on by Angel
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +15,6 @@ public class SelectedSpellUI : MonoBehaviour
     {
         SelectedSpellText.text = $"Testing SpellUI";
     }
-
 
     public void changeSpellText(BaseSpell spellInfo)
     {

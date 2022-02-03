@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Written by Lawson McCoy
 [CreateAssetMenu(fileName = "Wave", menuName = "Enemy_Wave")]
 public class EnemyWaveTemplate : ScriptableObject
 {
@@ -31,7 +32,7 @@ public class EnemyWaveTemplate : ScriptableObject
     // A function to spawn the wave of enemies
     //   Arguments: None
     //   Return value: The total number of enemies that the wave spawned in
-    public int SpawnWave()
+    public int SpawnWave(Transform cameraTransform) //unforunately for this play test I need this reference for the health bars
     {
         ValidateInput();
 
@@ -39,7 +40,12 @@ public class EnemyWaveTemplate : ScriptableObject
 
         // Spawn all enemies in this wave
         for (int index = 0; index < enemyPrefabs.Count; index++)
-            Instantiate(enemyPrefabs[index], enemySpawnPoints[index].position, enemySpawnPoints[index].rotation);
+        {
+            GameObject newEnemy = Instantiate(enemyPrefabs[index], enemySpawnPoints[index].position, enemySpawnPoints[index].rotation);
+
+            //set the health bar to point at the camera
+            newEnemy.GetComponentInChildren<EnemyHealthBillboard>().SetCamera(cameraTransform);
+        }
 
         // There was a total of enemyPrefab.Count enemies spawned
         return enemyPrefabs.Count;
