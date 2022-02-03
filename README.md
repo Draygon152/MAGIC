@@ -17,4 +17,7 @@ NOTES:
   In the first-playtest build of the game, the submenus within the Options menu
   have not yet been implemented. In addition to this, while there is a menu selection
   area for a second player to enter the game, there is not yet support for cooperative
-  play.
+  play. Extra effects for many spells are still a work in progress, though wind and
+  lightning bonus spell effects have been partially implemented and the base stats
+  of all spells are different. For the first playtest, players may only challenge
+  two waves of enemies.
