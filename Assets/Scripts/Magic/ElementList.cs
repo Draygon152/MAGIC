@@ -5,7 +5,7 @@ using System;
 
 public class ElementList : MonoBehaviour
 {
-    public BaseSpell ArcaneSpell;
+    [SerializeField] private BaseSpell ArcaneSpell;
     [SerializeField] private BaseSpell GustSpell;
     [SerializeField] private BaseSpell FireSpell;
     [SerializeField] private BaseSpell NatureSpell;

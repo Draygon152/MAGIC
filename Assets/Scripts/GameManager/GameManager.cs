@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    void Awake()
+    private void Awake()
     {
         Debug.Log("Game Manager Awake");
 
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Debug.Log("Game Manager Start");
 
@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         // Marking the GameManager as nonexistent
         Instance = null;
