@@ -1,11 +1,12 @@
 // Written by Kevin Chao
 
-#undef DEBUG
-
 using UnityEngine;
 
 public class MainMenu : Menu<MainMenu>
 {
+    [SerializeField] private bool debug;
+
+
     public void PlayGamePressed()
     {
         LobbyMenu.Open();
@@ -22,12 +23,9 @@ public class MainMenu : Menu<MainMenu>
     {
         Debug.Log("Exiting Game");
 
-        // Uncomment when testing quitting functionality from within
-        // Unity's editor, since Application.Quit() does nothing there
-#if (DEBUG)
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        if (debug)
+            UnityEditor.EditorApplication.isPlaying = false;
+        else
+            Application.Quit();
     }
 }

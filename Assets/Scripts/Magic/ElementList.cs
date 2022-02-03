@@ -1,7 +1,5 @@
-//Worked on by Angel
+// Written by Angel
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -14,7 +12,10 @@ public class ElementList : MonoBehaviour
     [SerializeField] private BaseSpell IceSpell;
     [SerializeField] private BaseSpell LightningSpell;
 
-    public BaseSpell Return_Spell(Element.ElementTypes CurrentElement) //Current Element is the selected element for the player
+
+
+    // Current Element is the element selected by a player
+    public BaseSpell Return_Spell(Element.ElementTypes CurrentElement) 
     {
         switch(CurrentElement)
         {

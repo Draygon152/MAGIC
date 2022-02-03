@@ -1,7 +1,6 @@
-//Worked on by Angel
+// Written by Angel
+// Modified by Kevin Chao
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -13,7 +12,8 @@ public class BaseSpell : MonoBehaviour
     private Rigidbody spellBody;
     public Effects spellEffect;
     public GameObject player;
-    public GameObject hitLocation;
+
+
 
     private void Awake()
     {
@@ -25,22 +25,25 @@ public class BaseSpell : MonoBehaviour
         spellBody = GetComponent<Rigidbody>();
         spellBody.isKinematic = true;
 
-        Destroy(gameObject, SpellToCast.spellLifetime); //destroy spell after certain time if it does not hit anything
+        Destroy(gameObject, SpellToCast.spellLifetime); // Destroy spell after certain time if it does not hit anything
     }
+
 
     private void Update()
     {
-        if (SpellToCast.spellSpeed > 0) //Projectile spell
+        if (SpellToCast.spellSpeed > 0) // Projectile spell
         {
             transform.Translate(Vector3.forward * SpellToCast.spellSpeed * Time.deltaTime);
         }
     }
 
+
     private void OnTriggerEnter(Collider collision)
     {
-        hitLocation = collision.gameObject;
-        Destroy(gameObject); //destroy the spell when it collides
-        spellEffect.Base_Effects(SpellToCast.element, player, hitLocation, this);
+        Destroy(gameObject); // Destroy the spell when it collides
+
+        // Apply spell effect at the collision's gameobject
+        spellEffect.Base_Effects(SpellToCast.element, player, collision.gameObject, this);
     }
 }
 

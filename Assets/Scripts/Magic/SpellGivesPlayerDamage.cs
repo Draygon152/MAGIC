@@ -1,7 +1,6 @@
-//Wprked on by Angel
+// Written by Angel
+// Modified by Kevin Chao
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpellGivesPlayerDamage : DamageGiverManager
@@ -13,9 +12,12 @@ public class SpellGivesPlayerDamage : DamageGiverManager
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Collided Player!");
+
             PlayerHealthManager player = collision.gameObject.GetComponentInParent<PlayerHealthManager>();
-            DamagePlayer(player, currentSpell.SpellToCast.damage);
-            Destroy(gameObject); //destroy the spell when it collides
+            if (player != null)
+                DamageTarget(player, currentSpell.SpellToCast.damage);
+
+            Destroy(gameObject); // Destroy the spell when it collides
         }
     }
 }

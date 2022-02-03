@@ -1,8 +1,8 @@
+// Written by Lawson
+// Modified by Angel, Kevin, Liz, and Marc
+
 using System.Collections.Generic;
 using UnityEngine;
-
-//Lawson made the Game Manager and wrote most of the code
-//Everyone else has contributed at least one line of code however
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject playerPrefab;    // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private GameObject camera; //The camera for the game, I hope to not need the full camer
-                                                //and only have gameCamera (the CameraSystem on camera), but I 
-                                                //have time before the first play test    
+    [SerializeField] private GameObject cameraRef; // The camera for the game, I hope to not need the full camer
+                                                   // and only have gameCamera (the CameraSystem on camera), but I 
+                                                   // have time before the first play test    
     
     private CameraSystem gameCamera; // The system responsible for having the camera follow the player
 
@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
     private gameState state; // A variable for storing the current game state
 
 
-
     // Make the game manager a singleton
     static public GameManager Instance
     {
@@ -64,6 +63,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+
     void Awake()
     {
         Debug.Log("Game Manager Awake");
@@ -80,11 +80,11 @@ public class GameManager : MonoBehaviour
         playerCount = 0;
         enemyCount = 0;
 
-        // initialize wave number to 0, will be set to one in StartGame
+        // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
 
-        //get the CameraSystem
-        gameCamera = camera.GetComponent<CameraSystem>();
+        // Get the CameraSystem
+        gameCamera = cameraRef.GetComponent<CameraSystem>();
     }
 
 
@@ -94,8 +94,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Manager Start");
 
         // Subscribe to events
-        // EventManager.Instance;
-        // EventManager.Instance.Subscribe(Event.EventTypes.GameStart, StartGame);
         EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
         EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, OnEnemyDeath);
         EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, OnReset);
@@ -133,20 +131,18 @@ public class GameManager : MonoBehaviour
         gameCamera.enabled = true;
         gameCamera.player = players.transform;
 
-        //Set the direction for the 
-
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
+        enemyCount += waves[waveNumber].SpawnWave(cameraRef.GetComponent<Transform>());
         waveNumber++;
 
-        // set the game state to playing
+        // Update current game state
         state = gameState.playing;
     }
 
 
     // End the game
-    // bool WinOrLose: A boolean value that is true if the player won the game and false if they lost
+    //   bool WinOrLose: A boolean value that is true if the player won the game and false if they lost
     private void EndGame(bool WinOrLose)
     {
         // check if the player won or lost and trigger the corresponding event
@@ -155,7 +151,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Victorious");
 
-            VictoryGameOver.Open(); //Activates the Victory Screen UI.
+            VictoryGameOver.Open(); // Activates the Victory Screen UI.
 
             state = gameState.victory;
         }
@@ -164,7 +160,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player Defeated");
 
-            DefeatGameOver.Open(); //Activates the Defeat Screen UI.
+            DefeatGameOver.Open(); // Activates the Defeat Screen UI.
 
             state = gameState.defeat;
         }
@@ -228,7 +224,7 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += waves[waveNumber].SpawnWave(camera.GetComponent<Transform>());
+                enemyCount += waves[waveNumber].SpawnWave(cameraRef.GetComponent<Transform>());
                 waveNumber++;
             }
         }
@@ -237,13 +233,12 @@ public class GameManager : MonoBehaviour
 
     private void OnReset() // To reset the game.
     {
-        //reset the game state
+        // reset the game state
         state = gameState.start;
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
         
-
         gameCamera.GetComponent<CameraSystem>().enabled = false;
         Destroy(players);
     }

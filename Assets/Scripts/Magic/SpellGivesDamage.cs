@@ -1,7 +1,6 @@
-//Worked on by Angel
+// Worked on by Angel
+// Modified by Kevin Chao
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpellGivesDamage : DamageGiverManager
@@ -15,15 +14,18 @@ public class SpellGivesDamage : DamageGiverManager
         {
             Debug.Log("Collided Object!");
             ObjectHealthManager obj = collision.gameObject.GetComponentInParent<ObjectHealthManager>();
-            DamageObject(obj, currentSpell.SpellToCast.damage);
-            Destroy(gameObject); //destroy the spell when it collides
+            if (obj != null)
+                DamageTarget(obj, currentSpell.SpellToCast.damage);
+
+            Destroy(gameObject); // Destroy the spell when it collides
         }
-        if (collision.gameObject.tag == "Enemy")
+
+        else if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("Blasted Enemy!");
             EnemyHealthManager enemy = collision.gameObject.GetComponentInParent<EnemyHealthManager>();
-            DamageEnemy(enemy, currentSpell.SpellToCast.damage);
-            //Destroy(gameObject); //destroy the spell when it collides
+            if (enemy != null)
+                DamageTarget(enemy, currentSpell.SpellToCast.damage);
         }
     }
 
@@ -31,9 +33,11 @@ public class SpellGivesDamage : DamageGiverManager
     {
         if (entity.tag == "Enemy")
         {
-            Debug.Log("Hurt Enemy!");
+            Debug.Log("Hurting Enemy!");
+
             EnemyHealthManager enemy = entity.GetComponent<EnemyHealthManager>();
-            DamageEnemy(enemy, spellHit.SpellToCast.damage);
+            if (enemy != null)
+                DamageTarget(enemy, spellHit.SpellToCast.damage);
         }
     }
 }

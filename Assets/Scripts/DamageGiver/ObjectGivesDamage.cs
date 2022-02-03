@@ -1,18 +1,24 @@
+// Written by Liz
+// Modified by Kevin Chao
+
 using UnityEngine;
 
-//Written by Liz
 public class ObjectGivesDamage : DamageGiverManager
 {
+    // Damage that will be dealt to entities colliding with this object
     [SerializeField] private int damageDealt;
 
-    // This function checks if player collided to Object
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Collided!");
+            Debug.Log("Collided With Player!");
+
             PlayerHealthManager player = collision.gameObject.GetComponentInParent<PlayerHealthManager>();
-            DamagePlayer(player, damageDealt);
+            if (player != null)
+                DamageTarget(player, damageDealt);
         }
     }
 }
