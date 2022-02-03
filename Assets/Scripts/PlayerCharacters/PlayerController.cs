@@ -1,7 +1,8 @@
 using UnityEngine;
 
-//Written primarily by Marc
-//Modify slightly by Lawson
+// Written primarily by Marc
+// Modify slightly by Lawson
+// Debugged and collisions fixed by Kevin Chao
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         // In here, the X-axis should refer to our Right Input Actions "A to move left, D to move right in the X-axis".
         // ...and Z-axis would refer to our Y-axis movements "W to move up, S to move down".
         inputDirection = new Vector3(PlayerControlsMap.Move.Right.ReadValue<float>(), 0, PlayerControlsMap.Move.Forward.ReadValue<float>());
+
         Move();
         Turn();
     }
@@ -48,8 +50,8 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        // Using rigidbody component, move our player.
-        rb.MovePosition(transform.position + (inputDirection.normalized.magnitude * moveSpeed * Time.deltaTime * transform.forward));
+        // Using rigidbody component, move our player. Uses rb.velocity to maintain collisions properly
+        rb.velocity = transform.forward * inputDirection.normalized.magnitude * moveSpeed;
     }
     
 
@@ -70,6 +72,5 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed * Time.deltaTime); // Rotate our player smoothly.
         }
-        
     }
 }
