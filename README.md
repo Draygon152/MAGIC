@@ -1,3 +1,4 @@
+<pre>
 # ICS167-Project
 Hello, and welcome to the wonderful world of MAGIC!
 To play the current build of this game, a mouse and keyboard are required.
@@ -21,3 +22,4 @@ NOTES:
   lightning bonus spell effects have been partially implemented and the base stats
   of all spells are different. For the first playtest, players may only challenge
   two waves of enemies.
+</pre>
