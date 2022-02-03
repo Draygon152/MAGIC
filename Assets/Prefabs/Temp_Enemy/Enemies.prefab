@@ -517,7 +517,6 @@ GameObject:
   - component: {fileID: 5763893213597020717}
   - component: {fileID: 8248662316145675719}
   - component: {fileID: 1872983717}
-  - component: {fileID: 1872983718}
   m_Layer: 3
   m_Name: Enemies
   m_TagString: Enemy
@@ -610,7 +609,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objRigidbody: {fileID: 5763893213597020719}
-  target: {fileID: 0}
   speed: 8
   turnSpeed: 720
   distanceFromTarget: 8
@@ -628,7 +626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a163246a867e920478045931881efa63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
   maxHealth: 10
   healthBar: {fileID: 9032181268822750399}
 --- !u!33 &8248662316145675719
@@ -653,15 +650,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: {fileID: 7145550566800696035}
   typeName: 
---- !u!114 &1872983718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8991031362452138341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da44b3d777801c738abcdef9ca43fd3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

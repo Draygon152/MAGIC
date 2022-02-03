@@ -6,7 +6,9 @@ public class EnemyHealthManager : HealthManager
 {
     [SerializeField] private EnemyHealthBar healthBar;
 
-    void Start()
+
+
+    protected override void Start()
     {
         //Call HealthManager start first
         base.Start();
@@ -16,6 +18,13 @@ public class EnemyHealthManager : HealthManager
 
         EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, Despawn);
     }
+
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.Unsubscribe(Event.EventTypes.ResetGame, Despawn);
+    }
+
 
     public override void LoseHealth(int damageAmount)
     {
@@ -35,6 +44,7 @@ public class EnemyHealthManager : HealthManager
             Destroy(gameObject);
         }
     }
+
 
     //despawn the enmey when the game is over
     public void Despawn()
