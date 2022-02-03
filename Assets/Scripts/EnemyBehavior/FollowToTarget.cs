@@ -1,6 +1,7 @@
+// Written by Liz
+
 using UnityEngine;
 
-//written by Liz
 public class FollowToTarget : MonoBehaviour
 {
     [SerializeField] private Rigidbody objRigidbody;
@@ -13,6 +14,8 @@ public class FollowToTarget : MonoBehaviour
     private GameManager gameManager;
     private Transform target;
 
+
+
     private void Start()
     {
         objRigidbody = GetComponent<Rigidbody>();
@@ -20,6 +23,7 @@ public class FollowToTarget : MonoBehaviour
         // Access the player prefab clone
         gameManager = GameManager.Instance;
         PlayerData playerData = gameManager.GetPlayerData;
+
         // Added this if statement because playerData is initially null when the game starts. GameObject causes an error if
         // playerData is null so do not delete this.
         if (playerData != null)
@@ -34,15 +38,18 @@ public class FollowToTarget : MonoBehaviour
             distanceFromTarget = tooCloseToTarget + 0.5f;
     }
 
+
     private void Update()
     {
         LookAtTarget();
     }
 
+
     private void FixedUpdate()
     {
         GoToTarget();
     }
+
 
     // LookAtTarget() rotates object to face its target.
     private void LookAtTarget()
@@ -54,6 +61,7 @@ public class FollowToTarget : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotate, turnSpeed * Time.deltaTime); // Rotate object smoothly.
         }
     }
+
 
     // GoToTarget() moves object towards its target at a certain distance.
     private void GoToTarget()
@@ -68,6 +76,7 @@ public class FollowToTarget : MonoBehaviour
                 Vector3 newPos = transform.position + transform.forward * speed * Time.deltaTime;
                 objRigidbody.MovePosition(newPos);
             }
+
             else if (cowardly)
             {
                 if (distance < tooCloseToTarget)

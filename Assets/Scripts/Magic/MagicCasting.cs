@@ -1,4 +1,4 @@
-//Worked on by Angel
+// Written by Angel
 
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class MagicCasting : MonoBehaviour
 
 
 
-    void Awake()
+    private void Awake()
     {
         // Initializes the player controls
         PlayerControlsspells = new PlayerControls();
@@ -36,11 +36,13 @@ public class MagicCasting : MonoBehaviour
     }
 
 
-    void Update()
+    private void Update()
     {
         castingtime = spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
         bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
-        if (!casting && cast_button_down)     // if the player is not casting and the cast button is pressed
+
+        // if the player is not casting and the cast button is pressed
+        if (!casting && cast_button_down)     
         {
             casting = true; // toggle casting to true
             current_cast_time = 0;  // set the time since last cast down to 0;
@@ -64,12 +66,15 @@ public class MagicCasting : MonoBehaviour
         SelectedElement = SE;
         spellToCast = listOfSpells.Return_Spell(SelectedElement.GetElementType());
     }
+
+
     public BaseSpell returnSpell()
     {
         return spellToCast;
     }
 
-    void CastCurrentSpell()
+
+    private void CastCurrentSpell()
     {
         Instantiate(spellToCast, castlocation.position, castlocation.rotation); // create spell at castlocation
     }

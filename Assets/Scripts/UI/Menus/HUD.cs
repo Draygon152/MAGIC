@@ -1,4 +1,5 @@
 // Written by Kevin Chao
+// Modified by Angel
 
 public class HUD : Menu<HUD>
 {
@@ -35,12 +36,12 @@ public class HUD : Menu<HUD>
 
     public void SetP1SpellInfo(BaseSpell spellSelected)
     {
-        Player1SpellUI.changeSpellText(spellSelected);
+        Player1SpellUI.changeSelectedSpellText(spellSelected);
     }
 
 
     public void SetP2SpellInfo(BaseSpell spellSelected)
     {
-        Player2SpellUI.changeSpellText(spellSelected);
+        Player2SpellUI.changeSelectedSpellText(spellSelected);
     }
 }

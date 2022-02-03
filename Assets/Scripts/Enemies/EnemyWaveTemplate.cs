@@ -1,4 +1,5 @@
-#undef DEBUG
+// Written by Lawson McCoy
+// Modified by Kevin Chao
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine;
 public class EnemyWaveTemplate : ScriptableObject
 {
     [SerializeField] private List<GameObject> enemyPrefabs;    // A list of all the enemy prefabs to be spawned
-    [SerializeField] private List<Transform> enemySpawnPoints; // A list of all the spawn location for the enemies (parallel to enmeyPrefab)
+    [SerializeField] private List<Transform> enemySpawnPoints; // A list of all the spawn location for the enemies (parallel to enemyPrefab)
 
 
 
@@ -20,11 +21,8 @@ public class EnemyWaveTemplate : ScriptableObject
         if (enemyPrefabs.Count != enemySpawnPoints.Count)
         {
             Debug.LogError("The number of enemies and spawn points do not match for " + name, this);
-#if (DEBUG)
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
+
             Application.Quit();
-#endif
         }
     }
 
@@ -32,7 +30,7 @@ public class EnemyWaveTemplate : ScriptableObject
     // A function to spawn the wave of enemies
     //   Arguments: None
     //   Return value: The total number of enemies that the wave spawned in
-    public int SpawnWave(Transform cameraTransform) //unforunately for this play test I need this reference for the health bars
+    public int SpawnWave(Transform cameraTransform) // Temporary reference needed for health bars, planned to change
     {
         ValidateInput();
 
@@ -43,7 +41,7 @@ public class EnemyWaveTemplate : ScriptableObject
         {
             GameObject newEnemy = Instantiate(enemyPrefabs[index], enemySpawnPoints[index].position, enemySpawnPoints[index].rotation);
 
-            //set the health bar to point at the camera
+            // Set the health bar to point at the camera
             newEnemy.GetComponentInChildren<EnemyHealthBillboard>().SetCamera(cameraTransform);
         }
 
