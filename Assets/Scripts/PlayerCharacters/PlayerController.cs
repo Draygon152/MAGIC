@@ -48,14 +48,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void Move()
+    private void Move()
     {
         // Using rigidbody component, move our player. Uses rb.velocity to maintain collisions properly
         rb.velocity = transform.forward * inputDirection.normalized.magnitude * moveSpeed;
     }
     
 
-    void Turn()
+    private void Turn()
     {
         if (inputDirection != Vector3.zero)
         {
