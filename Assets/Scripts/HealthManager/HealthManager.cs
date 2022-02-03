@@ -1,6 +1,7 @@
+// Written by Liz
+
 using UnityEngine;
 
-//Written by Liz
 public abstract class HealthManager : MonoBehaviour
 {
     [SerializeField] protected int maxHealth;
@@ -12,7 +13,7 @@ public abstract class HealthManager : MonoBehaviour
     protected virtual void Start()
     {
         currentHealth = maxHealth;
-        Debug.Log($"Current {gameObject.tag} Health: {currentHealth}");
+        Debug.Log($"Current {gameObject.name} Health: {currentHealth}");
     }
 
 

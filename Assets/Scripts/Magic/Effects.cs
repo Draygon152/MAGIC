@@ -1,7 +1,6 @@
-//Worked on by Angel
+// Written by Angel
+// Modified by Kevin Chao
 
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using UnityEngine;
 
@@ -11,6 +10,8 @@ public class Effects : MonoBehaviour
     private GameObject entity;
     [SerializeField] private SpellGivesDamage ouch;
     private BaseSpell currentSpell;
+
+
 
     public void Base_Effects(Element.ElementTypes currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
     {
@@ -42,29 +43,35 @@ public class Effects : MonoBehaviour
         }
     }
 
-    void lightningEffect()
+
+    private void lightningEffect()
     {
-        playerinfo.transform.position = entity.transform.position; //Teleports ontop of enemy, takes damage as a result
+        // Teleports on top of enemy, takes damage as a result, WIP
+        playerinfo.transform.position = entity.transform.position; 
     }
 
-    void arcaneEffect()
+
+    private void arcaneEffect()
     {
-        print("TESTING1");
+        Debug.Log("ARCANE EFFECT");
     }
 
-    void fireEffect()
+
+    private void fireEffect()
     {
-        print("tick");
+        Debug.Log("FIRE EFFECT");
     }
 
-    void windEffect()
+
+    private void windEffect()
     {
         Vector3 direction = entity.transform.position - playerinfo.transform.position;
         entity.GetComponent<Rigidbody>().AddForce(direction * 100);
     }
 
-    void iceEffect()
+
+    private void iceEffect()
     {
-        print("TESTING1");
+        Debug.Log("ICE EFFECT");
     }
 }

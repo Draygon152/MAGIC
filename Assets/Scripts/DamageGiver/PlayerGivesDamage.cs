@@ -1,26 +1,31 @@
+// Written by Liz
+
 using UnityEngine;
 
-//Written by Liz
 public class PlayerGivesDamage : DamageGiverManager
 {
     [SerializeField] private int damageDealt;
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Object")
+        string collisionTag = collision.gameObject.tag;
+
+        Debug.Log($"Player collided with {collisionTag}!");
+
+        if (collisionTag == "Object")
         {
-            Debug.Log("Collided Object!");
             ObjectHealthManager obj = collision.gameObject.GetComponentInParent<ObjectHealthManager>();
             if (obj != null)
-                DamageObject(obj, damageDealt);            
+                DamageTarget(obj, damageDealt);            
         }
 
-        else if (collision.gameObject.tag == "Enemy")
+        else if (collisionTag == "Enemy")
         {
-            Debug.Log("Collided Enemy!");
             EnemyHealthManager enemy = collision.gameObject.GetComponentInParent<EnemyHealthManager>();
             if (enemy != null)
-                DamageEnemy(enemy, damageDealt);
+                DamageTarget(enemy, damageDealt);
         }
     }
 }

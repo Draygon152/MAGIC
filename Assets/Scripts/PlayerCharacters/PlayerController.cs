@@ -1,13 +1,13 @@
+// Written by Marc
+// Modified by Kevin Chao and Lawson
+
 using UnityEngine;
 
-// Written primarily by Marc
-// Modify slightly by Lawson
-// Debugged and collisions fixed by Kevin Chao
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float moveSpeed = 8f;   // Controls the movement speed of player.
-    [SerializeField] private float turnSpeed = 720f; // Controls the turn speed of player.
+    [SerializeField] private float moveSpeed; // Controls the movement speed of player.
+    [SerializeField] private float turnSpeed; // Controls the turn speed of player.
 
     private PlayerControls PlayerControlsMap; // The Action Map that we created (Called PlayerControls) that is reading in the player's input
     private Vector3 inputDirection;           // Vector to gather our WASD keys input.

@@ -1,28 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+// Written by Lawson McCoy
+// Modified by Kevin Chao
+
 using UnityEngine;
 using UnityEngine.UI;
 
-//written by Lawson McCoy
 public class EnemyHealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider healthBarValue;
+    [SerializeField] private Slider healthBar;
 
-    //A setup fucntion to set the max health of the enemy
-    //and to start the enemy with their max health
+
+
+    // A setup function to set the max health of the enemy
+    // and to start the enemy with their max health
     public void InitializeHealthBar(int maxHealth)
     {
-        //set max health
-        healthBarValue.maxValue = maxHealth;
+        // Set health bar maximum
+        healthBar.maxValue = maxHealth;
 
-        //set health to be max health
-        healthBarValue.value = maxHealth;
+        // Set current health value to be max health
+        healthBar.value = maxHealth;
     }
 
-    //A function for setting the health bar to a new value
+
+    // A function for setting the health bar to a new value
     public void UpdateHealth(int newHealth)
     {
-        healthBarValue.value = newHealth;
+        healthBar.value = newHealth;
     }
 }
 

@@ -3,7 +3,6 @@
 using System.Collections;
 using UnityEngine;
 
-
 public class EventManagerTester : MonoBehaviour
 {
     private void Awake()

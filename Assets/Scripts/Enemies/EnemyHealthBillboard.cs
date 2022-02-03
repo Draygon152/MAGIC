@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+// Written by Lawson McCoy
+// Modified by Kevin Chao
+
 using UnityEngine;
 
-//Written by Lawson McCoy
 public class EnemyHealthBillboard : MonoBehaviour
 {
-    [SerializeField] private Transform camera; //A reference to the camera the health bar needs to face
+    [SerializeField] private Transform cameraRef; // A reference to the camera orientation the health bar needs to face
 
-    //LateUpdate is required so that the camera moves before rotating the health bar
-    void LateUpdate()
+
+
+    // LateUpdate is required so that the camera moves before rotating the health bar
+    private void LateUpdate()
     {
-        this.transform.LookAt(this.transform.position + camera.rotation * Vector3.forward);
+        transform.LookAt(transform.position + cameraRef.rotation * Vector3.forward);
     }
+
 
     public void SetCamera(Transform cameraToLookAt)
     {
-        camera = cameraToLookAt;
+        cameraRef = cameraToLookAt;
     }
 }

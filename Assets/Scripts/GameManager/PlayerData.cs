@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+// Written by Liz
+
 using UnityEngine;
 
-//written by Liz
 public class PlayerData : ScriptableObject
 {
     public GameObject playerOne;
