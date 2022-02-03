@@ -10,7 +10,6 @@ public class EnemyWaveTemplate : ScriptableObject
 {
     [SerializeField] private List<GameObject> enemyPrefabs;    // A list of all the enemy prefabs to be spawned
     [SerializeField] private List<Transform> enemySpawnPoints; // A list of all the spawn location for the enemies (parallel to enemyPrefab)
-    [SerializeField] private bool debug;
 
 
 
@@ -23,10 +22,7 @@ public class EnemyWaveTemplate : ScriptableObject
         {
             Debug.LogError("The number of enemies and spawn points do not match for " + name, this);
 
-            if (debug)
-                UnityEditor.EditorApplication.isPlaying = false;
-            else
-                Application.Quit();
+            Application.Quit();
         }
     }
 
