@@ -1,5 +1,5 @@
-<pre>
 # ICS167-Project
+<pre>
 Hello, and welcome to the wonderful world of MAGIC!
 To play the current build of this game, a mouse and keyboard are required.
 
