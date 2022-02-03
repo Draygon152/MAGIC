@@ -39,14 +39,9 @@ public class FollowToTarget : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        LookAtTarget();
-    }
-
-
     private void FixedUpdate()
     {
+        LookAtTarget();
         GoToTarget();
     }
 
