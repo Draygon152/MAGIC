@@ -4,12 +4,12 @@ public class Lightning : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Lightning];
+        return ElementNameDict[ElementTypes.Elements.Lightning];
     }
 
 
-    public override ElementTypes GetElementType()
+    public override ElementTypes.Elements GetElementType()
     {
-        return ElementTypes.Lightning;
+        return ElementTypes.Elements.Lightning;
     }
 }

@@ -1,74 +1,77 @@
 // Written by Angel
+// Modified by Kevin Chao
 
 using UnityEngine;
 
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField] private Transform castlocation; // set the location of where the spell is cast from
-    private BaseSpell spellToCast;
     [SerializeField] private ElementList listOfSpells;
-    private Element SelectedElement;
-    private PlayerControls PlayerControlsspells;
-    private bool casting = false; // the default state of casting magic is false
-    private float castingtime; // = 1f;   // default time between casts. need to replace with individual spell's casting time also placeholder
-    private float current_cast_time; // container for the time it has been since last cast
+
+    private BaseSpell spellToCast;
+    private Element selectedElement;
+    private PlayerControls playerSpellControls;
+
+    private bool casting = false;    // the default state of casting magic is false
+    private float castCooldown;      // default time between spellcasts. need to replace with individual spell's casting time also placeholder
+    private float timeSinceLastCast;
+    private bool castButtonDown;
 
 
 
     private void Awake()
     {
         // Initializes the player controls
-        PlayerControlsspells = new PlayerControls();
+        playerSpellControls = new PlayerControls();
     }
 
 
     private void OnEnable()
     {
         // Enables control for the player's spell casting
-        PlayerControlsspells.Enable();
+        playerSpellControls.Enable();
     }
 
 
     private void OnDisable()
     {
         // Disables control for the player's spell casting
-        PlayerControlsspells.Disable();
+        playerSpellControls.Disable();
     }
 
 
     private void Update()
     {
-        castingtime = spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
-        bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
+        castButtonDown = playerSpellControls.Spells.Cast.triggered && playerSpellControls.Spells.Cast.ReadValue<float>() > 0;
 
-        // if the player is not casting and the cast button is pressed
-        if (!casting && cast_button_down)     
+        // If the player is not casting and the cast button is pressed
+        if (!casting && castButtonDown)
         {
-            casting = true; // toggle casting to true
-            current_cast_time = 0;  // set the time since last cast down to 0;
+            casting = true;
+            timeSinceLastCast = 0.0f;
             CastCurrentSpell();
-            print("ABRA CADABRA!"); // test to see if it works
+
+            Debug.Log($"{selectedElement.GetElementName()} Spell Cast");
         }
 
-        if (casting) // If casting is true
+        if (casting)
         {
-            current_cast_time += Time.deltaTime; // add time from the last time it was cast
-            if (current_cast_time > castingtime) // check to see if enough time has passed between castings
-            {
+            timeSinceLastCast += Time.deltaTime;  // Increase time since last cast by time that passed
+
+            if (timeSinceLastCast > castCooldown) // If cooldown expired, next cast available
                 casting = false;
-            }
         }
     }
 
-
-    public void SetElement(Element SE) // SE = Selected Element
+    public void InitializeSpell(Element elem)
     {
-        SelectedElement = SE;
-        spellToCast = listOfSpells.Return_Spell(SelectedElement.GetElementType());
+        selectedElement = elem;
+        spellToCast = listOfSpells.GetSpell(selectedElement.GetElementType());
+        castCooldown = spellToCast.SpellToCast.timeBetweenCasts;
     }
 
 
-    public BaseSpell returnSpell()
+    public BaseSpell ReturnSpell()
     {
         return spellToCast;
     }

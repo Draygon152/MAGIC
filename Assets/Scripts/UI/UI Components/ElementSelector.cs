@@ -3,17 +3,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ElementSelector : MonoBehaviour
 {
     [SerializeField] private Text SelectedElementText;
     [SerializeField] private List<Button> ButtonList;
+    private Element SelectedElement;
+    
 
 
-    public Element SelectedElement
+    public Element GetSelectedElement()
     {
-        get;
-        private set;
+        if (SelectedElement == null)
+            Debug.LogException(new Exception("No element selected."));
+        
+        return SelectedElement;
     }
 
 

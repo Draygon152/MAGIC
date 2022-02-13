@@ -99,7 +99,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6072304469572764378}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2113565, y: 1.2113565, z: 1.2113565}
   m_Children:
@@ -121,7 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CountDownText: {fileID: 6072304471074229381}
+  TextColor: {r: 1, g: 1, b: 1, a: 1}
   CountDownTextBackground: {fileID: 6072304469530233980}
+  TransparentBackground: 0
   timerLength: 5
 --- !u!1 &6072304471074229383
 GameObject:

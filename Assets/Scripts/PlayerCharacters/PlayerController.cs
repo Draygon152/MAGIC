@@ -61,16 +61,18 @@ public class PlayerController : MonoBehaviour
         {
 
             // This is to have our W,S keys point upwards and downwards in Orthographic view; A,S keys point diagonal.
-            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
-            var changedInputDirection = matrix.MultiplyPoint3x4(inputDirection);
-
+            Matrix4x4 matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+            Vector3 changedInputDirection = matrix.MultiplyPoint3x4(inputDirection);
 
             // Gets the relative position to our current position to target destination.
-            var relativePosition = (transform.position + changedInputDirection) - transform.position;
-            // ...and make that a rotation angle (to look to).
-            var rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up); // Vector3.up tells Unity to rotate us around the Up axis.
+            Vector3 relativePosition = (transform.position + changedInputDirection) - transform.position;
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed * Time.deltaTime); // Rotate our player smoothly.
+            // ...and make that a rotation angle (to look to)
+            // Vector3.up tells Unity to rotate us around the "Up" axis.
+            Quaternion rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up); 
+
+            // Update player rotation
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed); 
         }
     }
 }

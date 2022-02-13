@@ -1,9 +1,8 @@
 // Written by Kevin Chao
 
-// Sealed class to hold EventTypes enum
-public sealed class Event
+public sealed class EventTypes
 {
-    public enum EventTypes
+    public enum Events
     {
         GameStart,
         GamePaused,

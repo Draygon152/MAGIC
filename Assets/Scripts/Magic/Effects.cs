@@ -13,29 +13,29 @@ public class Effects : MonoBehaviour
 
 
 
-    public void Base_Effects(Element.ElementTypes currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
+    public void Base_Effects(ElementTypes.Elements currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
     {
         playerinfo = player;
         entity = locationEntity;
         currentSpell = passedSpell;
         switch (currentElement)
         {
-            case Element.ElementTypes.Arcane:
+            case ElementTypes.Elements.Arcane:
                 arcaneEffect();
                 break;
-            case Element.ElementTypes.Wind:
+            case ElementTypes.Elements.Wind:
                 windEffect();
                 break;
-            case Element.ElementTypes.Fire:
+            case ElementTypes.Elements.Fire:
                 fireEffect();
                 break;
-            case Element.ElementTypes.Nature:
+            case ElementTypes.Elements.Nature:
                 arcaneEffect();
                 break;
-            case Element.ElementTypes.Ice:
+            case ElementTypes.Elements.Ice:
                 iceEffect();
                 break;
-            case Element.ElementTypes.Lightning:
+            case ElementTypes.Elements.Lightning:
                 lightningEffect();
                 break;
             default:

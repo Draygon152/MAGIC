@@ -8678,7 +8678,7 @@ PrefabInstance:
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 8107796699639736997, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
+      objectReference: {fileID: 1703992368162592074, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: Waves.Array.size
       value: 1

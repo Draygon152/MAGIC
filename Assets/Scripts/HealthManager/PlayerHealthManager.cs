@@ -2,16 +2,14 @@
 // Modified by Kevin Chao
 
 using UnityEngine;
+using System;
 
 public class PlayerHealthManager : HealthManager
 {
     [SerializeField] protected int startingHealth; // Health the player starts at after resurrection, not yet implemented
 
-    public delegate void UpdateHealthBar(int newCurrentHealth);
-    public delegate void UpdateHealthBarMax(int newMaxHealth);
-
-    public UpdateHealthBar setHealthBarValue;  // Contains pointer to function responsible for setting HealthBar's current value
-    public UpdateHealthBarMax setHealthBarMax; // Contains pointer to function responsible for setting HealthBar max
+    private Action<int> setHealthBarValue; // Contains pointer to function responsible for setting HealthBar's current value
+    private Action<int> setHealthBarMax;   // Contains pointer to function responsible for setting HealthBar max
 
 
 
@@ -55,11 +53,18 @@ public class PlayerHealthManager : HealthManager
             // If the player runs out of hp, disable the player instead of destroying, allows for resurrection
             gameObject.SetActive(false);
 
-            EventManager.Instance.Notify(Event.EventTypes.PlayerDeath);
+            EventManager.Instance.Notify(EventTypes.Events.PlayerDeath);
         }
 
         // If health is not yet empty, just update HealthBar
         else
             setHealthBarValue(currentHealth);
+    }
+
+
+    public void SetHealthBarDelegates(Action<int> setHBValue, Action<int> setHBValueMax)
+    {
+        setHealthBarValue = setHBValue;
+        setHealthBarMax = setHBValueMax;
     }
 }

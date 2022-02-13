@@ -17,13 +17,13 @@ public class EnemyHealthManager : HealthManager
         //Initialize health bar
         healthBar.InitializeHealthBar(maxHealth);
 
-        EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, Despawn);
+        EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, Despawn);
     }
 
 
     private void OnDestroy()
     {
-        EventManager.Instance.Unsubscribe(Event.EventTypes.ResetGame, Despawn);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.ResetGame, Despawn);
     }
 
 
@@ -41,7 +41,7 @@ public class EnemyHealthManager : HealthManager
         {
             // TODO: Implement option to spawn a higher-tier spell drop at location of death
 
-			EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
+			EventManager.Instance.Notify(EventTypes.Events.EnemyDeath);
             Destroy(gameObject);
         }
     }

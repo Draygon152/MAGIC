@@ -7,20 +7,32 @@ using System.Threading.Tasks;
 
 public class CountdownTimer : MonoBehaviour
 {
-    [SerializeField] private Text CountDownText; // Holds current time remaining
-    [SerializeField] private Image CountDownTextBackground;
+    [SerializeField] private Text countDownText; // Holds current time remaining for display
+    [SerializeField] private Color textColor;
+    [SerializeField] private Image countDownTextBackground;
+    [SerializeField] private bool transparentBackground;
+    [SerializeField] private EventTypes.Events eventToNotify; // What event to notify when countdown ends
 
-    [SerializeField] private int timerLength; // Max length of timer
+    [SerializeField] private int timerLength; // Value that timer counts down from
     private int timeRemaining;                // Time remaining in seconds
 
     private bool timerStarted;
     private CancellationTokenSource cts;      // Used for cancelling async Tasks
 
 
-    private void Start()
+    private void Awake()
     {
         timerStarted = false;
         cts = new CancellationTokenSource();
+
+        if (transparentBackground)
+        {
+            Color bgColor = countDownTextBackground.color;
+            bgColor.a = 0.0f;
+            countDownTextBackground.color = bgColor;
+        }
+
+        countDownText.color = textColor;
 
         HideCountDown();
     }
@@ -39,12 +51,12 @@ public class CountdownTimer : MonoBehaviour
 
 
     // Async entry point
-    public async void BeginCountDown(Element P1Element, Element P2Element)
+    public async void BeginCountDown()
     {
         Debug.Log("Countdown Started");
 
         // Reset CountDownText to the length of the timer
-        CountDownText.text = $"{timerLength}";
+        countDownText.text = $"{timerLength}";
 
         timerStarted = true;
         ShowCountDown();
@@ -69,7 +81,7 @@ public class CountdownTimer : MonoBehaviour
         {
             Debug.Log("Countdown Finished");
 
-            GameManager.Instance.StartGame(P1Element, P2Element);
+            EventManager.Instance.Notify(eventToNotify);
         }
     }
 
@@ -81,7 +93,7 @@ public class CountdownTimer : MonoBehaviour
 
         // Update timeRemaining and timerText
         timeRemaining -= 1;
-        CountDownText.text = $"{timeRemaining}";
+        countDownText.text = $"{timeRemaining}";
     }
 
 
@@ -100,15 +112,15 @@ public class CountdownTimer : MonoBehaviour
     // Displays countdown UI elements
     private void ShowCountDown()
     {
-        CountDownText.gameObject.SetActive(true);
-        CountDownTextBackground.gameObject.SetActive(true);
+        countDownText.gameObject.SetActive(true);
+        countDownTextBackground.gameObject.SetActive(true);
     }
 
 
     // Hides countdown UI elements
     private void HideCountDown()
     {
-        CountDownText.gameObject.SetActive(false);
-        CountDownTextBackground.gameObject.SetActive(false);
+        countDownText.gameObject.SetActive(false);
+        countDownTextBackground.gameObject.SetActive(false);
     }
 }

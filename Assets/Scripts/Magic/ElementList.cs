@@ -1,4 +1,5 @@
 // Written by Angel
+// Modified by Kevin Chao
 
 using UnityEngine;
 using System;
@@ -15,22 +16,22 @@ public class ElementList : MonoBehaviour
 
 
     // Current Element is the element selected by a player
-    public BaseSpell Return_Spell(Element.ElementTypes CurrentElement) 
+    public BaseSpell GetSpell(ElementTypes.Elements CurrentElement) 
     {
         switch(CurrentElement)
         {
-            case Element.ElementTypes.Arcane:
+            case ElementTypes.Elements.Arcane:
                 Debug.Log(ArcaneSpell);
                 return ArcaneSpell;
-            case Element.ElementTypes.Wind:
+            case ElementTypes.Elements.Wind:
                 return GustSpell;
-            case Element.ElementTypes.Fire:
+            case ElementTypes.Elements.Fire:
                 return FireSpell;
-            case Element.ElementTypes.Nature:
+            case ElementTypes.Elements.Nature:
                 return NatureSpell;
-            case Element.ElementTypes.Ice:
+            case ElementTypes.Elements.Ice:
                 return IceSpell;
-            case Element.ElementTypes.Lightning:
+            case ElementTypes.Elements.Lightning:
                 return LightningSpell;
             default:
                 throw new Exception("Element not found");

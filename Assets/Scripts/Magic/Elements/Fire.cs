@@ -4,12 +4,12 @@ public class Fire : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Fire];
+        return ElementNameDict[ElementTypes.Elements.Fire];
     }
 
 
-    public override ElementTypes GetElementType()
+    public override ElementTypes.Elements GetElementType()
     {
-        return ElementTypes.Fire;
+        return ElementTypes.Elements.Fire;
     }
 }

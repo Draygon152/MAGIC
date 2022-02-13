@@ -1,4 +1,5 @@
 // Written by Liz
+// Modified by Kevin Chao
 
 using UnityEngine;
 
@@ -11,8 +12,7 @@ public class FollowToTarget : MonoBehaviour
     [SerializeField] private float tooCloseToTarget;
     [SerializeField] private bool cowardly;
 
-    private GameManager gameManager;
-    private Transform target;
+    private Player target;
 
 
 
@@ -20,17 +20,8 @@ public class FollowToTarget : MonoBehaviour
     {
         objRigidbody = GetComponent<Rigidbody>();
 
-        // Access the player prefab clone
-        gameManager = GameManager.Instance;
-        PlayerData playerData = gameManager.GetPlayerData;
-
-        // Added this if statement because playerData is initially null when the game starts. GameObject causes an error if
-        // playerData is null so do not delete this.
-        if (playerData != null)
-        { 
-            GameObject playerObject = playerData.playerOne;
-            target = playerObject.transform;
-        }
+        // Access the player prefab clones
+        target = GameManager.Instance.GetPlayers();
         
         // If tooCloseToTarget is greater than distanceFromTarget, it will adjust the distance to be
         // greater than tooCloseToTarget to avoid object from jittering. This occurs ONLY if cowardly is enabled.
@@ -51,7 +42,7 @@ public class FollowToTarget : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 relativePos = target.position - transform.position;
+            Vector3 relativePos = target.transform.position - transform.position;
             Quaternion rotate = Quaternion.LookRotation(relativePos, Vector3.up);  // Rotate object to face target.
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotate, turnSpeed * Time.deltaTime); // Rotate object smoothly.
         }
@@ -63,7 +54,7 @@ public class FollowToTarget : MonoBehaviour
     {
         if (target != null)
         {
-            float distance = Vector3.Distance(target.position, transform.position);
+            float distance = Vector3.Distance(target.transform.position, transform.position);
             if (distance > distanceFromTarget)
             {
                 // If distance is greater than distanceFromTarget, object will move towards its target
