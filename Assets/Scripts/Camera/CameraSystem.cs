@@ -12,18 +12,25 @@ public class CameraSystem : MonoBehaviour
 
     private List<Transform> targetList;
 
-    
+
+
+    private void Awake()
+    {
+        targetList = new List<Transform>();
+    }
+
 
     private void FixedUpdate()
     {
-        MoveCamera();
+        if (targetList.Count > 0)
+            MoveCamera();
     }
 
 
     private void MoveCamera()
     {
         // Gets the targeted new position of the camera, update when multiple players implemented
-        Vector3 newPos = targetList[0].position; 
+        Vector3 newPos = targetList[0].position;
 
         transform.position = Vector3.Lerp(transform.position, newPos, smoothValue); // Smoothly moves the camera that follows the player.
     }
