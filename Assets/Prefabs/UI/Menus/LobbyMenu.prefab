@@ -3727,7 +3727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6072304469572764378, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}
       propertyPath: m_Name
-      value: CountdownTimer
+      value: LobbyTimer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}
