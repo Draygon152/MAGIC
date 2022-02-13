@@ -14,11 +14,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Player playerPrefab;  // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private CameraSystem cameraRef; // The camera for the game, I hope to not need the full camer
-                                                   // and only have gameCamera (the CameraSystem on camera), but I 
-                                                   // have time before the first play test    
-    
-    private CameraSystem gameCamera; // The system responsible for having the camera follow the player
+    [SerializeField] private CameraSystem gameCamera;
 
     [SerializeField] private List <EnemyWaveTemplate> waves; // A list of scriptable objects representing the waves that 
                                                              // needs to be spawned into the game
@@ -72,9 +68,6 @@ public class GameManager : MonoBehaviour
 
         // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
-
-        // Get the CameraSystem
-        gameCamera = cameraRef.GetComponent<CameraSystem>();
     }
 
 
@@ -118,12 +111,11 @@ public class GameManager : MonoBehaviour
         HUD.Instance.SetP1SpellInfo(players.GetBaseSpell());
 
         // Set the camera to follow the player
-        gameCamera.enabled = true;
-        gameCamera.player = players.transform;
+        gameCamera.AddFrameTarget(players.transform);
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += waves[waveNumber].SpawnWave(cameraRef.GetComponent<Transform>());
+        enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
         waveNumber++;
 
         // Update current game state
@@ -214,7 +206,7 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += waves[waveNumber].SpawnWave(cameraRef.GetComponent<Transform>());
+                enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
                 waveNumber++;
             }
         }
@@ -228,15 +220,16 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void OnReset() // To reset the game.
+    // Reset the game state when a ResetGame event is notified
+    private void OnReset()
     {
         // reset the game state
         state = gameState.start;
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
-        
-        gameCamera.GetComponent<CameraSystem>().enabled = false;
+
+        gameCamera.RemoveFrameTarget(players.transform);
         Destroy(players);
     }
 }

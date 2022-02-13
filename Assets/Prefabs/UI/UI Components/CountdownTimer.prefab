@@ -120,10 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee550127171df8a4d8313fff7db8a810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountDownText: {fileID: 6072304471074229381}
-  TextColor: {r: 1, g: 1, b: 1, a: 1}
-  CountDownTextBackground: {fileID: 6072304469530233980}
-  TransparentBackground: 0
+  countDownText: {fileID: 6072304471074229381}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  countDownTextBackground: {fileID: 6072304469530233980}
+  transparentBackground: 0
+  eventToNotify: 0
   timerLength: 5
 --- !u!1 &6072304471074229383
 GameObject:

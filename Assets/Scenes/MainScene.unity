@@ -5685,6 +5685,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5053994992518861486, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
   m_PrefabInstance: {fileID: 1792324564}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1325060572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5053994992518861484, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
+  m_PrefabInstance: {fileID: 1792324564}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325060571}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466389ba2cab53d41bb9a9397e38495e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1346174002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8667,6 +8678,10 @@ PrefabInstance:
       propertyPath: victoryUI
       value: 
       objectReference: {fileID: 5678099964061850467, guid: bc8e6d9e06908784995ee401b35eb754, type: 3}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: gameCamera
+      value: 
+      objectReference: {fileID: 1325060572}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: enemyPrefab
       value: 
