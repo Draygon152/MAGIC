@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e48d3f77000230468a0e34d135e7a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castlocation: {fileID: 3891170637809442976}
+  castLocation: {fileID: 3891170637809442976}
   listOfSpells: {fileID: 6968269123128102929, guid: 5f2ed3c238cb42b4eb8f32903443279f, type: 3}
 --- !u!114 &2141222732
 MonoBehaviour:
