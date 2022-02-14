@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MagicCasting : MonoBehaviour
 {
-    [SerializeField] private Transform castlocation; // set the location of where the spell is cast from
+    [SerializeField] private Transform castLocation; // set the location of where the spell is cast from
     [SerializeField] private ElementList listOfSpells;
 
     private BaseSpell spellToCast;
@@ -79,6 +79,6 @@ public class MagicCasting : MonoBehaviour
 
     private void CastCurrentSpell()
     {
-        Instantiate(spellToCast, castlocation.position, castlocation.rotation); // create spell at castlocation
+        Instantiate(spellToCast, castLocation.position, castLocation.rotation); // create spell at castlocation
     }
 }
