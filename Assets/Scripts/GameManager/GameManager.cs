@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player has died");
         // Some code will be added later for determining which player died
         // for now there is only one player so that player must of died
+        // Add code to remove the dead player from being tracked by the camera here
 
 
         // decrement playerCount
