@@ -157,8 +157,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player has died");
         // Some code will be added later for determining which player died
         // for now there is only one player so that player must of died
-        // Set the camera to stop following that player
-        gameCamera.enabled = false;
 
 
         // decrement playerCount
@@ -230,6 +228,6 @@ public class GameManager : MonoBehaviour
         waveNumber = 0;
 
         gameCamera.RemoveFrameTarget(players.transform);
-        Destroy(players);
+        Destroy(players.gameObject);
     }
 }
