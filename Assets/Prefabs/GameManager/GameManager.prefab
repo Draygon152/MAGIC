@@ -43,3 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fab2b3318fab238ad2cf7e1ddd14b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 1703992368162592074, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
+  playerSpawnPoint: {fileID: 0}
+  cameraRef: {fileID: 0}
+  waves: []
+  p1Data: {fileID: 11400000, guid: 06da2e2d441164645999afa5b3f195f8, type: 2}
+  p2Data: {fileID: 11400000, guid: 00a6ffd1ac15aaf469b3b64a83607c5a, type: 2}

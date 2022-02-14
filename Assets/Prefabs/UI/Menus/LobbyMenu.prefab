@@ -220,7 +220,6 @@ MonoBehaviour:
   - {fileID: 1430357344518236548}
   - {fileID: 1430357345555724891}
   - {fileID: 1430357344612093085}
-  SelectedElement: {fileID: 0}
 --- !u!1 &1430357343885769838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,12 +1217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a63d8ffb497fe44aad0bc957ee8c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Ready: {fileID: 1430357345709923542}
-  Player2Ready: {fileID: 1430357344114539804}
-  P1ElementSelector: {fileID: 1430357343872489754}
-  P2ElementSelector: {fileID: 1430357345092175608}
-  MainMenuButton: {fileID: 6163742261274610678}
+  player1Ready: {fileID: 1430357345709923542}
+  player2Ready: {fileID: 1430357344114539804}
+  p1ElementSelector: {fileID: 1430357343872489754}
+  p2ElementSelector: {fileID: 1430357345092175608}
+  mainMenuButton: {fileID: 6163742261274610678}
   timer: {fileID: 1430357345477866809}
+  p1Data: {fileID: 11400000, guid: 06da2e2d441164645999afa5b3f195f8, type: 2}
+  p2Data: {fileID: 11400000, guid: 00a6ffd1ac15aaf469b3b64a83607c5a, type: 2}
 --- !u!1 &1430357344518236550
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,7 +2174,6 @@ MonoBehaviour:
   - {fileID: 1430357344047247421}
   - {fileID: 1430357345047194819}
   - {fileID: 1430357343885769836}
-  SelectedElement: {fileID: 0}
 --- !u!1 &1430357345094933768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,7 +3554,7 @@ GameObject:
   - component: {fileID: 8487314420499426864}
   - component: {fileID: 6163742261274610678}
   m_Layer: 5
-  m_Name: ReturnToMainMenuButton
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3727,7 +3727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6072304469572764378, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}
       propertyPath: m_Name
-      value: CountdownTimer
+      value: LobbyTimer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a363d18e9dab0b48b2da27664fd83b6, type: 3}

@@ -4,12 +4,12 @@ public class Wind : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Wind];
+        return ElementNameDict[ElementTypes.Elements.Wind];
     }
 
 
-    public override ElementTypes GetElementType()
+    public override ElementTypes.Elements GetElementType()
     {
-        return ElementTypes.Wind;
+        return ElementTypes.Elements.Wind;
     }
 }

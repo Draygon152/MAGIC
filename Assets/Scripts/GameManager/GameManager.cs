@@ -12,24 +12,21 @@ public class GameManager : MonoBehaviour
                                                                                // the next wave will spawn when two enemies 
                                                                                // are remaining
 
-    [SerializeField] private GameObject playerPrefab;    // The prefab for the player
+    [SerializeField] private Player playerPrefab;  // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private GameObject cameraRef; // The camera for the game, I hope to not need the full camer
-                                                   // and only have gameCamera (the CameraSystem on camera), but I 
-                                                   // have time before the first play test    
-    
-    private CameraSystem gameCamera; // The system responsible for having the camera follow the player
+    [SerializeField] private CameraSystem gameCamera;
 
     [SerializeField] private List <EnemyWaveTemplate> waves; // A list of scriptable objects representing the waves that 
                                                              // needs to be spawned into the game
 
-    private GameObject players; // A variable to store the player, will likely become an array later
-                                // when multiplayer is implemented
+    private Player players;  // A variable to store the player, will likely become an array later
+                             // when multiplayer is implemented
+    [SerializeField] private PlayerData p1Data;
+    [SerializeField] private PlayerData p2Data;
+
     private int playerCount; // The number of players currently alive in the game
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
-
-    private PlayerData playerData; // playerData is a scriptable object that will carry a player gameObject instance (clone)
 
 
     // Defining an enum for the different game states
@@ -52,17 +49,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // Gets Scriptable Object but not set
-    public PlayerData GetPlayerData
-    {
-        get
-        {
-            return playerData;
-        }
-        private set { }
-    }
-
-
 
     private void Awake()
     {
@@ -82,9 +68,6 @@ public class GameManager : MonoBehaviour
 
         // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
-
-        // Get the CameraSystem
-        gameCamera = cameraRef.GetComponent<CameraSystem>();
     }
 
 
@@ -94,14 +77,22 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Manager Start");
 
         // Subscribe to events
-        EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, OnPlayerDeath);
-        EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, OnEnemyDeath);
-        EventManager.Instance.Subscribe(Event.EventTypes.ResetGame, OnReset);
+        EventManager.Instance.Subscribe(EventTypes.Events.GameStart, StartGame);
+        EventManager.Instance.Subscribe(EventTypes.Events.PlayerDeath, OnPlayerDeath);
+        EventManager.Instance.Subscribe(EventTypes.Events.EnemyDeath, OnEnemyDeath);
+        EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, OnReset);
+    }
+
+
+    private void OnDestroy()
+    {
+        // Marking the GameManager as nonexistent
+        Instance = null;
     }
 
 
     // A function to start the game
-    public void StartGame(Element P1Element, Element P2Element)
+    public void StartGame()
     {
         Debug.Log("Starting Game");
         
@@ -109,31 +100,22 @@ public class GameManager : MonoBehaviour
         players = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
         playerCount++;
 
-        // Create a PlayerData instance and initialize the player clone in a variable
-        playerData = ScriptableObject.CreateInstance("PlayerData") as PlayerData;
-        playerData.Initialize(players);
-
-        // Plan to move LobbyMenu.Close() to CountdownTimer to prevent circular dependency with GameManager
         LobbyMenu.Close();
         HUD.Open();
 
-        // Grab Player HealthManagers
-        PlayerHealthManager P1HealthManager = players.GetComponent<PlayerHealthManager>();
+        // Set player's elemental affinity, assign delegates to player's health bar
+        players.SetElement(p1Data.GetElement());
+        players.SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
 
-        players.GetComponent<MagicCasting>().SetElement(P1Element);
-        BaseSpell startingSpell = players.GetComponent<MagicCasting>().returnSpell();
-
-        P1HealthManager.setHealthBarValue = HUD.Instance.SetP1CurHealth;
-        P1HealthManager.setHealthBarMax = HUD.Instance.SetP1MaxHealth;
-        HUD.Instance.SetP1SpellInfo(startingSpell);
+        // Communicate player's base spell to HUD
+        HUD.Instance.SetP1SpellInfo(players.GetBaseSpell());
 
         // Set the camera to follow the player
-        gameCamera.enabled = true;
-        gameCamera.player = players.transform;
+        gameCamera.AddFrameTarget(players.transform);
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += waves[waveNumber].SpawnWave(cameraRef.GetComponent<Transform>());
+        enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
         waveNumber++;
 
         // Update current game state
@@ -165,7 +147,7 @@ public class GameManager : MonoBehaviour
             state = gameState.defeat;
         }
 
-        EventManager.Instance.Notify(Event.EventTypes.GameOver);
+        EventManager.Instance.Notify(EventTypes.Events.GameOver);
     }
 
 
@@ -175,8 +157,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player has died");
         // Some code will be added later for determining which player died
         // for now there is only one player so that player must of died
-        // Set the camera to stop following that player
-        gameCamera.enabled = false;
+        // Add code to remove the dead player from being tracked by the camera here
 
 
         // decrement playerCount
@@ -224,29 +205,30 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += waves[waveNumber].SpawnWave(cameraRef.GetComponent<Transform>());
+                enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
                 waveNumber++;
             }
         }
     }
 
 
-    private void OnReset() // To reset the game.
+    // Returns player cloned objects, for use in FollowToTarget
+    public Player GetPlayers()
+    {
+        return players;
+    }
+
+
+    // Reset the game state when a ResetGame event is notified
+    private void OnReset()
     {
         // reset the game state
         state = gameState.start;
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
-        
-        gameCamera.GetComponent<CameraSystem>().enabled = false;
-        Destroy(players);
-    }
 
-
-    private void OnDestroy()
-    {
-        // Marking the GameManager as nonexistent
-        Instance = null;
+        gameCamera.RemoveFrameTarget(players.transform);
+        Destroy(players.gameObject);
     }
 }

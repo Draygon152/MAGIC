@@ -8,7 +8,7 @@ using System;
 // Singleton
 public class EventManager : MonoBehaviour
 {
-    private static Dictionary<Event.EventTypes, Action> subscriberDict;
+    private static Dictionary<EventTypes.Events, Action> subscriberDict;
 
 
     public static EventManager Instance
@@ -28,7 +28,7 @@ public class EventManager : MonoBehaviour
         else
         {
             Instance = this;
-            subscriberDict = new Dictionary<Event.EventTypes, Action>();
+            subscriberDict = new Dictionary<EventTypes.Events, Action>();
 
             DontDestroyOnLoad(gameObject);
         }
@@ -43,7 +43,7 @@ public class EventManager : MonoBehaviour
     }
 
 
-    public void Subscribe(Event.EventTypes eventType, Action listener)
+    public void Subscribe(EventTypes.Events eventType, Action listener)
     {
         Action existingListeners;
         
@@ -67,7 +67,7 @@ public class EventManager : MonoBehaviour
     }
 
 
-    public void Unsubscribe(Event.EventTypes eventType, Action listener)
+    public void Unsubscribe(EventTypes.Events eventType, Action listener)
     {
         // If EventManager is already destroyed, no reason to unsubscribe
         if (Instance == null) return;
@@ -86,7 +86,7 @@ public class EventManager : MonoBehaviour
     }
 
 
-    public void Notify(Event.EventTypes eventType)
+    public void Notify(EventTypes.Events eventType)
     {
         // If eventType is in the subscriberDict, invoke all listeners of that eventType
         Action existingListeners = null;

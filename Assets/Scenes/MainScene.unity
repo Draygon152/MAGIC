@@ -5685,6 +5685,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5053994992518861486, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
   m_PrefabInstance: {fileID: 1792324564}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1325060572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5053994992518861484, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
+  m_PrefabInstance: {fileID: 1792324564}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325060571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466389ba2cab53d41bb9a9397e38495e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1346174002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7507,7 +7518,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5053994992518861484, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5053994992518861485, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
       propertyPath: m_RootOrder
@@ -8668,6 +8679,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5678099964061850467, guid: bc8e6d9e06908784995ee401b35eb754, type: 3}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
+      propertyPath: gameCamera
+      value: 
+      objectReference: {fileID: 1325060572}
+    - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 3990407462579761780, guid: 4ba9512012c1a104f93194064e7d5635, type: 3}
@@ -8678,7 +8693,7 @@ PrefabInstance:
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 8107796699639736997, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
+      objectReference: {fileID: 1703992368162592074, guid: 8d71dfd6de6d926478140ae4b40d256a, type: 3}
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: Waves.Array.size
       value: 1

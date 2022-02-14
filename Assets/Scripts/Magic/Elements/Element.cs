@@ -5,28 +5,18 @@ using System.Collections.Generic;
 
 public abstract class Element : MonoBehaviour
 {
-    public enum ElementTypes
+    protected Dictionary<ElementTypes.Elements, string> ElementNameDict = new Dictionary<ElementTypes.Elements, string>()
     {
-        Arcane,
-        Fire,
-        Ice,
-        Nature,
-        Lightning,
-        Wind
-    }
-
-
-    protected Dictionary<ElementTypes, string> ElementNameDict = new Dictionary<ElementTypes, string>()
-    {
-        {ElementTypes.Arcane, "ARCANE"},
-        {ElementTypes.Fire, "FIRE"},
-        {ElementTypes.Ice, "ICE"},
-        {ElementTypes.Nature, "NATURE"},
-        {ElementTypes.Lightning, "LIGHTNING"},
-        {ElementTypes.Wind, "WIND"}
+        {ElementTypes.Elements.Arcane, "ARCANE"},
+        {ElementTypes.Elements.Fire, "FIRE"},
+        {ElementTypes.Elements.Ice, "ICE"},
+        {ElementTypes.Elements.Nature, "NATURE"},
+        {ElementTypes.Elements.Lightning, "LIGHTNING"},
+        {ElementTypes.Elements.Wind, "WIND"}
     };
 
 
+
     public abstract string GetElementName();
-    public abstract ElementTypes GetElementType();
+    public abstract ElementTypes.Elements GetElementType();
 }
