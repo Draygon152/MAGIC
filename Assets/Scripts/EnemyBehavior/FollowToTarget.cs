@@ -21,7 +21,7 @@ public class FollowToTarget : MonoBehaviour
         objRigidbody = GetComponent<Rigidbody>();
 
         // Access the player prefab clones
-        target = PlayerManager.Instance.GetPlayerLocation(PlayerManager.Players.Player1);
+        target = PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1);
         
         // If tooCloseToTarget is greater than distanceFromTarget, it will adjust the distance to be
         // greater than tooCloseToTarget to avoid object from jittering. This occurs ONLY if cowardly is enabled.

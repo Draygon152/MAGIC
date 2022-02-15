@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     private const int NUMBER_OF_PLAYERS = 2; //The total number of players in the game
+    public const int PLAYER_1 = 0; //array index of player one
+    public const int PLAYER_2 = 1; //array index of player two
 
     public PlayerData[] playerData; //A simple array of length 2 to store the player data 
     public Player[] playerGameObject; //A simple array of length 2 to store references to the player game objects
@@ -26,21 +28,22 @@ public class PlayerManager : MonoBehaviour
     }
 
     //enum for refering to player 1 and player 2
-    public enum Players
-    {
-        Player1 = 0,
-        Player2 = 1
-    }
+    // public enum Players
+    // {
+    //     Player1 = 0,
+    //     Player2 = 1
+    // }
 
-    private void awake()
+    private void Awake()
     {
+        Debug.Log("Player Manager awake");
         // Set up Instance
         Instance = this;
 
         //Initialize the player data SO's
         playerData = new PlayerData[NUMBER_OF_PLAYERS];
-        playerData[(int)Players.Player1] = ScriptableObject.CreateInstance<PlayerData>(); //create SO for player 1
-        playerData[(int)Players.Player2] = ScriptableObject.CreateInstance<PlayerData>(); //create SO for player 2
+        playerData[PLAYER_1] = ScriptableObject.CreateInstance<PlayerData>(); //create SO for player 1
+        playerData[PLAYER_2] = ScriptableObject.CreateInstance<PlayerData>(); //create SO for player 2
 
         //Initialize the player game objects array
         playerGameObject = new Player[NUMBER_OF_PLAYERS];
@@ -49,46 +52,46 @@ public class PlayerManager : MonoBehaviour
     //Spawn the players in the game, and return the number of players spawned
     public int SpawnPlayers()
     {
-        playerGameObject[(int)Players.Player1] = Instantiate(playerPrefab, playerSpawnPoint.position + spawnOffset, playerSpawnPoint.rotation); //Spawn player 1
-        playerGameObject[(int)Players.Player2] = Instantiate(playerPrefab, playerSpawnPoint.position - spawnOffset, playerSpawnPoint.rotation); //Spawn player 2
+        playerGameObject[PLAYER_1] = Instantiate(playerPrefab, playerSpawnPoint.position + spawnOffset, playerSpawnPoint.rotation); //Spawn player 1
+        playerGameObject[PLAYER_2] = Instantiate(playerPrefab, playerSpawnPoint.position - spawnOffset, playerSpawnPoint.rotation); //Spawn player 2
 
         // Set player's elemental affinity, assign delegates to player's health bar
-        playerGameObject[(int)Players.Player1].SetElement(playerData[(int)Players.Player1].GetElement());
-        playerGameObject[(int)Players.Player2].SetElement(playerData[(int)Players.Player2].GetElement());
-        playerGameObject[(int)Players.Player1].SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
-        playerGameObject[(int)Players.Player2].SetHealthBarDelegates(HUD.Instance.SetP2CurHealth, HUD.Instance.SetP2MaxHealth);
+        playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
+        playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
+        playerGameObject[PLAYER_1].SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
+        playerGameObject[PLAYER_2].SetHealthBarDelegates(HUD.Instance.SetP2CurHealth, HUD.Instance.SetP2MaxHealth);
 
         //HUD base spell display
-        HUD.Instance.SetP1SpellInfo(playerGameObject[(int)Players.Player1].GetBaseSpell());
+        HUD.Instance.SetP1SpellInfo(playerGameObject[PLAYER_1].GetBaseSpell());
 
         //Set up camera with players
-        gameCamera.AddFrameTarget(playerGameObject[(int)Players.Player1].transform);
+        gameCamera.AddFrameTarget(playerGameObject[PLAYER_1].transform);
 
         return NUMBER_OF_PLAYERS;
     }
 
     //A getter function for retrieving the player data
-    public PlayerData GetPlayerData(Players player)
+    public PlayerData GetPlayerData(int player)
     {
-        return playerData[(int)player];
+        return playerData[player];
     }
 
     //A getter function for retrieving the location of the players
-    public Transform GetPlayerLocation(Players player)
+    public Transform GetPlayerLocation(int player)
     {
-        return playerGameObject[(int)player].transform;
+        return playerGameObject[player].transform;
     }
 
     //Reset the players and camera
     public void Reset()
     {
         //reset camera frame
-        gameCamera.RemoveFrameTarget(playerGameObject[(int)Players.Player1].transform);
-        gameCamera.RemoveFrameTarget(playerGameObject[(int)Players.Player2].transform);
+        gameCamera.RemoveFrameTarget(playerGameObject[PLAYER_1].transform);
+        gameCamera.RemoveFrameTarget(playerGameObject[PLAYER_2].transform);
 
         //destory players
-        Destroy(playerGameObject[(int)Players.Player1].gameObject);
-        Destroy(playerGameObject[(int)Players.Player2].gameObject);
+        Destroy(playerGameObject[PLAYER_1].gameObject);
+        Destroy(playerGameObject[PLAYER_2].gameObject);
 
     }
 
