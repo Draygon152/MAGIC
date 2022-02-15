@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New PlayerData", menuName = "PlayerData")]
+// [CreateAssetMenu(fileName = "New PlayerData", menuName = "PlayerData")]
 public class PlayerData : ScriptableObject
 {
     private Element ElementalAffinity;

@@ -12,7 +12,7 @@ public class FollowToTarget : MonoBehaviour
     [SerializeField] private float tooCloseToTarget;
     [SerializeField] private bool cowardly;
 
-    private Player target;
+    private Transform target;
 
 
 
@@ -21,7 +21,7 @@ public class FollowToTarget : MonoBehaviour
         objRigidbody = GetComponent<Rigidbody>();
 
         // Access the player prefab clones
-        target = GameManager.Instance.GetPlayers();
+        target = PlayerManager.Instance.GetPlayerLocation(PlayerManager.Players.Player1);
         
         // If tooCloseToTarget is greater than distanceFromTarget, it will adjust the distance to be
         // greater than tooCloseToTarget to avoid object from jittering. This occurs ONLY if cowardly is enabled.

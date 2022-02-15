@@ -12,17 +12,10 @@ public class GameManager : MonoBehaviour
                                                                                // the next wave will spawn when two enemies 
                                                                                // are remaining
 
-    [SerializeField] private Player playerPrefab;  // The prefab for the player
-    [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private CameraSystem gameCamera;
-
     [SerializeField] private List <EnemyWaveTemplate> waves; // A list of scriptable objects representing the waves that 
                                                              // needs to be spawned into the game
 
-    private Player players;  // A variable to store the player, will likely become an array later
-                             // when multiplayer is implemented
-    [SerializeField] private PlayerData p1Data;
-    [SerializeField] private PlayerData p2Data;
+    [SerializeField] private CameraSystem gameCamera; //Decoupling is needed to get rid of this
 
     private int playerCount; // The number of players currently alive in the game
     private int enemyCount;  // The number of enemies currently alive in the game
@@ -52,8 +45,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Game Manager Awake");
-
         // Set the game state to start when the game begins
         state = gameState.start;
 
@@ -74,8 +65,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Game Manager Start");
-
         // Subscribe to events
         EventManager.Instance.Subscribe(EventTypes.Events.GameStart, StartGame);
         EventManager.Instance.Subscribe(EventTypes.Events.PlayerDeath, OnPlayerDeath);
@@ -97,21 +86,20 @@ public class GameManager : MonoBehaviour
         Debug.Log("Starting Game");
         
         // spawn in the players
-        players = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
-        playerCount++;
+        playerCount = PlayerManager.Instance.SpawnPlayers();
 
         LobbyMenu.Close();
         HUD.Open();
 
         // Set player's elemental affinity, assign delegates to player's health bar
-        players.SetElement(p1Data.GetElement());
-        players.SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
+        // players.SetElement(p1Data.GetElement());
+        // players.SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
 
         // Communicate player's base spell to HUD
-        HUD.Instance.SetP1SpellInfo(players.GetBaseSpell());
+        // HUD.Instance.SetP1SpellInfo(players.GetBaseSpell());
 
         // Set the camera to follow the player
-        gameCamera.AddFrameTarget(players.transform);
+        // gameCamera.AddFrameTarget(players.transform);
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
@@ -213,10 +201,10 @@ public class GameManager : MonoBehaviour
 
 
     // Returns player cloned objects, for use in FollowToTarget
-    public Player GetPlayers()
-    {
-        return players;
-    }
+    // public Player GetPlayers()
+    // {
+    //     return players;
+    // }
 
 
     // Reset the game state when a ResetGame event is notified
@@ -228,7 +216,7 @@ public class GameManager : MonoBehaviour
         playerCount = 0;
         waveNumber = 0;
 
-        gameCamera.RemoveFrameTarget(players.transform);
-        Destroy(players.gameObject);
+        // gameCamera.RemoveFrameTarget(players.transform);
+        // Destroy(players.gameObject);
     }
 }
