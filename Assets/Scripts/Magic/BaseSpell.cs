@@ -2,6 +2,7 @@
 // Modified by Kevin Chao
 
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -24,10 +25,15 @@ public class BaseSpell : MonoBehaviour
 
         spellBody = GetComponent<Rigidbody>();
         spellBody.isKinematic = true;
-
-        Destroy(gameObject, SpellToCast.spellLifetime); // Destroy spell after certain time if it does not hit anything
+        StartCoroutine(spellDuration(SpellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
     }
 
+    IEnumerator spellDuration(float time)
+    {
+        yield return new WaitForSeconds(time);
+        spellEffect.time_Effects(SpellToCast.element, player, this);
+        Destroy(gameObject);
+    }
 
     private void Update()
     {
@@ -43,7 +49,7 @@ public class BaseSpell : MonoBehaviour
         Destroy(gameObject); // Destroy the spell when it collides
 
         // Apply spell effect at the collision's gameobject
-        spellEffect.Base_Effects(SpellToCast.element, player, collision.gameObject, this);
+        spellEffect.hit_Effects(SpellToCast.element, player, collision.gameObject, this);
     }
 }
 

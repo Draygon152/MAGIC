@@ -13,6 +13,8 @@ public class SpellTemplate : ScriptableObject
     public float spellSpeed;       // the speed the spell travels at
     public float spellLifetime;    // how long the spell will exist before fading out of existance (if it does not hit anything)
     public float radius;
+    public float growthSpeed;
+    public float totalGrowth;
     public float self; // 1 should be on self, 0 will be aoe (check speed, if speed is 0)
     public Element.ElementTypes element;
 }

@@ -38,11 +38,18 @@ public class MagicCasting : MonoBehaviour
 
     private void Update()
     {
+<<<<<<< Updated upstream
         castingtime = spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
         bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
 
         // if the player is not casting and the cast button is pressed
         if (!casting && cast_button_down)     
+=======
+        changeTransform();
+        bool cast_button_down = playerSpellControls.Spells.Cast.triggered && playerSpellControls.Spells.Cast.ReadValue<float>() > 0;
+        // If the player is not casting and the cast button is pressed
+        if (!casting && cast_button_down)
+>>>>>>> Stashed changes
         {
             casting = true; // toggle casting to true
             current_cast_time = 0;  // set the time since last cast down to 0;
@@ -71,6 +78,18 @@ public class MagicCasting : MonoBehaviour
     public BaseSpell returnSpell()
     {
         return spellToCast;
+    }
+    
+    private void changeTransform()
+    {
+        if (spellToCast.SpellToCast.spellSpeed == 0)
+        {
+            castLocation.localPosition = new Vector3(0, -0.5f, 0);
+        }
+        else
+        {
+            castLocation.localPosition = new Vector3(0, 0, 0);
+        }
     }
 
 
