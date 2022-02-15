@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MagicCasting : MonoBehaviour
 {
-    [SerializeField] private Transform castlocation; // set the location of where the spell is cast from
+    [SerializeField] private Transform castLocation; // set the location of where the spell is cast from
     private BaseSpell spellToCast;
     [SerializeField] private ElementList listOfSpells;
     private Element SelectedElement;
@@ -38,18 +38,10 @@ public class MagicCasting : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< Updated upstream
-        castingtime = spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
-        bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
-
-        // if the player is not casting and the cast button is pressed
-        if (!casting && cast_button_down)     
-=======
         changeTransform();
-        bool cast_button_down = playerSpellControls.Spells.Cast.triggered && playerSpellControls.Spells.Cast.ReadValue<float>() > 0;
+        bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
         // If the player is not casting and the cast button is pressed
         if (!casting && cast_button_down)
->>>>>>> Stashed changes
         {
             casting = true; // toggle casting to true
             current_cast_time = 0;  // set the time since last cast down to 0;
@@ -95,6 +87,6 @@ public class MagicCasting : MonoBehaviour
 
     private void CastCurrentSpell()
     {
-        Instantiate(spellToCast, castlocation.position, castlocation.rotation); // create spell at castlocation
+        Instantiate(spellToCast, castLocation.position, castLocation.rotation); // create spell at castlocation
     }
 }

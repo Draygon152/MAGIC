@@ -13,50 +13,26 @@ public class Effects : MonoBehaviour
     private BaseSpell currentSpell;
 
 
-<<<<<<< Updated upstream
-
-    public void Base_Effects(Element.ElementTypes currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
-=======
-    public void hit_Effects(ElementTypes.Elements currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
->>>>>>> Stashed changes
+    public void hit_Effects(Element.ElementTypes currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
     {
         playerinfo = player;
         entity = locationEntity;
         currentSpell = passedSpell;
         switch (currentElement)
         {
-<<<<<<< Updated upstream
             case Element.ElementTypes.Arcane:
-                arcaneEffect();
                 break;
             case Element.ElementTypes.Wind:
-                windEffect();
-                break;
-            case Element.ElementTypes.Fire:
-                fireEffect();
-                break;
-            case Element.ElementTypes.Nature:
-                arcaneEffect();
-                break;
-            case Element.ElementTypes.Ice:
-                iceEffect();
-                break;
-            case Element.ElementTypes.Lightning:
-                lightningEffect();
-=======
-            case ElementTypes.Elements.Arcane:
-                break;
-            case ElementTypes.Elements.Wind:
                 pushBackEffect();
                 break;
-            case ElementTypes.Elements.Fire:
+            case Element.ElementTypes.Fire:
                 sustainedDamageEffect();
                 break;
-            case ElementTypes.Elements.Nature:
+            case Element.ElementTypes.Nature:
                 break;
-            case ElementTypes.Elements.Ice:
+            case Element.ElementTypes.Ice:
                 break;
-            case ElementTypes.Elements.Lightning:
+            case Element.ElementTypes.Lightning:
                 teleportationEffect();
                 break;
             default:
@@ -64,25 +40,24 @@ public class Effects : MonoBehaviour
         }
     }
 
-    public void time_Effects(ElementTypes.Elements currentElement, GameObject player, BaseSpell passedSpell)
+    public void time_Effects(Element.ElementTypes currentElement, GameObject player, BaseSpell passedSpell)
     {
         playerinfo = player;
         currentSpell = passedSpell;
         switch (currentElement)
         {
-            case ElementTypes.Elements.Arcane:
+            case Element.ElementTypes.Arcane:
                 break;
-            case ElementTypes.Elements.Wind:
+            case Element.ElementTypes.Wind:
                 break;
-            case ElementTypes.Elements.Fire:
+            case Element.ElementTypes.Fire:
                 break;
-            case ElementTypes.Elements.Nature:
+            case Element.ElementTypes.Nature:
                 break;
-            case ElementTypes.Elements.Ice:
+            case Element.ElementTypes.Ice:
                 break;
-            case ElementTypes.Elements.Lightning:
+            case Element.ElementTypes.Lightning:
                 teleportationEffect();
->>>>>>> Stashed changes
                 break;
             default:
                 throw new Exception("Element not found");
