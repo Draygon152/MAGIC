@@ -26,7 +26,20 @@ public class BaseSpell : MonoBehaviour
 
         spellBody = GetComponent<Rigidbody>();
         spellBody.isKinematic = true;
+<<<<<<< Updated upstream
         StartCoroutine(spellDuration(SpellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
+=======
+
+        StartCoroutine(spellDuration(SpellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
+    }
+
+    IEnumerator spellDuration(float time)
+    {
+        yield return new WaitForSeconds(time);
+        //spellCall.Invoke(player, null, this);
+        spellEffect.Base_Effects(SpellToCast.element, player, null, this);
+        Destroy(gameObject);
+>>>>>>> Stashed changes
     }
 
     IEnumerator spellDuration(float time)

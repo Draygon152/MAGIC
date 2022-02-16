@@ -69,7 +69,11 @@ public class Effects : MonoBehaviour
     {
         print("WORKS");
         // Teleports on top of enemy, takes damage as a result, WIP
+<<<<<<< Updated upstream
         playerinfo.transform.position = currentSpell.transform.position;
+=======
+        playerinfo.transform.position = currentSpell.transform.position; 
+>>>>>>> Stashed changes
     }
 
 
