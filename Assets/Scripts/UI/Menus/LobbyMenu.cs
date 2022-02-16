@@ -15,13 +15,16 @@ public class LobbyMenu : Menu<LobbyMenu>
     private bool player1IsReady;
     private bool player2IsReady;
 
-    [SerializeField] private PlayerData p1Data;
-    [SerializeField] private PlayerData p2Data;
+    private PlayerData p1Data;
+    private PlayerData p2Data;
 
 
 
     private void Start()
     {
+        p1Data = PlayerManager.Instance.GetPlayerData(PlayerManager.PLAYER_1);
+        p2Data = PlayerManager.Instance.GetPlayerData(PlayerManager.PLAYER_2);
+
         player1IsReady = false;
         player2IsReady = false;
     }

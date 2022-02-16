@@ -1,3 +1,5 @@
+//Written by Lawson
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,13 +29,6 @@ public class PlayerManager : MonoBehaviour
         private set;
     }
 
-    //enum for refering to player 1 and player 2
-    // public enum Players
-    // {
-    //     Player1 = 0,
-    //     Player2 = 1
-    // }
-
     private void Awake()
     {
         Debug.Log("Player Manager awake");
@@ -58,16 +53,20 @@ public class PlayerManager : MonoBehaviour
         // Set player's elemental affinity, assign delegates to player's health bar
         playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
         playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
+
+        return NUMBER_OF_PLAYERS;
+    }
+
+    //A function to allow the game to tell the player manager when the HUD is ready to take the player data
+    public void InitializePlayerHUD()
+    {
+        //Set health bars
         playerGameObject[PLAYER_1].SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
         playerGameObject[PLAYER_2].SetHealthBarDelegates(HUD.Instance.SetP2CurHealth, HUD.Instance.SetP2MaxHealth);
 
-        //HUD base spell display
+        //Displays player's base spell
         HUD.Instance.SetP1SpellInfo(playerGameObject[PLAYER_1].GetBaseSpell());
-
-        //Set up camera with players
-        gameCamera.AddFrameTarget(playerGameObject[PLAYER_1].transform);
-
-        return NUMBER_OF_PLAYERS;
+        HUD.Instance.SetP2SpellInfo(playerGameObject[PLAYER_2].GetBaseSpell());
     }
 
     //A getter function for retrieving the player data
@@ -83,7 +82,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     //Reset the players and camera
-    public void Reset()
+    public void ResetPlayers()
     {
         //reset camera frame
         gameCamera.RemoveFrameTarget(playerGameObject[PLAYER_1].transform);

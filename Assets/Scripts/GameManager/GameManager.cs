@@ -91,15 +91,12 @@ public class GameManager : MonoBehaviour
         LobbyMenu.Close();
         HUD.Open();
 
-        // Set player's elemental affinity, assign delegates to player's health bar
-        // players.SetElement(p1Data.GetElement());
-        // players.SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
-
-        // Communicate player's base spell to HUD
-        // HUD.Instance.SetP1SpellInfo(players.GetBaseSpell());
+        // Initialize the HUD's player data
+        PlayerManager.Instance.InitializePlayerHUD();
 
         // Set the camera to follow the player
-        // gameCamera.AddFrameTarget(players.transform);
+        gameCamera.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
+        gameCamera.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
@@ -216,7 +213,6 @@ public class GameManager : MonoBehaviour
         playerCount = 0;
         waveNumber = 0;
 
-        // gameCamera.RemoveFrameTarget(players.transform);
-        // Destroy(players.gameObject);
+        PlayerManager.Instance.ResetPlayers();
     }
 }
