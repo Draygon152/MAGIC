@@ -2,6 +2,7 @@
 // Modified by Kevin Chao and Lawson
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,8 +17,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Player controller awake");
         // init the player controls action map
         PlayerControlsMap = new PlayerControls();
+
+        for (int i = 0; i < Gamepad.all.Count; i++)
+        {
+            Debug.Log(Gamepad.all[i].name);
+        }
     }
 
 
