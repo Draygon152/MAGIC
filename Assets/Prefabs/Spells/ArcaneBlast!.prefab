@@ -156,6 +156,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellToCast: {fileID: 11400000, guid: eb16ea8cd5753bc45ae0f3203a33a373, type: 2}
   spellEffect: {fileID: 2490613691426800600, guid: 30266618fe9c8b942b0d4ded0768599b, type: 3}
+  player: {fileID: 0}
+  spellCall:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &86483295079533102
 Rigidbody:
   m_ObjectHideFlags: 0

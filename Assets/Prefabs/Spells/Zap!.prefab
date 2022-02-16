@@ -172,3 +172,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellToCast: {fileID: 11400000, guid: 4c47e75ee93cf594bbca4041fc65c6f2, type: 2}
   spellEffect: {fileID: 2490613691426800600, guid: 30266618fe9c8b942b0d4ded0768599b, type: 3}
+  player: {fileID: 0}
+  spellCall:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3043426020653149250, guid: 30266618fe9c8b942b0d4ded0768599b, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

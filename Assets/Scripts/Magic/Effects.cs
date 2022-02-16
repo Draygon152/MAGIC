@@ -65,14 +65,16 @@ public class Effects : MonoBehaviour
     }
 
 
-    private void teleportationEffect()
+    public void teleportationEffect()
     {
+        print("WORKS");
         // Teleports on top of enemy, takes damage as a result, WIP
-        playerinfo.transform.position = currentSpell.transform.position; 
+        playerinfo.transform.position = currentSpell.transform.position;
     }
 
 
-    private void stunEffect()
+
+    public void stunEffect()
     {
         Debug.Log("ARCANE EFFECT");
     }

@@ -13,6 +13,7 @@ public class BaseSpell : MonoBehaviour
     private Rigidbody spellBody;
     public Effects spellEffect;
     public GameObject player;
+    [SerializeField] private spellEffectCall spellCall;
 
 
 
@@ -31,6 +32,7 @@ public class BaseSpell : MonoBehaviour
     IEnumerator spellDuration(float time)
     {
         yield return new WaitForSeconds(time);
+        //spellCall.Invoke(player, null, this);
         spellEffect.time_Effects(SpellToCast.element, player, this);
         Destroy(gameObject);
     }
@@ -46,8 +48,8 @@ public class BaseSpell : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        //spellCall.Invoke(player, collision.gameObject, this);
         Destroy(gameObject); // Destroy the spell when it collides
-
         // Apply spell effect at the collision's gameobject
         spellEffect.hit_Effects(SpellToCast.element, player, collision.gameObject, this);
     }
