@@ -13,7 +13,7 @@ public class Effects : MonoBehaviour
     private BaseSpell currentSpell;
 
 
-    public void hit_Effects(Element.ElementTypes currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
+    public void Base_Effects(Element.ElementTypes currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
     {
         playerinfo = player;
         entity = locationEntity;
@@ -40,40 +40,14 @@ public class Effects : MonoBehaviour
         }
     }
 
-    public void time_Effects(Element.ElementTypes currentElement, GameObject player, BaseSpell passedSpell)
-    {
-        playerinfo = player;
-        currentSpell = passedSpell;
-        switch (currentElement)
-        {
-            case Element.ElementTypes.Arcane:
-                break;
-            case Element.ElementTypes.Wind:
-                break;
-            case Element.ElementTypes.Fire:
-                break;
-            case Element.ElementTypes.Nature:
-                break;
-            case Element.ElementTypes.Ice:
-                break;
-            case Element.ElementTypes.Lightning:
-                teleportationEffect();
-                break;
-            default:
-                throw new Exception("Element not found");
-        }
-    }
 
 
     public void teleportationEffect()
     {
         print("WORKS");
         // Teleports on top of enemy, takes damage as a result, WIP
-<<<<<<< Updated upstream
         playerinfo.transform.position = currentSpell.transform.position;
-=======
-        playerinfo.transform.position = currentSpell.transform.position; 
->>>>>>> Stashed changes
+
     }
 
 

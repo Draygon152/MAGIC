@@ -26,9 +26,6 @@ public class BaseSpell : MonoBehaviour
 
         spellBody = GetComponent<Rigidbody>();
         spellBody.isKinematic = true;
-<<<<<<< Updated upstream
-        StartCoroutine(spellDuration(SpellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
-=======
 
         StartCoroutine(spellDuration(SpellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
     }
@@ -39,18 +36,10 @@ public class BaseSpell : MonoBehaviour
         //spellCall.Invoke(player, null, this);
         spellEffect.Base_Effects(SpellToCast.element, player, null, this);
         Destroy(gameObject);
->>>>>>> Stashed changes
     }
 
-    IEnumerator spellDuration(float time)
-    {
-        yield return new WaitForSeconds(time);
-        //spellCall.Invoke(player, null, this);
-        spellEffect.time_Effects(SpellToCast.element, player, this);
-        Destroy(gameObject);
-    }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (SpellToCast.spellSpeed > 0) // Projectile spell
         {
@@ -64,7 +53,7 @@ public class BaseSpell : MonoBehaviour
         //spellCall.Invoke(player, collision.gameObject, this);
         Destroy(gameObject); // Destroy the spell when it collides
         // Apply spell effect at the collision's gameobject
-        spellEffect.hit_Effects(SpellToCast.element, player, collision.gameObject, this);
+        spellEffect.Base_Effects(SpellToCast.element, player, collision.gameObject, this);
     }
 }
 
