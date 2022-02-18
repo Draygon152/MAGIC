@@ -10,16 +10,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed; // Controls the movement speed of player.
     [SerializeField] private float turnSpeed; // Controls the turn speed of player.
 
-    private PlayerControls PlayerControlsMap; // The Action Map that we created (Called PlayerControls) that is reading in the player's input
-    private Vector3 inputDirection;           // Vector to gather our WASD keys input.
+    private PlayerInput playerControls; // A reference to the PlayerInput component that handles player input
+
+    Vector3 inputDirection; //The vector for moving the player
 
 
 
     private void Awake()
     {
         Debug.Log("Player controller awake");
-        // init the player controls action map
-        PlayerControlsMap = new PlayerControls();
+        // set the reference to the PlayerInput component
+        playerControls = this.GetComponent<PlayerInput>();
 
         for (int i = 0; i < Gamepad.all.Count; i++)
         {
@@ -27,29 +28,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    private void OnEnable()
-    {
-        // Enabling control for the player
-        PlayerControlsMap.Enable();
-    }
-
-
-    private void OnDisable()
-    {
-        // Disabling control for the player
-        PlayerControlsMap.Disable();
-    }
-
-
-    private void FixedUpdate()
+    //Update the inputDirection vector only when the controls of
+    //the apporiate control scheme are changed
+    private void OnMove(InputValue value)
     {
         // Gathers our input from WASD Keys, set in the Input Manager system in Unity.
         // Since we're in Orthographic View:
         // In here, the X-axis should refer to our Right Input Actions "A to move left, D to move right in the X-axis".
         // ...and Z-axis would refer to our Y-axis movements "W to move up, S to move down".
-        inputDirection = new Vector3(PlayerControlsMap.Move.Right.ReadValue<float>(), 0, PlayerControlsMap.Move.Forward.ReadValue<float>());
+        inputDirection = value.Get<Vector3>();
+    }
 
+    private void FixedUpdate()
+    {
         Move();
         Turn();
     }

@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5203983517893298919}
   - component: {fileID: 811485582123301815}
   - component: {fileID: 2141222732}
+  - component: {fileID: -380955239945461657}
   m_Layer: 7
   m_Name: PlayerCharacter (Cube)
   m_TagString: Player
@@ -202,3 +203,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   startingHealth: 5
+--- !u!114 &-380955239945461657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107796699639736997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0d1529898335a005cab374a0b6abbdde, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8107796699639736997}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66bfbc97-730d-438c-a3a9-42f60fb13d35
+    m_ActionName: Move/Forward[/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: becf59f8-ca87-4540-b237-13871d4912b1
+    m_ActionName: Move/Right[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2e4487ff-cfcd-4579-b852-1ed7dfb357c5
+    m_ActionName: Spells/Cast[/Keyboard/q]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
