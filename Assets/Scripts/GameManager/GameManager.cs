@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
         private set;
     }
 
+
+
     private void Awake()
     {
         // Set the game state to start when the game begins
@@ -137,6 +139,12 @@ public class GameManager : MonoBehaviour
     // The listener for the PlayerDeath event
     public void OnPlayerDeath()
     {
+        Debug.Log("Player has died");
+        // Some code will be added later for determining which player died
+        // for now there is only one player so that player must of died
+        // Add code to remove the dead player from being tracked by the camera here
+
+
         // decrement playerCount
         playerCount--;
 
@@ -188,6 +196,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    // Returns player cloned objects, for use in FollowToTarget
+    // public Player GetPlayers()
+    // {
+    //     return players;
+    // }
+
+
     // Reset the game state when a ResetGame event is notified
     private void OnReset()
     {
@@ -196,10 +212,6 @@ public class GameManager : MonoBehaviour
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
-
-        //reset camera frame
-        gameCamera.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        gameCamera.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
 
         PlayerManager.Instance.ResetPlayers();
     }

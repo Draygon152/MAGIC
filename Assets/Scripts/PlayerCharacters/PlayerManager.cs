@@ -3,8 +3,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
 
 //This class will manage the players and their data
 public class PlayerManager : MonoBehaviour
@@ -13,12 +11,13 @@ public class PlayerManager : MonoBehaviour
     public const int PLAYER_1 = 0; //array index of player one
     public const int PLAYER_2 = 1; //array index of player two
 
-    private PlayerData[] playerData; //A simple array of length 2 to store the player data 
-    private Player[] playerGameObject; //A simple array of length 2 to store references to the player game objects
+    public PlayerData[] playerData; //A simple array of length 2 to store the player data 
+    public Player[] playerGameObject; //A simple array of length 2 to store references to the player game objects
 
     //for spawning the players
-    [SerializeField] private GameObject playerPrefab;  // The prefab for the player
+    [SerializeField] private Player playerPrefab;  // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
+    [SerializeField] private CameraSystem gameCamera;
     [SerializeField] private Vector3 spawnOffset = new Vector3(5, 0, 0); //The offset from the spawnPoint the players will spawn
                                                                          //Player one spawns at playerSpawnPoint + spawnOffset
                                                                          //Player two spawns at playerSpawnPoint - spawnOffset
@@ -48,42 +47,12 @@ public class PlayerManager : MonoBehaviour
     //Spawn the players in the game, and return the number of players spawned
     public int SpawnPlayers()
     {
-        //If you don't have a controller connected the first temporary line will
-        //cause an out of bounds error at the start of the game. To play the game
-        //either connect a controller or change the first line to also grab the 
-        //keyboard. The intent is to have pairedDevice set in Lobby menu, but untill
-        //that is the case these temporary lines are needed
-        playerData[PLAYER_1].pairedDevice = Gamepad.all[0]; //This line is temporary
-        playerData[PLAYER_2].pairedDevice = Keyboard.all[1]; //This line is temporary
-        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].pairedDevice).GetComponent<Player>(); //Spawn player 1
-        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].pairedDevice).GetComponent<Player>(); //Spawn player 2
-        
-        //Move the players to the spawn point
-        //Note because of the use of PlayerInput instantiate instead of GameObject instantiate (for setting the 
-        //player index and pairWithDevice in PlayerInput) I could not pass in the spawn point transform to spawn
-        //the players at the right location. As a result I must move them their now.
-        playerGameObject[PLAYER_1].transform.position = playerSpawnPoint.position + spawnOffset;
-        playerGameObject[PLAYER_1].transform.rotation = playerSpawnPoint.rotation;
-        playerGameObject[PLAYER_2].transform.position = playerSpawnPoint.position - spawnOffset;
-        playerGameObject[PLAYER_2].transform.rotation = playerSpawnPoint.rotation;
+        playerGameObject[PLAYER_1] = Instantiate(playerPrefab, playerSpawnPoint.position + spawnOffset, playerSpawnPoint.rotation); //Spawn player 1
+        playerGameObject[PLAYER_2] = Instantiate(playerPrefab, playerSpawnPoint.position - spawnOffset, playerSpawnPoint.rotation); //Spawn player 2
 
         // Set player's elemental affinity, assign delegates to player's health bar
         playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
         playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
-
-        // Pairing devices
-        Debug.Log(playerGameObject[PLAYER_1].GetComponent<PlayerInput>().devices.Count);
-        // playerData[PLAYER_1].pairedDevice = Gamepad.all[0]; //This line is temporary
-        // playerData[PLAYER_2].pairedDevice = Keyboard.all[0]; //This line is temporary
-        // playerGameObject[PLAYER_1].GetComponent<PlayerInput>().user.UnpairDevices();
-        // playerGameObject[PLAYER_2].GetComponent<PlayerInput>().user.UnpairDevices();
-        //         Debug.Log(playerGameObject[PLAYER_1].GetComponent<PlayerInput>().devices.Count);
-        // InputUser.PerformPairingWithDevice(playerData[PLAYER_1].pairedDevice, playerGameObject[PLAYER_1].GetComponent<PlayerInput>().user);
-        // InputUser.PerformPairingWithDevice(playerData[PLAYER_2].pairedDevice, playerGameObject[PLAYER_2].GetComponent<PlayerInput>().user);
-        // // playerGameObject[PLAYER_1].GetComponent<PlayerInput>().user.ActivateControlScheme(null);
-        // // playerGameObject[PLAYER_2].GetComponent<PlayerInput>().user.ActivateControlScheme(null);
-        Debug.Log(playerGameObject[PLAYER_2].GetComponent<PlayerInput>().devices.Count);
-
 
         return NUMBER_OF_PLAYERS;
     }
@@ -115,9 +84,14 @@ public class PlayerManager : MonoBehaviour
     //Reset the players and camera
     public void ResetPlayers()
     {
+        //reset camera frame
+        gameCamera.RemoveFrameTarget(playerGameObject[PLAYER_1].transform);
+        gameCamera.RemoveFrameTarget(playerGameObject[PLAYER_2].transform);
+
         //destory players
         Destroy(playerGameObject[PLAYER_1].gameObject);
         Destroy(playerGameObject[PLAYER_2].gameObject);
+
     }
 
     private void OnDestroy()
