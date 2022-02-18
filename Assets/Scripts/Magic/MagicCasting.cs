@@ -42,6 +42,7 @@ public class MagicCasting : MonoBehaviour
 
     private void Update()
     {
+        changeTransform();
         castButtonDown = playerSpellControls.Spells.Cast.triggered && playerSpellControls.Spells.Cast.ReadValue<float>() > 0;
 
         // If the player is not casting and the cast button is pressed
@@ -50,8 +51,6 @@ public class MagicCasting : MonoBehaviour
             casting = true;
             timeSinceLastCast = 0.0f;
             CastCurrentSpell();
-
-            Debug.Log($"{selectedElement.GetElementName()} Spell Cast");
         }
 
         if (casting)
@@ -76,6 +75,17 @@ public class MagicCasting : MonoBehaviour
         return spellToCast;
     }
 
+    private void changeTransform()
+    {
+        if (spellToCast.SpellToCast.spellSpeed == 0)
+        {
+            castLocation.localPosition = new Vector3(0, -0.5f, 0);
+        }
+        else
+        {
+            castLocation.localPosition = new Vector3(0, 0, 0);
+        }
+    }
 
     private void CastCurrentSpell()
     {

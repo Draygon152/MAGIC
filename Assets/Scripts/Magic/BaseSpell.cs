@@ -2,6 +2,7 @@
 // Modified by Kevin Chao
 
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -25,9 +26,18 @@ public class BaseSpell : MonoBehaviour
         spellBody = GetComponent<Rigidbody>();
         spellBody.isKinematic = true;
 
-        Destroy(gameObject, SpellToCast.spellLifetime); // Destroy spell after certain time if it does not hit anything
+        StartCoroutine(spellDuration(SpellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
     }
 
+    IEnumerator spellDuration(float time)
+    {
+        yield return new WaitForSeconds(time);
+        //spellCall.Invoke(player, null, this);
+        spellEffect.Base_Effects(SpellToCast.element, player, null, this);
+        Destroy(gameObject);
+    }
+    
+    
 
     private void Update()
     {

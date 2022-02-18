@@ -21,7 +21,7 @@ public class SpellGivesDamage : DamageGiverManager
         }
 
         else if (collision.gameObject.tag == "Enemy")
-        {
+        { 
             Debug.Log("Blasted Enemy!");
             EnemyHealthManager enemy = collision.gameObject.GetComponentInParent<EnemyHealthManager>();
             if (enemy != null)
