@@ -1,4 +1,5 @@
-// Written by Lawson
+//Written by Lawson
+//Modification by Liz
 
 using UnityEngine;
 
@@ -57,6 +58,10 @@ public class PlayerManager : MonoBehaviour
         playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
         playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
 
+        // Set player's number (Liz's modification)
+        playerGameObject[PLAYER_1].PlayerNumber = PLAYER_1;
+        playerGameObject[PLAYER_2].PlayerNumber = PLAYER_2;
+
         return NUMBER_OF_PLAYERS;
     }
 
@@ -82,6 +87,7 @@ public class PlayerManager : MonoBehaviour
 
 
     //A getter function for retrieving the location of the players
+    // To access Player 1, pass 0. To access Player 2, pass 1.
     public Transform GetPlayerLocation(int player)
     {
         return playerGameObject[player].transform;
