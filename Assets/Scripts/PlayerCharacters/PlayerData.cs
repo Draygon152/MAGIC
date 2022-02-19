@@ -8,12 +8,10 @@ public class PlayerData : ScriptableObject
 {
     private Element ElementalAffinity;
 
-
     public void SetElement(Element elem)
     {
         ElementalAffinity = elem;
     }
-
 
     public Element GetElement()
     {
