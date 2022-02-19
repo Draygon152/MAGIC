@@ -21,7 +21,6 @@ public class ElementList : MonoBehaviour
         switch(CurrentElement)
         {
             case ElementTypes.Elements.Arcane:
-                Debug.Log(ArcaneSpell);
                 return ArcaneSpell;
             case ElementTypes.Elements.Wind:
                 return GustSpell;

@@ -3,7 +3,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System;
 using System.Collections.Generic;
 
 public class LobbyMenu : Menu<LobbyMenu>
@@ -12,6 +11,8 @@ public class LobbyMenu : Menu<LobbyMenu>
     [SerializeField] private Toggle player2Ready;
     [SerializeField] private ElementSelector p1ElementSelector; // UI elements for players to select Elemental Affinity
     [SerializeField] private ElementSelector p2ElementSelector;
+    [SerializeField] private Dropdown p1InputSelector;
+    [SerializeField] private Dropdown p2InputSelector;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private CountdownTimer timer; // Timer, provides countdown, game starts when countdown reaches 0
 
@@ -21,7 +22,8 @@ public class LobbyMenu : Menu<LobbyMenu>
     private PlayerData p1Data;
     private PlayerData p2Data;
 
-    private List<InputDevice> availableDevices;
+    // Contains assigned device names and references to the actual InputDevice objects
+    private Dictionary<string, InputDevice> availableDevices;
 
 
 
@@ -34,6 +36,11 @@ public class LobbyMenu : Menu<LobbyMenu>
         player2IsReady = false;
 
         availableDevices = FilterInputDevices();
+
+        p1InputSelector.AddOptions(new List<string> { "Select Input Device" });
+        p2InputSelector.AddOptions(new List<string> { "Select Input Device" });
+        p1InputSelector.AddOptions(new List<string>(availableDevices.Keys));
+        p2InputSelector.AddOptions(new List<string>(availableDevices.Keys));
     }
 
 
@@ -131,6 +138,42 @@ public class LobbyMenu : Menu<LobbyMenu>
     }
 
 
+    public void Player1InputDeviceSelected()
+    {
+        string selectedOption = p1InputSelector.options[p1InputSelector.value].text;
+
+        if (selectedOption == "Select Input Device")
+        {
+            p1Data.pairedDevice = null;
+        }
+
+        else
+        {
+            p1Data.pairedDevice = availableDevices[selectedOption];
+        }
+
+        Debug.Log(p1Data.pairedDevice);
+    }
+
+
+    public void Player2InputDeviceSelected()
+    {
+        string selectedOption = p2InputSelector.options[p2InputSelector.value].text;
+
+        if (selectedOption == "Select Input Device")
+        {
+            p2Data.pairedDevice = null;
+        }
+
+        else
+        {
+            p2Data.pairedDevice = availableDevices[selectedOption];
+        }
+
+        Debug.Log(p2Data.pairedDevice);
+    }
+
+
     // For use by GUI button
     public void ReturnToMainMenu()
     {
@@ -138,19 +181,24 @@ public class LobbyMenu : Menu<LobbyMenu>
     }
 
 
-    private List<InputDevice> FilterInputDevices()
+    private Dictionary<string, InputDevice> FilterInputDevices()
     {
-        List<InputDevice> output = new List<InputDevice>();
+        Dictionary<string, InputDevice> output = new Dictionary<string, InputDevice>();
+        int gamepadCounter = 0;
+        int keyboardCounter = 0;
 
         foreach (InputDevice device in InputSystem.devices)
         {
-            if (device.Equals(typeof(Gamepad)) || device.Equals(typeof(Keyboard)))
+            if (device is Gamepad)
             {
-                output.Add(device);
+                output.Add($"Gamepad {++gamepadCounter}", device);
+            }
+            
+            else if (device is Keyboard)
+            {
+                output.Add($"Keyboard {++keyboardCounter}", device);
             }
         }
-
-        Debug.Log($"AAAAA: {output.Count}");
 
         return output;
     }
