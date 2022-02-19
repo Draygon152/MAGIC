@@ -98,6 +98,9 @@ public class GameManager : MonoBehaviour
         gameCamera.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
         gameCamera.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
 
+        //Set the camera to its starting position.
+        gameCamera.StartingCamPos();
+
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
         enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
@@ -147,6 +150,7 @@ public class GameManager : MonoBehaviour
 
         // decrement playerCount
         playerCount--;
+
 
         // Check if players are still alive
         if (playerCount <= 0)
