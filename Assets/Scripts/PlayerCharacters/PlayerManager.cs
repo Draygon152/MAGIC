@@ -71,20 +71,6 @@ public class PlayerManager : MonoBehaviour
         playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
         playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
 
-        // Pairing devices
-        Debug.Log(playerGameObject[PLAYER_1].GetComponent<PlayerInput>().devices.Count);
-        // playerData[PLAYER_1].pairedDevice = Gamepad.all[0]; //This line is temporary
-        // playerData[PLAYER_2].pairedDevice = Keyboard.all[0]; //This line is temporary
-        // playerGameObject[PLAYER_1].GetComponent<PlayerInput>().user.UnpairDevices();
-        // playerGameObject[PLAYER_2].GetComponent<PlayerInput>().user.UnpairDevices();
-        //         Debug.Log(playerGameObject[PLAYER_1].GetComponent<PlayerInput>().devices.Count);
-        // InputUser.PerformPairingWithDevice(playerData[PLAYER_1].pairedDevice, playerGameObject[PLAYER_1].GetComponent<PlayerInput>().user);
-        // InputUser.PerformPairingWithDevice(playerData[PLAYER_2].pairedDevice, playerGameObject[PLAYER_2].GetComponent<PlayerInput>().user);
-        // // playerGameObject[PLAYER_1].GetComponent<PlayerInput>().user.ActivateControlScheme(null);
-        // // playerGameObject[PLAYER_2].GetComponent<PlayerInput>().user.ActivateControlScheme(null);
-        Debug.Log(playerGameObject[PLAYER_2].GetComponent<PlayerInput>().devices.Count);
-
-
         return NUMBER_OF_PLAYERS;
     }
 
