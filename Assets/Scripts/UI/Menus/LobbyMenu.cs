@@ -2,6 +2,9 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using System;
+using System.Collections.Generic;
 
 public class LobbyMenu : Menu<LobbyMenu>
 {
@@ -18,6 +21,8 @@ public class LobbyMenu : Menu<LobbyMenu>
     private PlayerData p1Data;
     private PlayerData p2Data;
 
+    private List<InputDevice> availableDevices;
+
 
 
     private void Start()
@@ -27,6 +32,8 @@ public class LobbyMenu : Menu<LobbyMenu>
 
         player1IsReady = false;
         player2IsReady = false;
+
+        availableDevices = FilterInputDevices();
     }
 
 
@@ -128,5 +135,23 @@ public class LobbyMenu : Menu<LobbyMenu>
     public void ReturnToMainMenu()
     {
         Close();
+    }
+
+
+    private List<InputDevice> FilterInputDevices()
+    {
+        List<InputDevice> output = new List<InputDevice>();
+
+        foreach (InputDevice device in InputSystem.devices)
+        {
+            if (device.Equals(typeof(Gamepad)) || device.Equals(typeof(Keyboard)))
+            {
+                output.Add(device);
+            }
+        }
+
+        Debug.Log($"AAAAA: {output.Count}");
+
+        return output;
     }
 }
