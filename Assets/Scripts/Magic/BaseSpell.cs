@@ -51,8 +51,8 @@ public class BaseSpell : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         Destroy(gameObject); // Destroy the spell when it collides
-
         // Apply spell effect at the collision's gameobject
+        print(SpellToCast.element);
         spellEffect.Base_Effects(SpellToCast.element, player, collision.gameObject, this);
     }
 }

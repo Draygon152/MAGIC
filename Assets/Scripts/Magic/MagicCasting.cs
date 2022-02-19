@@ -91,4 +91,13 @@ public class MagicCasting : MonoBehaviour
     {
         Instantiate(spellToCast, castLocation.position, castLocation.rotation); // create spell at castlocation
     }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if(collision.GetComponent<Collider>().tag == "pickups")
+        {
+            print("PICKUP");
+            spellToCast = collision.GetComponent<SpellItem>().returnContainedSpell();
+        }
+    }
 }

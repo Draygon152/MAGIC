@@ -28,6 +28,7 @@ public class Effects : MonoBehaviour
             case ElementTypes.Elements.Fire:
                 break;
             case ElementTypes.Elements.Nature:
+                healEffect();
                 break;
             case ElementTypes.Elements.Ice:
                 break;
@@ -44,7 +45,6 @@ public class Effects : MonoBehaviour
     public void teleportationEffect()
     {
         print("WORKS");
-        // Teleports on top of enemy, takes damage as a result, WIP
         playerinfo.transform.position = currentSpell.transform.position;
 
     }
@@ -53,6 +53,7 @@ public class Effects : MonoBehaviour
 
     public void stunEffect()
     {
+        //set speed to 0 for duration (possibly disable damage aswell)
         Debug.Log("ARCANE EFFECT");
     }
 
@@ -81,11 +82,19 @@ public class Effects : MonoBehaviour
 
     private void slowEffect()
     {
+        //divides speed by percent
         Debug.Log("ICE EFFECT");
     }
 
     private void healEffect()
     {
-        Debug.Log("Hea");
+        if (entity == null)
+        {
+
+        }
+        else
+        {
+            playerinfo.GetComponent<PlayerHealthManager>().GainHealth(currentSpell.SpellToCast.damage);
+        }
     }
 }
