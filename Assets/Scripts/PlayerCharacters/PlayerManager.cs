@@ -106,6 +106,29 @@ public class PlayerManager : MonoBehaviour
         Destroy(playerGameObject[PLAYER_2].gameObject);
     }
 
+    //This function returns a reference to the dead player if there is one.
+    //If there is no dead player it will return null instead. Note that if both
+    //players are dead the game will be over, this function is intented to only be called
+    //while the game is being played
+    public Player GetDeadPlayer()
+    {
+        Player deadPlayer = null; //A reference to the dead player
+
+        //check if player 1 is dead
+        if (!playerGameObject[PLAYER_1].gameObject.activeSelf)
+        {
+            deadPlayer = playerGameObject[PLAYER_1];
+        }
+
+        //check if player 2 is dead
+        if (!playerGameObject[PLAYER_2].gameObject.activeSelf)
+        {
+            deadPlayer = playerGameObject[PLAYER_2];
+        }
+
+        return deadPlayer;
+    }
+
     private void OnDestroy()
     {
         // Marking the GameManager as nonexistent

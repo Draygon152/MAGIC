@@ -150,6 +150,11 @@ public class GameManager : MonoBehaviour
             // The player lost
             EndGame(false);
         }
+        else //A player dead but the game isn't over (one player is still alive)
+        {
+            //remove the dead player from the camera frame
+            gameCamera.RemoveFrameTarget(PlayerManager.Instance.GetDeadPlayer().transform);
+        }
     }
 
 

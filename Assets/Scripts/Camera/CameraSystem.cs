@@ -48,24 +48,25 @@ public class CameraSystem : MonoBehaviour
         {
             avgPos = targetList[0].position;
         }
-        
-        
-        //Depending on how many players there are, calculate its average position
-        for (int i = 0; i < targetList.Count; i++)
+        else
         {
-            //Add the position of each target into avgPos and increment the numTargets for use later.
-            avgPos += targetList[i].position;
-            numTargets++;
-        }
+            //Depending on how many players there are, calculate its average position
+            for (int i = 0; i < targetList.Count; i++)
+            {
+                //Add the position of each target into avgPos and increment the numTargets for use later.
+                avgPos += targetList[i].position;
+                numTargets++;
+            }
 
-        //If there are targets, get its average position.
-        if (numTargets > 0)
-        {
-            avgPos /= numTargets;
-        }
+            //If there are targets, get its average position.
+            if (numTargets > 0)
+            {
+                avgPos /= numTargets;
+            }
 
-        //Keep the same y value (frozen y movement).
-        //avgPos.y = transform.position.y;
+            //Keep the same y value (frozen y movement).
+            //avgPos.y = transform.position.y;
+        }
         
 
         return avgPos;
