@@ -48,7 +48,6 @@ public class MagicCasting : MonoBehaviour
         if (!casting && castButtonDown)
         {
             casting = true;
-            timeSinceLastCast = 0.0f;
             CastCurrentSpell();
 
             Debug.Log($"{selectedElement.GetElementName()} Spell Cast");
@@ -59,15 +58,19 @@ public class MagicCasting : MonoBehaviour
             timeSinceLastCast += Time.deltaTime;  // Increase time since last cast by time that passed
 
             if (timeSinceLastCast > castCooldown) // If cooldown expired, next cast available
+            {
                 casting = false;
+                timeSinceLastCast = 0.0f;
+            }
         }
     }
+
 
     public void InitializeSpell(Element elem)
     {
         selectedElement = elem;
         spellToCast = listOfSpells.GetSpell(selectedElement.GetElementType());
-        castCooldown = spellToCast.SpellToCast.timeBetweenCasts;
+        castCooldown = spellToCast.spellToCast.timeBetweenCasts;
     }
 
 
@@ -80,5 +83,11 @@ public class MagicCasting : MonoBehaviour
     private void CastCurrentSpell()
     {
         Instantiate(spellToCast, castLocation.position, castLocation.rotation); // create spell at castlocation
+    }
+
+
+    public float GetTimeSinceLastCast()
+    {
+        return timeSinceLastCast;
     }
 }

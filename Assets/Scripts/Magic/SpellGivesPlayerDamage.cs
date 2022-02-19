@@ -15,7 +15,7 @@ public class SpellGivesPlayerDamage : DamageGiverManager
 
             PlayerHealthManager player = collision.gameObject.GetComponentInParent<PlayerHealthManager>();
             if (player != null)
-                DamageTarget(player, currentSpell.SpellToCast.damage);
+                DamageTarget(player, currentSpell.spellToCast.damage);
 
             Destroy(gameObject); // Destroy the spell when it collides
         }

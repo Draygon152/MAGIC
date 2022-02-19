@@ -39,9 +39,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public BaseSpell GetBaseSpell()
+    public MagicCasting GetCaster()
     {
-        return magicCaster.ReturnSpell();
+        return magicCaster;
     }
 
 
