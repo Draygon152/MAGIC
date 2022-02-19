@@ -2,6 +2,7 @@
 // Modified by Kevin Chao
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MagicCasting : MonoBehaviour
 {
@@ -39,19 +40,47 @@ public class MagicCasting : MonoBehaviour
         playerSpellControls.Disable();
     }
 
-
-    private void Update()
+    //Callback for casting a spell
+    private void OnCast()
     {
         changeTransform();
-        castButtonDown = playerSpellControls.Spells.Cast.triggered && playerSpellControls.Spells.Cast.ReadValue<float>() > 0;
-
-        // If the player is not casting and the cast button is pressed
-        if (!casting && castButtonDown)
+        
+        // If the player is not casting
+        if (!casting)
         {
             casting = true;
             timeSinceLastCast = 0.0f;
             CastCurrentSpell();
         }
+
+
+    }
+
+    private void Update()
+    {
+        castButtonDown = playerSpellControls.Gameplay.Cast.triggered && playerSpellControls.Gameplay.Cast.ReadValue<float>() > 0;
+
+        // Hello Angel, I (Lawson) commented out this code when I refactor the control system
+        // Since I switch of having a generate C# wrapper script to a PlayerInput component
+        // some of the functionality changed. You no longer have access to the cast action (how you called 
+        // ReadValue<float>()) through a script. If you want it you will have to extract it from the 
+        // PlayerInput component, which requires you to first call getComponent<PlayerInput>(), and then
+        // call action("cast") to get the action. Notice that this is not ideal especially since it requires a 
+        // string literal. However you should have no need of the action now. The PlayerInput will automatically
+        // call OnCast, if defined, as a callback function when the cast action is performed. Notice that I move
+        // the code I commented out up above to OnCast. I am leaving it you to delete this commemted out code and 
+        // any variables that are no longer necessary. This way you are familar with this change and we can minimize
+        // clean up error.
+        // will require you  
+        // // If the player is not casting and the cast button is pressed
+        // if (!casting && castButtonDown)
+        // {
+        //     casting = true;
+        //     timeSinceLastCast = 0.0f;
+        //     CastCurrentSpell();
+
+        //     Debug.Log($"{selectedElement.GetElementName()} Spell Cast");
+        // }
 
         if (casting)
         {
