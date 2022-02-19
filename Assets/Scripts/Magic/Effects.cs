@@ -94,7 +94,7 @@ public class Effects : MonoBehaviour
         }
         else
         {
-            playerinfo.GetComponent<PlayerHealthManager>().GainHealth(currentSpell.SpellToCast.damage);
+            playerinfo.GetComponent<PlayerHealthManager>().GainHealth(currentSpell.spellToCast.damage);
         }
     }
 }

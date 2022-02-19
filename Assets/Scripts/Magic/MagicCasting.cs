@@ -49,7 +49,6 @@ public class MagicCasting : MonoBehaviour
         if (!casting)
         {
             casting = true;
-            timeSinceLastCast = 0.0f;
             CastCurrentSpell();
         }
 
@@ -87,15 +86,19 @@ public class MagicCasting : MonoBehaviour
             timeSinceLastCast += Time.deltaTime;  // Increase time since last cast by time that passed
 
             if (timeSinceLastCast > castCooldown) // If cooldown expired, next cast available
+            {
                 casting = false;
+                timeSinceLastCast = 0.0f;
+            }
         }
     }
+
 
     public void InitializeSpell(Element elem)
     {
         selectedElement = elem;
         spellToCast = listOfSpells.GetSpell(selectedElement.GetElementType());
-        castCooldown = spellToCast.SpellToCast.timeBetweenCasts;
+        castCooldown = spellToCast.spellToCast.timeBetweenCasts;
     }
 
 
@@ -106,7 +109,7 @@ public class MagicCasting : MonoBehaviour
 
     private void changeTransform()
     {
-        if (spellToCast.SpellToCast.spellSpeed == 0)
+        if (spellToCast.spellToCast.spellSpeed == 0)
         {
             castLocation.localPosition = new Vector3(0, -0.5f, 0);
         }
@@ -128,5 +131,10 @@ public class MagicCasting : MonoBehaviour
             print("PICKUP");
             spellToCast = collision.GetComponent<SpellItem>().returnContainedSpell();
         }
+    }
+
+    public float GetTimeSinceLastCast()
+    {
+        return timeSinceLastCast;
     }
 }

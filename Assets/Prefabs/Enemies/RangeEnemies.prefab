@@ -55,21 +55,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5763893213597020718, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5763893213597020718, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: cowardly
+    - target: {fileID: 5819798027175314403, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5763893213597020718, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: tooCloseToTarget
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5763893213597020718, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: distanceFromTarget
-      value: 10
+    - target: {fileID: 5819798027175314403, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Name
@@ -77,29 +69,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
---- !u!1 &2896186389428589734 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-  m_PrefabInstance: {fileID: 6122605545685614019}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &2872488174234432167
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2896186389428589734}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &-6856783436320015388
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2896186389428589734}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

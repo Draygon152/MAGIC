@@ -34,14 +34,14 @@ public class HUD : Menu<HUD>
     }
 
 
-    public void SetP1SpellInfo(BaseSpell spellSelected)
+    public void SetP1SpellCaster(MagicCasting caster)
     {
-        Player1SpellUI.changeSelectedSpellText(spellSelected);
+        Player1SpellUI.InitializeSpellUI(caster);
     }
 
 
-    public void SetP2SpellInfo(BaseSpell spellSelected)
+    public void SetP2SpellCaster(MagicCasting caster)
     {
-        Player2SpellUI.changeSelectedSpellText(spellSelected);
+        Player2SpellUI.InitializeSpellUI(caster);
     }
 }

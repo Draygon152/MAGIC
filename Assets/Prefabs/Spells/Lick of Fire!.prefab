@@ -89,8 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellToCast: {fileID: 11400000, guid: 11fa7107e936bb5418fe37eecd9cf264, type: 2}
+  spellToCast: {fileID: 11400000, guid: 11fa7107e936bb5418fe37eecd9cf264, type: 2}
   spellEffect: {fileID: 2490613691426800600, guid: 30266618fe9c8b942b0d4ded0768599b, type: 3}
+  player: {fileID: 0}
 --- !u!1 &6449931744767961268
 GameObject:
   m_ObjectHideFlags: 0

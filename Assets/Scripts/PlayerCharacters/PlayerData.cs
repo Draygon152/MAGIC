@@ -14,7 +14,6 @@ public class PlayerData : ScriptableObject
         ElementalAffinity = elem;
     }
 
-
     public Element GetElement()
     {
         return ElementalAffinity;

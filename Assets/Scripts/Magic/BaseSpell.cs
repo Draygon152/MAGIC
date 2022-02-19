@@ -8,7 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class BaseSpell : MonoBehaviour
 {
-    public SpellTemplate SpellToCast;
+    public SpellTemplate spellToCast;
     private SphereCollider spellCollider;
     private Rigidbody spellBody;
     public Effects spellEffect;
@@ -21,19 +21,19 @@ public class BaseSpell : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         spellCollider = GetComponent<SphereCollider>();
         spellCollider.isTrigger = true;
-        spellCollider.radius = SpellToCast.radius;
+        spellCollider.radius = spellToCast.radius;
 
         spellBody = GetComponent<Rigidbody>();
         spellBody.isKinematic = true;
 
-        StartCoroutine(spellDuration(SpellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
+        StartCoroutine(spellDuration(spellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
     }
 
     IEnumerator spellDuration(float time)
     {
         yield return new WaitForSeconds(time);
         //spellCall.Invoke(player, null, this);
-        spellEffect.Base_Effects(SpellToCast.element, player, null, this);
+        spellEffect.Base_Effects(spellToCast.element, player, null, this);
         Destroy(gameObject);
     }
     
@@ -41,9 +41,9 @@ public class BaseSpell : MonoBehaviour
 
     private void Update()
     {
-        if (SpellToCast.spellSpeed > 0) // Projectile spell
+        if (spellToCast.spellSpeed > 0) // Projectile spell
         {
-            transform.Translate(Vector3.forward * SpellToCast.spellSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * spellToCast.spellSpeed * Time.deltaTime);
         }
     }
 
@@ -52,8 +52,8 @@ public class BaseSpell : MonoBehaviour
     {
         Destroy(gameObject); // Destroy the spell when it collides
         // Apply spell effect at the collision's gameobject
-        print(SpellToCast.element);
-        spellEffect.Base_Effects(SpellToCast.element, player, collision.gameObject, this);
+        print(spellToCast.element);
+        spellEffect.Base_Effects(spellToCast.element, player, collision.gameObject, this);
     }
 }
 

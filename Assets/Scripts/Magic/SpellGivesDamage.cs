@@ -15,7 +15,7 @@ public class SpellGivesDamage : DamageGiverManager
             Debug.Log("Collided Object!");
             ObjectHealthManager obj = collision.gameObject.GetComponentInParent<ObjectHealthManager>();
             if (obj != null)
-                DamageTarget(obj, currentSpell.SpellToCast.damage);
+                DamageTarget(obj, currentSpell.spellToCast.damage);
 
             Destroy(gameObject); // Destroy the spell when it collides
         }
@@ -25,7 +25,7 @@ public class SpellGivesDamage : DamageGiverManager
             Debug.Log("Blasted Enemy!");
             EnemyHealthManager enemy = collision.gameObject.GetComponentInParent<EnemyHealthManager>();
             if (enemy != null)
-                DamageTarget(enemy, currentSpell.SpellToCast.damage);
+                DamageTarget(enemy, currentSpell.spellToCast.damage);
         }
     }
 
@@ -37,7 +37,7 @@ public class SpellGivesDamage : DamageGiverManager
 
             EnemyHealthManager enemy = entity.GetComponent<EnemyHealthManager>();
             if (enemy != null)
-                DamageTarget(enemy, spellHit.SpellToCast.damage);
+                DamageTarget(enemy, spellHit.spellToCast.damage);
         }
     }
 }

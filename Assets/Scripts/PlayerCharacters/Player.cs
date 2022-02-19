@@ -1,4 +1,5 @@
 // Written by Kevin Chao
+// Little Modification by Lizbeth A
 
 using UnityEngine;
 using System;
@@ -10,8 +11,7 @@ public class Player : MonoBehaviour
 {
     private MagicCasting magicCaster;
     private PlayerHealthManager healthManager;
-
-
+    private int playerNumber;
 
     private void Awake()
     {
@@ -25,10 +25,23 @@ public class Player : MonoBehaviour
         magicCaster.InitializeSpell(elem);
     }
 
-
-    public BaseSpell GetBaseSpell()
+    // Liz's modification
+    // Grabs Player game object's number
+    public int PlayerNumber
     {
-        return magicCaster.ReturnSpell();
+        get
+        {
+            return playerNumber;
+        }
+        set 
+        {
+            playerNumber = value;
+        }
+    }
+
+    public MagicCasting GetCaster()
+    {
+        return magicCaster;
     }
 
 
