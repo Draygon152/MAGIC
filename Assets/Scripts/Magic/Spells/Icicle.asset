@@ -16,8 +16,8 @@ MonoBehaviour:
   timeBetweenCasts: 1.5
   numInstances: -1
   castSpeed: 0.1
-  spellSpeed: 10
-  spellLifetime: 1
+  spellSpeed: 14
+  spellLifetime: 1.25
   radius: 0.5
   self: 0
   element: 2
