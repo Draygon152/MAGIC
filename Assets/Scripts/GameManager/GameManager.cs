@@ -104,6 +104,9 @@ public class GameManager : MonoBehaviour
         enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
         waveNumber++;
 
+        //Set the enemy counter on the HUD
+        HUD.Instance.SetEnemyCouter(enemyCount);
+
         // Update current game state
         state = gameState.playing;
     }
@@ -161,17 +164,15 @@ public class GameManager : MonoBehaviour
     // The listener for the EnemyDeath event
     public void OnEnemyDeath()
     {
-        Debug.Log("Enemy has died");
-
         // decrement enemyCount
         enemyCount--;
+
+        // update enemy counter on HUD
+        HUD.Instance.SetEnemyCouter(enemyCount);
 
         // check if final wave
         if (waveNumber >= waves.Count)
         {
-            Debug.Log("Final Wave");
-            Debug.Log($"Enemies Left: {enemyCount}");
-
             // On final wave
             // don't spawn more waves
             // Check if player has won
@@ -181,11 +182,8 @@ public class GameManager : MonoBehaviour
                 EndGame(true);
             }
         }
-
         else
         {
-            Debug.Log("Not final wave");
-
             // There are more waves to spawn
             // check if they are ready to spawn
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
@@ -193,8 +191,11 @@ public class GameManager : MonoBehaviour
                 // ready to spawn next wave
                 enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
                 waveNumber++;
-            }
-        }
+            } //end if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
+        }//end else of (if (waveNumber >= waves.Count))
+
+        // update enemy counter on HUD
+        HUD.Instance.SetEnemyCouter(enemyCount);
     }
 
     // Reset the game state when a ResetGame event is notified
