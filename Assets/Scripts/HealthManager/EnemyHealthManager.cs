@@ -45,9 +45,17 @@ public class EnemyHealthManager : HealthManager
         {
             // TODO: Implement option to spawn a higher-tier spell drop at location of death
 
-			EventManager.Instance.Notify(EventTypes.Events.EnemyDeath);
+			NotifyDeath();
             Destroy(gameObject);
         }
+    }
+
+    //This is its own function so MinionEnemyHealthManager
+    //can override this function to avoid triggering the 
+    //EnemyDeath event
+    virtual protected void NotifyDeath()
+    {
+		EventManager.Instance.Notify(EventTypes.Events.EnemyDeath);
     }
 
 

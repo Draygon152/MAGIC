@@ -1,4 +1,5 @@
 // Written by Liz
+// Modified by Kevin Chao and Lawson
 
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public abstract class HealthManager : MonoBehaviour
         Debug.Log($"Current {gameObject.name} Health: {currentHealth}");
     }
 
+
     virtual public void GainHealth(int healAmount)
     {
         currentHealth += healAmount;
@@ -23,6 +25,7 @@ public abstract class HealthManager : MonoBehaviour
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
     }
+
 
     public abstract void LoseHealth(int damageAmount);
 
@@ -35,10 +38,12 @@ public abstract class HealthManager : MonoBehaviour
         return currentHealth > threshold;
     }
 
+
     public bool HealthBelowAmountThreshold(int threshold)
     {
         return currentHealth < threshold;
     }
+
 
     public bool HealthAbovePercentageThreshold(float threshold)
     {
@@ -46,6 +51,7 @@ public abstract class HealthManager : MonoBehaviour
 
         return percentageOfMaxHealth > threshold;
     }
+
 
     public bool HealthBelowPercentageThreshold(float threshold)
     {

@@ -28,7 +28,7 @@ public class PlayerHealthManager : HealthManager
     }
 
 
-    public void GainHealth(int healAmount)
+    public override void GainHealth(int healAmount)
     {
         base.GainHealth(healAmount);
 
@@ -65,12 +65,14 @@ public class PlayerHealthManager : HealthManager
         setHealthBarMax = setHBValueMax;
     }
 
-    public int returnMaxHealth()
+
+    public int GetMaxHealth()
     {
         return maxHealth;
     }
     
-    public int returnCurrentHealth()
+
+    public int GetCurrentHealth()
     {
         return currentHealth;
     }
