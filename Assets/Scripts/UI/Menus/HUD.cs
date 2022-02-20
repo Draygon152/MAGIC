@@ -1,12 +1,19 @@
 // Written by Kevin Chao
 // Modified by Angel
 
+using System;
+using TMPro;
+using UnityEngine;
+
 public class HUD : Menu<HUD>
 {
-    public HealthBar Player1HealthBar;
-    public HealthBar Player2HealthBar;
-    public SelectedSpellUI Player1SpellUI;
-    public SelectedSpellUI Player2SpellUI;
+
+    [SerializeField] private HealthBar Player1HealthBar;
+    [SerializeField] private HealthBar Player2HealthBar;
+    [SerializeField] private SelectedSpellUI Player1SpellUI;
+    [SerializeField] private SelectedSpellUI Player2SpellUI;
+    [SerializeField] private TextMeshProUGUI enemyCounter;
+
 
 
 
@@ -43,5 +50,10 @@ public class HUD : Menu<HUD>
     public void SetP2SpellCaster(MagicCasting caster)
     {
         Player2SpellUI.InitializeSpellUI(caster);
+    }
+
+    public void SetEnemyCouter(int enemiesRemaining)
+    {
+        enemyCounter.text = "Enemies Remaining: " + Convert.ToString(enemiesRemaining);
     }
 }

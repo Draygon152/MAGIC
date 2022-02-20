@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class Effects : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class Effects : MonoBehaviour
     private GameObject entity;
     [SerializeField] private SpellGivesDamage ouch;
     private BaseSpell currentSpell;
-
 
 
     public void Base_Effects(ElementTypes.Elements currentElement, GameObject player, GameObject locationEntity, BaseSpell passedSpell)
@@ -21,22 +21,19 @@ public class Effects : MonoBehaviour
         switch (currentElement)
         {
             case ElementTypes.Elements.Arcane:
-                arcaneEffect();
                 break;
             case ElementTypes.Elements.Wind:
-                windEffect();
+                pushBackEffect();
                 break;
             case ElementTypes.Elements.Fire:
-                fireEffect();
                 break;
             case ElementTypes.Elements.Nature:
-                arcaneEffect();
+                healEffect();
                 break;
             case ElementTypes.Elements.Ice:
-                iceEffect();
                 break;
             case ElementTypes.Elements.Lightning:
-                lightningEffect();
+                teleportationEffect();
                 break;
             default:
                 throw new Exception("Element not found");
@@ -44,34 +41,60 @@ public class Effects : MonoBehaviour
     }
 
 
-    private void lightningEffect()
+
+    public void teleportationEffect()
     {
-        // Teleports on top of enemy, takes damage as a result, WIP
-        playerinfo.transform.position = entity.transform.position; 
+        print("WORKS");
+        playerinfo.transform.position = currentSpell.transform.position;
+
     }
 
 
-    private void arcaneEffect()
+
+    public void stunEffect()
     {
+        //set speed to 0 for duration (possibly disable damage aswell)
         Debug.Log("ARCANE EFFECT");
     }
 
 
-    private void fireEffect()
+    private void sustainedDamageEffect()
     {
+        ouch.sustainedDamage(entity, currentSpell);
         Debug.Log("FIRE EFFECT");
     }
 
 
-    private void windEffect()
+
+    private void pushBackEffect()
     {
-        Vector3 direction = entity.transform.position - playerinfo.transform.position;
-        entity.GetComponent<Rigidbody>().AddForce(direction * 100);
+        if(entity == null)
+        {
+        }
+        else
+        {
+            Vector3 direction = entity.transform.position - playerinfo.transform.position;
+            entity.GetComponent<Rigidbody>().AddForce(direction * 250);
+        }
+
     }
 
 
-    private void iceEffect()
+    private void slowEffect()
     {
+        //divides speed by percent
         Debug.Log("ICE EFFECT");
+    }
+
+    private void healEffect()
+    {
+        if (entity == null)
+        {
+
+        }
+        else
+        {
+            playerinfo.GetComponent<PlayerHealthManager>().GainHealth(currentSpell.spellToCast.damage);
+        }
     }
 }

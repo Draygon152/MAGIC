@@ -26,6 +26,12 @@ public class EnemyHealthManager : HealthManager
         EventManager.Instance.Unsubscribe(EventTypes.Events.ResetGame, Despawn);
     }
 
+    public override void GainHealth(int healAmount)
+    {
+        base.GainHealth(healAmount);
+
+        healthBar.UpdateHealth(currentHealth);
+    }
 
     public override void LoseHealth(int damageAmount)
     {
@@ -33,17 +39,23 @@ public class EnemyHealthManager : HealthManager
 
         // Update the health bar
         healthBar.UpdateHealth(currentHealth);
-        
-        Debug.Log($"Health of {gameObject.name} after damage: {currentHealth}");
 
         // If health becomes 0 or less, enemy destroyed
         if (currentHealth <= 0)
         {
             // TODO: Implement option to spawn a higher-tier spell drop at location of death
 
-			EventManager.Instance.Notify(EventTypes.Events.EnemyDeath);
+			NotifyDeath();
             Destroy(gameObject);
         }
+    }
+
+    //This is its own function so MinionEnemyHealthManager
+    //can override this function to avoid triggering the 
+    //EnemyDeath event
+    virtual protected void NotifyDeath()
+    {
+		EventManager.Instance.Notify(EventTypes.Events.EnemyDeath);
     }
 
 

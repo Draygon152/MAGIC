@@ -1,5 +1,5 @@
 // Written by Liz
-// Modified by Kevin Chao
+// Modified by Kevin Chao & Angel Rubio
 
 using UnityEngine;
 using System;
@@ -28,12 +28,9 @@ public class PlayerHealthManager : HealthManager
     }
 
 
-    public void GainHealth(int healAmount)
+    public override void GainHealth(int healAmount)
     {
-        currentHealth += healAmount;
-
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        base.GainHealth(healAmount);
 
         setHealthBarValue(currentHealth);
     }
@@ -66,5 +63,17 @@ public class PlayerHealthManager : HealthManager
     {
         setHealthBarValue = setHBValue;
         setHealthBarMax = setHBValueMax;
+    }
+
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+    
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 }

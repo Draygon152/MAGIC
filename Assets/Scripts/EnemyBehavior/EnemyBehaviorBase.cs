@@ -1,4 +1,5 @@
 // Written by Liz
+// Modified by Lawson
 
 using UnityEngine;
 using UnityEngine.AI;
@@ -41,7 +42,7 @@ public class EnemyBehaviorBase : MonoBehaviour
 }
 
     // Enemy follows to assigned location
-    private void Follow(Vector3 targetLocation)
+    protected void Follow(Vector3 targetLocation)
     {
         agent.SetDestination(targetLocation);
     }
@@ -139,22 +140,38 @@ public class EnemyBehaviorBase : MonoBehaviour
         {
             StartCoroutine(FindPlayersWithinRadius());
         }
-        //IMPLEMENT PURSUE :V
         // If there is a current player target, enemy would process to follow the chosen player
         // If not, enemy would begin to wander
+        if (currentTargetNumber != -1)
+        {
+            //Perform the behavior for this enemy, the base function will just follow, but it
+            //can be overriden for different behaviors
+            PerformBehavior();
+        }
+    }
+
+    protected void Flee(Vector3 location)
+    {
+        Vector3 fleeVector = location - this.gameObject.transform.position;
+        agent.SetDestination(this.transform.position - fleeVector);
+    }
+
+    virtual protected void PerformBehavior()
+    {
         if (currentTargetNumber != -1)
         {
             if (agent.speed != enemyOriginalSpeed)
             {
                 agent.speed = enemyOriginalSpeed;
             }
+
             Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
             Follow(targetLocation);
         }
         else
         {
             if (isWanderTime)
-            { 
+            {
                 StartCoroutine(Wander());
             }
         }
