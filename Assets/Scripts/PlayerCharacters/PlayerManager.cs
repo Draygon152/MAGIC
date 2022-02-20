@@ -107,6 +107,10 @@ public class PlayerManager : MonoBehaviour
         return playerGameObject[player].transform;
     }
 
+    public Player GetPlayer(int player)
+    {
+        return playerGameObject[player];
+    }
 
     //Reset the players and camera
     public void ResetPlayers()
