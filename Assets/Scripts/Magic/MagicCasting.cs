@@ -17,6 +17,7 @@ public class MagicCasting : MonoBehaviour
     private float castCooldown;      // default time between spellcasts. need to replace with individual spell's casting time also placeholder
     private float timeSinceLastCast;
     private bool castButtonDown;
+    private int playerNumber; //A variable to store the player number so it can be reference when casting a spell
 
 
 
@@ -24,6 +25,9 @@ public class MagicCasting : MonoBehaviour
     {
         // Initializes the player controls
         playerSpellControls = new PlayerControls();
+
+        //Set the playerNumber
+        playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
     }
 
 
@@ -126,7 +130,7 @@ public class MagicCasting : MonoBehaviour
 
     private void CastCurrentSpell()
     {
-        Instantiate(spellToCast, castLocation.position, castLocation.rotation); // create spell at castlocation
+        BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber); // create spell at castlocation
     }
 
 
