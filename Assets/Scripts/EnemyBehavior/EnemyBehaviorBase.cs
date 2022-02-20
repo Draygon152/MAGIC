@@ -148,6 +148,13 @@ public class EnemyBehaviorBase : MonoBehaviour
             //can be overriden for different behaviors
             PerformBehavior();
         }
+        else
+        {
+            if (isWanderTime)
+            {
+                StartCoroutine(Wander());
+            }
+        }
     }
 
     protected void Flee(Vector3 location)
@@ -158,22 +165,12 @@ public class EnemyBehaviorBase : MonoBehaviour
 
     virtual protected void PerformBehavior()
     {
-        if (currentTargetNumber != -1)
+        if (agent.speed != enemyOriginalSpeed)
         {
-            if (agent.speed != enemyOriginalSpeed)
-            {
-                agent.speed = enemyOriginalSpeed;
-            }
-
-            Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
-            Follow(targetLocation);
+            agent.speed = enemyOriginalSpeed;
         }
-        else
-        {
-            if (isWanderTime)
-            {
-                StartCoroutine(Wander());
-            }
-        }
+        
+        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
+        Follow(targetLocation);
     }
 }

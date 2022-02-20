@@ -29,8 +29,6 @@ public class PlayerManager : MonoBehaviour
         private set;
     }
 
-
-
     private void Awake()
     {
         Debug.Log("Player Manager awake");
