@@ -30,10 +30,7 @@ public class PlayerHealthManager : HealthManager
 
     public void GainHealth(int healAmount)
     {
-        currentHealth += healAmount;
-
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        base.GainHealth(healAmount);
 
         setHealthBarValue(currentHealth);
     }
