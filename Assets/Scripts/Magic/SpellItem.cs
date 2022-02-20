@@ -1,7 +1,5 @@
-//Written by Angel
+// Written by Angel
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -14,11 +12,6 @@ public class SpellItem : MonoBehaviour
     [SerializeField] private SpellList spellList;
 
 
-    private void Start()
-    {
-        containedSpell = spellList.spellRandomizer();
-        print(containedSpell);
-    }
 
     private void Awake()
     {
@@ -30,10 +23,19 @@ public class SpellItem : MonoBehaviour
         pickUpBody.isKinematic = true;
     }
 
+
+    private void Start()
+    {
+        containedSpell = spellList.spellRandomizer();
+        Debug.Log($"SPELL IN ITEM: {containedSpell}");
+    }
+
+
     public BaseSpell returnContainedSpell()
     {
         return containedSpell;
     }
+
 
     private void OnTriggerEnter(Collider collision)
     {

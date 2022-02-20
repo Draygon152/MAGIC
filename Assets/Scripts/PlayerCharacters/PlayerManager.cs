@@ -56,8 +56,6 @@ public class PlayerManager : MonoBehaviour
         //either connect a controller or change the first line to also grab the 
         //keyboard. The intent is to have pairedDevice set in Lobby menu, but untill
         //that is the case these temporary lines are needed
-        playerData[PLAYER_1].pairedDevice = Gamepad.all[0]; //This line is temporary
-        playerData[PLAYER_2].pairedDevice = Keyboard.all[1]; //This line is temporary
         playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].pairedDevice).GetComponent<Player>(); //Spawn player 1
         playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].pairedDevice).GetComponent<Player>(); //Spawn player 2
         

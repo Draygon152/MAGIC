@@ -40,6 +40,7 @@ public class MagicCasting : MonoBehaviour
         playerSpellControls.Disable();
     }
 
+
     //Callback for casting a spell
     private void OnCast()
     {
@@ -54,6 +55,7 @@ public class MagicCasting : MonoBehaviour
 
 
     }
+
 
     private void Update()
     {
@@ -107,31 +109,36 @@ public class MagicCasting : MonoBehaviour
         return spellToCast;
     }
 
+
     private void changeTransform()
     {
         if (spellToCast.spellToCast.spellSpeed == 0)
         {
             castLocation.localPosition = new Vector3(0, -0.5f, 0);
         }
+
         else
         {
             castLocation.localPosition = new Vector3(0, 0, 0);
         }
     }
 
+
     private void CastCurrentSpell()
     {
         Instantiate(spellToCast, castLocation.position, castLocation.rotation); // create spell at castlocation
     }
 
+
     private void OnTriggerEnter(Collider collision)
     {
         if(collision.GetComponent<Collider>().tag == "pickups")
         {
-            print("PICKUP");
+            Debug.Log("PICKUP");
             spellToCast = collision.GetComponent<SpellItem>().returnContainedSpell();
         }
     }
+
 
     public float GetTimeSinceLastCast()
     {
