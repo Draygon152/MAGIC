@@ -24,7 +24,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
     // Enemy follows to assigned location
-    private void Follow(Vector3 location)
+    protected void Follow(Vector3 location)
     {
         agent.SetDestination(location);
     }
@@ -82,5 +82,11 @@ public class EnemyBehaviorBase : MonoBehaviour
             Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
             Follow(targetLocation);
         }
+    }
+
+    protected void Flee(Vector3 location)
+    {
+        Vector3 fleeVector = location - this.gameObject.transform.position;
+        agent.SetDestination(this.transform.position - fleeVector);
     }
 }
