@@ -2,11 +2,12 @@
 // Modified by Kevin Chao
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-// [CreateAssetMenu(fileName = "New PlayerData", menuName = "PlayerData")]
 public class PlayerData : ScriptableObject
 {
     private Element ElementalAffinity;
+    public InputDevice pairedDevice;
 
     public void SetElement(Element elem)
     {

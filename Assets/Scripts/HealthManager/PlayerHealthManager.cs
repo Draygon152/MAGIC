@@ -1,5 +1,5 @@
 // Written by Liz
-// Modified by Kevin Chao
+// Modified by Kevin Chao & Angel Rubio
 
 using UnityEngine;
 using System;
@@ -66,5 +66,15 @@ public class PlayerHealthManager : HealthManager
     {
         setHealthBarValue = setHBValue;
         setHealthBarMax = setHBValueMax;
+    }
+
+    public int returnMaxHealth()
+    {
+        return maxHealth;
+    }
+    
+    public int returnCurrentHealth()
+    {
+        return currentHealth;
     }
 }
