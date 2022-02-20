@@ -7,9 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2686184855805433103, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: damageDealt
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1872983717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: typeName
       value: Hiskgar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_Speed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_RootOrder
@@ -67,6 +75,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_PrefabInstance: {fileID: 1840888165550858531}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &67725292282035035 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+  m_PrefabInstance: {fileID: 1840888165550858531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &-1417722759386122376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,10 +92,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b0a795ebfcc3e2bc5e7aa84f92f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  detectionRadius: 0
+  agent: {fileID: 67725292282035035}
+  detectionRadius: 20
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
-  timeBetweenCheckPlayers: 0
-  healRate: 5
+    m_Bits: 128
+  timeBetweenCheckPlayers: 1
+  healAmount: 1
+  healTime: 1
+  fleeHealthPercentage: 0.2
+  attackHealthPercentage: 0.8

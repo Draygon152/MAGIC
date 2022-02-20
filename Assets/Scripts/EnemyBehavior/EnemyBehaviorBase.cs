@@ -79,8 +79,9 @@ public class EnemyBehaviorBase : MonoBehaviour
         // Target will change if found a closer player
         if (currentTargetNumber != -1)
         { 
-            Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
-            Follow(targetLocation);
+            //Perform the behavior for this enemy, the base function will just follow, but it
+            //can be overriden for different behaviors
+            PerformBehavior();
         }
     }
 
@@ -88,5 +89,11 @@ public class EnemyBehaviorBase : MonoBehaviour
     {
         Vector3 fleeVector = location - this.gameObject.transform.position;
         agent.SetDestination(this.transform.position - fleeVector);
+    }
+
+    virtual protected void PerformBehavior()
+    {
+        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
+        Follow(targetLocation);    
     }
 }
