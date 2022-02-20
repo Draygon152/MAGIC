@@ -63,6 +63,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: detectionRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: wanderMaxRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: wanderMinRadius
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: timeBetweenWander
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: timeBetweenCheckPlayers
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Name
       value: RangeEnemies
