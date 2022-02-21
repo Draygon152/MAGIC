@@ -80,12 +80,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: wanderJitter
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: detectionRadius
-      value: 20
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: timeBetweenWander
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: timeBetweenCheckPlayers
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Name

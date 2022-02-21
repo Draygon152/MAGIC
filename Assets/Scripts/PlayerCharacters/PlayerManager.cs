@@ -29,8 +29,6 @@ public class PlayerManager : MonoBehaviour
         private set;
     }
 
-
-
     private void Awake()
     {
         Debug.Log("Player Manager awake");
@@ -110,6 +108,12 @@ public class PlayerManager : MonoBehaviour
     public Player GetPlayer(int player)
     {
         return playerGameObject[player];
+    }
+    
+    // Returns a list of all Players
+    public Player[] GetFullPlayerList()
+    {
+        return playerGameObject;
     }
 
     //Reset the players and camera
