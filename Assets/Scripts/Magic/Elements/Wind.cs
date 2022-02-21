@@ -4,7 +4,7 @@ public class Wind : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Elements.Wind];
+        return elementNameDict[ElementTypes.Elements.Wind];
     }
 
 

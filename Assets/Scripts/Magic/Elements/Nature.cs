@@ -4,7 +4,7 @@ public class Nature : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Elements.Nature];
+        return elementNameDict[ElementTypes.Elements.Nature];
     }
 
 

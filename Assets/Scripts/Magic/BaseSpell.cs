@@ -8,18 +8,21 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class BaseSpell : MonoBehaviour
 {
-    public SpellTemplate spellToCast;
+    [SerializeField] private SpellTemplate spellToCast;
+    [SerializeField] private Player player;
+    [SerializeField] private SpellEffects spellEffect;
+
     private SphereCollider spellCollider;
     private Rigidbody spellBody;
-    public Effects spellEffect;
-    public GameObject player;
+    
 
-    //This function serves as a wrapper around the normal Instantiate function
-    //It allows the ability to set the player object using the player number when
-    //creating the spell. That way a baseSpell created using this wrapper function 
-    //will keep track of the player who casted the spell
+
+    // This function serves as a wrapper around the normal Instantiate function
+    // It allows the ability to set the player object using the player number when
+    // creating the spell. That way a baseSpell created using this wrapper function 
+    // will keep track of the player who casted the spell
     /*
-    Arguements:
+    Arguments:
         spellToCreate - The prefab of the spell being casted
         locationOfCreation - The position to spawn the spell at
         rotationOfCreation - A Quaternion providing the rotation of the spell
@@ -28,10 +31,10 @@ public class BaseSpell : MonoBehaviour
     static public void Instantiate(BaseSpell spellToCreate, Vector3 locationOfCreation, Quaternion rotationOfCreation, int playerNumber)
     {
         //Create the spell
-        BaseSpell castedSpell = Object.Instantiate(spellToCreate, locationOfCreation, rotationOfCreation);
+        BaseSpell castedSpell = Instantiate(spellToCreate, locationOfCreation, rotationOfCreation);
 
         //Set the player who cast the spell
-        castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber).gameObject;
+        castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
     }
 
 
@@ -44,37 +47,45 @@ public class BaseSpell : MonoBehaviour
         spellBody = GetComponent<Rigidbody>();
         spellBody.isKinematic = true;
 
-        StartCoroutine(spellDuration(spellToCast.spellLifetime)); // Destroy spell after certain time if it does not hit anything
-    }
-
-    IEnumerator spellDuration(float time)
-    {
-        yield return new WaitForSeconds(time);
-        //spellCall.Invoke(player, null, this);
-        spellEffect.Base_Effects(spellToCast.element, player, null, this);
-        Destroy(gameObject);
+        // Destroy spell after certain time if it does not hit anything
+        StartCoroutine(SpellDuration(spellToCast.spellLifetime)); 
     }
     
     
-
     private void Update()
     {
-        if (spellToCast.spellSpeed > 0) // Projectile spell
+        // Specific to projectile spells
+        if (spellToCast.spellSpeed > 0) 
         {
             transform.Translate(Vector3.forward * spellToCast.spellSpeed * Time.deltaTime);
         }
     }
 
 
-    private void OnTriggerEnter(Collider collision)
+    public SpellTemplate GetSpell()
     {
-        Destroy(gameObject); // Destroy the spell when it collides
-        // Apply spell effect at the collision's gameobject
-        print(spellToCast.element);
-        spellEffect.Base_Effects(spellToCast.element, player, collision.gameObject, this);
+        return spellToCast;
     }
 
-    //Set the player number to the player who 
-}
 
-//MAKE THE LIGHTNING AFFECT APPLICABLE EVEN IF IT DOES NOT COLLIDE
+    private IEnumerator SpellDuration(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        // spellCall.Invoke(player, null, this);
+        spellEffect.BaseEffects(spellToCast.element, player, null, this);
+        Destroy(gameObject);
+    }
+
+
+    // TODO: Set the player number to the player that was collided with
+    private void OnTriggerEnter(Collider collision)
+    {
+        // Destroy the spell when it collides
+        Destroy(gameObject);
+
+        // Apply spell effect at the collision's gameobject
+        Debug.Log($"Spell of element '{spellToCast.element}' collided");
+        spellEffect.BaseEffects(spellToCast.element, player, collision.gameObject, this);
+    }
+}

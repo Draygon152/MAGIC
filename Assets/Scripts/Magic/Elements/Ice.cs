@@ -4,7 +4,7 @@ public class Ice : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Elements.Ice];
+        return elementNameDict[ElementTypes.Elements.Ice];
     }
 
 

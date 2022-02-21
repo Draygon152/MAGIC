@@ -28,8 +28,9 @@ public class SelectedSpellUI : MonoBehaviour
 
     public void InitializeSpellUI(MagicCasting caster)
     {
-        selectedSpellText.text = caster.ReturnSpell().ToString();
-        cooldownSlider.maxValue = caster.ReturnSpell().spellToCast.timeBetweenCasts;
+        selectedSpellText.text = caster.GetSpell().ToString();
+
+        cooldownSlider.maxValue = caster.GetSpell().timeBetweenCasts;
         cooldownSlider.value = 0.0f;
 
         playerCastSystem = caster;

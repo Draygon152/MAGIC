@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4092537527269123442
+--- !u!1001 &3046401428500070686
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,43 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2686184855805433103, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: damageDealt
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: -326729198359042743, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 1640683063, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: cameraRef
-      value: 
-      objectReference: {fileID: 5053994992518861485, guid: 4d48dac9afe3769478261a0c68e8ef36, type: 3}
     - target: {fileID: 1872983717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: typeName
-      value: Larva
+      value: Cowardly Range Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: m_Speed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: m_Acceleration
-      value: 20
+      propertyPath: m_StoppingDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_LocalPosition.x
@@ -87,14 +63,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5763893213597020717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: isMinion
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5763893213597020717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: maxHealth
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5819798027175314403, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -105,15 +73,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: detectionRadius
-      value: 200
+      value: 30
       objectReference: {fileID: 0}
-    - target: {fileID: 8248662316145675719, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: timeBetweenWander
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: timeBetweenCheckPlayers
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Name
-      value: NquelsnaakLarva
+      value: CowardlyRangedEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}

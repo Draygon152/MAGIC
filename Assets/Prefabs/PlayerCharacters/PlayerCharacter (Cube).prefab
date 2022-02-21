@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castLocation: {fileID: 3891170637809442976}
-  listOfSpells: {fileID: 6968269123128102929, guid: 5f2ed3c238cb42b4eb8f32903443279f, type: 3}
+  listOfSpells: {fileID: 2993198322871573470, guid: 5f2ed3c238cb42b4eb8f32903443279f, type: 3}
 --- !u!114 &2141222732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  startingHealth: 5
+  startingHealth: 10
 --- !u!114 &-380955239945461657
 MonoBehaviour:
   m_ObjectHideFlags: 0
