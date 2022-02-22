@@ -28,7 +28,23 @@ public class EnemyBehaviorBase : MonoBehaviour
     private float enemyOriginalSpeed;
     private bool checkForPlayers;
     private bool isWanderTime;
-    
+    private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
+                           // minions from causing a game end after a player wins
+
+
+
+    private void Awake()
+    {
+        EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
+        gameOver = false;
+    }
+
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableBehavior);
+    }
+
 
     // Initializes enemy's agent
     private void Start()
@@ -40,6 +56,36 @@ public class EnemyBehaviorBase : MonoBehaviour
         enemyOriginalSpeed = agent.speed;
         checkForPlayers = true;
         isWanderTime = true;
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (!gameOver)
+        {
+            // Checks for players in radius and waits a while before checking again.
+            if (checkForPlayers)
+            {
+                StartCoroutine(FindPlayersWithinRadius());
+            }
+
+            // If there is a current player target, enemy would process to follow the chosen player
+            // If not, enemy would begin to wander
+            if (currentTargetNumber != -1)
+            {
+                //Perform the behavior for this enemy, the base function will just follow, but it
+                //can be overriden for different behaviors
+                PerformBehavior();
+            }
+
+            else
+            {
+                if (isWanderTime)
+                {
+                    StartCoroutine(Wander());
+                }
+            }
+        }
     }
 
 
@@ -100,6 +146,7 @@ public class EnemyBehaviorBase : MonoBehaviour
         return shorterPosition;
     }
 
+
     // Checks for Player Objects within radius
     private IEnumerator FindPlayersWithinRadius()
     {
@@ -142,34 +189,6 @@ public class EnemyBehaviorBase : MonoBehaviour
             }
         }
     }
- 
-
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        // Checks for players in radius and waits a while before checking again.
-        if (checkForPlayers)
-        {
-            StartCoroutine(FindPlayersWithinRadius());
-        }
-
-        // If there is a current player target, enemy would process to follow the chosen player
-        // If not, enemy would begin to wander
-        if (currentTargetNumber != -1)
-        {
-            //Perform the behavior for this enemy, the base function will just follow, but it
-            //can be overriden for different behaviors
-            PerformBehavior();
-        }
-
-        else
-        {
-            if (isWanderTime)
-            {
-                StartCoroutine(Wander());
-            }
-        }
-    }
 
 
     protected void Flee(Vector3 location)
@@ -188,5 +207,11 @@ public class EnemyBehaviorBase : MonoBehaviour
         
         Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
         Follow(targetLocation);
+    }
+
+
+    private void DisableBehavior()
+    {
+        gameOver = true;
     }
 }

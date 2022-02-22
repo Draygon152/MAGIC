@@ -11,14 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float turnSpeed; // Controls the turn speed of player.
 
     private PlayerInput playerControls; // A reference to the PlayerInput component that handles player input
-
-    Vector3 inputDirection; //The vector for moving the player
+    private Vector3 inputDirection; // The vector for moving the player
+    private bool gameOver; // If the game is over (true), movement should be disabled
 
 
 
     private void Awake()
     {
         Debug.Log("PlayerController Awake");
+
+        gameOver = false;
 
         // set the reference to the PlayerInput component
         playerControls = this.GetComponent<PlayerInput>();
@@ -27,13 +29,24 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(Gamepad.all[i].name);
         }
+
+        EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableControls);
+    }
+
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableControls);
     }
 
 
     private void FixedUpdate()
     {
-        Move();
-        Turn();
+        if (!gameOver)
+        {
+            Move();
+            Turn();
+        }
     }
 
 
@@ -75,5 +88,11 @@ public class PlayerController : MonoBehaviour
             // Update player rotation
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed);
         }
+    }
+
+
+    private void DisableControls()
+    {
+        gameOver = true;
     }
 }

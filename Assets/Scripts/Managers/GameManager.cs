@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour
         HUD.Instance.SetEnemyCouter(enemyCount);
     }
 
+
     // Reset the game state when a ResetGame event is notified
     private void OnReset()
     {
