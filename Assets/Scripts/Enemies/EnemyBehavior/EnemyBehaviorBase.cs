@@ -13,6 +13,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     [SerializeField] private float detectionRadius; // Enemy's detection radius
     [SerializeField] private float timeBetweenCheckPlayers; // How many seconds should the enemy check for players
     [SerializeField] private LayerMask layerMask; // Detect colliders within layerMask
+
     // Wander variables
     [SerializeField] private float wanderMinRadius;
     [SerializeField] private float wanderMaxRadius;
@@ -39,7 +40,8 @@ public class EnemyBehaviorBase : MonoBehaviour
         enemyOriginalSpeed = agent.speed;
         checkForPlayers = true;
         isWanderTime = true;
-}
+    }
+
 
     // Enemy follows to assigned location
     protected void Follow(Vector3 targetLocation)
@@ -47,10 +49,12 @@ public class EnemyBehaviorBase : MonoBehaviour
         agent.SetDestination(targetLocation);
     }
 
+
     private IEnumerator Wander()
     {
         isWanderTime = false;
         Vector3 wanderTarget = Vector3.zero;
+
         // Time for the enemy to be smart
         if (wanderInterval >= wanderTowardsPlayerInterval)
         {
@@ -59,6 +63,7 @@ public class EnemyBehaviorBase : MonoBehaviour
             wanderInterval = 0;
             agent.speed *= charge;
         }
+
         else
         { 
             // Select a wander target at random around the enemy
@@ -66,6 +71,7 @@ public class EnemyBehaviorBase : MonoBehaviour
             wanderTarget = new Vector3(point.x, 0, point.y) + this.transform.position;
             wanderInterval++;
         }
+
         Follow(wanderTarget); // Move enemy to wander target
 
         yield return new WaitForSeconds(timeBetweenWander);
@@ -74,7 +80,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
-    // WanderEnemyFindClosestTarget() finds the closest player desite distance
+    // WanderEnemyFindClosestTarget() finds the closest player within distance
     private Vector3 WanderEnemyFindClosestTarget()
     {
         Player[] playerList = playerManager.GetFullPlayerList();
@@ -84,11 +90,13 @@ public class EnemyBehaviorBase : MonoBehaviour
             float currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
             Transform playerLocation = playerManager.GetPlayerLocation(player.PlayerNumber);
             float newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
+
             if (newDistance <= currentDistance)
             {
-                shorterPosition = playerLocation.position; // Found shorteset position
+                shorterPosition = playerLocation.position; // Found shortest position
             }
         }
+
         return shorterPosition;
     }
 
@@ -104,6 +112,7 @@ public class EnemyBehaviorBase : MonoBehaviour
         {
             TargetNearestPlayer();
         }
+
         else
         {
             currentTargetNumber = -1; // No target
@@ -113,6 +122,7 @@ public class EnemyBehaviorBase : MonoBehaviour
         checkForPlayers = true;
     }
     
+
     // Assign enemy's target to the nearst player detected
     private void TargetNearestPlayer()
     {
@@ -124,14 +134,16 @@ public class EnemyBehaviorBase : MonoBehaviour
 
             float currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
             float newDistance = Vector3.Distance(this.transform.position, playerManager.GetPlayerLocation(playerNum).position);
+
             if (newDistance <= currentDistance)
             {
-                shorterPosition = playerManager.GetPlayerLocation(playerNum).position; // Found shorteset position
+                shorterPosition = playerManager.GetPlayerLocation(playerNum).position; // Found shortest position
                 currentTargetNumber = playerNum; // Set enemy's target
             }
         }
     }
  
+
     // Update is called once per frame
     private void FixedUpdate()
     {
@@ -140,6 +152,7 @@ public class EnemyBehaviorBase : MonoBehaviour
         {
             StartCoroutine(FindPlayersWithinRadius());
         }
+
         // If there is a current player target, enemy would process to follow the chosen player
         // If not, enemy would begin to wander
         if (currentTargetNumber != -1)
@@ -148,6 +161,7 @@ public class EnemyBehaviorBase : MonoBehaviour
             //can be overriden for different behaviors
             PerformBehavior();
         }
+
         else
         {
             if (isWanderTime)
@@ -157,11 +171,13 @@ public class EnemyBehaviorBase : MonoBehaviour
         }
     }
 
+
     protected void Flee(Vector3 location)
     {
         Vector3 fleeVector = location - this.gameObject.transform.position;
         agent.SetDestination(this.transform.position - fleeVector);
     }
+
 
     virtual protected void PerformBehavior()
     {

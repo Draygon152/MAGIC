@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Player controller awake");
+        Debug.Log("PlayerController Awake");
+
         // set the reference to the PlayerInput component
         playerControls = this.GetComponent<PlayerInput>();
 
@@ -27,6 +28,14 @@ public class PlayerController : MonoBehaviour
             Debug.Log(Gamepad.all[i].name);
         }
     }
+
+
+    private void FixedUpdate()
+    {
+        Move();
+        Turn();
+    }
+
 
     //Update the inputDirection vector only when the controls of
     //the apporiate control scheme are changed
@@ -39,19 +48,13 @@ public class PlayerController : MonoBehaviour
         inputDirection = value.Get<Vector3>();
     }
 
-    private void FixedUpdate()
-    {
-        Move();
-        Turn();
-    }
-
 
     private void Move()
     {
         // Using rigidbody component, move our player. Uses rb.velocity to maintain collisions properly
         rb.velocity = transform.forward * inputDirection.normalized.magnitude * moveSpeed;
     }
-    
+
 
     private void Turn()
     {
@@ -67,10 +70,10 @@ public class PlayerController : MonoBehaviour
 
             // ...and make that a rotation angle (to look to)
             // Vector3.up tells Unity to rotate us around the "Up" axis.
-            Quaternion rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up); 
+            Quaternion rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up);
 
             // Update player rotation
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed); 
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed);
         }
     }
 }

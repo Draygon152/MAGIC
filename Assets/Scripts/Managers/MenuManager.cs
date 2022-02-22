@@ -19,6 +19,7 @@ public class MenuManager : MonoBehaviour
 
     private Stack<Menu> menuStack = new Stack<Menu>();
 
+
     public static MenuManager Instance
     {
         get;

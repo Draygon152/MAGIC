@@ -28,4 +28,3 @@ public class EnemyHealthBar : MonoBehaviour
         healthBar.value = newHealth;
     }
 }
-

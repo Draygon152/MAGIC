@@ -58,8 +58,8 @@ public class PlayerManager : MonoBehaviour
     public int SpawnPlayers()
     {
         // Spawn both players
-        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].pairedDevice).GetComponent<Player>();
-        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].pairedDevice).GetComponent<Player>();
+        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].GetInputDevice()).GetComponent<Player>();
+        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].GetInputDevice()).GetComponent<Player>();
         
         // Move players to their spawn point
         // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 

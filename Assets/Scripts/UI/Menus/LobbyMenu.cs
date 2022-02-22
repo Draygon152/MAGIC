@@ -148,15 +148,15 @@ public class LobbyMenu : Menu<LobbyMenu>
 
         if (selectedOption == "Select Input Device")
         {
-            p1Data.pairedDevice = null;
+            p1Data.SetInputDevice(null);
         }
 
         else
         {
-            p1Data.pairedDevice = availableDevices[selectedOption];
+            p1Data.SetInputDevice(availableDevices[selectedOption]);
         }
 
-        Debug.Log($"P1 SELECTED: {p1Data.pairedDevice}");
+        Debug.Log($"P1 SELECTED: {p1Data.GetInputDevice()}");
     }
 
 
@@ -166,15 +166,15 @@ public class LobbyMenu : Menu<LobbyMenu>
 
         if (selectedOption == "Select Input Device")
         {
-            p2Data.pairedDevice = null;
+            p2Data.SetInputDevice(null);
         }
 
         else
         {
-            p2Data.pairedDevice = availableDevices[selectedOption];
+            p2Data.SetInputDevice(availableDevices[selectedOption]);
         }
 
-        Debug.Log($"P2 SELECTED: {p2Data.pairedDevice}");
+        Debug.Log($"P2 SELECTED: {p2Data.GetInputDevice()}");
     }
 
 

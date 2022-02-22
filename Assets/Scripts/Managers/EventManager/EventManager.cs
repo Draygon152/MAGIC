@@ -18,6 +18,7 @@ public class EventManager : MonoBehaviour
     }
 
 
+
     private void Awake()
     {
         Debug.Log("EventManager Awake");

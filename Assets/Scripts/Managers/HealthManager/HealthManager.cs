@@ -33,7 +33,6 @@ public abstract class HealthManager : MonoBehaviour
 
     //The following functions are for checking if the health of an object is
     //above/below a certain threshold
-
     public bool HealthAboveAmountThreshold(int threshold)
     {
         return currentHealth > threshold;

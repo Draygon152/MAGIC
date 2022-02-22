@@ -34,12 +34,14 @@ public class GameManager : MonoBehaviour
     private gameState state; // A variable for storing the current game state
 
 
+
     // Make the game manager a singleton
     static public GameManager Instance
     {
         get;
         private set;
     }
+
 
     private void Awake()
     {
@@ -153,6 +155,7 @@ public class GameManager : MonoBehaviour
             // The player lost
             EndGame(false);
         }
+
         else //A player dead but the game isn't over (one player is still alive)
         {
             //remove the dead player from the camera frame
@@ -182,6 +185,7 @@ public class GameManager : MonoBehaviour
                 EndGame(true);
             }
         }
+
         else
         {
             // There are more waves to spawn
