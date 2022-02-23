@@ -57,6 +57,8 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
+        int playerCount = 0; //Counts up the number of players spawned
+
         // Spawn both players
         playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].GetInputDevice()).GetComponent<Player>();
         playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].GetInputDevice()).GetComponent<Player>();
@@ -78,7 +80,34 @@ public class PlayerManager : MonoBehaviour
         playerGameObject[PLAYER_1].PlayerNumber = PLAYER_1;
         playerGameObject[PLAYER_2].PlayerNumber = PLAYER_2;
 
-        return NUMBER_OF_PLAYERS;
+        Debug.Log($"Player one device {playerData[PLAYER_1].GetInputDevice()}");
+        Debug.Log($"Player two device {playerData[PLAYER_2].GetInputDevice()}");
+
+        //Check for unused players
+        if (playerData[PLAYER_2].GetInputDevice() == null)
+        {
+            playerGameObject[PLAYER_2].gameObject.SetActive(false);
+
+            //keep player one no matter what, so there is at least one player in the game
+            playerCount++;
+        }
+        else
+        {
+            //Count player two
+            playerCount++;
+
+            if (playerData[PLAYER_1].GetInputDevice() == null)
+            {
+                playerGameObject[PLAYER_1].gameObject.SetActive(false);
+            }
+            else
+            {
+                //count player one
+                playerCount++;
+            }
+        }
+
+        return playerCount;
     }
 
 
