@@ -1,4 +1,5 @@
 // Written by Lawson
+// Modified by Kevin Chao
 
 using System.Collections;
 using UnityEngine;
@@ -25,14 +26,18 @@ public class HiskgarBehavior : EnemyBehaviorBase
 
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         state = HiskgarState.attackPlayer;
     }
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         // Set the reference to the health manager
         self = this.gameObject.GetComponent<EnemyHealthManager>();
     }

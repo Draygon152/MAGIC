@@ -41,6 +41,6 @@ NOTES:
   standing underneath them. This is due to the NavMesh baking being upset by the pine
   tree model, and is expected behavior.
   
-  For the second playtest, players will challenge two waves of enemies which implement
+  For the second playtest, players will challenge three waves of enemies which implement
   NavMesh navigation and more complex AI behaviors.
 </pre>
