@@ -40,9 +40,6 @@ public class EnemyWaveTemplate : ScriptableObject
         for (int index = 0; index < enemyPrefabs.Count; index++)
         {
             GameObject newEnemy = Instantiate(enemyPrefabs[index], enemySpawnPoints[index].position, enemySpawnPoints[index].rotation);
-
-            // Set the health bar to point at the camera
-            newEnemy.GetComponentInChildren<EnemyHealthBillboard>().SetCamera(cameraTransform);
         }
 
         // There was a total of enemyPrefab.Count enemies spawned
