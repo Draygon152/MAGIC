@@ -21,20 +21,6 @@ public class GameManager : MonoBehaviour
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
 
-
-    // Defining an enum for the different game states
-    private enum gameState
-    {
-        start,   // Before the game is running, in Main Menu
-        playing, // While playing the game
-        pause,   // While playing the game but it is paused
-        victory, // When all enemies have been defeated and players have won, in victory menu
-        defeat   // When both player have died, in defeat menu
-    }
-    private gameState state; // A variable for storing the current game state
-
-
-
     // Make the game manager a singleton
     static public GameManager Instance
     {
@@ -45,9 +31,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Set the game state to start when the game begins
-        state = gameState.start;
-
         // Set up Instance
         Instance = this;
 
@@ -108,9 +91,6 @@ public class GameManager : MonoBehaviour
 
         //Set the enemy counter on the HUD
         HUD.Instance.SetEnemyCouter(enemyCount);
-
-        // Update current game state
-        state = gameState.playing;
     }
 
 
@@ -125,8 +105,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player Victorious");
 
             VictoryGameOver.Open(); // Activates the Victory Screen UI.
-
-            state = gameState.victory;
         }
 
         else
@@ -134,8 +112,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player Defeated");
 
             DefeatGameOver.Open(); // Activates the Defeat Screen UI.
-
-            state = gameState.defeat;
         }
 
         EventManager.Instance.Notify(EventTypes.Events.GameOver);
@@ -207,7 +183,6 @@ public class GameManager : MonoBehaviour
     private void OnReset()
     {
         // reset the game state
-        state = gameState.start;
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
