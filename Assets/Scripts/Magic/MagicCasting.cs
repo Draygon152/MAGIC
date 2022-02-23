@@ -10,38 +10,21 @@ public class MagicCasting : MonoBehaviour
 
     private BaseSpell spellToCast;
     private Element selectedElement;
-    private PlayerControls playerSpellControls;
 
     private bool casting = false; // Default state of casting magic is false
     private float castCooldown;   // Default time between spellcasts. Need to replace with individual spell casting time, placeholder
     private float timeSinceLastCast;
-    private bool castButtonDown;
     private int playerNumber; // Stores player number so it can be referenced when casting a spell
 
 
 
     private void Awake()
     {
-        // Initialize player controls
-        playerSpellControls = new PlayerControls();
 
         // Set playerNumber
         playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
     }
 
-
-    private void OnEnable()
-    {
-        // Enables control for the player's spell casting
-        playerSpellControls.Enable();
-    }
-
-
-    private void OnDisable()
-    {
-        // Disables control for the player's spell casting
-        playerSpellControls.Disable();
-    }
 
 
     private void Update()
