@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Written by Lawson McCoy
+// Written by Lawson McCoy
 [CreateAssetMenu(fileName = "Wave", menuName = "Enemy_Wave")]
 public class EnemyWaveTemplate : ScriptableObject
 {

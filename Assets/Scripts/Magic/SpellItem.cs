@@ -1,4 +1,5 @@
 // Written by Angel
+// Modified by Kevin Chao
 
 using UnityEngine;
 
@@ -9,8 +10,7 @@ public class SpellItem : MonoBehaviour
     private SphereCollider pickUpCollider;
     private Rigidbody pickUpBody;
     private BaseSpell containedSpell;
-    [SerializeField] private SpellList spellList;
-
+    
 
 
     private void Awake()
@@ -26,12 +26,13 @@ public class SpellItem : MonoBehaviour
 
     private void Start()
     {
-        containedSpell = spellList.spellRandomizer();
+        containedSpell = SpellList.Instance.GetRandomSpell();
+
         Debug.Log($"SPELL IN ITEM: {containedSpell}");
     }
 
 
-    public BaseSpell returnContainedSpell()
+    public BaseSpell GetSpell()
     {
         return containedSpell;
     }
@@ -39,6 +40,7 @@ public class SpellItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        // If a player steps onto the SpellItem, it should disappear
         if (collision.GetComponent<Collider>().tag == "Player")
         {
             Destroy(gameObject);

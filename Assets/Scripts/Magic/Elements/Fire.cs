@@ -4,7 +4,7 @@ public class Fire : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Elements.Fire];
+        return elementNameDict[ElementTypes.Elements.Fire];
     }
 
 

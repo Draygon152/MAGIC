@@ -74,6 +74,7 @@ public class LobbyMenu : Menu<LobbyMenu>
 
             // Set Player1 readystate to true
             player1IsReady = true;
+            p1InputSelector.interactable = false;
 
             // If Player2 is also ready, start countdown
             if (player2IsReady)
@@ -93,6 +94,7 @@ public class LobbyMenu : Menu<LobbyMenu>
             {
                 timer.StopCountDown();
                 mainMenuButton.interactable = true;
+                p1InputSelector.interactable = true;
             }
 
             // Set Player1's readystate to false
@@ -111,6 +113,7 @@ public class LobbyMenu : Menu<LobbyMenu>
 
             // Set Player2 readystate to true
             player2IsReady = true;
+            p2InputSelector.interactable = false;
 
             // If Player1 is also ready, start countdown
             if (player1IsReady)
@@ -130,6 +133,7 @@ public class LobbyMenu : Menu<LobbyMenu>
             {
                 timer.StopCountDown();
                 mainMenuButton.interactable = true;
+                p2InputSelector.interactable = true;
             }
 
             // Set Player2's readystate to false
@@ -144,15 +148,15 @@ public class LobbyMenu : Menu<LobbyMenu>
 
         if (selectedOption == "Select Input Device")
         {
-            p1Data.pairedDevice = null;
+            p1Data.SetInputDevice(null);
         }
 
         else
         {
-            p1Data.pairedDevice = availableDevices[selectedOption];
+            p1Data.SetInputDevice(availableDevices[selectedOption]);
         }
 
-        Debug.Log(p1Data.pairedDevice);
+        Debug.Log($"P1 SELECTED: {p1Data.GetInputDevice()}");
     }
 
 
@@ -162,15 +166,15 @@ public class LobbyMenu : Menu<LobbyMenu>
 
         if (selectedOption == "Select Input Device")
         {
-            p2Data.pairedDevice = null;
+            p2Data.SetInputDevice(null);
         }
 
         else
         {
-            p2Data.pairedDevice = availableDevices[selectedOption];
+            p2Data.SetInputDevice(availableDevices[selectedOption]);
         }
 
-        Debug.Log(p2Data.pairedDevice);
+        Debug.Log($"P2 SELECTED: {p2Data.GetInputDevice()}");
     }
 
 

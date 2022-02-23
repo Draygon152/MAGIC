@@ -188,7 +188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castLocation: {fileID: 3891170637809442976}
-  listOfSpells: {fileID: 6968269123128102929, guid: 5f2ed3c238cb42b4eb8f32903443279f, type: 3}
 --- !u!114 &2141222732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  startingHealth: 5
+  startingHealth: 10
 --- !u!114 &-380955239945461657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +251,7 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2e4487ff-cfcd-4579-b852-1ed7dfb357c5
     m_ActionName: Spells/Cast[/Keyboard/q]
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1

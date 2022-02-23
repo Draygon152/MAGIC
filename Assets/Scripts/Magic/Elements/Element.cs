@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public abstract class Element : MonoBehaviour
 {
-    protected Dictionary<ElementTypes.Elements, string> ElementNameDict = new Dictionary<ElementTypes.Elements, string>()
+    protected Dictionary<ElementTypes.Elements, string> elementNameDict = new Dictionary<ElementTypes.Elements, string>()
     {
         {ElementTypes.Elements.Arcane, "ARCANE"},
         {ElementTypes.Elements.Fire, "FIRE"},

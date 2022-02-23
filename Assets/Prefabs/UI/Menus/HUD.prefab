@@ -176,9 +176,9 @@ RectTransform:
   m_Father: {fileID: 5071869309287445840}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 65.76648, y: -81.6275}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -203.22998, y: 62.98001}
   m_SizeDelta: {x: 406.46704, y: 62.744995}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1916080362136960179
@@ -243,8 +243,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286c994c61626df4aae7b5bf2cf1ee57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthSlider: {fileID: 5071869308486804488}
+  healthSlider: {fileID: 5071869308486804488}
 --- !u!1 &5071869309098591937
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,10 +866,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097c372ec2330fb4d8f2aac3085a314a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1HealthBar: {fileID: 2064669008}
-  Player2HealthBar: {fileID: 117166221}
-  Player1SpellUI: {fileID: 2297399814339445861}
-  Player2SpellUI: {fileID: 7740806401505134450}
+  player1HealthBar: {fileID: 2064669008}
+  player2HealthBar: {fileID: 117166221}
+  player1SpellUI: {fileID: 2297399814339445861}
+  player2SpellUI: {fileID: 7740806401505134450}
   enemyCounter: {fileID: 4226106708702809692}
 --- !u!222 &2943159700572064366
 CanvasRenderer:
@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286c994c61626df4aae7b5bf2cf1ee57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthSlider: {fileID: 5071869309608029655}
+  healthSlider: {fileID: 5071869309608029655}
 --- !u!1 &5071869310022922403
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class Lightning : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Elements.Lightning];
+        return elementNameDict[ElementTypes.Elements.Lightning];
     }
 
 
