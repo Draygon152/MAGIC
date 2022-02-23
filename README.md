@@ -42,5 +42,9 @@ NOTES:
   tree model, and is expected behavior.
   
   For the second playtest, players will challenge three waves of enemies which implement
-  NavMesh navigation and more complex AI behaviors.
+  NavMesh navigation and more complex AI behaviors. The second wave contains an enemy
+  called the Hiskgar, which will begin to regenerate health and run away once it reaches
+  20% health. This regeneration stops when it reaches 80%. The third wave contains an
+  enemy called the Nsquelsnaak which will periodically spawn Larvae to attack the player,
+  while the Nsquelsnaak continues to wander.
 </pre>
