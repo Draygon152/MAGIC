@@ -50,8 +50,8 @@ NOTES:
   called the Hiskgar, which will begin to regenerate health and run away once it reaches
   20% health. This regeneration stops when it reaches 80%. This regeneration can only
   occur once per Hiskgar, to make it easier to kill the Hiskgar without having to trap it
-  in a corner. The third wave contains an enemy called the Nsquelsnaak which will
-  periodically spawn Larvae to attack the player, while the Nsquelsnaak continues to wander.
+  in a corner. The third wave contains an enemy called the Nquelsnaak which will
+  periodically spawn Larvae to attack the player, while the Nquelsnaak continues to wander.
   At some points, it may appear that the enemy counter does not decrease properly. This is
   not the case, and is instead a result of how our game decides when to spawn the next wave.
   When there is only one enemy left, the next wave spawns. When moving from the second wave
