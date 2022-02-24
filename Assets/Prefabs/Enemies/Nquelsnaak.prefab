@@ -114,6 +114,6 @@ MonoBehaviour:
   distanceToMaintain: 15
   maintainDistanceError: 5
   larvaPrefab: {fileID: 7751559521620626905, guid: 57e5c155b04c76b31915915be219a196, type: 3}
-  spawnTime: 5
+  spawnTime: 6
   spawnAmount: 2
   spawnRange: 3

@@ -38,7 +38,7 @@ NOTES:
   checkboxes must be checked for the game to begin. This will be changed in future
   builds. Extra effects for many spells are still a work in progress. The lightning
   spell effect is partially implemented, when the projectile has finished travelling
-  its' path, it will teleport the player who casted it to the projectile's end location.
+  its path, it will teleport the player who casted it to the projectile's end location.
   If it collides with an enemy or terrain object, it will teleport the player directly
   onto that collision target. This is expected behavior that will be patched out. Trees
   now have collision boxes, and the pine trees in particular have deceptively large
@@ -48,15 +48,14 @@ NOTES:
   For the second playtest, players will challenge three waves of enemies which implement
   NavMesh navigation and more complex AI behaviors. The second wave contains an enemy
   called the Hiskgar, which will begin to regenerate health and run away once it reaches
-  20% health. This regeneration stops when it reaches 80%. It is currently impossible to
-  kill the Hiskgar without a high-damage spell such as Arcane Blast(Arcane Element) or a
-  second player. This is planned to be balanced a bit more by the next build. The third
-  wave contains an enemy called the Nsquelsnaak which will periodically spawn Larvae to
-  attack the player, while the Nsquelsnaak continues to wander. At some points, it may
-  appear that the enemy counter does not decrease properly. This is not the case, and is
-  instead a result of how our game decides when to spawn the next wave. When there is only
-  one enemy left, the next wave spawns. When moving from the second wave to the third wave,
-  this may give the impression that killing an enemy did not decrease the counter properly,
-  when in reality an enemy is spawned right as the second-to last enemy of wave two is
-  killed. This will be addressed in a future build for clarity.
+  20% health. This regeneration stops when it reaches 80%. This regeneration can only
+  occur once per Hiskgar, to make it easier to kill the Hiskgar without having to trap it
+  in a corner. The third wave contains an enemy called the Nsquelsnaak which will
+  periodically spawn Larvae to attack the player, while the Nsquelsnaak continues to wander.
+  At some points, it may appear that the enemy counter does not decrease properly. This is
+  not the case, and is instead a result of how our game decides when to spawn the next wave.
+  When there is only one enemy left, the next wave spawns. When moving from the second wave
+  to the third wave, this may give the impression that killing an enemy did not decrease the
+  counter properly, when in reality an enemy is spawned right as the second-to last enemy
+  of wave two is killed. This will be addressed in a future build for clarity.
 </pre>

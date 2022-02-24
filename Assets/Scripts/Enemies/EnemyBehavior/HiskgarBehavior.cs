@@ -15,6 +15,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
 
     private EnemyHealthManager self; // A reference to the health manager for healing
     private bool healing = false;    // A bool to flag whether or not the Hiskgar is currently healing
+    private bool hasHealed = false;  // Bool flag to determine if the Hiskgar has already healed once
 
 
     private enum HiskgarState
@@ -63,7 +64,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
                 // when fleeing from the player, flee from closest player and heal
                 Flee(playerManager.GetPlayerLocation(currentTargetNumber).position);
                 // heal since you are fleeing
-                if (!healing)
+                if (!hasHealed && !healing)
                 {
                     StartCoroutine(HealSelf());
                 }
@@ -73,6 +74,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
                 if (self.HealthAbovePercentageThreshold(attackHealthPercentage))
                 {
                     state = HiskgarState.attackPlayer;
+                    hasHealed = true;
                 }
                 break;
         } // end swtich (state)
