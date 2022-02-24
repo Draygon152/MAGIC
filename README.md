@@ -58,4 +58,6 @@ NOTES:
   to the third wave, this may give the impression that killing an enemy did not decrease the
   counter properly, when in reality an enemy is spawned right as the second-to last enemy
   of wave two is killed. This will be addressed in a future build for clarity.
+  
+  A minimap is on its way for the third playtest!
 </pre>
