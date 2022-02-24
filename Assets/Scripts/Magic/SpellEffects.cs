@@ -75,10 +75,16 @@ public class SpellEffects : MonoBehaviour
 
     private void PushBackEffect()
     {
-        if (target != null)
+        try
         {
-            Vector3 direction = target.transform.position - player.transform.position;
-            target.GetComponent<Rigidbody>().AddForce(direction * 250);
+            if (target != null || target.GetComponent<Rigidbody>() != null)
+            {
+                Vector3 direction = target.transform.position - player.transform.position;
+                target.GetComponent<Rigidbody>().AddForce(direction * 250);
+            }
+        }
+        catch
+        {
         }
     }
 
