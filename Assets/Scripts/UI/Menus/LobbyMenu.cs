@@ -88,13 +88,13 @@ public class LobbyMenu : Menu<LobbyMenu>
         else if (player1Ready.isOn == false)
         {
             p1ElementSelector.EnableAllElementButtons();
+            p1InputSelector.interactable = true;
 
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
             {
                 timer.StopCountDown();
-                mainMenuButton.interactable = true;
-                p1InputSelector.interactable = true;
+                mainMenuButton.interactable = true;   
             }
 
             // Set Player1's readystate to false
@@ -127,13 +127,13 @@ public class LobbyMenu : Menu<LobbyMenu>
         else if (player2Ready.isOn == false)
         {
             p2ElementSelector.EnableAllElementButtons();
+            p2InputSelector.interactable = true;
 
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
             {
                 timer.StopCountDown();
                 mainMenuButton.interactable = true;
-                p2InputSelector.interactable = true;
             }
 
             // Set Player2's readystate to false

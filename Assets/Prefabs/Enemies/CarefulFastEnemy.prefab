@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 5763893213597020713, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9b31207ebb9397942b449f657ea964d7, type: 2}
+      objectReference: {fileID: 2100000, guid: 103e7370dec694347bdd80f1bcce3e54, type: 2}
     - target: {fileID: 5819798027175314403, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Name
-      value: CowardlyFastEnemy
+      value: CarefulFastEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
