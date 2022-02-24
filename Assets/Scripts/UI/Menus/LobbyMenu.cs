@@ -2,68 +2,99 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class LobbyMenu : Menu<LobbyMenu>
 {
-    [SerializeField] private Toggle Player1Ready;
-    [SerializeField] private Toggle Player2Ready;
-    [SerializeField] private ElementSelector P1ElementSelector; // UI elements for players to select Elemental Affinity
-    [SerializeField] private ElementSelector P2ElementSelector;
-    [SerializeField] private Button MainMenuButton;
+    [SerializeField] private Toggle player1Ready;
+    [SerializeField] private Toggle player2Ready;
+    [SerializeField] private ElementSelector p1ElementSelector; // UI elements for players to select Elemental Affinity
+    [SerializeField] private ElementSelector p2ElementSelector;
+    [SerializeField] private Dropdown p1InputSelector;
+    [SerializeField] private Dropdown p2InputSelector;
+    [SerializeField] private Button mainMenuButton;
     [SerializeField] private CountdownTimer timer; // Timer, provides countdown, game starts when countdown reaches 0
 
     private bool player1IsReady;
     private bool player2IsReady;
 
+    private PlayerData p1Data;
+    private PlayerData p2Data;
+
+    // Contains assigned device names and references to the actual InputDevice objects
+    private Dictionary<string, InputDevice> availableDevices;
+
 
 
     private void Start()
     {
+        p1Data = PlayerManager.Instance.GetPlayerData(PlayerManager.PLAYER_1);
+        p2Data = PlayerManager.Instance.GetPlayerData(PlayerManager.PLAYER_2);
+
         player1IsReady = false;
         player2IsReady = false;
+
+        availableDevices = FilterInputDevices();
+
+        p1InputSelector.AddOptions(new List<string> { "Select Input Device" });
+        p2InputSelector.AddOptions(new List<string> { "Select Input Device" });
+        p1InputSelector.AddOptions(new List<string>(availableDevices.Keys));
+        p2InputSelector.AddOptions(new List<string>(availableDevices.Keys));
     }
 
 
+    // For use by GUI buttons
     public void Player1SelectedElement()
     {
-        Player1Ready.interactable = true;
+        player1Ready.interactable = true;
+
+        // Store element data in PlayerData1
+        p1Data.SetElement(p1ElementSelector.GetSelectedElement());
     }
 
 
+    // For use by GUI buttons
     public void Player2SelectedElement()
     {
-        Player2Ready.interactable = true;
+        player2Ready.interactable = true;
+
+        // Store element data in PlayerData2
+        p2Data.SetElement(p2ElementSelector.GetSelectedElement());
     }
 
 
+    // For use by GUI toggle
     public void Player1TogglePressed()
     {
         // If the toggle has just been activated
-        if (Player1Ready.isOn == true)
+        if (player1Ready.isOn == true)
         {
-            P1ElementSelector.DisableAllElementButtons();
+            p1ElementSelector.DisableAllElementButtons();
 
             // Set Player1 readystate to true
             player1IsReady = true;
+            p1InputSelector.interactable = false;
 
             // If Player2 is also ready, start countdown
             if (player2IsReady)
             {
-                timer.BeginCountDown(P1ElementSelector.SelectedElement, P2ElementSelector.SelectedElement);
-                MainMenuButton.interactable = false;
+                timer.BeginCountDown();
+                mainMenuButton.interactable = false;
             }
         }
 
         // If the toggle has just been deactivated
-        else if (Player1Ready.isOn == false)
+        else if (player1Ready.isOn == false)
         {
-            P1ElementSelector.EnableAllElementButtons();
+            p1ElementSelector.EnableAllElementButtons();
+            p1InputSelector.interactable = true;
 
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
             {
                 timer.StopCountDown();
-                MainMenuButton.interactable = true;
+                mainMenuButton.interactable = true;   
             }
 
             // Set Player1's readystate to false
@@ -72,34 +103,37 @@ public class LobbyMenu : Menu<LobbyMenu>
     }
 
 
+    // For use by GUI toggle
     public void Player2TogglePressed()
     {
         // If the toggle has just been activated
-        if (Player2Ready.isOn == true)
+        if (player2Ready.isOn == true)
         {
-            P2ElementSelector.DisableAllElementButtons();
+            p2ElementSelector.DisableAllElementButtons();
 
             // Set Player2 readystate to true
             player2IsReady = true;
+            p2InputSelector.interactable = false;
 
             // If Player1 is also ready, start countdown
             if (player1IsReady)
             {
-                timer.BeginCountDown(P1ElementSelector.SelectedElement, P2ElementSelector.SelectedElement);
-                MainMenuButton.interactable = false;
+                timer.BeginCountDown();
+                mainMenuButton.interactable = false;
             }
         }
 
         // If the toggle has just been deactivated
-        else if (Player2Ready.isOn == false)
+        else if (player2Ready.isOn == false)
         {
-            P2ElementSelector.EnableAllElementButtons();
+            p2ElementSelector.EnableAllElementButtons();
+            p2InputSelector.interactable = true;
 
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
             {
                 timer.StopCountDown();
-                MainMenuButton.interactable = true;
+                mainMenuButton.interactable = true;
             }
 
             // Set Player2's readystate to false
@@ -108,8 +142,68 @@ public class LobbyMenu : Menu<LobbyMenu>
     }
 
 
+    public void Player1InputDeviceSelected()
+    {
+        string selectedOption = p1InputSelector.options[p1InputSelector.value].text;
+
+        if (selectedOption == "Select Input Device")
+        {
+            p1Data.SetInputDevice(null);
+        }
+
+        else
+        {
+            p1Data.SetInputDevice(availableDevices[selectedOption]);
+        }
+
+        Debug.Log($"P1 SELECTED: {p1Data.GetInputDevice()}");
+    }
+
+
+    public void Player2InputDeviceSelected()
+    {
+        string selectedOption = p2InputSelector.options[p2InputSelector.value].text;
+
+        if (selectedOption == "Select Input Device")
+        {
+            p2Data.SetInputDevice(null);
+        }
+
+        else
+        {
+            p2Data.SetInputDevice(availableDevices[selectedOption]);
+        }
+
+        Debug.Log($"P2 SELECTED: {p2Data.GetInputDevice()}");
+    }
+
+
+    // For use by GUI button
     public void ReturnToMainMenu()
     {
         Close();
+    }
+
+
+    private Dictionary<string, InputDevice> FilterInputDevices()
+    {
+        Dictionary<string, InputDevice> output = new Dictionary<string, InputDevice>();
+        int gamepadCounter = 0;
+        int keyboardCounter = 0;
+
+        foreach (InputDevice device in InputSystem.devices)
+        {
+            if (device is Gamepad)
+            {
+                output.Add($"Gamepad {++gamepadCounter}", device);
+            }
+            
+            else if (device is Keyboard)
+            {
+                output.Add($"Keyboard {++keyboardCounter}", device);
+            }
+        }
+
+        return output;
     }
 }

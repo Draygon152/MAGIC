@@ -1,47 +1,60 @@
 // Written by Kevin Chao
-// Modified by Angel
+// Modified by Angel and Lawson
+
+using System;
+using TMPro;
+using UnityEngine;
 
 public class HUD : Menu<HUD>
 {
-    public HealthBar Player1HealthBar;
-    public HealthBar Player2HealthBar;
-    public SelectedSpellUI Player1SpellUI;
-    public SelectedSpellUI Player2SpellUI;
+
+    [SerializeField] private HealthBar player1HealthBar;
+    [SerializeField] private HealthBar player2HealthBar;
+    [SerializeField] private SelectedSpellUI player1SpellUI;
+    [SerializeField] private SelectedSpellUI player2SpellUI;
+    [SerializeField] private TextMeshProUGUI enemyCounter;
+
 
 
 
     public void SetP1CurHealth(int newHealth)
     {
-        Player1HealthBar.SetCurHealth(newHealth);
+        player1HealthBar.SetCurHealth(newHealth);
     }
 
 
     public void SetP1MaxHealth(int maxHealth)
     {
-        Player1HealthBar.SetMaxHealth(maxHealth);
+        player1HealthBar.SetMaxHealth(maxHealth);
     }
 
 
     public void SetP2CurHealth(int newHealth)
     {
-        Player2HealthBar.SetCurHealth(newHealth);
+        player2HealthBar.SetCurHealth(newHealth);
     }
 
 
     public void SetP2MaxHealth(int maxHealth)
     {
-        Player2HealthBar.SetMaxHealth(maxHealth);
+        player2HealthBar.SetMaxHealth(maxHealth);
     }
 
 
-    public void SetP1SpellInfo(BaseSpell spellSelected)
+    public void SetP1SpellCaster(MagicCasting caster)
     {
-        Player1SpellUI.changeSelectedSpellText(spellSelected);
+        player1SpellUI.InitializeSpellUI(caster);
     }
 
 
-    public void SetP2SpellInfo(BaseSpell spellSelected)
+    public void SetP2SpellCaster(MagicCasting caster)
     {
-        Player2SpellUI.changeSelectedSpellText(spellSelected);
+        player2SpellUI.InitializeSpellUI(caster);
+    }
+
+
+    public void SetEnemyCouter(int enemiesRemaining)
+    {
+        enemyCounter.text = "Enemies Remaining: " + Convert.ToString(enemiesRemaining);
     }
 }

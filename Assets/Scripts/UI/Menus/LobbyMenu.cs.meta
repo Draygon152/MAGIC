@@ -3,7 +3,15 @@ guid: 4a63d8ffb497fe44aad0bc957ee8c391
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player1Ready: {instanceID: 0}
+  - player2Ready: {instanceID: 0}
+  - p1ElementSelector: {instanceID: 0}
+  - p2ElementSelector: {instanceID: 0}
+  - mainMenuButton: {instanceID: 0}
+  - timer: {instanceID: 0}
+  - p1Data: {fileID: 11400000, guid: 06da2e2d441164645999afa5b3f195f8, type: 2}
+  - p2Data: {fileID: 11400000, guid: 00a6ffd1ac15aaf469b3b64a83607c5a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,18 +1,23 @@
 // Written by Angel
+// Modified by Kevin Chao
 
 using UnityEngine;
 
-// Allows us to make different spells using this template
+// Template for spell creation, added as option in Asset Menu
 [CreateAssetMenu(fileName = "New Spell", menuName = "Magic Spells")]
 public class SpellTemplate : ScriptableObject
 {
-    public int damage; // how much damage the spell will deal
-    public float timeBetweenCasts; // how long it should take before user can cast the spell again
-    public float numInstances;     // how many instances of this spell should be avaliable at once (-1 if unlimited)
-    public float castSpeed;        // how long it should take to cast
-    public float spellSpeed;       // the speed the spell travels at
-    public float spellLifetime;    // how long the spell will exist before fading out of existance (if it does not hit anything)
-    public float radius;
-    public float self; // 1 should be on self, 0 will be aoe (check speed, if speed is 0)
-    public Element.ElementTypes element;
+    public int damage;       // How much damage the spell will deal
+    public int numInstances; // How many instances of this spell should be available at once (-1 if unlimited)
+
+    public float timeBetweenCasts; // How long it should take before user can cast the spell again
+    public float castSpeed;        // How long spell should take to cast
+    public float spellSpeed;       // The speed the spell travels at
+    public float spellLifetime;    // How long the spell will exist before fading out of existance (if it does not hit anything)
+    public float radius; // Radius of spell effect
+
+    // Determines whether spell should be cast centered on self or not
+    public bool self;
+
+    public ElementTypes.Elements element;
 }

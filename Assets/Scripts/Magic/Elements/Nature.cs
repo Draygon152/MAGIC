@@ -4,12 +4,12 @@ public class Nature : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Nature];
+        return elementNameDict[ElementTypes.Elements.Nature];
     }
 
 
-    public override ElementTypes GetElementType()
+    public override ElementTypes.Elements GetElementType()
     {
-        return ElementTypes.Nature;
+        return ElementTypes.Elements.Nature;
     }
 }

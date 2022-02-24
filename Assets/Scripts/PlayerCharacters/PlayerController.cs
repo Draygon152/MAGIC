@@ -2,6 +2,7 @@
 // Modified by Kevin Chao and Lawson
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,42 +10,55 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed; // Controls the movement speed of player.
     [SerializeField] private float turnSpeed; // Controls the turn speed of player.
 
-    private PlayerControls PlayerControlsMap; // The Action Map that we created (Called PlayerControls) that is reading in the player's input
-    private Vector3 inputDirection;           // Vector to gather our WASD keys input.
+    private PlayerInput playerControls; // A reference to the PlayerInput component that handles player input
+    private Vector3 inputDirection; // The vector for moving the player
+    private bool gameOver; // If the game is over (true), movement should be disabled
 
 
 
     private void Awake()
     {
-        // init the player controls action map
-        PlayerControlsMap = new PlayerControls();
+        Debug.Log("PlayerController Awake");
+
+        gameOver = false;
+
+        // set the reference to the PlayerInput component
+        playerControls = this.GetComponent<PlayerInput>();
+
+        for (int i = 0; i < Gamepad.all.Count; i++)
+        {
+            Debug.Log(Gamepad.all[i].name);
+        }
+
+        EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableControls);
     }
 
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        // Enabling control for the player
-        PlayerControlsMap.Enable();
-    }
-
-
-    private void OnDisable()
-    {
-        // Disabling control for the player
-        PlayerControlsMap.Disable();
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableControls);
     }
 
 
     private void FixedUpdate()
     {
+        if (!gameOver)
+        {
+            Move();
+            Turn();
+        }
+    }
+
+
+    //Update the inputDirection vector only when the controls of
+    //the apporiate control scheme are changed
+    private void OnMove(InputValue value)
+    {
         // Gathers our input from WASD Keys, set in the Input Manager system in Unity.
         // Since we're in Orthographic View:
         // In here, the X-axis should refer to our Right Input Actions "A to move left, D to move right in the X-axis".
         // ...and Z-axis would refer to our Y-axis movements "W to move up, S to move down".
-        inputDirection = new Vector3(PlayerControlsMap.Move.Right.ReadValue<float>(), 0, PlayerControlsMap.Move.Forward.ReadValue<float>());
-
-        Move();
-        Turn();
+        inputDirection = value.Get<Vector3>();
     }
 
 
@@ -53,7 +67,7 @@ public class PlayerController : MonoBehaviour
         // Using rigidbody component, move our player. Uses rb.velocity to maintain collisions properly
         rb.velocity = transform.forward * inputDirection.normalized.magnitude * moveSpeed;
     }
-    
+
 
     private void Turn()
     {
@@ -61,16 +75,24 @@ public class PlayerController : MonoBehaviour
         {
 
             // This is to have our W,S keys point upwards and downwards in Orthographic view; A,S keys point diagonal.
-            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
-            var changedInputDirection = matrix.MultiplyPoint3x4(inputDirection);
-
+            Matrix4x4 matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+            Vector3 changedInputDirection = matrix.MultiplyPoint3x4(inputDirection);
 
             // Gets the relative position to our current position to target destination.
-            var relativePosition = (transform.position + changedInputDirection) - transform.position;
-            // ...and make that a rotation angle (to look to).
-            var rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up); // Vector3.up tells Unity to rotate us around the Up axis.
+            Vector3 relativePosition = (transform.position + changedInputDirection) - transform.position;
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed * Time.deltaTime); // Rotate our player smoothly.
+            // ...and make that a rotation angle (to look to)
+            // Vector3.up tells Unity to rotate us around the "Up" axis.
+            Quaternion rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up);
+
+            // Update player rotation
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed);
         }
+    }
+
+
+    private void DisableControls()
+    {
+        gameOver = true;
     }
 }

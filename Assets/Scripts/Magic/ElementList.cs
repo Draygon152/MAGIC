@@ -1,39 +1,77 @@
 // Written by Angel
+// Modified by Kevin Chao
 
-using UnityEngine;
 using System;
+using UnityEngine;
 
+// TODO: Merge ElementList and SpellList functionality in revamped spell system
 public class ElementList : MonoBehaviour
 {
-    [SerializeField] private BaseSpell ArcaneSpell;
-    [SerializeField] private BaseSpell GustSpell;
-    [SerializeField] private BaseSpell FireSpell;
-    [SerializeField] private BaseSpell NatureSpell;
-    [SerializeField] private BaseSpell IceSpell;
-    [SerializeField] private BaseSpell LightningSpell;
+    [SerializeField] private BaseSpell arcaneSpell;
+    [SerializeField] private BaseSpell gustSpell;
+    [SerializeField] private BaseSpell fireSpell;
+    [SerializeField] private BaseSpell natureSpell;
+    [SerializeField] private BaseSpell iceSpell;
+    [SerializeField] private BaseSpell lightningSpell;
 
+
+
+    public static ElementList Instance
+    {
+        get;
+        private set;
+    }
+
+
+    private void Awake()
+    {
+        Debug.Log("ElementList Awake");
+
+        if (Instance != null)
+            Destroy(gameObject);
+
+        else
+        {
+            Instance = this;
+        }
+    }
+
+
+    private void OnDestroy()
+    {
+        Debug.Log("ElementList Destroyed");
+
+        Instance = null;
+    }
 
 
     // Current Element is the element selected by a player
-    public BaseSpell Return_Spell(Element.ElementTypes CurrentElement) 
+    public BaseSpell GetSpell(ElementTypes.Elements currentElement) 
     {
-        switch(CurrentElement)
+        switch(currentElement)
         {
-            case Element.ElementTypes.Arcane:
-                Debug.Log(ArcaneSpell);
-                return ArcaneSpell;
-            case Element.ElementTypes.Wind:
-                return GustSpell;
-            case Element.ElementTypes.Fire:
-                return FireSpell;
-            case Element.ElementTypes.Nature:
-                return NatureSpell;
-            case Element.ElementTypes.Ice:
-                return IceSpell;
-            case Element.ElementTypes.Lightning:
-                return LightningSpell;
+            case ElementTypes.Elements.Arcane:
+                return arcaneSpell;
+
+            case ElementTypes.Elements.Wind:
+                return gustSpell;
+
+            case ElementTypes.Elements.Fire:
+                return fireSpell;
+
+            case ElementTypes.Elements.Nature:
+                return natureSpell;
+
+            case ElementTypes.Elements.Ice:
+                return iceSpell;
+
+            case ElementTypes.Elements.Lightning:
+                return lightningSpell;
+
             default:
-                throw new Exception("Element not found");
+                Exception ex = new Exception($"Element '{currentElement}' not found");
+                Debug.LogException(ex);
+                throw ex;
         }
     }
 }

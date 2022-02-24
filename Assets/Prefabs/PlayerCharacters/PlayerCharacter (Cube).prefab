@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3891170637809442976}
   m_Layer: 7
-  m_Name: Castlocation
+  m_Name: CastLocation
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 988538087402436569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.118, z: 1.422}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4716117005724028398}
@@ -43,9 +43,11 @@ GameObject:
   - component: {fileID: 5203983517893298912}
   - component: {fileID: 5203983517893298913}
   - component: {fileID: 5203983517893298918}
+  - component: {fileID: 1703992368162592074}
   - component: {fileID: 5203983517893298919}
   - component: {fileID: 811485582123301815}
   - component: {fileID: 2141222732}
+  - component: {fileID: -380955239945461657}
   m_Layer: 7
   m_Name: PlayerCharacter (Cube)
   m_TagString: Player
@@ -146,6 +148,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1703992368162592074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107796699639736997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6722f07ae57e8458f2ec3db6c56f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5203983517893298919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e48d3f77000230468a0e34d135e7a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castlocation: {fileID: 3891170637809442976}
-  listOfSpells: {fileID: 6968269123128102929, guid: 5f2ed3c238cb42b4eb8f32903443279f, type: 3}
+  castLocation: {fileID: 3891170637809442976}
 --- !u!114 &2141222732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,4 +201,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  startingHealth: 5
+  startingHealth: 10
+--- !u!114 &-380955239945461657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107796699639736997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0d1529898335a005cab374a0b6abbdde, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8107796699639736997}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66bfbc97-730d-438c-a3a9-42f60fb13d35
+    m_ActionName: Move/Forward[/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: becf59f8-ca87-4540-b237-13871d4912b1
+    m_ActionName: Move/Right[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2e4487ff-cfcd-4579-b852-1ed7dfb357c5
+    m_ActionName: Spells/Cast[/Keyboard/q]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

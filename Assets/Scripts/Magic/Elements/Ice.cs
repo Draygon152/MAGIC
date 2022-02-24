@@ -4,12 +4,12 @@ public class Ice : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Ice];
+        return elementNameDict[ElementTypes.Elements.Ice];
     }
 
 
-    public override ElementTypes GetElementType()
+    public override ElementTypes.Elements GetElementType()
     {
-        return ElementTypes.Ice;
+        return ElementTypes.Elements.Ice;
     }
 }

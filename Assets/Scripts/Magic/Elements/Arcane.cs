@@ -4,12 +4,12 @@ public class Arcane : Element
 {
     public override string GetElementName()
     {
-        return ElementNameDict[ElementTypes.Arcane];
+        return elementNameDict[ElementTypes.Elements.Arcane];
     }
 
 
-    public override ElementTypes GetElementType()
+    public override ElementTypes.Elements GetElementType()
     {
-        return ElementTypes.Arcane;
+        return ElementTypes.Elements.Arcane;
     }
 }

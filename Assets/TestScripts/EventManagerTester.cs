@@ -22,8 +22,8 @@ public class EventManagerTester : MonoBehaviour
         Debug.Log("Tester Disabled");
 
         // Unsubscribe all listening functions from their events, cleanup
-        EventManager.Instance.Unsubscribe(Event.EventTypes.EnemyDeath, EnemyDeathListener);
-        EventManager.Instance.Unsubscribe(Event.EventTypes.PlayerDeath, PlayerDeathListener);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.EnemyDeath, EnemyDeathListener);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.PlayerDeath, PlayerDeathListener);
     }
 
 
@@ -32,8 +32,8 @@ public class EventManagerTester : MonoBehaviour
         Debug.Log("Tester Started");
 
         // Subscribe listening functions to testing events
-        EventManager.Instance.Subscribe(Event.EventTypes.EnemyDeath, EnemyDeathListener);
-        EventManager.Instance.Subscribe(Event.EventTypes.PlayerDeath, PlayerDeathListener);
+        EventManager.Instance.Subscribe(EventTypes.Events.EnemyDeath, EnemyDeathListener);
+        EventManager.Instance.Subscribe(EventTypes.Events.PlayerDeath, PlayerDeathListener);
 
         // Begin test, stored in coroutine
         StartCoroutine(TestStart());
@@ -49,10 +49,10 @@ public class EventManagerTester : MonoBehaviour
         while (true)
         {
             yield return waitTime;
-            EventManager.Instance.Notify(Event.EventTypes.EnemyDeath);
+            EventManager.Instance.Notify(EventTypes.Events.EnemyDeath);
 
             yield return waitTime;
-            EventManager.Instance.Notify(Event.EventTypes.PlayerDeath);
+            EventManager.Instance.Notify(EventTypes.Events.PlayerDeath);
         }
     }
 

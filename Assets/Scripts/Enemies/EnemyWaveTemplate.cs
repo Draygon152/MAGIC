@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Written by Lawson McCoy
+// Written by Lawson McCoy
 [CreateAssetMenu(fileName = "Wave", menuName = "Enemy_Wave")]
 public class EnemyWaveTemplate : ScriptableObject
 {
@@ -40,9 +40,6 @@ public class EnemyWaveTemplate : ScriptableObject
         for (int index = 0; index < enemyPrefabs.Count; index++)
         {
             GameObject newEnemy = Instantiate(enemyPrefabs[index], enemySpawnPoints[index].position, enemySpawnPoints[index].rotation);
-
-            // Set the health bar to point at the camera
-            newEnemy.GetComponentInChildren<EnemyHealthBillboard>().SetCamera(cameraTransform);
         }
 
         // There was a total of enemyPrefab.Count enemies spawned

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave_2
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 8071810307828470206, guid: e972f7063c1f345f98f5f498ccd98b4d, type: 3}
+  - {fileID: 7298832424236615750, guid: 6e7d55e5c4ee3ce218390670ce43c4a0, type: 3}
   - {fileID: 6233107874321950843, guid: e6193b84c491b2170938e68cbe6326db, type: 3}
   enemySpawnPoints:
   - {fileID: 825776167332693110, guid: 6fe08bfd8a29f5e4fa3b82e5e5739b9a, type: 3}

@@ -1,81 +1,115 @@
 // Written by Angel
+// Modified by Kevin Chao and Lawson
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MagicCasting : MonoBehaviour
 {
-    [SerializeField] private Transform castlocation; // set the location of where the spell is cast from
+    [SerializeField] private Transform castLocation; // Location where the spell is cast from
+
     private BaseSpell spellToCast;
-    [SerializeField] private ElementList listOfSpells;
-    private Element SelectedElement;
-    private PlayerControls PlayerControlsspells;
-    private bool casting = false; // the default state of casting magic is false
-    private float castingtime; // = 1f;   // default time between casts. need to replace with individual spell's casting time also placeholder
-    private float current_cast_time; // container for the time it has been since last cast
+    private Element selectedElement;
+
+    private bool casting = false; // Default state of casting magic is false
+    private float castCooldown;   // Default time between spellcasts. Need to replace with individual spell casting time, placeholder
+    private float timeSinceLastCast;
+    private int playerNumber; // Stores player number so it can be referenced when casting a spell
 
 
 
     private void Awake()
     {
-        // Initializes the player controls
-        PlayerControlsspells = new PlayerControls();
-    }
-
-
-    private void OnEnable()
-    {
-        // Enables control for the player's spell casting
-        PlayerControlsspells.Enable();
-    }
-
-
-    private void OnDisable()
-    {
-        // Disables control for the player's spell casting
-        PlayerControlsspells.Disable();
+        // Set playerNumber
+        playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
     }
 
 
     private void Update()
     {
-        castingtime = spellToCast.GetComponent<BaseSpell>().SpellToCast.timeBetweenCasts;
-        bool cast_button_down = PlayerControlsspells.Spells.Cast.triggered && PlayerControlsspells.Spells.Cast.ReadValue<float>() > 0;
-
-        // if the player is not casting and the cast button is pressed
-        if (!casting && cast_button_down)     
+        if (casting)
         {
-            casting = true; // toggle casting to true
-            current_cast_time = 0;  // set the time since last cast down to 0;
-            CastCurrentSpell();
-            print("ABRA CADABRA!"); // test to see if it works
-        }
+            timeSinceLastCast += Time.deltaTime;  // Increase time since last cast by time that passed
 
-        if (casting) // If casting is true
-        {
-            current_cast_time += Time.deltaTime; // add time from the last time it was cast
-            if (current_cast_time > castingtime) // check to see if enough time has passed between castings
+            if (timeSinceLastCast > castCooldown) // If cooldown expired, next cast available
             {
                 casting = false;
+                timeSinceLastCast = 0.0f;
             }
         }
     }
 
 
-    public void SetElement(Element SE) // SE = Selected Element
+    public void InitializeSpell(Element elem)
     {
-        SelectedElement = SE;
-        spellToCast = listOfSpells.Return_Spell(SelectedElement.GetElementType());
+        selectedElement = elem;
+        spellToCast = ElementList.Instance.GetSpell(selectedElement.GetElementType());
+        castCooldown = spellToCast.GetSpell().timeBetweenCasts;
     }
 
 
-    public BaseSpell returnSpell()
+    public SpellTemplate GetSpell()
     {
-        return spellToCast;
+        return spellToCast.GetSpell();
+    }
+
+
+    private void ChangeTransform()
+    {
+        if (spellToCast.GetSpell().spellSpeed == 0)
+        {
+            castLocation.localPosition = new Vector3(0, -0.5f, 0);
+        }
+
+        else
+        {
+            castLocation.localPosition = new Vector3(0, 0, 0);
+        }
     }
 
 
     private void CastCurrentSpell()
     {
-        Instantiate(spellToCast, castlocation.position, castlocation.rotation); // create spell at castlocation
+        // Create spell at castLocation
+        BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
+    }
+
+
+    public float GetTimeSinceLastCast()
+    {
+        return timeSinceLastCast;
+    }
+
+
+    // TODO: Add code that will update the correct player's HUD text with new spell name
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.GetComponent<Collider>().tag == "pickups")
+        {
+            Debug.Log($"Picking up SpellItem {collision.name}");
+
+            spellToCast = collision.GetComponent<SpellItem>().GetSpell();
+
+            if (playerNumber == PlayerManager.PLAYER_1)
+                HUD.Instance.SetP1SpellCaster(this);
+
+            else if (playerNumber == PlayerManager.PLAYER_2)
+                HUD.Instance.SetP2SpellCaster(this);
+        }
+    }
+
+
+    // TODO: Finish transition to new casting system
+    // Callback for casting a spell
+    private void OnCast()
+    {
+        ChangeTransform();
+
+        // If the player is not casting
+        if (!casting)
+        {
+            casting = true;
+            CastCurrentSpell();
+        }
     }
 }
