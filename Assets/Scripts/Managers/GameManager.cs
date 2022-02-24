@@ -76,8 +76,15 @@ public class GameManager : MonoBehaviour
         PlayerManager.Instance.InitializeHUD();
 
         // Set the camera to follow the player
-        CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_1).gameObject.activeSelf)
+        {
+            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
+        }
+
+        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_2).gameObject.activeSelf)
+        {
+            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+        }
 
         //Set the camera to its starting position.
         CameraSystem.Instance.StartingCamPos();
