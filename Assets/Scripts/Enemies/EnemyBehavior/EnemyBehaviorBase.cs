@@ -33,7 +33,7 @@ public class EnemyBehaviorBase : MonoBehaviour
 
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
         gameOver = false;
@@ -47,7 +47,7 @@ public class EnemyBehaviorBase : MonoBehaviour
 
 
     // Initializes enemy's agent
-    private void Start()
+    protected virtual void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
         playerManager = PlayerManager.Instance;
@@ -73,8 +73,8 @@ public class EnemyBehaviorBase : MonoBehaviour
             // If not, enemy would begin to wander
             if (currentTargetNumber != -1)
             {
-                //Perform the behavior for this enemy, the base function will just follow, but it
-                //can be overriden for different behaviors
+                // Perform the behavior for this enemy, the base function will just follow, but it
+                // can be overriden for different behaviors
                 PerformBehavior();
             }
 
@@ -204,8 +204,9 @@ public class EnemyBehaviorBase : MonoBehaviour
         {
             agent.speed = enemyOriginalSpeed;
         }
-        
-        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position; // Grab targeted player's location
+
+        // Grab targeted player's location
+        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
         Follow(targetLocation);
     }
 

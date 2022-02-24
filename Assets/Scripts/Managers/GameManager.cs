@@ -15,25 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List <EnemyWaveTemplate> waves; // A list of scriptable objects representing the waves that 
                                                              // needs to be spawned into the game
 
-    [SerializeField] private CameraSystem gameCamera; //Decoupling is needed to get rid of this
-
     private int playerCount; // The number of players currently alive in the game
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
-
-
-    // Defining an enum for the different game states
-    private enum gameState
-    {
-        start,   // Before the game is running, in Main Menu
-        playing, // While playing the game
-        pause,   // While playing the game but it is paused
-        victory, // When all enemies have been defeated and players have won, in victory menu
-        defeat   // When both player have died, in defeat menu
-    }
-    private gameState state; // A variable for storing the current game state
-
-
 
     // Make the game manager a singleton
     static public GameManager Instance
@@ -45,9 +29,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Set the game state to start when the game begins
-        state = gameState.start;
-
         // Set up Instance
         Instance = this;
 
@@ -95,29 +76,26 @@ public class GameManager : MonoBehaviour
         PlayerManager.Instance.InitializeHUD();
 
         // Set the camera to follow the player
-        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_1).gameObject.active)
+        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_1).gameObject.activeSelf)
         {
-            gameCamera.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
+            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
         }
 
-         if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_2).gameObject.active)
+        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_2).gameObject.activeSelf)
         {
-            gameCamera.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
         }
 
         //Set the camera to its starting position.
-        gameCamera.StartingCamPos();
+        CameraSystem.Instance.StartingCamPos();
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
-        enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
+        enemyCount += waves[waveNumber].SpawnWave(CameraSystem.Instance.GetTransform());
         waveNumber++;
 
         //Set the enemy counter on the HUD
         HUD.Instance.SetEnemyCouter(enemyCount);
-
-        // Update current game state
-        state = gameState.playing;
     }
 
 
@@ -132,8 +110,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player Victorious");
 
             VictoryGameOver.Open(); // Activates the Victory Screen UI.
-
-            state = gameState.victory;
         }
 
         else
@@ -141,8 +117,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player Defeated");
 
             DefeatGameOver.Open(); // Activates the Defeat Screen UI.
-
-            state = gameState.defeat;
         }
 
         EventManager.Instance.Notify(EventTypes.Events.GameOver);
@@ -166,7 +140,7 @@ public class GameManager : MonoBehaviour
         else //A player dead but the game isn't over (one player is still alive)
         {
             //remove the dead player from the camera frame
-            gameCamera.RemoveFrameTarget(PlayerManager.Instance.GetDeadPlayer().transform);
+            CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetDeadPlayer().transform);
         }
     }
 
@@ -200,7 +174,7 @@ public class GameManager : MonoBehaviour
             if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
             {
                 // ready to spawn next wave
-                enemyCount += waves[waveNumber].SpawnWave(gameCamera.GetTransform());
+                enemyCount += waves[waveNumber].SpawnWave(CameraSystem.Instance.GetTransform());
                 waveNumber++;
             } //end if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
         }//end else of (if (waveNumber >= waves.Count))
@@ -214,14 +188,13 @@ public class GameManager : MonoBehaviour
     private void OnReset()
     {
         // reset the game state
-        state = gameState.start;
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
 
         //reset camera frame
-        gameCamera.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        gameCamera.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
+        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
 
         PlayerManager.Instance.ResetPlayers();
     }

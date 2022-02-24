@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Wave_1
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 4391336237789353534, guid: 33ccd0c98dec7ab94bbd79fba2ec06e2, type: 3}
-  - {fileID: 2896186389428589734, guid: 8c736630af6aaf55ea34e6596793778c, type: 3}
+  - {fileID: 4624826214652089052, guid: fd99f6ad6c5c3eb1785cd65473811bd2, type: 3}
   - {fileID: 9124829305224688902, guid: d54f7b19c281f0c4d9690ed090c9f87f, type: 3}
+  - {fileID: 5116422693680626878, guid: c7f20d4da1c7915f7bf53ca8b9e1d737, type: 3}
   enemySpawnPoints:
   - {fileID: 3744957841082246635, guid: 0b6975f90d06f8d7cbc05f3b7db64804, type: 3}
   - {fileID: 5025184364852422318, guid: 5e971af76bacba7439d781b9847c8407, type: 3}

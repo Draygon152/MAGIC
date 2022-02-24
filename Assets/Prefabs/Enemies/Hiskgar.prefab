@@ -94,10 +94,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 67725292282035035}
   detectionRadius: 20
+  timeBetweenCheckPlayers: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  timeBetweenCheckPlayers: 1
+  wanderMinRadius: 20
+  wanderMaxRadius: 40
+  timeBetweenWander: 4
+  wanderTowardsPlayerInterval: 5
+  charge: 1.5
   healAmount: 1
   healTime: 1
   fleeHealthPercentage: 0.2

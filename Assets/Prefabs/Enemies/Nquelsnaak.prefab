@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: damageDealt
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1872983717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: typeName
+      value: Nquelsnaak
+      objectReference: {fileID: 0}
     - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Speed
       value: 3
@@ -63,6 +67,10 @@ PrefabInstance:
       propertyPath: detectionRadius
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 7145550566800696035, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_text
+      value: Nquelsnaak
+      objectReference: {fileID: 0}
     - target: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Name
       value: Nquelsnaak
@@ -94,10 +102,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6434266912200434979}
   detectionRadius: 40
+  timeBetweenCheckPlayers: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  timeBetweenCheckPlayers: 1
+  wanderMinRadius: 20
+  wanderMaxRadius: 40
+  timeBetweenWander: 4
+  wanderTowardsPlayerInterval: 5
+  charge: 1.5
   distanceToMaintain: 15
   maintainDistanceError: 5
   larvaPrefab: {fileID: 7751559521620626905, guid: 57e5c155b04c76b31915915be219a196, type: 3}

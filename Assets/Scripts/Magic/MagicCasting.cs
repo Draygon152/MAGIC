@@ -20,16 +20,13 @@ public class MagicCasting : MonoBehaviour
 
     private void Awake()
     {
-
         // Set playerNumber
         playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
     }
 
 
-
     private void Update()
     {
-
         if (casting)
         {
             timeSinceLastCast += Time.deltaTime;  // Increase time since last cast by time that passed
