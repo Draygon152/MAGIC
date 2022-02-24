@@ -5,12 +5,12 @@ To play the current build of this game, a mouse and keyboard are required, but
 gamepad usage for gameplay is supported. Gamepads should be plugged in before
 pressing "Start Game" from the Main Menu.
 
-If no input devices are selected for either player, and more than one is plugged
-in, input devices are randomly assigned to each player character. If only one
-input device is plugged in, then that input device will be responsible for
-controlling both player characters. If both player characters are assigned the
-same input device, then both player characters will be controlled by that input
-device.
+If no input devices are selected for either player, only one player character
+will spawn, which will be controlled by keyboard controls. If the same input
+device is selected for both players, two player characters will spawn, and
+will both be controlled by that input device. If at least two input devices
+are plugged in and different ones are selected for each player, then two
+player characters will spawn, each controlled by a different input device.
 
 MAGIC! is a PvE wave-survival game. You lose when the health of both player characters
 is depleted, and you win when you've destroyed every wave of enemies that dares to

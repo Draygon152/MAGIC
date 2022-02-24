@@ -33,7 +33,8 @@ public class SpellEffects : MonoBehaviour
                 break;
 
             case ElementTypes.Elements.Nature:
-                HealEffect();
+                if (target.tag == "Player")
+                    HealEffect();
                 break;
 
             case ElementTypes.Elements.Ice:
