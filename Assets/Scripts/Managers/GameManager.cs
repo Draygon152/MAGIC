@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int playerCount; // The number of players currently alive in the game
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
+    private bool paused;
 
     // Make the game manager a singleton
     static public GameManager Instance
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         get;
         private set;
     }
+
 
 
     private void Awake()
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
 
         // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
+        paused = false;
     }
 
 
@@ -96,6 +99,24 @@ public class GameManager : MonoBehaviour
 
         //Set the enemy counter on the HUD
         HUD.Instance.SetEnemyCouter(enemyCount);
+    }
+
+
+    public void PauseGame()
+    {
+        if (!paused)
+        {
+            paused = true;
+            Time.timeScale = 0;
+            PauseMenu.Open();
+        }
+
+        else
+        {
+            paused = false;
+            Time.timeScale = 1;
+            PauseMenu.Close();
+        }
     }
 
 
@@ -191,6 +212,8 @@ public class GameManager : MonoBehaviour
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
+        paused = false;
+        Time.timeScale = 1;
 
         //reset camera frame
         CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));

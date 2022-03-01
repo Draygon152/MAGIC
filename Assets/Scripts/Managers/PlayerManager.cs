@@ -60,8 +60,8 @@ public class PlayerManager : MonoBehaviour
         int playerCount = 0; //Counts up the number of players spawned
 
         // Spawn both players
-        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].GetInputDevice()).GetComponent<Player>();
-        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].GetInputDevice()).GetComponent<Player>();
+        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].pairedDevice).GetComponent<Player>();
+        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].pairedDevice).GetComponent<Player>();
         
         // Move players to their spawn point
         // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
@@ -73,18 +73,18 @@ public class PlayerManager : MonoBehaviour
         playerGameObject[PLAYER_2].transform.rotation = playerSpawnPoint.rotation;
 
         // Set player's elemental affinity, assign delegates to player's health bar
-        playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
-        playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
+        playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].ElementalAffinity);
+        playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].ElementalAffinity);
 
         // Set player identification numbers
         playerGameObject[PLAYER_1].PlayerNumber = PLAYER_1;
         playerGameObject[PLAYER_2].PlayerNumber = PLAYER_2;
 
-        Debug.Log($"Player one device {playerData[PLAYER_1].GetInputDevice()}");
-        Debug.Log($"Player two device {playerData[PLAYER_2].GetInputDevice()}");
+        Debug.Log($"Player one device {playerData[PLAYER_1].pairedDevice}");
+        Debug.Log($"Player two device {playerData[PLAYER_2].pairedDevice}");
 
         //Check for unused players
-        if (playerData[PLAYER_2].GetInputDevice() == null)
+        if (playerData[PLAYER_2].pairedDevice == null)
         {
             playerGameObject[PLAYER_2].gameObject.SetActive(false);
 
@@ -96,7 +96,7 @@ public class PlayerManager : MonoBehaviour
             //Count player two
             playerCount++;
 
-            if (playerData[PLAYER_1].GetInputDevice() == null)
+            if (playerData[PLAYER_1].pairedDevice == null)
             {
                 playerGameObject[PLAYER_1].gameObject.SetActive(false);
             }

@@ -17,6 +17,7 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     }
 
 
+
     // Awake() and OnDestroy() are protected to still allow for their use by child classes,
     // virtual to allow for overloading and specifying functionality in children
     protected virtual void Awake()
@@ -52,7 +53,7 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     {
         if (Instance == null)
         {
-            Debug.LogErrorFormat("Cannot close {0}, Instance is null", typeof(T));
+            Debug.LogErrorFormat($"Cannot close {typeof(T)}, Instance is null");
             return;
         }
 

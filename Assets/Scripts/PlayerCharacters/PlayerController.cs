@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //Update the inputDirection vector only when the controls of
-    //the apporiate control scheme are changed
+    // Update the inputDirection vector only when the controls of
+    // the apporiate control scheme are changed
     private void OnMove(InputValue value)
     {
         // Gathers our input from WASD Keys, set in the Input Manager system in Unity.
@@ -88,6 +88,12 @@ public class PlayerController : MonoBehaviour
             // Update player rotation
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationAngle, turnSpeed);
         }
+    }
+
+
+    private void OnPauseGame()
+    {
+        GameManager.Instance.PauseGame();
     }
 
 
