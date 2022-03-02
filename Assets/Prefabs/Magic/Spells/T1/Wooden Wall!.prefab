@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8118848796068082146}
   - component: {fileID: 6678950182708947800}
   - component: {fileID: 6300203771591002909}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WoodenWall Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 7349677235740948135}
   - component: {fileID: 2654473716748409946}
   - component: {fileID: 1721081577843271366}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WoodenWall X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,9 +202,10 @@ GameObject:
   - component: {fileID: 6538500561316877508}
   - component: {fileID: -3801125936875991043}
   - component: {fileID: -8311044243572400147}
-  m_Layer: 0
+  - component: {fileID: -806056753554315578}
+  m_Layer: 6
   m_Name: Wooden Wall!
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,9 +267,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellToCast: {fileID: 0}
+  spellToCast: {fileID: 11400000, guid: 2e01c528756b77e439670f68b56c5691, type: 2}
   player: {fileID: 0}
-  spellEffect: {fileID: 0}
+  spellEffect: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
   effectCall:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-806056753554315578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8432886547247984421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpell: {fileID: -8311044243572400147}

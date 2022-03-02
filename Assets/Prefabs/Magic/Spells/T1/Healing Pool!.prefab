@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1944645418712209251}
   - component: {fileID: 3566989285728354593}
   - component: {fileID: -412647294867395860}
-  m_Layer: 0
+  - component: {fileID: -7183661180803624105}
+  m_Layer: 6
   m_Name: Healing Pool!
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,12 +76,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellToCast: {fileID: 0}
+  spellToCast: {fileID: 11400000, guid: 7a398c3fdbbf8b2449bfb205d7916f35, type: 2}
   player: {fileID: 0}
-  spellEffect: {fileID: 0}
+  spellEffect: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
   effectCall:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-7183661180803624105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122753303259802082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpell: {fileID: -412647294867395860}
 --- !u!1 &7122753304262999422
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +107,7 @@ GameObject:
   - component: {fileID: 7122753304262999418}
   - component: {fileID: 7122753304262999419}
   - component: {fileID: 7122753304262999420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

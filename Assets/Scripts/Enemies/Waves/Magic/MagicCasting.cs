@@ -112,9 +112,4 @@ public class MagicCasting : MonoBehaviour
             CastCurrentSpell();
         }
     }
-
-    private void OnActivate()
-    {
-        print("Hello");
-    }
 }

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
-  m_Name: Zap
+  m_Name: HealingPool
   m_EditorClassIdentifier: 
-  damage: 2
-  timeBetweenCasts: 0.5
-  numInstances: -1
+  damage: 4
+  numInstances: 0
+  timeBetweenCasts: 3
   castSpeed: 0.1
-  spellSpeed: 20
-  spellLifetime: 1
-  radius: 0.25
+  spellSpeed: 0
+  spellLifetime: 5
+  effectDuration: 0
+  radius: 2
   self: 0
-  element: 4
+  element: 2

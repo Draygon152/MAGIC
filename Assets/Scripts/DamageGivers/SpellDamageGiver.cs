@@ -8,26 +8,11 @@ public class SpellDamageGiver : DamageGiver
     [SerializeField] private BaseSpell currentSpell;
 
 
-
-    public void SustainedDamage(GameObject target, BaseSpell spellHit)
-    {
-        if (target.tag == "Enemy")
-        {
-            Debug.Log($"Applying {spellHit.name} DOT to {target.name}");
-
-            EnemyHealthManager enemy = target.GetComponent<EnemyHealthManager>();
-
-            if (enemy != null)
-                DamageTarget(enemy, spellHit.GetSpell().damage);
-        }
-    }
-
-
     private void OnTriggerEnter(Collider collision)
     {
         Debug.Log($"{currentSpell.name} applying damage to {collision.name}");
 
-        if (collision.gameObject.tag == "Object" || collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
         {
             HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
 

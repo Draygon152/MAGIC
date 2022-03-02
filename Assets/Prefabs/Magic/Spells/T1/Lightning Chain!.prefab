@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: -3621782435919253092}
   - component: {fileID: -4889522474357962964}
   - component: {fileID: -2944406223500383022}
-  m_Layer: 0
+  - component: {fileID: -4706322675945721065}
+  m_Layer: 6
   m_Name: Lightning Chain!
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612801762167470135}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 499.04834, y: 1.26, z: 497.1194}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7628986076864667363}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &-3621782435919253092
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -46,7 +47,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &-4889522474357962964
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,12 +76,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellToCast: {fileID: 0}
+  spellToCast: {fileID: 11400000, guid: 99af457b3100daf4e9cf2be9ed19aeb6, type: 2}
   player: {fileID: 0}
-  spellEffect: {fileID: 0}
+  spellEffect: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
   effectCall:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-4706322675945721065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612801762167470135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpell: {fileID: -2944406223500383022}
 --- !u!1 &8537387751334749717
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +107,7 @@ GameObject:
   - component: {fileID: 1339708736663855414}
   - component: {fileID: 7084137460006567824}
   - component: {fileID: 2723718422265679207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,13 +121,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8537387751334749717}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1168589751168966405}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!33 &1339708736663855414
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3353935275871929765}
   - component: {fileID: 2204038002804071654}
   - component: {fileID: 2806416922140282500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,9 +107,10 @@ GameObject:
   - component: {fileID: -8613240628023482717}
   - component: {fileID: 2089846689705346811}
   - component: {fileID: 7930500291013140690}
-  m_Layer: 0
+  - component: {fileID: 7232753693036581694}
+  m_Layer: 6
   m_Name: Blown Away!
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,9 +171,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellToCast: {fileID: 0}
+  spellToCast: {fileID: 11400000, guid: 2754b05670c4fdd4c9ce7d3a822dde52, type: 2}
   player: {fileID: 0}
-  spellEffect: {fileID: 0}
+  spellEffect: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
   effectCall:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7232753693036581694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957972116589829841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpell: {fileID: 7930500291013140690}

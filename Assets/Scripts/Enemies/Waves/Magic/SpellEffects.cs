@@ -43,25 +43,46 @@ public class SpellEffects : MonoBehaviour
             player.GetComponent<PlayerHealthManager>().GainHealth(spell.GetSpell().damage);
     }
 
-    /*
-    private void stuneffect()
+    public void stuneffect(Player player, GameObject target, BaseSpell spell)
     {
-        // set speed to 0 for duration (possibly disable damage aswell)
-        debug.log("arcane effect");
+        try
+        {
+            if (target != null || target.GetComponent<DebuffManager>() != null)
+            {
+                target.GetComponent<DebuffManager>().damageChange(spell.GetSpell().effectDuration);
+                target.GetComponent<DebuffManager>().speedChange(spell.GetSpell().effectDuration, 0f);
+            }
+        }
+        catch
+        { 
+        }
     }
 
-
-    private void sustaineddamageeffect()
+    public void sustaineddamageeffect(Player player, GameObject target, BaseSpell spell)
     {
-        debug.log("fire effect");
-
-        spelldamagegiver.sustaineddamage(target, spell);
+        try
+        {
+            if (target != null || target.GetComponent<DebuffManager>() != null)
+            {
+                target.GetComponent<DebuffManager>().sustainedDamage(spell.GetSpell().effectDuration, spell.GetSpell().damage);
+            }
+        }
+        catch
+        {
+        }
     }
 
-    private void sloweffect()
+    public void sloweffect(Player player, GameObject target, BaseSpell spell)
     {
-        // divides speed by percent
-        debug.log("ice effect");
+        try
+        {
+            if (target != null || target.GetComponent<DebuffManager>() != null)
+            {
+                target.GetComponent<DebuffManager>().speedChange(spell.GetSpell().effectDuration, 0.5f);
+            }
+        }
+        catch
+        {
+        }
     }
-    */
 }

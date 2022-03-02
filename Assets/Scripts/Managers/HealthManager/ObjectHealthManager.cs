@@ -1,10 +1,12 @@
 // Written by Liz
-// Modified by Kevin Chao
+// Modified by Kevin Chao and Angel
 
 using UnityEngine;
 
 public class ObjectHealthManager : HealthManager
 {
+    [SerializeField] private SpellItem spellItem;
+
     public override void LoseHealth(int damageAmount)
     {
         currentHealth -= damageAmount;
@@ -15,7 +17,16 @@ public class ObjectHealthManager : HealthManager
         {
             // TODO: Implement code to spawn in a spell drop at current object location
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            spawnSpellItem();
+        }
+    }
+
+    private void spawnSpellItem()
+    {
+        if(gameObject.tag == "Crate")
+        {
+            Instantiate(spellItem, gameObject.transform.position, gameObject.transform.rotation);
         }
     }
 }

@@ -49,6 +49,6 @@ public class SpellList : MonoBehaviour
 
     public BaseSpell getTestSpell()
     {
-        return listOfSpells[6];
+        return listOfSpells[11];
     }
 }
