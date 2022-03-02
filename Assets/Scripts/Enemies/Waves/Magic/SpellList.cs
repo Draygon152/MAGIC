@@ -46,4 +46,9 @@ public class SpellList : MonoBehaviour
 
         return listOfSpells[randnum];
     }
+
+    public BaseSpell getTestSpell()
+    {
+        return listOfSpells[6];
+    }
 }

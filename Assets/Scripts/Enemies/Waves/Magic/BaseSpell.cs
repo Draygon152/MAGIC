@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -11,6 +12,7 @@ public class BaseSpell : MonoBehaviour
     [SerializeField] private SpellTemplate spellToCast;
     [SerializeField] private Player player;
     [SerializeField] private SpellEffects spellEffect;
+    [SerializeField] private EffectEvent effectCall;
 
     private SphereCollider spellCollider;
     private Rigidbody spellBody;
@@ -48,7 +50,7 @@ public class BaseSpell : MonoBehaviour
         spellBody.isKinematic = true;
 
         // Destroy spell after certain time if it does not hit anything
-        StartCoroutine(SpellDuration(spellToCast.spellLifetime)); 
+        StartCoroutine(SpellDuration(spellToCast.spellLifetime));
     }
     
     
@@ -72,8 +74,7 @@ public class BaseSpell : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        // spellCall.Invoke(player, null, this);
-        spellEffect.BaseEffects(spellToCast.element, player, null, this);
+        effectCall.Invoke(player, null, this);
         Destroy(gameObject);
     }
 
@@ -86,6 +87,11 @@ public class BaseSpell : MonoBehaviour
 
         // Apply spell effect at the collision's gameobject
         Debug.Log($"Spell of element '{spellToCast.element}' collided");
-        spellEffect.BaseEffects(spellToCast.element, player, collision.gameObject, this);
+        effectCall.Invoke(player, collision.gameObject, this);
+    }
+
+    private void OnActivate()
+    {
+        print("boop");
     }
 }

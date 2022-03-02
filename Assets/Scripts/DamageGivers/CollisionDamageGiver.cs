@@ -22,4 +22,9 @@ public class CollisionDamageGiver : DamageGiver
                 DamageTarget(player, damageDealt);
         }
     }
+
+    public int currentDamage()
+    {
+        return damageDealt;
+    }
 }
