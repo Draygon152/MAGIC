@@ -50,6 +50,6 @@ public class SpellList : MonoBehaviour
 
     public BaseSpell GetTestSpell()
     {
-        return listOfSpells[8];
+        return listOfSpells[10];
     }
 }

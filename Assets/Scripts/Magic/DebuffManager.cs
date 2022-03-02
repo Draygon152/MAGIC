@@ -47,17 +47,18 @@ public class DebuffManager : MonoBehaviour
 
     public void sustainedDamage(float time, float damage)
     {
-        for(int i = 0; i < 3; i++)
-        {
-            StartCoroutine(TickDamage(time, damage));
-        }
+        StartCoroutine(TickDamage(time, damage));
     }
 
     private IEnumerator TickDamage(float time, float damage)
     {
-        yield return new WaitForSeconds(time);
         int damageint = (int)damage;
-        this.GetComponent<EnemyHealthManager>().LoseHealth(damageint);
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(time);
+            this.GetComponent<EnemyHealthManager>().LoseHealth(damageint);
+            print("tick");
+        }
     }
 
     private void revertSpeed()
