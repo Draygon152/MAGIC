@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class GameManager : MonoBehaviour
     private int playerCount; // The number of players currently alive in the game
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
-    private bool paused;
+
+    private PlayerInput pauseControls;
 
     // Make the game manager a singleton
     static public GameManager Instance
@@ -42,7 +44,10 @@ public class GameManager : MonoBehaviour
 
         // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
-        paused = false;
+
+        // Create instance of ScriptableObject for pause controls, allows for
+        // switching between action maps
+        pauseControls = GetComponent<PlayerInput>();
     }
 
 
@@ -99,24 +104,6 @@ public class GameManager : MonoBehaviour
 
         //Set the enemy counter on the HUD
         HUD.Instance.SetEnemyCouter(enemyCount);
-    }
-
-
-    public void PauseGame()
-    {
-        if (!paused)
-        {
-            paused = true;
-            Time.timeScale = 0;
-            PauseMenu.Open();
-        }
-
-        else
-        {
-            paused = false;
-            Time.timeScale = 1;
-            PauseMenu.Close();
-        }
     }
 
 
@@ -208,17 +195,45 @@ public class GameManager : MonoBehaviour
     // Reset the game state when a ResetGame event is notified
     private void OnReset()
     {
-        // reset the game state
+        // Reset the game state
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
-        paused = false;
-        Time.timeScale = 1;
 
-        //reset camera frame
+        // Reset pause state
+        Time.timeScale = 1;
+        pauseControls.SwitchCurrentActionMap("During Runtime");
+
+        // Reset camera frame
         CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
         CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
 
         PlayerManager.Instance.ResetPlayers();
+    }
+
+
+    public void OnRuntimePauseToggle()
+    {
+        if (playerCount != 0)
+        {
+            pauseControls.SwitchCurrentActionMap("During Menu");
+            Time.timeScale = 0;
+            PauseMenu.Open();
+        }
+    }
+
+
+    public void OnMenuPauseToggle()
+    {
+        if (playerCount != 0)
+        {
+            pauseControls.SwitchCurrentActionMap("During Runtime");
+            Time.timeScale = 1;
+
+            if (OptionsMenu.Instance != null)
+                OptionsMenu.Close();
+
+            PauseMenu.Close();
+        }
     }
 }

@@ -1,0 +1,101 @@
+{
+    "name": "RuntimeGamestateControls",
+    "maps": [
+        {
+            "name": "During Runtime",
+            "id": "0a9fa61d-3049-49e1-a307-6491f2c667b3",
+            "actions": [
+                {
+                    "name": "Runtime Pause Toggle",
+                    "type": "Button",
+                    "id": "88ac946c-c39f-4fb1-82e2-1fce4d582346",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5e41b28f-5bc6-45a5-896a-843775a86547",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Basic Gameplay",
+                    "action": "Runtime Pause Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfc391aa-d085-4e91-88fb-4b9a73eaeab2",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Basic Gameplay",
+                    "action": "Runtime Pause Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "During Menu",
+            "id": "a163fed8-9946-4557-b67c-89f8af07b154",
+            "actions": [
+                {
+                    "name": "Menu Pause Toggle",
+                    "type": "Button",
+                    "id": "918945a0-2538-45f6-a728-bce7b71a2fce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "57726c82-972d-4471-8e13-beefbcbfdf9c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Basic Gameplay",
+                    "action": "Menu Pause Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ef438d8-235f-4407-86ad-bdd34eea42f8",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Basic Gameplay",
+                    "action": "Menu Pause Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Basic Gameplay",
+            "bindingGroup": "Basic Gameplay",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

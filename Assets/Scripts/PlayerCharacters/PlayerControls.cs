@@ -53,15 +53,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Pause Game"",
-                    ""type"": ""Button"",
-                    ""id"": ""1c4b1833-59e2-4990-9311-b245f7bd57fd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -306,28 +297,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ed9181dd-de49-4563-b45a-4187d43655ce"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Pause Game"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bc331df2-38b1-49b9-918a-efff9b43f5ac"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Pause Game"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -362,7 +331,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_Move2D = m_Gameplay.FindAction("Move2D", throwIfNotFound: true);
         m_Gameplay_Cast = m_Gameplay.FindAction("Cast", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_PauseGame = m_Gameplay.FindAction("Pause Game", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,7 +393,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Move2D;
     private readonly InputAction m_Gameplay_Cast;
     private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_PauseGame;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -433,7 +400,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Move2D => m_Wrapper.m_Gameplay_Move2D;
         public InputAction @Cast => m_Wrapper.m_Gameplay_Cast;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @PauseGame => m_Wrapper.m_Gameplay_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -452,9 +418,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @PauseGame.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPauseGame;
-                @PauseGame.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPauseGame;
-                @PauseGame.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -468,9 +431,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @PauseGame.started += instance.OnPauseGame;
-                @PauseGame.performed += instance.OnPauseGame;
-                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -498,6 +458,5 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMove2D(InputAction.CallbackContext context);
         void OnCast(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

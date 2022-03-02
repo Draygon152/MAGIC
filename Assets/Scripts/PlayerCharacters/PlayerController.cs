@@ -91,12 +91,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnPauseGame()
-    {
-        GameManager.Instance.PauseGame();
-    }
-
-
     private void DisableControls()
     {
         gameOver = true;
