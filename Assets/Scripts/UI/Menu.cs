@@ -1,10 +1,13 @@
 // Written by Kevin Chao
 
 using UnityEngine;
+using UnityEngine.UI;
 
 // Base class for all menus, Singleton
 public abstract class Menu<T> : Menu where T : Menu<T>
 {
+    [SerializeField] Button defaultSelected;
+
     // Property with public read-access, private write-access
     // Properties are treated like fields but can have behaviors execute on read/write
     // Static keyword means this property belongs to the Menu class rather than a specific
@@ -24,6 +27,9 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     {
         // Set Instance to refer to current instance
         Instance = (T)this;
+        
+        if (defaultSelected != null)
+            defaultSelected.Select();
     }
 
 

@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
     private int enemyCount;  // The number of enemies currently alive in the game
     private int waveNumber;  // A variable for keeping track of the wave number in the game
 
-    private PlayerInput pauseControls;
-
     // Make the game manager a singleton
     static public GameManager Instance
     {
@@ -44,10 +42,6 @@ public class GameManager : MonoBehaviour
 
         // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
-
-        // Create instance of ScriptableObject for pause controls, allows for
-        // switching between action maps
-        pauseControls = GetComponent<PlayerInput>();
     }
 
 
@@ -200,40 +194,13 @@ public class GameManager : MonoBehaviour
         playerCount = 0;
         waveNumber = 0;
 
-        // Reset pause state
+        // Guarantees gameplay can continue if restarted from pause state
         Time.timeScale = 1;
-        pauseControls.SwitchCurrentActionMap("During Runtime");
 
         // Reset camera frame
         CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
         CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
 
         PlayerManager.Instance.ResetPlayers();
-    }
-
-
-    public void OnRuntimePauseToggle()
-    {
-        if (playerCount != 0)
-        {
-            pauseControls.SwitchCurrentActionMap("During Menu");
-            Time.timeScale = 0;
-            PauseMenu.Open();
-        }
-    }
-
-
-    public void OnMenuPauseToggle()
-    {
-        if (playerCount != 0)
-        {
-            pauseControls.SwitchCurrentActionMap("During Runtime");
-            Time.timeScale = 1;
-
-            if (OptionsMenu.Instance != null)
-                OptionsMenu.Close();
-
-            PauseMenu.Close();
-        }
     }
 }

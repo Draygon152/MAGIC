@@ -1,6 +1,7 @@
 // Written by Kevin Chao
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : Menu<PauseMenu>
 {
@@ -13,7 +14,8 @@ public class PauseMenu : Menu<PauseMenu>
     public void OnMainMenuPress()
     {
         EventManager.Instance.Notify(EventTypes.Events.ResetGame);
-        Close();
+        if (Instance != null)
+            Close();
         MainMenu.Open();
     }
 }

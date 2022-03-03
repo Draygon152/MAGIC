@@ -28,15 +28,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""f8e55857-6979-48d5-9fbd-3e800ec6c41f"",
             ""actions"": [
                 {
-                    ""name"": ""Move2D"",
-                    ""type"": ""Value"",
-                    ""id"": ""76732eba-e992-46f0-9c58-f2b262003258"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Cast"",
                     ""type"": ""Button"",
                     ""id"": ""3eca1350-d01d-4bb5-bab5-f12ecc783da5"",
@@ -53,75 +44,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Runtime Pause Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""6579c943-d390-4264-8d17-10b0fae3c01b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""Keyboard"",
-                    ""id"": ""bce7d75a-f800-4a7a-bb53-b0a78680ee3d"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move2D"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""5c5a9ac0-78bd-4b2f-afba-2ffcd428a6b7"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move2D"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""f6e3ec7d-53ac-46b3-87fa-d5ee9b7f622a"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move2D"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""b959e6ae-29f7-4d4c-9679-f064bd831db0"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move2D"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""db3c33ab-70f1-4250-a6ad-ac92bdd030bf"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move2D"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""75c512d4-6e57-40d3-bef6-decadafd4149"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move2D"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""48f46764-7cae-4be9-b7e7-fcee64eef167"",
@@ -297,6 +231,120 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16caf6ee-90bb-432d-96ed-3d9959fff55b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Runtime Pause Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d4ade31-4e0c-4f31-849a-af77736da7c2"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Runtime Pause Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""1d40e9eb-ca59-4be6-b9a2-5f10432b8d8b"",
+            ""actions"": [
+                {
+                    ""name"": ""Menu Pause Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""7563ee7f-a761-48e0-acc9-88c0643abd0b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu Navigation"",
+                    ""type"": ""Button"",
+                    ""id"": ""5df58f1f-6843-4eb4-9f86-16cb24cb63ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""96ec6c55-84da-434d-8bab-a82d5a101d4c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu Pause Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cb1c77e-373c-441a-8424-890e5a89246e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu Pause Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9113191a-ace4-4929-b729-0819f5cded7b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Menu Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc34f162-abd5-4069-94bd-557feeb2925d"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""788c54df-e8aa-411b-bb84-cdce5af4ad65"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dfc6543-bc93-47e4-b44c-567d0dd1ed08"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -328,9 +376,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Move2D = m_Gameplay.FindAction("Move2D", throwIfNotFound: true);
         m_Gameplay_Cast = m_Gameplay.FindAction("Cast", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_RuntimePauseToggle = m_Gameplay.FindAction("Runtime Pause Toggle", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_MenuPauseToggle = m_UI.FindAction("Menu Pause Toggle", throwIfNotFound: true);
+        m_UI_MenuNavigation = m_UI.FindAction("Menu Navigation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -390,16 +442,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_Move2D;
     private readonly InputAction m_Gameplay_Cast;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_RuntimePauseToggle;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move2D => m_Wrapper.m_Gameplay_Move2D;
         public InputAction @Cast => m_Wrapper.m_Gameplay_Cast;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @RuntimePauseToggle => m_Wrapper.m_Gameplay_RuntimePauseToggle;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -409,32 +461,73 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Move2D.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove2D;
-                @Move2D.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove2D;
-                @Move2D.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove2D;
                 @Cast.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCast;
                 @Cast.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCast;
                 @Cast.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCast;
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @RuntimePauseToggle.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRuntimePauseToggle;
+                @RuntimePauseToggle.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRuntimePauseToggle;
+                @RuntimePauseToggle.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRuntimePauseToggle;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move2D.started += instance.OnMove2D;
-                @Move2D.performed += instance.OnMove2D;
-                @Move2D.canceled += instance.OnMove2D;
                 @Cast.started += instance.OnCast;
                 @Cast.performed += instance.OnCast;
                 @Cast.canceled += instance.OnCast;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @RuntimePauseToggle.started += instance.OnRuntimePauseToggle;
+                @RuntimePauseToggle.performed += instance.OnRuntimePauseToggle;
+                @RuntimePauseToggle.canceled += instance.OnRuntimePauseToggle;
             }
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_MenuPauseToggle;
+    private readonly InputAction m_UI_MenuNavigation;
+    public struct UIActions
+    {
+        private @PlayerControls m_Wrapper;
+        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MenuPauseToggle => m_Wrapper.m_UI_MenuPauseToggle;
+        public InputAction @MenuNavigation => m_Wrapper.m_UI_MenuNavigation;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @MenuPauseToggle.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuPauseToggle;
+                @MenuPauseToggle.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuPauseToggle;
+                @MenuPauseToggle.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuPauseToggle;
+                @MenuNavigation.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuNavigation;
+                @MenuNavigation.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuNavigation;
+                @MenuNavigation.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuNavigation;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MenuPauseToggle.started += instance.OnMenuPauseToggle;
+                @MenuPauseToggle.performed += instance.OnMenuPauseToggle;
+                @MenuPauseToggle.canceled += instance.OnMenuPauseToggle;
+                @MenuNavigation.started += instance.OnMenuNavigation;
+                @MenuNavigation.performed += instance.OnMenuNavigation;
+                @MenuNavigation.canceled += instance.OnMenuNavigation;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -455,8 +548,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     }
     public interface IGameplayActions
     {
-        void OnMove2D(InputAction.CallbackContext context);
         void OnCast(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnRuntimePauseToggle(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnMenuPauseToggle(InputAction.CallbackContext context);
+        void OnMenuNavigation(InputAction.CallbackContext context);
     }
 }

@@ -95,4 +95,30 @@ public class PlayerController : MonoBehaviour
     {
         gameOver = true;
     }
+
+
+    private void OnRuntimePauseToggle()
+    {
+        if (PauseMenu.Instance == null)
+        {
+            playerControls.SwitchCurrentActionMap("UI");
+            Time.timeScale = 0;
+            PauseMenu.Open();
+        }
+    }
+
+
+    private void OnMenuPauseToggle()
+    {
+        if (PauseMenu.Instance != null)
+        {
+            playerControls.SwitchCurrentActionMap("Gameplay");
+            Time.timeScale = 1;
+
+            if (OptionsMenu.Instance != null)
+                OptionsMenu.Close();
+
+            PauseMenu.Close();
+        }
+    }
 }
