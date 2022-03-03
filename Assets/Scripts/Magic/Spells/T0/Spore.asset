@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Spore
   m_EditorClassIdentifier: 
   damage: 4
-  timeBetweenCasts: 2.5
   numInstances: 3
+  timeBetweenCasts: 2.5
   castSpeed: 0.1
   spellSpeed: 0
   spellLifetime: 4
-  radius: 0.5
+  effectDuration: 0
+  radius: 1
   self: 0
   element: 3

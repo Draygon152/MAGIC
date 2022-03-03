@@ -18,7 +18,7 @@ MonoBehaviour:
   castSpeed: 0.1
   spellSpeed: 0.1
   spellLifetime: 4
-  effectDuration: 0
+  effectDuration: 1
   radius: 0.5
   self: 0
   element: 0

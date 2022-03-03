@@ -51,6 +51,10 @@ public class BaseSpell : MonoBehaviour
 
         // Destroy spell after certain time if it does not hit anything
         StartCoroutine(SpellDuration(spellToCast.spellLifetime));
+        if(spellToCast.self == true)
+        {
+            //StartCoroutine(Expansion(1)); AOE SPELL WIP
+        }
     }
     
     
@@ -76,6 +80,15 @@ public class BaseSpell : MonoBehaviour
 
         effectCall.Invoke(player, null, this);
         Destroy(gameObject);
+    }
+
+    private IEnumerator Expansion(float time)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            yield return new WaitForSeconds(time);
+            this.transform.localScale = new Vector3(1, 0, 1);
+        }
     }
 
 
