@@ -50,7 +50,7 @@ public class LobbyMenu : Menu<LobbyMenu>
         player1Ready.interactable = true;
 
         // Store element data in PlayerData1
-        p1Data.SetElement(p1ElementSelector.GetSelectedElement());
+        p1Data.ElementalAffinity = p1ElementSelector.GetSelectedElement();
     }
 
 
@@ -60,7 +60,7 @@ public class LobbyMenu : Menu<LobbyMenu>
         player2Ready.interactable = true;
 
         // Store element data in PlayerData2
-        p2Data.SetElement(p2ElementSelector.GetSelectedElement());
+        p2Data.ElementalAffinity = p2ElementSelector.GetSelectedElement();
     }
 
 
@@ -148,15 +148,15 @@ public class LobbyMenu : Menu<LobbyMenu>
 
         if (selectedOption == "Select Input Device")
         {
-            p1Data.SetInputDevice(null);
+            p1Data.pairedDevice = null;
         }
 
         else
         {
-            p1Data.SetInputDevice(availableDevices[selectedOption]);
+            p1Data.pairedDevice = availableDevices[selectedOption];
         }
 
-        Debug.Log($"P1 SELECTED: {p1Data.GetInputDevice()}");
+        Debug.Log($"P1 SELECTED: {p1Data.pairedDevice}");
     }
 
 
@@ -166,15 +166,15 @@ public class LobbyMenu : Menu<LobbyMenu>
 
         if (selectedOption == "Select Input Device")
         {
-            p2Data.SetInputDevice(null);
+            p2Data.pairedDevice = null;
         }
 
         else
         {
-            p2Data.SetInputDevice(availableDevices[selectedOption]);
+            p2Data.pairedDevice = availableDevices[selectedOption];
         }
 
-        Debug.Log($"P2 SELECTED: {p2Data.GetInputDevice()}");
+        Debug.Log($"P2 SELECTED: {p2Data.pairedDevice}");
     }
 
 

@@ -7,9 +7,11 @@ using UnityEngine.InputSystem;
 //This class will manage the players and their data
 public class PlayerManager : MonoBehaviour
 {
-    private const int NUMBER_OF_PLAYERS = 2; // Total number of players in the game
+    private const int NUMBER_OF_PLAYERS = 2; // Maximum number of players in the game
     public const int PLAYER_1 = 0; // array index of player 1
     public const int PLAYER_2 = 1; // array index of player 2
+
+    private int playerCount;
 
     private PlayerData[] playerData; // Simple array of length 2 to store the player data 
     private Player[] playerGameObject; // Simple array of length 2 to store references to the player game objects
@@ -57,11 +59,11 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
-        int playerCount = 0; //Counts up the number of players spawned
+        playerCount = 0; // Counts up the number of players spawned
 
         // Spawn both players
-        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].GetInputDevice()).GetComponent<Player>();
-        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].GetInputDevice()).GetComponent<Player>();
+        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].pairedDevice).GetComponent<Player>();
+        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].pairedDevice).GetComponent<Player>();
         
         // Move players to their spawn point
         // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
@@ -73,36 +75,37 @@ public class PlayerManager : MonoBehaviour
         playerGameObject[PLAYER_2].transform.rotation = playerSpawnPoint.rotation;
 
         // Set player's elemental affinity, assign delegates to player's health bar
-        playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
-        playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
+        playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].ElementalAffinity);
+        playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].ElementalAffinity);
 
         // Set player identification numbers
         playerGameObject[PLAYER_1].PlayerNumber = PLAYER_1;
         playerGameObject[PLAYER_2].PlayerNumber = PLAYER_2;
 
-        Debug.Log($"Player one device {playerData[PLAYER_1].GetInputDevice()}");
-        Debug.Log($"Player two device {playerData[PLAYER_2].GetInputDevice()}");
+        Debug.Log($"Player one device {playerData[PLAYER_1].pairedDevice}");
+        Debug.Log($"Player two device {playerData[PLAYER_2].pairedDevice}");
 
-        //Check for unused players
-        if (playerData[PLAYER_2].GetInputDevice() == null)
+        // Check for unused players
+        if (playerData[PLAYER_2].pairedDevice == null)
         {
             playerGameObject[PLAYER_2].gameObject.SetActive(false);
 
-            //keep player one no matter what, so there is at least one player in the game
+            // keep player one no matter what, so there is at least one player in the game
             playerCount++;
         }
+
         else
         {
-            //Count player two
+            // Count player two
             playerCount++;
 
-            if (playerData[PLAYER_1].GetInputDevice() == null)
+            if (playerData[PLAYER_1].pairedDevice == null)
             {
                 playerGameObject[PLAYER_1].gameObject.SetActive(false);
             }
             else
             {
-                //count player one
+                // count player one
                 playerCount++;
             }
         }

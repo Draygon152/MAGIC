@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         get;
         private set;
     }
+
 
 
     private void Awake()
@@ -187,12 +189,15 @@ public class GameManager : MonoBehaviour
     // Reset the game state when a ResetGame event is notified
     private void OnReset()
     {
-        // reset the game state
+        // Reset the game state
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
 
-        //reset camera frame
+        // Guarantees gameplay can continue if restarted from pause state
+        Time.timeScale = 1;
+
+        // Reset camera frame
         CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
         CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
 

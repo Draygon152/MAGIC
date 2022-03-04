@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //Update the inputDirection vector only when the controls of
-    //the apporiate control scheme are changed
+    // Update the inputDirection vector only when the controls of
+    // the apporiate control scheme are changed
     private void OnMove(InputValue value)
     {
         // Gathers our input from WASD Keys, set in the Input Manager system in Unity.
@@ -94,5 +94,31 @@ public class PlayerController : MonoBehaviour
     private void DisableControls()
     {
         gameOver = true;
+    }
+
+
+    private void OnRuntimePauseToggle()
+    {
+        if (PauseMenu.Instance == null)
+        {
+            playerControls.SwitchCurrentActionMap("UI");
+            Time.timeScale = 0;
+            PauseMenu.Open();
+        }
+    }
+
+
+    private void OnMenuPauseToggle()
+    {
+        if (PauseMenu.Instance != null)
+        {
+            playerControls.SwitchCurrentActionMap("Gameplay");
+            Time.timeScale = 1;
+
+            if (OptionsMenu.Instance != null)
+                OptionsMenu.Close();
+
+            PauseMenu.Close();
+        }
     }
 }

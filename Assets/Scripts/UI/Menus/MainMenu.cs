@@ -1,6 +1,7 @@
 // Written by Kevin Chao
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : Menu<MainMenu>
 {
