@@ -92,6 +92,21 @@ MonoBehaviour:
   spellToCast: {fileID: 11400000, guid: 27ef48d59f018eb4d8baf83119995f42, type: 2}
   player: {fileID: 0}
   spellEffect: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
+  effectCall:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
+        m_TargetAssemblyTypeName: SpellEffects, Assembly-CSharp
+        m_MethodName: pushbackeffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7259304895596750838
 GameObject:
   m_ObjectHideFlags: 0

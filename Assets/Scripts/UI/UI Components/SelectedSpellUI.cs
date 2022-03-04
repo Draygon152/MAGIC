@@ -35,4 +35,10 @@ public class SelectedSpellUI : MonoBehaviour
 
         playerCastSystem = caster;
     }
+
+    public void changeSpellCooldown(float newCooldown)
+    {
+        print(newCooldown);
+        cooldownSlider.maxValue = newCooldown;
+    }
 }

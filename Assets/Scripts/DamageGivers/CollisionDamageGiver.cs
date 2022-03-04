@@ -1,5 +1,5 @@
 // Written by Liz
-// Modified by Kevin Chao
+// Modified by Kevin Chao and Angel Rubio
 
 using UnityEngine;
 
@@ -21,5 +21,15 @@ public class CollisionDamageGiver : DamageGiver
             if (player != null)
                 DamageTarget(player, damageDealt);
         }
+    }
+
+    public int currentDamage()
+    {
+        return damageDealt;
+    }
+
+    public void changeDamage(int newdamage)
+    {
+        damageDealt = newdamage;
     }
 }

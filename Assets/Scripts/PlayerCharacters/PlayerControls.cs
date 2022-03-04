@@ -46,9 +46,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Activate"",
+                    ""type"": ""Button"",
+                    ""id"": ""b85f7a43-82af-4872-9b5a-a871482fc3c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Runtime Pause Toggle"",
                     ""type"": ""Button"",
-                    ""id"": ""6579c943-d390-4264-8d17-10b0fae3c01b"",
+                    ""id"": ""04e58218-c592-4694-9315-b6fa6b16ddab"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -95,7 +104,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -106,7 +115,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -172,7 +181,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -183,7 +192,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -234,22 +243,33 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""16caf6ee-90bb-432d-96ed-3d9959fff55b"",
+                    ""id"": ""a2d1452e-ddc1-41fb-96d7-5412a5852462"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Activate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""699d9507-0858-45ad-9dea-9604913b0145"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Runtime Pause Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9d4ade31-4e0c-4f31-849a-af77736da7c2"",
+                    ""id"": ""bb4e1acf-4d42-4db0-bd6f-405b50dc5d01"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Runtime Pause Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -258,12 +278,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         },
         {
             ""name"": ""UI"",
-            ""id"": ""1d40e9eb-ca59-4be6-b9a2-5f10432b8d8b"",
+            ""id"": ""a922fdb9-5488-4a06-ba83-00f4cc4ed7e3"",
             ""actions"": [
                 {
                     ""name"": ""Menu Pause Toggle"",
                     ""type"": ""Button"",
-                    ""id"": ""7563ee7f-a761-48e0-acc9-88c0643abd0b"",
+                    ""id"": ""b53e5f78-7468-48a1-a533-2862fdac877e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -272,7 +292,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Menu Navigation"",
                     ""type"": ""Button"",
-                    ""id"": ""5df58f1f-6843-4eb4-9f86-16cb24cb63ba"",
+                    ""id"": ""159c0a6a-bf8a-4583-a96c-5f970418de6e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -282,29 +302,29 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""96ec6c55-84da-434d-8bab-a82d5a101d4c"",
+                    ""id"": ""9c5271ce-e940-4d73-8333-a3d3b337300f"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Menu Pause Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5cb1c77e-373c-441a-8424-890e5a89246e"",
+                    ""id"": ""fc171409-c991-49af-b404-9666de4d6584"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Menu Pause Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9113191a-ace4-4929-b729-0819f5cded7b"",
+                    ""id"": ""d25479a6-ac13-4955-ae30-71e7b2c1c9ca"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -315,33 +335,33 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""dc34f162-abd5-4069-94bd-557feeb2925d"",
+                    ""id"": ""552fc530-7b7e-4e75-a855-108970848668"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Menu Navigation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""788c54df-e8aa-411b-bb84-cdce5af4ad65"",
+                    ""id"": ""0df7b1fb-81da-463a-b242-b718dd2f61ec"",
                     ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Menu Navigation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6dfc6543-bc93-47e4-b44c-567d0dd1ed08"",
+                    ""id"": ""31fea0c2-1900-4045-8309-19b5430965aa"",
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Menu Navigation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -378,6 +398,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Cast = m_Gameplay.FindAction("Cast", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_Activate = m_Gameplay.FindAction("Activate", throwIfNotFound: true);
         m_Gameplay_RuntimePauseToggle = m_Gameplay.FindAction("Runtime Pause Toggle", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -444,6 +465,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Cast;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_Activate;
     private readonly InputAction m_Gameplay_RuntimePauseToggle;
     public struct GameplayActions
     {
@@ -451,6 +473,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Cast => m_Wrapper.m_Gameplay_Cast;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @Activate => m_Wrapper.m_Gameplay_Activate;
         public InputAction @RuntimePauseToggle => m_Wrapper.m_Gameplay_RuntimePauseToggle;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -467,6 +490,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Activate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnActivate;
+                @Activate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnActivate;
+                @Activate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnActivate;
                 @RuntimePauseToggle.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRuntimePauseToggle;
                 @RuntimePauseToggle.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRuntimePauseToggle;
                 @RuntimePauseToggle.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRuntimePauseToggle;
@@ -480,6 +506,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Activate.started += instance.OnActivate;
+                @Activate.performed += instance.OnActivate;
+                @Activate.canceled += instance.OnActivate;
                 @RuntimePauseToggle.started += instance.OnRuntimePauseToggle;
                 @RuntimePauseToggle.performed += instance.OnRuntimePauseToggle;
                 @RuntimePauseToggle.canceled += instance.OnRuntimePauseToggle;
@@ -550,6 +579,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnCast(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnActivate(InputAction.CallbackContext context);
         void OnRuntimePauseToggle(InputAction.CallbackContext context);
     }
     public interface IUIActions

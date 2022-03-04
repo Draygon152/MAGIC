@@ -114,7 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd7cd1c02c17561bad0a944b51f7ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraRef: {fileID: 0}
 --- !u!1 &4666660204605821311
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +520,7 @@ GameObject:
   - component: {fileID: -2686184855805433103}
   - component: {fileID: 1836551393782438520}
   - component: {fileID: 6005707754632276139}
+  - component: {fileID: -1652378705339584564}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -643,6 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   healthBar: {fileID: 9032181268822750399}
+  isMinion: 0
 --- !u!114 &1872983717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,3 +716,15 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
+--- !u!114 &-1652378705339584564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8991031362452138341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b0f96e761a89e40bc0bc0ad575b8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
