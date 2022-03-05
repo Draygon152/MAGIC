@@ -16,6 +16,8 @@ public class MagicCasting : MonoBehaviour
     private float timeSinceLastCast;
     private int playerNumber; // Stores player number so it can be referenced when casting a spell
 
+    private BaseSpell shellofSpell;
+
 
 
     private void Awake()
@@ -58,12 +60,21 @@ public class MagicCasting : MonoBehaviour
     {
         if (spellToCast.GetSpell().spellSpeed == 0)
         {
+            print("nospeed");
             castLocation.localPosition = new Vector3(0, -0.5f, 0);
         }
 
         else
         {
-            castLocation.localPosition = new Vector3(0, 0, 0);
+            print("speed");
+            if (spellToCast.GetSpell().spellSpeed < .5)
+            {
+                castLocation.localPosition = new Vector3(0, 0, 1);
+            }
+            else
+            {
+                castLocation.localPosition = new Vector3(0, 0, 0);
+            }
         }
     }
 
@@ -71,7 +82,7 @@ public class MagicCasting : MonoBehaviour
     private void CastCurrentSpell()
     {
         // Create spell at castLocation
-        BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
+        shellofSpell = BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
     }
 
 
@@ -116,6 +127,14 @@ public class MagicCasting : MonoBehaviour
         {
             casting = true;
             CastCurrentSpell();
+        }
+    }
+
+    private void OnActivate()
+    {
+        if (shellofSpell != null)
+        {
+            shellofSpell.EarlyCast();
         }
     }
 }

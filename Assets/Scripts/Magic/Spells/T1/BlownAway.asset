@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   numInstances: -1
-  timeBetweenCasts: 3
+  timeBetweenCasts: 2
   castSpeed: 0.1
   spellSpeed: 0
-  spellLifetime: 3
+  spellLifetime: 2
   effectDuration: 1
   radius: 1
+  continious: 1
   self: 1
   element: 5

@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Gust
   m_EditorClassIdentifier: 
   damage: 1
-  timeBetweenCasts: 1.5
   numInstances: -1
+  timeBetweenCasts: 1.5
   castSpeed: 0.1
   spellSpeed: 15
   spellLifetime: 2
+  effectDuration: 0
   radius: 1.5
+  continious: 0
   self: 0
   element: 5

@@ -30,13 +30,20 @@ public class BaseSpell : MonoBehaviour
         rotationOfCreation - A Quaternion providing the rotation of the spell
         playerNumber - The player number of the player who casted the spell
     */
-    static public void Instantiate(BaseSpell spellToCreate, Vector3 locationOfCreation, Quaternion rotationOfCreation, int playerNumber)
+    static public BaseSpell Instantiate(BaseSpell spellToCreate, Vector3 locationOfCreation, Quaternion rotationOfCreation, int playerNumber)
     {
         //Create the spell
         BaseSpell castedSpell = Instantiate(spellToCreate, locationOfCreation, rotationOfCreation);
 
         //Set the player who cast the spell
         castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
+        
+        if(castedSpell.spellToCast.self == true) //now aoe sticks to the player
+        {
+            castedSpell.transform.parent = castedSpell.player.transform;
+        }
+
+        return castedSpell;
     }
 
 
@@ -53,7 +60,7 @@ public class BaseSpell : MonoBehaviour
         StartCoroutine(SpellDuration(spellToCast.spellLifetime));
         if(spellToCast.self == true)
         {
-            //StartCoroutine(Expansion(1)); AOE SPELL WIP
+            StartCoroutine(Expansion(.5f));
         }
     }
     
@@ -84,10 +91,10 @@ public class BaseSpell : MonoBehaviour
 
     private IEnumerator Expansion(float time)
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(time);
-            this.transform.localScale = new Vector3(1, 0, 1);
+            this.transform.localScale += new Vector3(1, 0, 1);
         }
     }
 
@@ -95,16 +102,26 @@ public class BaseSpell : MonoBehaviour
     // TODO: Set the player number to the player that was collided with
     private void OnTriggerEnter(Collider collision)
     {
-        // Destroy the spell when it collides
-        Destroy(gameObject);
+        print("player?");
+        if(spellToCast.continious == false)
+        {
+            // Destroy the spell when it collides
+            Destroy(gameObject);
 
-        // Apply spell effect at the collision's gameobject
-        Debug.Log($"Spell of element '{spellToCast.element}' collided");
-        effectCall.Invoke(player, collision.gameObject, this);
+            // Apply spell effect at the collision's gameobject
+            Debug.Log($"Spell of element '{spellToCast.element}' collided");
+            effectCall.Invoke(player, collision.gameObject, this);
+        }
+        else 
+        {
+            effectCall.Invoke(player, collision.gameObject, this);
+        }
     }
 
-    private void OnActivate()
+    public void EarlyCast()
     {
-        print("boop");
+        effectCall.Invoke(player, null, this);
+        Destroy(gameObject);
+
     }
 }

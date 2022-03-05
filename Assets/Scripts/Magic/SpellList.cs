@@ -42,7 +42,7 @@ public class SpellList : MonoBehaviour
 
     public BaseSpell GetRandomSpell()
     {
-        int randnum = Random.Range(0, listOfSpells.Count);
+        int randnum = Random.Range(6, listOfSpells.Count);
 
         return listOfSpells[randnum];
     }
@@ -50,6 +50,7 @@ public class SpellList : MonoBehaviour
 
     public BaseSpell GetTestSpell()
     {
+        print(listOfSpells.Count);
         return listOfSpells[7];
     }
 }

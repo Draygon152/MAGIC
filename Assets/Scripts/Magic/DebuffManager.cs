@@ -21,7 +21,7 @@ public class DebuffManager : MonoBehaviour
 
     public void speedChange(float time, float change)
     {
-        if(change == 0)
+        if (change == 0)
         {
             this.GetComponent<NavMeshAgent>().isStopped = true;
         }

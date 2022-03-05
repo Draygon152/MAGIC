@@ -97,7 +97,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
         m_TargetAssemblyTypeName: SpellEffects, Assembly-CSharp
-        m_MethodName: sustaineddamageeffect
+        m_MethodName: Sustaineddamageeffect
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

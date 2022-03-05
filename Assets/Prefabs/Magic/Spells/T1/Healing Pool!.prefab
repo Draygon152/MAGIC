@@ -46,7 +46,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3566989285728354593
 Rigidbody:
@@ -81,7 +81,31 @@ MonoBehaviour:
   spellEffect: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
   effectCall:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
+        m_TargetAssemblyTypeName: SpellEffects, Assembly-CSharp
+        m_MethodName: Sloweffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
+        m_TargetAssemblyTypeName: SpellEffects, Assembly-CSharp
+        m_MethodName: Healeffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-7183661180803624105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +130,6 @@ GameObject:
   - component: {fileID: 7122753304262999421}
   - component: {fileID: 7122753304262999418}
   - component: {fileID: 7122753304262999419}
-  - component: {fileID: 7122753304262999420}
   m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
@@ -123,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 7122753304262999422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 0.4, z: 2}
+  m_LocalScale: {x: 4, y: 0.4, z: 4}
   m_Children: []
   m_Father: {fileID: 7122753303259802081}
   m_RootOrder: 0
@@ -177,16 +200,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7122753304262999420
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7122753304262999422}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
