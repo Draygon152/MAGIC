@@ -18,7 +18,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
     private bool hasHealed = false;  // Bool flag to determine if the Hiskgar has already healed once
 
     // Attack Variables
-    private EnemyDamageGiver damageGiver; // A reference to the damage giver class for applying damage
+    private CollisionDamageGiver damageGiver; // A reference to the damage giver class for applying damage
     private int attackPower;
     private float damageOverTime; // Attack player in X seconds overtime
     private bool readyToApplyDamage; // A bool to flag whether or not the enemy is ready to attack again
@@ -47,7 +47,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
         
         // Set the reference to the health manager
         self = this.gameObject.GetComponent<EnemyHealthManager>();
-        damageGiver = this.gameObject.GetComponent<EnemyDamageGiver>(); // Grab enemy's EnemyDamageGiver
+        damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>(); // Grab enemy's EnemyDamageGiver
         // Set Attack Variables
         attackPower = damageGiver.GetDamageDealt();
         damageOverTime = damageGiver.GetDamageOverTime();
