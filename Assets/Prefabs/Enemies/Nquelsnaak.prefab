@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6773967326612829247, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: damageDealt
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6773967326612829247, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: damageOverTime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2686184855805433103, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: damageDealt
       value: 0
@@ -120,6 +128,7 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
+  attackRadius: 1
   distanceToMaintain: 15
   maintainDistanceError: 5
   larvaPrefab: {fileID: 4942251179604567321, guid: 57e5c155b04c76b31915915be219a196, type: 3}

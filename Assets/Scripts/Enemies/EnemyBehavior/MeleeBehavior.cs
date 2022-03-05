@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class MeleeBehavior : EnemyBehaviorBase
 {
-    [SerializeField] private int attackPower;
-    [SerializeField] private float damageOverTime; // Attack player in X seconds overtime
-
-    private DamageGiver damageGiver; // A reference to the damage giver class for applying damage
-    private bool readyToApplyDamage; // A bool to flag whether or not the Hiskgar is ready to attack again
+    private EnemyDamageGiver damageGiver; // A reference to the damage giver class for applying damage
+    private int attackPower;
+    private float damageOverTime; // Attack player in X seconds overtime
+    private bool readyToApplyDamage; // A bool to flag whether or not the enemy is ready to attack again
 
     private enum MeleeState
     {
@@ -20,7 +19,10 @@ public class MeleeBehavior : EnemyBehaviorBase
     protected override void Start()
     {
         base.Start();
-        damageGiver = this.gameObject.GetComponent<DamageGiver>();
+        damageGiver = this.gameObject.GetComponent<EnemyDamageGiver>(); // Grab enemy's EnemyDamageGiver
+        // Set Attack Variables
+        attackPower = damageGiver.GetDamageDealt();
+        damageOverTime = damageGiver.GetDamageOverTime();
         readyToApplyDamage = true;
     }
 

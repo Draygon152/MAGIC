@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 1872983717}
   - component: {fileID: 1836551393782438520}
   - component: {fileID: 8961594199354966123}
-  - component: {fileID: -8005316989065169751}
+  - component: {fileID: -6773967326612829247}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -670,7 +670,7 @@ NavMeshAgent:
   m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 150
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -703,9 +703,7 @@ MonoBehaviour:
   wanderTowardsPlayerInterval: 5
   charge: 1.5
   attackRadius: 1
-  attackPower: 3
-  damageOverTime: 2
---- !u!114 &-8005316989065169751
+--- !u!114 &-6773967326612829247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -714,6 +712,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8991031362452138341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3aeb616764f774fb341bf8cd679d55, type: 3}
+  m_Script: {fileID: 11500000, guid: d192b729b42964f47ae5c9180228c2e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageDealt: 2
+  damageOverTime: 2

@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6773967326612829247, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: damageDealt
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1872983717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: typeName
       value: Slow Melee Enemy
