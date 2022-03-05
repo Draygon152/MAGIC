@@ -22,7 +22,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     [SerializeField] private float charge; // Increase the charge temporarily when enemy cannot find player for a while
 
     // Attack variables
-    [SerializeField] private float attackRadius = 1;
+    [SerializeField] private float attackDistance = 1; // Distance betweeen the enemy itself and target
 
 
     protected PlayerManager playerManager;
@@ -210,7 +210,7 @@ public class EnemyBehaviorBase : MonoBehaviour
             Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
             float distance = Vector3.Distance(this.transform.position, targetLocation);
 
-            if (distance <= attackRadius)
+            if (distance <= attackDistance)
             {
                 isWithinRadius = true;
             }
