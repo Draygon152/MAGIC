@@ -118,12 +118,12 @@ public class PlayerManager : MonoBehaviour
     public void InitializeHUD()
     {
         // Set health bars
-        playerGameObject[PLAYER_1].SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
-        playerGameObject[PLAYER_2].SetHealthBarDelegates(HUD.Instance.SetP2CurHealth, HUD.Instance.SetP2MaxHealth);
+        playerGameObject[PLAYER_1].SetHealthBarDelegates(HUD.Instance.SetPlayerCurHealth, HUD.Instance.SetPlayerMaxHealth);
+        playerGameObject[PLAYER_2].SetHealthBarDelegates(HUD.Instance.SetPlayerCurHealth, HUD.Instance.SetPlayerMaxHealth);
 
         // Displays player's base spell
-        HUD.Instance.SetP1SpellCaster(playerGameObject[PLAYER_1].GetCaster());
-        HUD.Instance.SetP2SpellCaster(playerGameObject[PLAYER_2].GetCaster());
+        HUD.Instance.SetPlayerSpellCaster(PLAYER_1, playerGameObject[PLAYER_1].GetCaster());
+        HUD.Instance.SetPlayerSpellCaster(PLAYER_2, playerGameObject[PLAYER_2].GetCaster());
     }
 
 

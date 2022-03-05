@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         waveNumber++;
 
         //Set the enemy counter on the HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
     }
 
 
@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
         enemyCount--;
 
         // update enemy counter on HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
 
         // check if final wave
         if (waveNumber >= waves.Count)
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
         }//end else of (if (waveNumber >= waves.Count))
 
         // update enemy counter on HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
     }
 
 

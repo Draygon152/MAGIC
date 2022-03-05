@@ -92,14 +92,14 @@ public class MagicCasting : MonoBehaviour
             castCooldown = spellToCast.GetSpell().timeBetweenCasts;
             if (playerNumber == PlayerManager.PLAYER_1)
             {
-                HUD.Instance.SetP1SpellCaster(this);
-                HUD.Instance.SetP1MaxCooldown(spellToCast.GetSpell().timeBetweenCasts);
+                HUD.Instance.SetPlayerSpellCaster(PlayerManager.PLAYER_1, this);
+                HUD.Instance.SetPlayerMaxCooldown(PlayerManager.PLAYER_1, spellToCast.GetSpell().timeBetweenCasts);
             }
 
             else if (playerNumber == PlayerManager.PLAYER_2)
             {
-                HUD.Instance.SetP2SpellCaster(this);
-                HUD.Instance.SetP2MaxCooldown(spellToCast.GetSpell().timeBetweenCasts);
+                HUD.Instance.SetPlayerSpellCaster(PlayerManager.PLAYER_2, this);
+                HUD.Instance.SetPlayerMaxCooldown(PlayerManager.PLAYER_2, spellToCast.GetSpell().timeBetweenCasts);
              }
         }
     }

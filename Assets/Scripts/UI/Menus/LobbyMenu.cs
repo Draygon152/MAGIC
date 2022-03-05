@@ -8,9 +8,10 @@ using UnityEngine.InputSystem;
 
 public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
 {
-    [SerializeField] protected List<Toggle> playerReadyToggles;
-    [SerializeField] protected List<ElementSelector> elementSelectors;
-    [SerializeField] protected List<Dropdown> inputSelectors;
+    // Player 1 is stored at index 0, Player 2 stored at index 1, etc.
+    [SerializeField] protected Toggle[] playerReadyToggles;
+    [SerializeField] protected ElementSelector[] elementSelectors;
+    [SerializeField] protected Dropdown[] inputSelectors;
 
     [SerializeField] protected Button mainMenuButton;
     [SerializeField] protected CountdownTimer timer;
@@ -21,7 +22,6 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
     protected int numPlayers;
     protected bool[] playerReadyStates;
 
-    // Player 1 is stored at index 0, Player 2 stored at index 1, etc.
     protected PlayerData[] playerDataList;
 
 

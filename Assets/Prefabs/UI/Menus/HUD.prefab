@@ -866,10 +866,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097c372ec2330fb4d8f2aac3085a314a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1HealthBar: {fileID: 2064669008}
-  player2HealthBar: {fileID: 117166221}
-  player1SpellUI: {fileID: 2297399814339445861}
-  player2SpellUI: {fileID: 7740806401505134450}
+  defaultSelected: {fileID: 0}
+  playerHealthBars:
+  - {fileID: 2064669008}
+  - {fileID: 117166221}
+  playerSpellUIs:
+  - {fileID: 2297399814339445861}
+  - {fileID: 7740806401505134450}
   enemyCounter: {fileID: 4226106708702809692}
 --- !u!222 &2943159700572064366
 CanvasRenderer:

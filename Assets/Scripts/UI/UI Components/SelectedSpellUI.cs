@@ -36,9 +36,11 @@ public class SelectedSpellUI : MonoBehaviour
         playerCastSystem = caster;
     }
 
-    public void changeSpellCooldown(float newCooldown)
+
+    public void ChangeSpellCooldown(float newCooldown)
     {
-        print(newCooldown);
+        Debug.Log($"Spell max cooldown changed to: {newCooldown}");
+
         cooldownSlider.maxValue = newCooldown;
     }
 }
