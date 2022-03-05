@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
                                                                          // Player 2 spawns at playerSpawnPoint - spawnOffset
 
     // Make the player manager a Singleton
-    static public PlayerManager Instance
+    public static PlayerManager Instance
     {
         get;
         private set;

@@ -1,7 +1,5 @@
 // Written by Kevin Chao
 
-using UnityEngine;
-
 public class SingleplayerLobbyMenu : LobbyMenu
 {
     protected override void Start()

@@ -26,7 +26,6 @@ public abstract class LobbyMenu : Menu<LobbyMenu>
 
 
 
-
     protected virtual void Start()
     {
         availableDevices = FilterInputDevices();
@@ -44,7 +43,6 @@ public abstract class LobbyMenu : Menu<LobbyMenu>
         if (playerNumber < 0 || playerNumber > numPlayers - 1)
             Debug.LogException(new Exception($"PlayerSelectedElement: Invalid player number ({playerNumber})"));
 
-        Debug.Log(playerNumber);
         playerReadyToggles[playerNumber].interactable = true;
 
         // Store element data in PlayerData1
