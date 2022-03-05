@@ -1,4 +1,5 @@
 // Written by Angel
+// Modified by Kevin Chao
 
 using System.Collections;
 using UnityEngine;
@@ -23,10 +24,11 @@ public class DebuffManager : MonoBehaviour
 
     public void SpeedChange(float time, float change)
     {
-        if(change == 0)
+        if (change == 0)
         {
             this.GetComponent<NavMeshAgent>().isStopped = true;
         }
+
         else
         {
             this.GetComponent<EnemyBehaviorBase>().changeSpeed(storedSpeed * change);

@@ -20,12 +20,12 @@ public class MenuManager : MonoBehaviour
 
     private Stack<Menu> menuStack = new Stack<Menu>();
 
-
     public static MenuManager Instance
     {
         get;
         private set;
     }
+
 
 
     // Fine to use private here, since nothing should inherit from MenuManager

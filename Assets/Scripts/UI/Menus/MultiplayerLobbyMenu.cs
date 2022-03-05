@@ -1,6 +1,6 @@
 // Written by Kevin Chao
 
-public class MultiplayerLobbyMenu : LobbyMenu
+public class MultiplayerLobbyMenu : LobbyMenu<MultiplayerLobbyMenu>
 {
     protected override void Start()
     {

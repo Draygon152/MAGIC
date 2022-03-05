@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public abstract class LobbyMenu : Menu<LobbyMenu>
+public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
 {
     [SerializeField] protected List<Toggle> playerReadyToggles;
     [SerializeField] protected List<ElementSelector> elementSelectors;

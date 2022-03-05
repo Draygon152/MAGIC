@@ -31,6 +31,12 @@ public abstract class HealthManager : MonoBehaviour
     public abstract void LoseHealth(int damageAmount);
 
 
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+
     //The following functions are for checking if the health of an object is
     //above/below a certain threshold
     public bool HealthAboveAmountThreshold(int threshold)

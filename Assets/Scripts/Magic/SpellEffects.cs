@@ -1,7 +1,6 @@
 // Written by Angel
 // Modified by Kevin Chao
 
-using System;
 using UnityEngine;
 
 public class SpellEffects : MonoBehaviour
@@ -9,12 +8,14 @@ public class SpellEffects : MonoBehaviour
     [SerializeField] private SpellDamageGiver spellDamageGiver;
 
 
+
     public void TeleportationEffect(Player player, GameObject target, BaseSpell spell)
     {
         player.transform.position = spell.transform.position;
     }
 
-    public void pushbackeffect(Player player, GameObject target, BaseSpell spell)
+
+    public void PushbackEffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
@@ -37,17 +38,19 @@ public class SpellEffects : MonoBehaviour
         }
     }
 
-    public void healeffect(Player player, GameObject target, BaseSpell spell)
+
+    public void HealEffect(Player player, GameObject target, BaseSpell spell)
     {
         if (target != null)
             player.GetComponent<PlayerHealthManager>().GainHealth(spell.GetSpell().damage);
     }
 
-    public void stuneffect(Player player, GameObject target, BaseSpell spell)
+
+    public void StunEffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
-            if (target != null || target.GetComponent<DebuffManager>() != null)
+            if (target != null && target.GetComponent<HealthManager>().GetHealth() > 0 && target.GetComponent<DebuffManager>() != null)
             {
                 target.GetComponent<DebuffManager>().DamageChange(spell.GetSpell().effectDuration);
                 target.GetComponent<DebuffManager>().SpeedChange(spell.GetSpell().effectDuration, 0f);
@@ -58,7 +61,8 @@ public class SpellEffects : MonoBehaviour
         }
     }
 
-    public void sustaineddamageeffect(Player player, GameObject target, BaseSpell spell)
+
+    public void SustainedDamageEffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
@@ -72,7 +76,8 @@ public class SpellEffects : MonoBehaviour
         }
     }
 
-    public void sloweffect(Player player, GameObject target, BaseSpell spell)
+
+    public void SlowEffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
