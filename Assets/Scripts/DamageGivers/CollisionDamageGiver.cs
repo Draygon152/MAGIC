@@ -1,5 +1,6 @@
-// Written by Liz
-// Modified by Kevin Chao
+// Written by Lizbeth
+// Modified by Kevin Chao and Angel Rubio
+
 using System.Collections;
 using UnityEngine;
 
@@ -17,5 +18,14 @@ public class CollisionDamageGiver : DamageGiver
     public float GetDamageOverTime()
     {
         return damageOverTime;
+    }
+    public int currentDamage()
+    {
+        return damageDealt;
+    }
+
+    public void changeDamage(int newdamage)
+    {
+        damageDealt = newdamage;
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9070994594750066362}
   - component: {fileID: 9070994594750066361}
   m_Layer: 8
-  m_Name: SpellItem
+  m_Name: SpellItemPrefab
   m_TagString: pickups
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

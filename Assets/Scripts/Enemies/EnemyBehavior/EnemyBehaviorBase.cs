@@ -1,5 +1,5 @@
 // Written by Lizbeth
-// Modified by Lawson
+// Modified by Lawson and Angel
 
 using UnityEngine;
 using UnityEngine.AI;
@@ -230,8 +230,22 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
+    public void changeSpeed(float newspeed)
+    {
+        enemyOriginalSpeed = newspeed;
+    }
+
+
+    public float returnSpeed()
+    {
+        return agent.speed;
+    }
+    
+    
     private void DisableBehavior()
     {
         gameOver = true;
     }
+    
+    
 }

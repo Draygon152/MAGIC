@@ -89,12 +89,18 @@ public class MagicCasting : MonoBehaviour
             Debug.Log($"Picking up SpellItem {collision.name}");
 
             spellToCast = collision.GetComponent<SpellItem>().GetSpell();
-
+            castCooldown = spellToCast.GetSpell().timeBetweenCasts;
             if (playerNumber == PlayerManager.PLAYER_1)
+            {
                 HUD.Instance.SetP1SpellCaster(this);
+                HUD.Instance.SetP1MaxCooldown(spellToCast.GetSpell().timeBetweenCasts);
+            }
 
             else if (playerNumber == PlayerManager.PLAYER_2)
+            {
                 HUD.Instance.SetP2SpellCaster(this);
+                HUD.Instance.SetP2MaxCooldown(spellToCast.GetSpell().timeBetweenCasts);
+             }
         }
     }
 

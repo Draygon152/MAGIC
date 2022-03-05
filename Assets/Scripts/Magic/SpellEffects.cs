@@ -8,78 +8,27 @@ public class SpellEffects : MonoBehaviour
 {
     [SerializeField] private SpellDamageGiver spellDamageGiver;
 
-    private Player player;
-    private GameObject target;
-    private BaseSpell spell;
 
-
-
-    public void BaseEffects(ElementTypes.Elements element, Player player, GameObject target, BaseSpell passedSpell)
+    public void TeleportationEffect(Player player, GameObject target, BaseSpell spell)
     {
-        this.player = player;
-        this.target = target;
-        spell = passedSpell;
-
-        switch (element)
-        {
-            case ElementTypes.Elements.Arcane:
-                break;
-
-            case ElementTypes.Elements.Wind:
-                PushBackEffect();
-                break;
-
-            case ElementTypes.Elements.Fire:
-                break;
-
-            case ElementTypes.Elements.Nature:
-                    HealEffect();
-                break;
-
-            case ElementTypes.Elements.Ice:
-                break;
-
-            case ElementTypes.Elements.Lightning:
-                TeleportationEffect();
-                break;
-
-            default:
-                Debug.LogException(new Exception($"Invalid Element '{element}' in BaseEffects.cs"));
-                break;
-        }
-    }
-
-
-    private void TeleportationEffect()
-    {
-        Debug.Log("LIGHTNING EFFECT");
-
         player.transform.position = spell.transform.position;
     }
 
-
-    private void StunEffect()
-    {
-        // set speed to 0 for duration (possibly disable damage aswell)
-        Debug.Log("ARCANE EFFECT");
-    }
-
-
-    private void SustainedDamageEffect()
-    {
-        Debug.Log("FIRE EFFECT");
-
-        spellDamageGiver.SustainedDamage(target, spell);
-    }
-
-
-    private void PushBackEffect()
+    public void pushbackeffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
             if (target != null || target.GetComponent<Rigidbody>() != null)
             {
                 Vector3 direction = target.transform.position - player.transform.position;
+                if(direction[0] > 1 || direction[0] < -1)
+                {
+                    direction[0] *= 5;
+                }
+                if(direction[2] > 1 || direction[2] < -1)
+                {
+                    direction[2] *= 5;
+                }
                 target.GetComponent<Rigidbody>().AddForce(direction * 250);
             }
         }
@@ -88,17 +37,52 @@ public class SpellEffects : MonoBehaviour
         }
     }
 
-
-    private void SlowEffect()
-    {
-        // divides speed by percent
-        Debug.Log("ICE EFFECT");
-    }
-
-
-    private void HealEffect()
+    public void healeffect(Player player, GameObject target, BaseSpell spell)
     {
         if (target != null)
             player.GetComponent<PlayerHealthManager>().GainHealth(spell.GetSpell().damage);
+    }
+
+    public void stuneffect(Player player, GameObject target, BaseSpell spell)
+    {
+        try
+        {
+            if (target != null || target.GetComponent<DebuffManager>() != null)
+            {
+                target.GetComponent<DebuffManager>().damageChange(spell.GetSpell().effectDuration);
+                target.GetComponent<DebuffManager>().speedChange(spell.GetSpell().effectDuration, 0f);
+            }
+        }
+        catch
+        { 
+        }
+    }
+
+    public void sustaineddamageeffect(Player player, GameObject target, BaseSpell spell)
+    {
+        try
+        {
+            if (target != null || target.GetComponent<DebuffManager>() != null)
+            {
+                target.GetComponent<DebuffManager>().sustainedDamage(spell.GetSpell().effectDuration, spell.GetSpell().damage);
+            }
+        }
+        catch
+        {
+        }
+    }
+
+    public void sloweffect(Player player, GameObject target, BaseSpell spell)
+    {
+        try
+        {
+            if (target != null || target.GetComponent<DebuffManager>() != null)
+            {
+                target.GetComponent<DebuffManager>().speedChange(spell.GetSpell().effectDuration, 0.5f);
+            }
+        }
+        catch
+        {
+        }
     }
 }

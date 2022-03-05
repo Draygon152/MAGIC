@@ -52,9 +52,20 @@ public class HUD : Menu<HUD>
         player2SpellUI.InitializeSpellUI(caster);
     }
 
+    public void SetP1MaxCooldown(float newCooldown)
+    {
+        player1SpellUI.changeSpellCooldown(newCooldown);
+    }
+
+    public void SetP2MaxCooldown(float newCooldown)
+    {
+        player2SpellUI.changeSpellCooldown(newCooldown);
+    }
+
 
     public void SetEnemyCouter(int enemiesRemaining)
     {
         enemyCounter.text = "Enemies Remaining: " + Convert.ToString(enemiesRemaining);
     }
+
 }
