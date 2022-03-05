@@ -1,16 +1,17 @@
-//Written by Angel
+// Written by Angel
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class DebuffManager : MonoBehaviour
 {
-    private float storedSpeed;
     private int storedDamage;
+    private float storedSpeed;
     private float storedAccel;
     private NavMeshAgent navMesh;
+
+
 
     private void Awake()
     {
@@ -19,7 +20,8 @@ public class DebuffManager : MonoBehaviour
         storedSpeed = this.GetComponent<EnemyBehaviorBase>().returnSpeed();
     }
 
-    public void speedChange(float time, float change)
+
+    public void SpeedChange(float time, float change)
     {
         if(change == 0)
         {
@@ -32,23 +34,27 @@ public class DebuffManager : MonoBehaviour
         StartCoroutine(EffectDuration(time));
     }
 
-    public void damageChange(float time)
+
+    public void DamageChange(float time)
     {
         this.GetComponent<CollisionDamageGiver>().changeDamage(0);
         StartCoroutine(EffectDuration(time));
     }
 
+
     private IEnumerator EffectDuration(float time)
     {
         yield return new WaitForSeconds(time);
-        revertDamage();
-        revertSpeed();
+        RevertDamage();
+        RevertSpeed();
     }
 
-    public void sustainedDamage(float time, float damage)
+
+    public void SustainedDamage(float time, float damage)
     {
         StartCoroutine(TickDamage(time, damage));
     }
+
 
     private IEnumerator TickDamage(float time, float damage)
     {
@@ -57,17 +63,20 @@ public class DebuffManager : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
             this.GetComponent<EnemyHealthManager>().LoseHealth(damageint);
-            print("tick");
+
+            Debug.Log("Damage Ticking");
         }
     }
 
-    private void revertSpeed()
+
+    private void RevertSpeed()
     {
         this.GetComponent<EnemyBehaviorBase>().changeSpeed(storedSpeed);
         this.GetComponent<NavMeshAgent>().isStopped = false;
     }
 
-    private void revertDamage()
+
+    private void RevertDamage()
     {
         this.GetComponent<CollisionDamageGiver>().changeDamage(storedDamage);
     }

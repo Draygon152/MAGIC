@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         // spawn in the players
         playerCount = PlayerManager.Instance.SpawnPlayers();
 
-        LobbyMenu.Close();
+        MultiplayerLobbyMenu.Close();
         HUD.Open();
 
         // Initialize the HUD's player data

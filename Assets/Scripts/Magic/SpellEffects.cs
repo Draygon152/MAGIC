@@ -49,8 +49,8 @@ public class SpellEffects : MonoBehaviour
         {
             if (target != null || target.GetComponent<DebuffManager>() != null)
             {
-                target.GetComponent<DebuffManager>().damageChange(spell.GetSpell().effectDuration);
-                target.GetComponent<DebuffManager>().speedChange(spell.GetSpell().effectDuration, 0f);
+                target.GetComponent<DebuffManager>().DamageChange(spell.GetSpell().effectDuration);
+                target.GetComponent<DebuffManager>().SpeedChange(spell.GetSpell().effectDuration, 0f);
             }
         }
         catch
@@ -64,7 +64,7 @@ public class SpellEffects : MonoBehaviour
         {
             if (target != null || target.GetComponent<DebuffManager>() != null)
             {
-                target.GetComponent<DebuffManager>().sustainedDamage(spell.GetSpell().effectDuration, spell.GetSpell().damage);
+                target.GetComponent<DebuffManager>().SustainedDamage(spell.GetSpell().effectDuration, spell.GetSpell().damage);
             }
         }
         catch
@@ -78,7 +78,7 @@ public class SpellEffects : MonoBehaviour
         {
             if (target != null || target.GetComponent<DebuffManager>() != null)
             {
-                target.GetComponent<DebuffManager>().speedChange(spell.GetSpell().effectDuration, 0.5f);
+                target.GetComponent<DebuffManager>().SpeedChange(spell.GetSpell().effectDuration, 0.5f);
             }
         }
         catch

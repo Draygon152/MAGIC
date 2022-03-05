@@ -11,7 +11,8 @@ public class MenuManager : MonoBehaviour
     public OptionsMenu optionsMenuPrefab;
     public VideoOptions videoOptionsPrefab;
     public SoundOptions soundOptionsPrefab;
-    public LobbyMenu lobbyMenuPrefab;
+    public SingleplayerLobbyMenu singleplayerLobbyPrefab;
+    public MultiplayerLobbyMenu multiplayerLobbyPrefab;
     public HUD hudPrefab;
     public PauseMenu pauseMenuPrefab;
     public VictoryGameOver victoryMenuPrefab;
