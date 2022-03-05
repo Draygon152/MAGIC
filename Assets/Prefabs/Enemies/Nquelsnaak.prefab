@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: damageDealt
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2686184855805433103, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: damageOverTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1872983717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: typeName
       value: Nquelsnaak
@@ -71,12 +75,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Nquelsnaak
       objectReference: {fileID: 0}
+    - target: {fileID: 8961594199354966123, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8991031362452138341, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Name
       value: Nquelsnaak
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+    - {fileID: 8961594199354966123, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
 --- !u!1 &4391336237789353534 stripped
 GameObject:
@@ -113,7 +122,7 @@ MonoBehaviour:
   charge: 1.5
   distanceToMaintain: 15
   maintainDistanceError: 5
-  larvaPrefab: {fileID: 7751559521620626905, guid: 57e5c155b04c76b31915915be219a196, type: 3}
+  larvaPrefab: {fileID: 4942251179604567321, guid: 57e5c155b04c76b31915915be219a196, type: 3}
   spawnTime: 6
   spawnAmount: 2
   spawnRange: 3

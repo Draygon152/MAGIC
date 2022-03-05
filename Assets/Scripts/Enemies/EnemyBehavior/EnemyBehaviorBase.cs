@@ -1,11 +1,11 @@
-// Written by Liz
+// Written by Lizbeth
 // Modified by Lawson
 
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-// This class currently set the enemy's basic behavior to follow the nearest player within radius
+// This class serve as the base for all enemies. Each has the ability to follow/flee, wonder, and attack within radius
 public class EnemyBehaviorBase : MonoBehaviour
 {
     // Advanced following variables
@@ -20,6 +20,10 @@ public class EnemyBehaviorBase : MonoBehaviour
     [SerializeField] private float timeBetweenWander; // How many seconds should the enemy wander
     [SerializeField] private float wanderTowardsPlayerInterval;
     [SerializeField] private float charge; // Increase the charge temporarily when enemy cannot find player for a while
+
+    // Attack variables
+    [SerializeField] private float attackRadius = 1;
+
 
     protected PlayerManager playerManager;
     protected Collider[] foundPlayers; // List of players' colliders
@@ -69,7 +73,7 @@ public class EnemyBehaviorBase : MonoBehaviour
                 StartCoroutine(FindPlayersWithinRadius());
             }
 
-            // If there is a current player target, enemy would process to follow the chosen player
+            // If there is a current player target, enemy would proceed to follow the chosen player
             // If not, enemy would begin to wander
             if (currentTargetNumber != -1)
             {
@@ -95,6 +99,12 @@ public class EnemyBehaviorBase : MonoBehaviour
         agent.SetDestination(targetLocation);
     }
 
+
+    protected void Flee(Vector3 location)
+    {
+        Vector3 fleeVector = location - this.gameObject.transform.position;
+        agent.SetDestination(this.transform.position - fleeVector);
+    }
 
     private IEnumerator Wander()
     {
@@ -137,7 +147,7 @@ public class EnemyBehaviorBase : MonoBehaviour
             Transform playerLocation = playerManager.GetPlayerLocation(player.PlayerNumber);
             float newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
 
-            if (newDistance <= currentDistance)
+            if (newDistance <= currentDistance && player.gameObject.activeInHierarchy)
             {
                 shorterPosition = playerLocation.position; // Found shortest position
             }
@@ -182,7 +192,7 @@ public class EnemyBehaviorBase : MonoBehaviour
             float currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
             float newDistance = Vector3.Distance(this.transform.position, playerManager.GetPlayerLocation(playerNum).position);
 
-            if (newDistance <= currentDistance)
+            if (newDistance <= currentDistance && player.gameObject.activeInHierarchy)
             {
                 shorterPosition = playerManager.GetPlayerLocation(playerNum).position; // Found shortest position
                 currentTargetNumber = playerNum; // Set enemy's target
@@ -191,12 +201,25 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
-    protected void Flee(Vector3 location)
+    // Returns a boolean that states whether current target is within attack radius
+    protected bool IsWithinAttackRadius()
     {
-        Vector3 fleeVector = location - this.gameObject.transform.position;
-        agent.SetDestination(this.transform.position - fleeVector);
-    }
+        bool isWithinRadius = false;
 
+        // Checks if there is a current target. If not, then it is not within attack radius
+        if (currentTargetNumber != -1)
+        {
+            Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
+            float distance = Vector3.Distance(this.transform.position, targetLocation);
+
+            if (distance <= attackRadius)
+            {
+                isWithinRadius = true;
+            }
+        }
+
+        return isWithinRadius;
+    }
 
     virtual protected void PerformBehavior()
     {
@@ -204,10 +227,6 @@ public class EnemyBehaviorBase : MonoBehaviour
         {
             agent.speed = enemyOriginalSpeed;
         }
-
-        // Grab targeted player's location
-        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
-        Follow(targetLocation);
     }
 
 

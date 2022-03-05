@@ -1,4 +1,5 @@
 // Written by Lawson
+// Modified a little by Lizbeth
 
 using System.Collections;
 using UnityEngine;
@@ -32,6 +33,9 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
 
     protected override void PerformBehavior()
     {
+        // Liz's small modification:
+        base.PerformBehavior();
+
         // Get the distance from the target
         targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
         distanceFromTarget = (this.gameObject.transform.position - targetLocation).magnitude;

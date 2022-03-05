@@ -73,6 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+    - {fileID: 8961594199354966123, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
 --- !u!1 &7298832424236615750 stripped
 GameObject:
@@ -107,7 +108,10 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
+  attackRadius: 1
   healAmount: 1
   healTime: 1
   fleeHealthPercentage: 0.2
   attackHealthPercentage: 0.8
+  attackHiskgarPower: 1
+  damageOverTimeHiskgar: 2
