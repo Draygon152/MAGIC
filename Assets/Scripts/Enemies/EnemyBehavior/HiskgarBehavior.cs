@@ -49,7 +49,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
         self = this.gameObject.GetComponent<EnemyHealthManager>();
         damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>(); // Grab enemy's EnemyDamageGiver
         // Set Attack Variables
-        attackPower = damageGiver.GetDamageDealt();
+        attackPower = damageGiver.CurrentDamage();
         damageOverTime = damageGiver.GetDamageOverTime();
         readyToApplyDamage = true;
     }

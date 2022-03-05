@@ -10,21 +10,16 @@ public class CollisionDamageGiver : DamageGiver
     [SerializeField] private int damageDealt; // Attack power
     [SerializeField] private float damageOverTime; // Attack player in X seconds overtime
 
-    public int GetDamageDealt()
-    {
-        return damageDealt;
-    }
-
     public float GetDamageOverTime()
     {
         return damageOverTime;
     }
-    public int currentDamage()
+    public int CurrentDamage()
     {
         return damageDealt;
     }
 
-    public void changeDamage(int newdamage)
+    public void ChangeDamage(int newdamage)
     {
         damageDealt = newdamage;
     }
