@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 //This class will manage the players and their data
 public class PlayerManager : MonoBehaviour
 {
-    private const int NUMBER_OF_PLAYERS = 2; // Maximum number of players in the game
     public const int PLAYER_1 = 0; // array index of player 1
     public const int PLAYER_2 = 1; // array index of player 2
 
@@ -30,22 +29,26 @@ public class PlayerManager : MonoBehaviour
         private set;
     }
 
+    public void SetNumberOfPlayers(int numberOfPlayers)
+    {
+        playerCount = numberOfPlayers;
+
+        // Initialize the player data SOs
+        playerData = new PlayerData[playerCount];
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+        {
+            playerData[playerIndex] = new PlayerData(); // create SO instance for player 1
+        }
+
+        // Initialize the player game objects array
+        playerGameObject = new Player[playerCount];
+    }
 
 
     private void Awake()
     {
         // Set up Instance
         Instance = this;
-
-        // Initialize the player data SOs
-        playerData = new PlayerData[NUMBER_OF_PLAYERS];
-        for (int playerIndex = 0; playerIndex < NUMBER_OF_PLAYERS; playerIndex++)
-        {
-            playerData[playerIndex] = new PlayerData(); // create SO instance for player 1
-        }
-
-        // Initialize the player game objects array
-        playerGameObject = new Player[NUMBER_OF_PLAYERS];
     }
 
 
@@ -59,32 +62,6 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
-        playerCount = 0; // Counts up the number of players spawned
-
-        // Check for unused players
-        if (playerData[PLAYER_2].pairedDevice == null)
-        {
-            playerGameObject[PLAYER_2].gameObject.SetActive(false);
-
-            // keep player one no matter what, so there is at least one player in the game
-            playerCount++;
-        }
-        else
-        {
-            // Count player two
-            playerCount++;
-
-            if (playerData[PLAYER_1].pairedDevice == null)
-            {
-                playerGameObject[PLAYER_1].gameObject.SetActive(false);
-            }
-            else
-            {
-                // count player one
-                playerCount++;
-            }
-        }
-
         for (int playerIndex = 0; playerIndex < playerCount; playerCount++)
         {
             // Spawn both players
@@ -102,30 +79,6 @@ public class PlayerManager : MonoBehaviour
 
             // Set player identification numbers
             playerGameObject[playerIndex].PlayerNumber = playerIndex;
-
-            // Check for unused players
-            if (playerData[PLAYER_2].pairedDevice == null)
-            {
-                playerGameObject[PLAYER_2].gameObject.SetActive(false);
-
-                // keep player one no matter what, so there is at least one player in the game
-                playerCount++;
-            }
-            else
-            {
-                // Count player two
-                playerCount++;
-
-                if (playerData[PLAYER_1].pairedDevice == null)
-                {
-                    playerGameObject[PLAYER_1].gameObject.SetActive(false);
-                }
-                else
-                {
-                    // count player one
-                    playerCount++;
-                }
-            }
         }
 
         return playerCount;
@@ -213,6 +166,7 @@ public class PlayerData
 {
     public Element ElementalAffinity;
     public InputDevice pairedDevice;
+    public bool AI = false;
 
     public PlayerData()
     {
