@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
                                                                          // Player 2 spawns at playerSpawnPoint - spawnOffset
 
     // Make the player manager a Singleton
-    static public PlayerManager Instance
+    public static PlayerManager Instance
     {
         get;
         private set;
@@ -135,18 +135,13 @@ public class PlayerManager : MonoBehaviour
     // A function to tell PlayerManager when the HUD is ready to accept player data
     public void InitializeHUD()
     {
-        playerGameObject[PLAYER_1].SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
-        playerGameObject[PLAYER_2].SetHealthBarDelegates(HUD.Instance.SetP2CurHealth, HUD.Instance.SetP2MaxHealth);
-
-        HUD.Instance.SetP1SpellCaster(playerGameObject[PLAYER_1].GetCaster());
-        HUD.Instance.SetP2SpellCaster(playerGameObject[PLAYER_2].GetCaster());
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             // Set health bars
-            //playerGameObject[playerIndex].SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
+            playerGameObject[playerIndex].SetHealthBarDelegates(HUD.Instance.SetPlayerCurHealth, HUD.Instance.SetPlayerMaxHealth);
 
             // Displays player's base spell
-            // HUD.Instance.SetP1SpellCaster(playerGameObject[playerIndex].GetCaster());
+            HUD.Instance.SetPlayerSpellCaster(playerIndex, playerGameObject[playerIndex].GetCaster());
         }
     }
 

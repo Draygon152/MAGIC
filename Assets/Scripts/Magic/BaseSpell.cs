@@ -82,6 +82,7 @@ public class BaseSpell : MonoBehaviour
         Destroy(gameObject);
     }
 
+
     private IEnumerator Expansion(float time)
     {
         for (int i = 0; i < 2; i++)
@@ -100,11 +101,13 @@ public class BaseSpell : MonoBehaviour
 
         // Apply spell effect at the collision's gameobject
         Debug.Log($"Spell of element '{spellToCast.element}' collided");
+
         effectCall.Invoke(player, collision.gameObject, this);
     }
 
+
     private void OnActivate()
     {
-        print("boop");
+        Debug.Log($"{name} Activation");
     }
 }

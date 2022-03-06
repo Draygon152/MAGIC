@@ -11,7 +11,8 @@ public class MenuManager : MonoBehaviour
     public OptionsMenu optionsMenuPrefab;
     public VideoOptions videoOptionsPrefab;
     public SoundOptions soundOptionsPrefab;
-    public LobbyMenu lobbyMenuPrefab;
+    public SingleplayerLobbyMenu singleplayerLobbyPrefab;
+    public MultiplayerLobbyMenu multiplayerLobbyPrefab;
     public HUD hudPrefab;
     public PauseMenu pauseMenuPrefab;
     public VictoryGameOver victoryMenuPrefab;
@@ -19,12 +20,12 @@ public class MenuManager : MonoBehaviour
 
     private Stack<Menu> menuStack = new Stack<Menu>();
 
-
     public static MenuManager Instance
     {
         get;
         private set;
     }
+
 
 
     // Fine to use private here, since nothing should inherit from MenuManager
@@ -120,13 +121,13 @@ public class MenuManager : MonoBehaviour
 
         if (menuStack.Count == 0)
         {
-            Debug.LogErrorFormat(closedMenu, "cannot close {0}, menu stack empty", closedMenu.GetType());
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, menu stack empty");
             return;
         }
 
         if (menuStack.Peek() != closedMenu)
         {
-            Debug.LogErrorFormat(closedMenu, "cannot close {0}, not at top of menu stack", closedMenu.GetType());
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, not at top of menu stack");
             return;
         }
 

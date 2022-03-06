@@ -1,13 +1,18 @@
 // Written by Kevin Chao
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MainMenu : Menu<MainMenu>
 {
-    public void PlayGamePressed()
+    public void SingleplayerPressed()
     {
-        LobbyMenu.Open();
+        SingleplayerLobbyMenu.Open();
+    }
+
+
+    public void MultiplayerPressed()
+    {
+        MultiplayerLobbyMenu.Open();
     }
 
 
