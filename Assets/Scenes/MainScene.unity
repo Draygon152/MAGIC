@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1082,6 +1082,38 @@ PrefabInstance:
       propertyPath: playerSpawnPoint
       value: 
       objectReference: {fileID: 141253490}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[0].x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[0].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[1].x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[1].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[2].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672458254429893568, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
+      propertyPath: spawnOffset.Array.data[2].y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7672458254429893569, guid: 2f64e439bf8e329a89a26373082ac738, type: 3}
       propertyPath: m_RootOrder
       value: 6

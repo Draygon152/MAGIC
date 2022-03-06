@@ -90,17 +90,9 @@ public class MagicCasting : MonoBehaviour
 
             spellToCast = collision.GetComponent<SpellItem>().GetSpell();
             castCooldown = spellToCast.GetSpell().timeBetweenCasts;
-            if (playerNumber == PlayerManager.PLAYER_1)
-            {
-                HUD.Instance.SetPlayerSpellCaster(PlayerManager.PLAYER_1, this);
-                HUD.Instance.SetPlayerMaxCooldown(PlayerManager.PLAYER_1, spellToCast.GetSpell().timeBetweenCasts);
-            }
-
-            else if (playerNumber == PlayerManager.PLAYER_2)
-            {
-                HUD.Instance.SetPlayerSpellCaster(PlayerManager.PLAYER_2, this);
-                HUD.Instance.SetPlayerMaxCooldown(PlayerManager.PLAYER_2, spellToCast.GetSpell().timeBetweenCasts);
-             }
+            
+            HUD.Instance.SetPlayerSpellCaster(playerNumber, this);
+            HUD.Instance.SetPlayerMaxCooldown(playerNumber, spellToCast.GetSpell().timeBetweenCasts);
         }
     }
 

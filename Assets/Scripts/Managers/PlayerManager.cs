@@ -42,6 +42,11 @@ public class PlayerManager : MonoBehaviour
         playerGameObject = new Player[playerCount];
     }
 
+    public int GetNumberOfPlayers()
+    {
+        return playerCount;
+    }
+
 
     private void Awake()
     {
@@ -108,6 +113,8 @@ public class PlayerManager : MonoBehaviour
 
     public Player GetPlayer(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerGameObject[player];
     }
 
@@ -115,6 +122,8 @@ public class PlayerManager : MonoBehaviour
     // A getter function for retrieving the player data
     public PlayerData GetPlayerData(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerData[player];
     }
 
@@ -123,6 +132,8 @@ public class PlayerManager : MonoBehaviour
     // To access Player 1, pass 0. To access Player 2, pass 1.
     public Transform GetPlayerLocation(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerGameObject[player].transform;
     }
 
@@ -143,7 +154,6 @@ public class PlayerManager : MonoBehaviour
             Destroy(playerGameObject[playerIndex].gameObject);
         }
     }
-
 
     // This function returns a reference to the dead player if there is one.
     // If there is no dead player it will return null instead. Note that if both

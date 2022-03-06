@@ -44,7 +44,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
     }
 
 
-    protected override void PerformBehavior()
+    protected override void PerformEnemyBehavior()
     {
         switch (state)
         {

@@ -75,7 +75,7 @@ public class EnemyBehaviorBase : BehaviorBase
             {
                 // Perform the behavior for this enemy, the base function will just follow, but it
                 // can be overriden for different behaviors
-                PerformBehavior();
+                PerformEnemyBehavior();
             }
 
             else
