@@ -18,9 +18,7 @@ public class PlayerManager : MonoBehaviour
     //for spawning the players
     [SerializeField] private GameObject playerPrefab;  // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private Vector3 spawnOffset = new Vector3(5, 0, 0); // The offset from the spawnPoint the players will spawn
-                                                                         // Player 2 spawns at playerSpawnPoint + spawnOffset
-                                                                         // Player 2 spawns at playerSpawnPoint - spawnOffset
+    [SerializeField] private Vector3[] spawnOffset;  // The offset from the spawnPoint the players will spawn
 
     // Make the player manager a Singleton
     public static PlayerManager Instance
@@ -62,7 +60,7 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
-        for (int playerIndex = 0; playerIndex < playerCount; playerCount++)
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             // Spawn both players
             playerGameObject[playerIndex] = PlayerInput.Instantiate(playerPrefab, playerIndex: playerIndex, pairWithDevice: playerData[playerIndex].pairedDevice).GetComponent<Player>();
@@ -71,7 +69,7 @@ public class PlayerManager : MonoBehaviour
             // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
             // player index and pairWithDevice in PlayerInput) I could not pass in the spawn point transform to spawn
             // the players at the right location. As a result they must be moved manually.
-            playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset;
+            playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset[playerIndex];
             playerGameObject[playerIndex].transform.rotation = playerSpawnPoint.rotation;
 
             // Set player's elemental affinity, assign delegates to player's health bar
@@ -79,6 +77,15 @@ public class PlayerManager : MonoBehaviour
 
             // Set player identification numbers
             playerGameObject[playerIndex].PlayerNumber = playerIndex;
+
+            //Activate the AI for AI players
+            if (playerData[playerIndex].pairedDevice == null)
+            {
+                playerGameObject[playerIndex].GetComponent<CoopAIBehavior>().enabled = true;
+
+                //disable controls
+                playerGameObject[playerIndex].GetComponent<PlayerInput>().enabled = false;
+            }
         }
 
         return playerCount;

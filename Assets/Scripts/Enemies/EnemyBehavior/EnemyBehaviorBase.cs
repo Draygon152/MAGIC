@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using System.Collections;
 
 // This class currently set the enemy's basic behavior to follow the nearest player within radius
-public class EnemyBehaviorBase : MonoBehaviour
+public class EnemyBehaviorBase : BehaviorBase
 {
     // Advanced following variables
     [SerializeField] protected NavMeshAgent agent;
@@ -59,7 +59,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    override protected void PerformBehavior()
     {
         if (!gameOver)
         {
@@ -198,7 +198,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
-    virtual protected void PerformBehavior()
+    virtual protected void PerformEnemyBehavior()
     {
         if (agent.speed != enemyOriginalSpeed)
         {
