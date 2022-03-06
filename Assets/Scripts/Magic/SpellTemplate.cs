@@ -20,6 +20,7 @@ public class SpellTemplate : ScriptableObject
 
     // Determines whether spell should be cast centered on self or not
     public bool self;
+    public bool expand;
 
     public ElementTypes.Elements element;
 }

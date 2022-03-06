@@ -51,6 +51,6 @@ public class SpellList : MonoBehaviour
     public BaseSpell GetTestSpell()
     {
         print(listOfSpells.Count);
-        return listOfSpells[7];
+        return listOfSpells[13];
     }
 }

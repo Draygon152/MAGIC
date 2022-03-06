@@ -58,7 +58,7 @@ public class BaseSpell : MonoBehaviour
 
         // Destroy spell after certain time if it does not hit anything
         StartCoroutine(SpellDuration(spellToCast.spellLifetime));
-        if(spellToCast.self == true)
+        if(spellToCast.expand == true)
         {
             StartCoroutine(Expansion(.5f));
         }
