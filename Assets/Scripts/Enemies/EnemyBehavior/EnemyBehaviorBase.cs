@@ -59,7 +59,7 @@ public class EnemyBehaviorBase : BehaviorBase
     }
 
 
-    override protected void PerformBehavior()
+    protected override void PerformBehavior()
     {
         if (!gameOver)
         {
@@ -198,7 +198,7 @@ public class EnemyBehaviorBase : BehaviorBase
     }
 
 
-    virtual protected void PerformEnemyBehavior()
+    protected virtual void PerformEnemyBehavior()
     {
         if (agent.speed != enemyOriginalSpeed)
         {
@@ -216,10 +216,12 @@ public class EnemyBehaviorBase : BehaviorBase
         gameOver = true;
     }
     
+
     public void changeSpeed(float newspeed)
     {
         enemyOriginalSpeed = newspeed;
     }
+
 
     public float returnSpeed()
     {
