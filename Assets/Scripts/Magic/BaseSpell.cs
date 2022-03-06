@@ -102,7 +102,6 @@ public class BaseSpell : MonoBehaviour
     // TODO: Set the player number to the player that was collided with
     private void OnTriggerEnter(Collider collision)
     {
-        print("player?");
         if(spellToCast.continious == false)
         {
             // Destroy the spell when it collides
@@ -122,6 +121,5 @@ public class BaseSpell : MonoBehaviour
     {
         effectCall.Invoke(player, null, this);
         Destroy(gameObject);
-
     }
 }

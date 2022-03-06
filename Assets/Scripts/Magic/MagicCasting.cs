@@ -60,13 +60,11 @@ public class MagicCasting : MonoBehaviour
     {
         if (spellToCast.GetSpell().spellSpeed == 0)
         {
-            print("nospeed");
             castLocation.localPosition = new Vector3(0, -0.5f, 0);
         }
 
         else
         {
-            print("speed");
             if (spellToCast.GetSpell().spellSpeed < .5)
             {
                 castLocation.localPosition = new Vector3(0, 0, 1);
