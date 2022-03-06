@@ -32,8 +32,8 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
 
         foreach (Dropdown inputSelector in inputSelectors)
         {
-            inputSelector.AddOptions(new List<string> { "Select Input Device" });
             inputSelector.AddOptions(new List<string>(availableDevices.Keys));
+            inputSelector.AddOptions(new List<string> { "AI Player" });
         }
     }
 
@@ -98,7 +98,7 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
 
         string selectedOption = inputSelectors[playerNumber].options[inputSelectors[playerNumber].value].text;
 
-        if (selectedOption == "Select Input Device")
+        if (selectedOption == "AI Player")
         {
             playerDataList[playerNumber].pairedDevice = null;
         }

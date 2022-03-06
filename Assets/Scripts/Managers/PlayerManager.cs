@@ -209,6 +209,8 @@ public class PlayerManager : MonoBehaviour
     }
 }
 
+
+
 public class PlayerData
 {
     public Element ElementalAffinity;
