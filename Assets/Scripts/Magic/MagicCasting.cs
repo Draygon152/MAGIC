@@ -58,20 +58,25 @@ public class MagicCasting : MonoBehaviour
 
     private void ChangeTransform()
     {
-        if (spellToCast.GetSpell().spellSpeed == 0)
+        float cooldownRemaining;
+        cooldownRemaining = HUD.Instance.ReturnCooldown(playerNumber);
+        if(cooldownRemaining == 0)
         {
-            castLocation.localPosition = new Vector3(0, -0.5f, 0);
-        }
-
-        else
-        {
-            if (spellToCast.GetSpell().spellSpeed < .5)
+            if (spellToCast.GetSpell().spellSpeed == 0)
             {
-                castLocation.localPosition = new Vector3(0, 0, 1);
+                castLocation.localPosition = new Vector3(0, -0.5f, 0);
             }
+
             else
             {
-                castLocation.localPosition = new Vector3(0, 0, 0);
+                if (spellToCast.GetSpell().spellSpeed < .5)
+                {
+                    castLocation.localPosition = new Vector3(0, 0, 1);
+                }
+                else
+                {
+                    castLocation.localPosition = new Vector3(0, 0, 0);
+                }
             }
         }
     }

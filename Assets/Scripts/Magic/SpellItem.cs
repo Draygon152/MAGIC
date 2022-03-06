@@ -26,7 +26,7 @@ public class SpellItem : MonoBehaviour
 
     private void Start()
     {
-        containedSpell = SpellList.Instance.GetTestSpell();
+        containedSpell = SpellList.Instance.GetRandomSpell();
         // containedSpell = SpellList.Instance.GetTestSpell();
 
         Debug.Log($"SPELL IN ITEM: {containedSpell}");
