@@ -58,9 +58,9 @@ public class MagicCasting : MonoBehaviour
 
     private void ChangeTransform()
     {
-        float cooldownRemaining;
-        cooldownRemaining = HUD.Instance.ReturnCooldown(playerNumber);
-        if(cooldownRemaining == 0)
+        float cooldownRemaining = HUD.Instance.ReturnCooldown(playerNumber);
+
+        if (cooldownRemaining == 0)
         {
             if (spellToCast.GetSpell().spellSpeed == 0)
             {
