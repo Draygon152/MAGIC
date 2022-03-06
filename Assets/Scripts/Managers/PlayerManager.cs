@@ -62,7 +62,7 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
-        for (int playerIndex = 0; playerIndex < playerCount; playerCount++)
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             // Spawn both players
             playerGameObject[playerIndex] = PlayerInput.Instantiate(playerPrefab, playerIndex: playerIndex, pairWithDevice: playerData[playerIndex].pairedDevice).GetComponent<Player>();
