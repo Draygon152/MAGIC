@@ -14,7 +14,7 @@ public class SpellEffects : MonoBehaviour
         player.transform.position = spell.transform.position;
     }
 
-    public void pushbackeffect(Player player, GameObject target, BaseSpell spell)
+    public void Pushbackeffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
@@ -37,13 +37,12 @@ public class SpellEffects : MonoBehaviour
         }
     }
 
-    public void healeffect(Player player, GameObject target, BaseSpell spell)
+    public void Healeffect(Player player, GameObject target, BaseSpell spell)
     {
-        if (target != null)
-            player.GetComponent<PlayerHealthManager>().GainHealth(spell.GetSpell().damage);
+        player.GetComponent<PlayerHealthManager>().GainHealth(spell.GetSpell().damage);
     }
 
-    public void stuneffect(Player player, GameObject target, BaseSpell spell)
+    public void Stuneffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
@@ -58,7 +57,7 @@ public class SpellEffects : MonoBehaviour
         }
     }
 
-    public void sustaineddamageeffect(Player player, GameObject target, BaseSpell spell)
+    public void Sustaineddamageeffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
@@ -72,7 +71,7 @@ public class SpellEffects : MonoBehaviour
         }
     }
 
-    public void sloweffect(Player player, GameObject target, BaseSpell spell)
+    public void Sloweffect(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
@@ -84,5 +83,30 @@ public class SpellEffects : MonoBehaviour
         catch
         {
         }
+    }
+
+    public void BounceDamage(Player player, GameObject target, BaseSpell spell)
+    {
+        try
+        {
+            GameObject currenttarget = target;
+            while (currenttarget != null)
+            {
+                currenttarget = ReturnEnemyinRange(3f, currenttarget);
+                if(currenttarget != null)
+                {
+                    spellDamageGiver.UseDamage(currenttarget, spell.GetSpell().damage);
+                }
+
+            }
+        }
+        catch
+        {
+        }
+    }
+
+    private GameObject ReturnEnemyinRange(float range, GameObject currenttarget)
+    {
+        return null;
     }
 }

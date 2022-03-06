@@ -68,4 +68,16 @@ public class HUD : Menu<HUD>
         enemyCounter.text = "Enemies Remaining: " + Convert.ToString(enemiesRemaining);
     }
 
+    public float ReturnCooldown(int playerNumber)
+    {
+        if(playerNumber == 0)
+        {
+            return player1SpellUI.CheckSpellCooldownValue();
+        }
+        else
+        {
+            return player2SpellUI.CheckSpellCooldownValue();
+        }
+    }
+
 }
