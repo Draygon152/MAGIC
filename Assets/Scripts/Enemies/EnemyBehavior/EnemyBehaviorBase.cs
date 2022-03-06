@@ -14,6 +14,11 @@ public class EnemyBehaviorBase : MonoBehaviour
     [SerializeField] private float timeBetweenCheckPlayers; // How many seconds should the enemy check for players
     [SerializeField] private LayerMask layerMask; // Detect colliders within layerMask
 
+    // Flee variables
+    [SerializeField] protected bool hasFleeBehavior; // flag which indicates the enemy will flee at some distance
+    [SerializeField] protected float fleeCooldown = 5f;
+    [SerializeField] private float fleeDistance; // Enemy runs away if player is within fleeDistance
+
     // Wander variables
     [SerializeField] private float wanderMinRadius;
     [SerializeField] private float wanderMaxRadius;
@@ -79,7 +84,6 @@ public class EnemyBehaviorBase : MonoBehaviour
                 // can be overriden for different behaviors
                 PerformBehavior();
             }
-
             else
             {
                 if (isWanderTime)
@@ -100,9 +104,25 @@ public class EnemyBehaviorBase : MonoBehaviour
 
     protected void Flee(Vector3 location)
     {
-        Vector3 fleeVector = location - this.gameObject.transform.position;
-        agent.SetDestination(this.transform.position - fleeVector);
+        Vector3 distance = location - this.gameObject.transform.position;
+        Vector3 fleeVector = this.transform.position - distance;
+
+        NavMeshHit hit;
+        bool test = NavMesh.SamplePosition(fleeVector, out hit, 10.0f, NavMesh.AllAreas);
+
+        
+        if (test)
+        {
+            agent.SetDestination(fleeVector);
+            Debug.Log($"Destination set! {agent.SetDestination(fleeVector)}");
+        }
+        else
+        {
+            Debug.Log("Cant find shit!");
+        }
     }
+
+
 
     private IEnumerator Wander()
     {
@@ -199,12 +219,12 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
-    // Returns a boolean that states whether current target is within attack radius
-    protected bool IsWithinAttackRadius()
+    // Returns a boolean that states whether current target is within attack distance
+    protected bool IsWithinAttackDistance()
     {
         bool isWithinRadius = false;
 
-        // Checks if there is a current target. If not, then it is not within attack radius
+        // Checks if there is a current target. If not, then it is not within attack distance
         if (currentTargetNumber != -1)
         {
             Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
@@ -217,6 +237,26 @@ public class EnemyBehaviorBase : MonoBehaviour
         }
 
         return isWithinRadius;
+    }
+
+    // Returns a boolean that states whether current target is within flee distance
+    // If enemy does not have flee behavior enabled, this function automatically returns false
+    protected bool IsWithinFleeDistance()
+    {
+        bool isWithinDistance = false;
+
+        if (hasFleeBehavior && currentTargetNumber != -1)
+        {
+            Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
+            float distance = Vector3.Distance(this.transform.position, targetLocation);
+
+            if (distance <= fleeDistance)
+            {
+                isWithinDistance = true;
+            }
+        }
+
+        return isWithinDistance;
     }
 
     virtual protected void PerformBehavior()
@@ -244,6 +284,4 @@ public class EnemyBehaviorBase : MonoBehaviour
     {
         gameOver = true;
     }
-    
-    
 }

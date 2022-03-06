@@ -120,6 +120,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
+  hasFleeBehavior: 0
+  fleeCooldown: 5
+  fleeDistance: 1
   wanderMinRadius: 20
   wanderMaxRadius: 40
   timeBetweenWander: 4

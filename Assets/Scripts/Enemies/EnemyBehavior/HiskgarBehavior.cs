@@ -4,7 +4,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class HiskgarBehavior : EnemyBehaviorBase
+public class HiskgarBehavior : MeleeBehavior
 {
     [SerializeField] private int healAmount = 5; // The amount the Hiskgar heals with each tick while fleeing
     [SerializeField] private int healTime = 1;   // The amount of time between heal ticks while fleeing
@@ -17,27 +17,21 @@ public class HiskgarBehavior : EnemyBehaviorBase
     private bool healing = false;    // A bool to flag whether or not the Hiskgar is currently healing
     private bool hasHealed = false;  // Bool flag to determine if the Hiskgar has already healed once
 
-    // Attack Variables
-    private CollisionDamageGiver damageGiver; // A reference to the damage giver class for applying damage
-    private int attackPower;
-    private float damageOverTime; // Attack player in X seconds overtime
-    private bool readyToApplyDamage; // A bool to flag whether or not the enemy is ready to attack again
-
-
+    
     private enum HiskgarState
     {
         followPlayer,
         attackPlayer,
         fleeingAndHealing
     }
-    private HiskgarState state;
+    private HiskgarState hiskgarState;
 
 
     protected override void Awake()
     {
         base.Awake();
 
-        state = HiskgarState.followPlayer;
+        hiskgarState = HiskgarState.attackPlayer;
     }
 
 
@@ -47,59 +41,25 @@ public class HiskgarBehavior : EnemyBehaviorBase
         
         // Set the reference to the health manager
         self = this.gameObject.GetComponent<EnemyHealthManager>();
-        damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>(); // Grab enemy's EnemyDamageGiver
-        // Set Attack Variables
-        attackPower = damageGiver.CurrentDamage();
-        damageOverTime = damageGiver.GetDamageOverTime();
-        readyToApplyDamage = true;
     }
 
 
     protected override void PerformBehavior()
     {
-        // Liz's small modification:
-        base.PerformBehavior();
-
-        switch (state)
+        switch (hiskgarState)
         {
-            // Liz's modification:
-            case HiskgarState.followPlayer:
-                // Follow the player closest to enemy
-                Follow(playerManager.GetPlayerLocation(currentTargetNumber).position);
-
-                // Check if health is low first and then check attack radius
-                if (self.HealthBelowPercentageThreshold(fleeHealthPercentage))
-                {
-                    state = HiskgarState.fleeingAndHealing;
-                }
-                else if (IsWithinAttackRadius())
-                {
-                    state = HiskgarState.attackPlayer;
-                }
-                
-                break;
-
             case HiskgarState.attackPlayer:
                 // Check if health is low first
                 if (self.HealthBelowPercentageThreshold(fleeHealthPercentage))
                 {
-                    state = HiskgarState.fleeingAndHealing;
+                    hiskgarState = HiskgarState.fleeingAndHealing;
                 }
-                else if (!IsWithinAttackRadius())
-                {
-                    state = HiskgarState.followPlayer; // If player not within attack radius, change state to following
-                }
-
-                // Attack closest player if ready
-                if (readyToApplyDamage)
-                {
-                    StartCoroutine(CauseTargetDamage());
-                }
-
+                // Perform regular melee behavior
+                base.PerformBehavior();
                 break;
+                
                 // Check if health is below flee health percentage
                 // if so switch to fleeing
-
             case HiskgarState.fleeingAndHealing:
                 // when fleeing from the player, flee from closest player and heal
                 Flee(playerManager.GetPlayerLocation(currentTargetNumber).position);
@@ -113,7 +73,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
                 // if so switch to attacking
                 if (self.HealthAbovePercentageThreshold(attackHealthPercentage))
                 {
-                    state = HiskgarState.followPlayer;
+                    hiskgarState = HiskgarState.attackPlayer;
                     hasHealed = true;
                 }
                 break;
@@ -132,20 +92,5 @@ public class HiskgarBehavior : EnemyBehaviorBase
         // cooldown before next heal, when done mark self as not healing
         yield return new WaitForSeconds(healTime);
         healing = false;
-    }
-
-    // Apply damage
-    private IEnumerator CauseTargetDamage()
-    {
-        readyToApplyDamage = false;
-
-        PlayerHealthManager targetHealthManager = playerManager.GetPlayer(currentTargetNumber).gameObject.GetComponent<PlayerHealthManager>();
-        if (targetHealthManager != null && damageGiver != null)
-        {
-            damageGiver.DamageTarget(targetHealthManager, attackPower);
-        }
-
-        yield return new WaitForSeconds(damageOverTime);
-        readyToApplyDamage = true;
     }
 }

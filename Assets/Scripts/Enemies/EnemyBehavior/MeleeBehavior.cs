@@ -8,13 +8,22 @@ public class MeleeBehavior : EnemyBehaviorBase
     private int attackPower;
     private float damageOverTime; // Attack player in X seconds overtime
     private bool readyToApplyDamage; // A bool to flag whether or not the enemy is ready to attack again
-
-    private enum MeleeState
+    private bool readyToFlee;
+    
+    protected enum MeleeState
     {
         followTarget,
-        attackTarget
+        attackTarget,
+        fleeFromTarget
     }
-    private MeleeState state;
+    protected MeleeState meleeState;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        meleeState = MeleeState.followTarget;
+    }
 
     protected override void Start()
     {
@@ -24,38 +33,56 @@ public class MeleeBehavior : EnemyBehaviorBase
         attackPower = damageGiver.CurrentDamage();
         damageOverTime = damageGiver.GetDamageOverTime();
         readyToApplyDamage = true;
+        readyToFlee = true;
     }
 
     protected override void PerformBehavior()
     {
         base.PerformBehavior();
-        
-        switch (state)
+
+        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
+        switch (meleeState)
         {
             case MeleeState.followTarget:
                 // Grab targeted player's location
-                Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
                 Follow(targetLocation);
 
                 // Change to attack state when target is nearby
-                if (IsWithinAttackRadius())
+                if (IsWithinAttackDistance())
                 {
-                    state = MeleeState.attackTarget;
+                    meleeState = MeleeState.attackTarget;
                 }
 
                 break;
             
             case MeleeState.attackTarget:
                 // If target not within radius, change state
-                if (!IsWithinAttackRadius())
+                if (!IsWithinAttackDistance())
                 {
-                    state = MeleeState.followTarget;
+                    meleeState = MeleeState.followTarget;
                 }
-
+                
                 // Target is within attack radius, apply damage overtime
                 if (readyToApplyDamage)
                 {
                     StartCoroutine(CauseTargetDamage());
+                    
+                    // If melee enemy has flee behavior, it will hit the target once and run away
+                    if (IsWithinFleeDistance())
+                    {
+                        meleeState = MeleeState.fleeFromTarget;
+                    }
+                }
+                break;
+
+            case MeleeState.fleeFromTarget:
+                if (readyToFlee)
+                {
+                    StartCoroutine(MeleeIsFleeing());
+                }
+                else
+                {
+                    Flee(targetLocation);
                 }
                 break;
         }
@@ -74,5 +101,24 @@ public class MeleeBehavior : EnemyBehaviorBase
 
         yield return new WaitForSeconds(damageOverTime);
         readyToApplyDamage = true;
+    }
+
+    private IEnumerator MeleeIsFleeing()
+    {
+        readyToFlee = false;
+        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
+        Flee(targetLocation);
+
+        yield return new WaitForSeconds(fleeCooldown);
+
+        if (!IsWithinAttackDistance())
+        {
+            meleeState = MeleeState.followTarget;
+        }
+        else
+        {
+            meleeState = MeleeState.attackTarget;
+        }
+        readyToFlee = true;
     }
 }
