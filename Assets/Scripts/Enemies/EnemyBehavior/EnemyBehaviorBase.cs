@@ -29,7 +29,6 @@ public class EnemyBehaviorBase : MonoBehaviour
     // Attack variables
     [SerializeField] private float attackDistance = 1; // Distance betweeen the enemy itself and target
 
-
     protected PlayerManager playerManager;
     protected Collider[] foundPlayers; // List of players' colliders
     protected int currentTargetNumber; // Enemy's current player target and -1 represents no target
@@ -39,6 +38,8 @@ public class EnemyBehaviorBase : MonoBehaviour
     private bool isWanderTime;
     private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
                            // minions from causing a game end after a player wins
+
+
 
     protected virtual void Awake()
     {
@@ -58,9 +59,11 @@ public class EnemyBehaviorBase : MonoBehaviour
     {
         agent = this.GetComponent<NavMeshAgent>();
         playerManager = PlayerManager.Instance;
+
         currentTargetNumber = -1;
         wanderInterval = 0;
         enemyOriginalSpeed = agent.speed;
+
         checkForPlayers = true;
         isWanderTime = true;
     }
@@ -84,6 +87,7 @@ public class EnemyBehaviorBase : MonoBehaviour
                 // can be overriden for different behaviors
                 PerformBehavior();
             }
+
             else
             {
                 if (isWanderTime)
@@ -116,12 +120,13 @@ public class EnemyBehaviorBase : MonoBehaviour
             agent.SetDestination(fleeVector);
             Debug.Log($"Destination set! {agent.SetDestination(fleeVector)}");
         }
+
         else
         {
+            // TODO: Remove before Playtest 3
             Debug.Log("Cant find shit!");
         }
     }
-
 
 
     private IEnumerator Wander()
@@ -239,6 +244,7 @@ public class EnemyBehaviorBase : MonoBehaviour
         return isWithinRadius;
     }
 
+
     // Returns a boolean that states whether current target is within flee distance
     // If enemy does not have flee behavior enabled, this function automatically returns false
     protected bool IsWithinFleeDistance()
@@ -259,7 +265,8 @@ public class EnemyBehaviorBase : MonoBehaviour
         return isWithinDistance;
     }
 
-    virtual protected void PerformBehavior()
+
+    protected virtual void PerformBehavior()
     {
         if (agent.speed != enemyOriginalSpeed)
         {
@@ -268,13 +275,13 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
-    public void changeSpeed(float newspeed)
+    public void ChangeSpeed(float newspeed)
     {
         enemyOriginalSpeed = newspeed;
     }
 
 
-    public float returnSpeed()
+    public float ReturnSpeed()
     {
         return agent.speed;
     }

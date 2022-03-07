@@ -1,4 +1,5 @@
 // Written by Lizbeth
+
 using System.Collections;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ public class RangeBehavior : EnemyBehaviorBase
     }
     private RangeState state;
 
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,12 +25,15 @@ public class RangeBehavior : EnemyBehaviorBase
         state = RangeState.followTarget;
     }
 
+
     protected override void Start()
     {
         base.Start();
+
         agent.stoppingDistance = stopAtDistance;
         readyToFlee = true;
     }
+
 
     protected override void PerformBehavior()
     {
@@ -53,6 +59,7 @@ public class RangeBehavior : EnemyBehaviorBase
                 {
                     StartCoroutine(RangeIsFleeing());
                 }
+
                 else
                 {
                     Flee(targetLocation);
@@ -60,6 +67,7 @@ public class RangeBehavior : EnemyBehaviorBase
                 break;
         }
     }
+
 
     private IEnumerator RangeIsFleeing()
     {
@@ -75,6 +83,7 @@ public class RangeBehavior : EnemyBehaviorBase
             agent.stoppingDistance = stopAtDistance; // Reset enemy's stopping distance
             state = RangeState.followTarget; // Change state
         }
+
         readyToFlee = true;
     }
 }

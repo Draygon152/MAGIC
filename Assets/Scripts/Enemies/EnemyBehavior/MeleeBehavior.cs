@@ -1,4 +1,5 @@
 // Written by Lizbeth
+
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class MeleeBehavior : EnemyBehaviorBase
 {
     private CollisionDamageGiver damageGiver; // A reference to the damage giver class for applying damage
     private int attackPower;
-    private float damageOverTime; // Attack player in X seconds overtime
+    private float attackCooldown; // Cooldown time between melee attacks
     private bool readyToApplyDamage; // A bool to flag whether or not the enemy is ready to attack again
     private bool readyToFlee;
     
@@ -18,6 +19,8 @@ public class MeleeBehavior : EnemyBehaviorBase
     }
     protected MeleeState meleeState;
 
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -25,16 +28,22 @@ public class MeleeBehavior : EnemyBehaviorBase
         meleeState = MeleeState.followTarget;
     }
 
+
     protected override void Start()
     {
         base.Start();
-        damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>(); // Grab enemy's EnemyDamageGiver
-        // Set Attack Variables
+
+        // TODO: Rename CollisionDamageGiver class for accuracy
+        // Grab enemy's EnemyDamageGiver
+        damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>(); 
+
+        // Set attack Variables
         attackPower = damageGiver.CurrentDamage();
-        damageOverTime = damageGiver.GetDamageOverTime();
+        attackCooldown = damageGiver.GetDamageOverTime();
         readyToApplyDamage = true;
         readyToFlee = true;
     }
+
 
     protected override void PerformBehavior()
     {
@@ -80,6 +89,7 @@ public class MeleeBehavior : EnemyBehaviorBase
                 {
                     StartCoroutine(MeleeIsFleeing());
                 }
+
                 else
                 {
                     Flee(targetLocation);
@@ -94,14 +104,15 @@ public class MeleeBehavior : EnemyBehaviorBase
         readyToApplyDamage = false;
 
         PlayerHealthManager targetHealthManager = playerManager.GetPlayer(currentTargetNumber).gameObject.GetComponent<PlayerHealthManager>();
-        if(targetHealthManager != null && damageGiver != null)
+        if (targetHealthManager != null && damageGiver != null)
         {
             damageGiver.DamageTarget(targetHealthManager, attackPower); 
         }
 
-        yield return new WaitForSeconds(damageOverTime);
+        yield return new WaitForSeconds(attackCooldown);
         readyToApplyDamage = true;
     }
+
 
     private IEnumerator MeleeIsFleeing()
     {
@@ -115,10 +126,12 @@ public class MeleeBehavior : EnemyBehaviorBase
         {
             meleeState = MeleeState.followTarget;
         }
+
         else
         {
             meleeState = MeleeState.attackTarget;
         }
+
         readyToFlee = true;
     }
 }

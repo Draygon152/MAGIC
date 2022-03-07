@@ -17,7 +17,6 @@ public class HiskgarBehavior : MeleeBehavior
     private bool healing = false;    // A bool to flag whether or not the Hiskgar is currently healing
     private bool hasHealed = false;  // Bool flag to determine if the Hiskgar has already healed once
 
-    
     private enum HiskgarState
     {
         followPlayer,
@@ -25,6 +24,7 @@ public class HiskgarBehavior : MeleeBehavior
         fleeingAndHealing
     }
     private HiskgarState hiskgarState;
+
 
 
     protected override void Awake()

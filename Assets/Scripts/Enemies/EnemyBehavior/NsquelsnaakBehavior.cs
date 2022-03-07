@@ -1,5 +1,5 @@
 // Written by Lawson
-// Modified a little by Lizbeth
+// Modified by Lizbeth
 
 using System.Collections;
 using UnityEngine;
@@ -73,6 +73,7 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
                     // too far away, get closer
                     state = MaintainDistanceState.moveTowardPlayer;
                 }
+
                 else if (distanceToMaintain < distanceFromTarget - maintainDistanceError)
                 {
                     // too close, get farther away
