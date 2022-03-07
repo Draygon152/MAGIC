@@ -105,6 +105,9 @@ public class PlayerManager : MonoBehaviour
     {
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
+            // For each player, enable their HUD elements
+            HUD.Instance.EnablePlayerHUDElements(playerIndex);
+
             // Set health bars
             playerGameObject[playerIndex].SetHealthBarDelegates(HUD.Instance.SetPlayerCurHealth, HUD.Instance.SetPlayerMaxHealth);
 
@@ -155,8 +158,12 @@ public class PlayerManager : MonoBehaviour
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             Destroy(playerGameObject[playerIndex].gameObject);
+
+            // Disable HUD Elements
+            HUD.Instance.DisablePlayerHUDElements(playerIndex);
         }
     }
+
 
     // This function returns a reference to the dead player if there is one.
     // If there is no dead player it will return null instead. Note that if both

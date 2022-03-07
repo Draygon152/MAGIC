@@ -81,13 +81,10 @@ public class MagicCasting : MonoBehaviour
     }
 
 
-    // TODO: Add code that will update the correct player's HUD text with new spell name
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.GetComponent<Collider>().tag == "pickups")
         {
-            Debug.Log($"Picking up SpellItem {collision.name}");
-
             spellToCast = collision.GetComponent<SpellItem>().GetSpell();
             castCooldown = spellToCast.GetSpell().timeBetweenCasts;
             

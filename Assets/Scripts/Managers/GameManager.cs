@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -66,8 +65,6 @@ public class GameManager : MonoBehaviour
     // A function to start the game
     public void StartGame()
     {
-        Debug.Log("Starting Game");
-        
         // spawn in the players
         playerCount = PlayerManager.Instance.SpawnPlayers();
 
@@ -109,16 +106,12 @@ public class GameManager : MonoBehaviour
         // and update the game state
         if (WinOrLose)
         {
-            Debug.Log("Player Victorious");
-
-            VictoryGameOver.Open(); // Activates the Victory Screen UI.
+            VictoryGameOver.Open();
         }
 
         else
         {
-            Debug.Log("Player Defeated");
-
-            DefeatGameOver.Open(); // Activates the Defeat Screen UI.
+            DefeatGameOver.Open();
         }
 
         EventManager.Instance.Notify(EventTypes.Events.GameOver);
@@ -130,7 +123,6 @@ public class GameManager : MonoBehaviour
     {
         // decrement playerCount
         playerCount--;
-
 
         // Check if players are still alive
         if (playerCount <= 0)

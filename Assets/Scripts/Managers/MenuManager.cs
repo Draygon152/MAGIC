@@ -32,8 +32,6 @@ public class MenuManager : MonoBehaviour
     // and no other classes should be calling Awake() and OnDestroy()
     private void Awake()
     {
-        Debug.Log("MenuManager Awake");
-
         if (Instance != null)
             Destroy(gameObject);
 
@@ -49,8 +47,6 @@ public class MenuManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("MenuManager Destroyed");
-
         Instance = null;
     }
 
@@ -95,8 +91,6 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenu(Menu openedMenu)
     {
-        Debug.Log("Opening Menu " + openedMenu.GetType());
-
         if (menuStack.Count > 0)
         {
             // Deactivate topmost menu if it exists
@@ -117,8 +111,6 @@ public class MenuManager : MonoBehaviour
     // Attempts to close requested menu type
     public void CloseMenu(Menu closedMenu)
     {
-        Debug.Log("Closing Menu " + closedMenu.GetType());
-
         if (menuStack.Count == 0)
         {
             Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, menu stack empty");
@@ -150,8 +142,6 @@ public class MenuManager : MonoBehaviour
     // Closes all open menus
     public void CloseAllMenus()
     {
-        Debug.Log("Closing All Menus");
-
         int openMenus = menuStack.Count;
 
         for (int i = 0; i < openMenus; i++)

@@ -6,6 +6,5 @@ public class VictoryGameOver : Menu<VictoryGameOver>
     {
         EventManager.Instance.Notify(EventTypes.Events.ResetGame);
         MainMenu.Open();
-        // Add code to reset GameManager state back to Start?
     }
 }

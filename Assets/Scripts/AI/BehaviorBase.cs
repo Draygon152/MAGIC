@@ -1,14 +1,17 @@
+// Written by Lawson
+
 using UnityEngine;
 
-abstract public class BehaviorBase : MonoBehaviour
+public abstract class BehaviorBase : MonoBehaviour
 {
-    //The behavior of the AI
-    abstract protected void PerformBehavior();
-
     //Performs this behavior every frame
     private void FixedUpdate()
     {
         PerformBehavior();
     }
+
+
+    //The behavior of the AI
+    protected abstract void PerformBehavior();
 }
   

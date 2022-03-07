@@ -51,7 +51,7 @@ public class BaseSpell : MonoBehaviour
 
         // Destroy spell after certain time if it does not hit anything
         StartCoroutine(SpellDuration(spellToCast.spellLifetime));
-        if(spellToCast.self == true)
+        if (spellToCast.self == true)
         {
             //StartCoroutine(Expansion(1)); AOE SPELL WIP
         }
@@ -100,8 +100,6 @@ public class BaseSpell : MonoBehaviour
         Destroy(gameObject);
 
         // Apply spell effect at the collision's gameobject
-        Debug.Log($"Spell of element '{spellToCast.element}' collided");
-
         effectCall.Invoke(player, collision.gameObject, this);
     }
 

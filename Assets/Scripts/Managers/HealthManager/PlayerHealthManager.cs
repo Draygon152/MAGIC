@@ -40,7 +40,6 @@ public class PlayerHealthManager : HealthManager
     public override void LoseHealth(int damageAmount)
     {
         currentHealth -= damageAmount;
-        Debug.Log($"Health of {gameObject.name} after damage: {currentHealth}");
 
         // If health becomes 0 or less, player dies
         if (currentHealth <= 0)

@@ -14,8 +14,6 @@ public abstract class HealthManager : MonoBehaviour
     protected virtual void Start()
     {
         currentHealth = maxHealth;
-
-        Debug.Log($"Current {gameObject.name} Health: {currentHealth}");
     }
 
 

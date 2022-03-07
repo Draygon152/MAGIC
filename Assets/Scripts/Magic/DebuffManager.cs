@@ -33,6 +33,7 @@ public class DebuffManager : MonoBehaviour
         {
             this.GetComponent<EnemyBehaviorBase>().changeSpeed(storedSpeed * change);
         }
+
         StartCoroutine(EffectDuration(time));
     }
 
@@ -65,8 +66,6 @@ public class DebuffManager : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
             this.GetComponent<EnemyHealthManager>().LoseHealth(damageint);
-
-            Debug.Log("Damage Ticking");
         }
     }
 

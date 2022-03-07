@@ -13,7 +13,6 @@ public class ObjectHealthManager : HealthManager
     public override void LoseHealth(int damageAmount)
     {
         currentHealth -= damageAmount;
-        Debug.Log($"Health of {gameObject.name} after damage: {currentHealth}");
 
         // If health becomes 0 or less, object destroyed
         if (currentHealth <= 0)
@@ -26,7 +25,7 @@ public class ObjectHealthManager : HealthManager
 
     private void SpawnSpellItem()
     {
-        if(gameObject.tag == "Crate")
+        if (gameObject.tag == "Crate")
         {
             Instantiate(spellItem, gameObject.transform.position, gameObject.transform.rotation);
         }

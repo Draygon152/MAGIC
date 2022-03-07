@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("PlayerController Awake");
-
         gameOver = false;
 
         // set the reference to the PlayerInput component

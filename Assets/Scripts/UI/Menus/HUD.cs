@@ -1,8 +1,6 @@
 // Written by Kevin Chao
 // Modified by Angel and Lawson
 
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -14,7 +12,21 @@ public class HUD : Menu<HUD>
 
     [SerializeField] private TextMeshProUGUI enemyCounter;
 
-    
+
+
+    public void EnablePlayerHUDElements(int playerNum)
+    {
+        playerHealthBars[playerNum].gameObject.SetActive(true);
+        playerSpellUIs[playerNum].gameObject.SetActive(true);
+    }
+
+
+    public void DisablePlayerHUDElements(int playerNum)
+    {
+        playerHealthBars[playerNum].gameObject.SetActive(false);
+        playerSpellUIs[playerNum].gameObject.SetActive(false);
+    }
+
 
     public void SetPlayerCurHealth(int playerNum, int newHealth)
     {
@@ -42,6 +54,6 @@ public class HUD : Menu<HUD>
 
     public void SetEnemyCounter(int enemiesRemaining)
     {
-        enemyCounter.text = "Enemies Remaining: " + Convert.ToString(enemiesRemaining);
+        enemyCounter.text = $"Enemies Remaining: {enemiesRemaining}";
     }
 }

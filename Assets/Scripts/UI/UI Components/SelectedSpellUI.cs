@@ -39,8 +39,6 @@ public class SelectedSpellUI : MonoBehaviour
 
     public void ChangeSpellCooldown(float newCooldown)
     {
-        Debug.Log($"Spell max cooldown changed to: {newCooldown}");
-
         cooldownSlider.maxValue = newCooldown;
     }
 }
