@@ -123,6 +123,7 @@ public class MagicCasting : MonoBehaviour
     {
         if(!casting)
         {
+            casting = true;
             CastCurrentSpell();
         }
     }
