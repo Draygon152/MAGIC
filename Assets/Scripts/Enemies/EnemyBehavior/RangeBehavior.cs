@@ -62,6 +62,7 @@ public class RangeBehavior : EnemyBehaviorBase
 
                 else
                 {
+                    this.gameObject.GetComponent<MagicCasting>().EnemyCast();
                     Flee(targetLocation);
                 }
                 break;

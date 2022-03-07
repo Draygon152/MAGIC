@@ -19,5 +19,12 @@ public class SpellDamageGiver : DamageGiver
             if (target != null)
                 DamageTarget(target, currentSpell.GetSpell().damage);
         }
+        if(collision.gameObject.layer == 7)
+        {
+            HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
+
+            if (target != null)
+                DamageTarget(target, currentSpell.GetSpell().damage);
+        }
     }
 }

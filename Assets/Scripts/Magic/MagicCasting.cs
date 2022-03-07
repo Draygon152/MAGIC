@@ -8,7 +8,7 @@ public class MagicCasting : MonoBehaviour
 {
     [SerializeField] private Transform castLocation; // Location where the spell is cast from
 
-    private BaseSpell spellToCast;
+    [SerializeField]private BaseSpell spellToCast;
     private Element selectedElement;
 
     private bool casting = false; // Default state of casting magic is false
@@ -115,6 +115,14 @@ public class MagicCasting : MonoBehaviour
         if (!casting)
         {
             casting = true;
+            CastCurrentSpell();
+        }
+    }
+
+    public void EnemyCast()
+    {
+        if(!casting)
+        {
             CastCurrentSpell();
         }
     }
