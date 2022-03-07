@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerData[] playerData; // Simple array of length 2 to store the player data 
     private Player[] playerGameObject; // Simple array of length 2 to store references to the player game objects
 
-    //for spawning the players
+    // for spawning the players
     [SerializeField] private GameObject playerPrefab;  // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
     [SerializeField] private Vector3[] spawnOffset;  // The offset from the spawnPoint the players will spawn
@@ -27,25 +27,6 @@ public class PlayerManager : MonoBehaviour
         private set;
     }
 
-    public void SetNumberOfPlayers(int numberOfPlayers)
-    {
-        playerCount = numberOfPlayers;
-
-        // Initialize the player data SOs
-        playerData = new PlayerData[playerCount];
-        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
-        {
-            playerData[playerIndex] = new PlayerData(); // create SO instance for player 1
-        }
-
-        // Initialize the player game objects array
-        playerGameObject = new Player[playerCount];
-    }
-
-    public int GetNumberOfPlayers()
-    {
-        return playerCount;
-    }
 
 
     private void Awake()
@@ -62,13 +43,35 @@ public class PlayerManager : MonoBehaviour
     }
 
 
+    public void SetNumberOfPlayers(int numberOfPlayers)
+    {
+        playerCount = numberOfPlayers;
+
+        // Initialize the player data SOs
+        playerData = new PlayerData[playerCount];
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+        {
+            playerData[playerIndex] = new PlayerData(); // create SO instance for player 1
+        }
+
+        // Initialize the player game objects array
+        playerGameObject = new Player[playerCount];
+    }
+
+
+    public int GetNumberOfPlayers()
+    {
+        return playerCount;
+    }
+
+
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             // Spawn both players
-            playerGameObject[playerIndex] = PlayerInput.Instantiate(playerPrefab, playerIndex: playerIndex, pairWithDevice: playerData[playerIndex].pairedDevice).GetComponent<Player>();
+            playerGameObject[playerIndex] = PlayerInput.Instantiate(playerPrefab, playerIndex: playerIndex, pairWithDevice: playerData[playerIndex].PairedDevice).GetComponent<Player>();
             
             // Move players to their spawn point
             // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
@@ -83,12 +86,12 @@ public class PlayerManager : MonoBehaviour
             // Set player identification numbers
             playerGameObject[playerIndex].PlayerNumber = playerIndex;
 
-            //Activate the AI for AI players
-            if (playerData[playerIndex].pairedDevice == null)
+            // Activate the AI for AI players
+            if (playerData[playerIndex].PairedDevice == null)
             {
                 playerGameObject[playerIndex].GetComponent<CoopAIBehavior>().enabled = true;
 
-                //disable controls
+                // disable manual controls
                 playerGameObject[playerIndex].GetComponent<PlayerInput>().enabled = false;
             }
         }
@@ -183,13 +186,49 @@ public class PlayerManager : MonoBehaviour
 
 public class PlayerData
 {
-    public Element ElementalAffinity;
-    public InputDevice pairedDevice;
-    public bool AI = false;
+    public Element ElementalAffinity
+    {
+        get;
+        private set;
+    }
+
+    public InputDevice PairedDevice
+    {
+        get;
+        private set;
+    }
+
+    public bool AI
+    {
+        get;
+        private set;
+    }
+
+
 
     public PlayerData()
     {
         ElementalAffinity = null;
-        pairedDevice = null;
+        PairedDevice = null;
+        AI = false;
+    }
+
+
+    // Explicit setters to reduce likelihood of accidentally overwriting fields
+    public void SetElementalAffinity(Element newAffinity)
+    {
+        ElementalAffinity = newAffinity;
+    }
+
+
+    public void SetPairedDevice(InputDevice newDevice)
+    {
+        PairedDevice = newDevice;
+    }
+
+
+    public void SetAIStatus(bool newAIStatus)
+    {
+        AI = newAIStatus;
     }
 }

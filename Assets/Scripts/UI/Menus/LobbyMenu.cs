@@ -33,7 +33,6 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
         foreach (Dropdown inputSelector in inputSelectors)
         {
             inputSelector.AddOptions(new List<string>(availableDevices.Keys));
-            inputSelector.AddOptions(new List<string> { "AI Player" });
         }
 
         //Set up the player data for the PlayerManager
@@ -42,9 +41,36 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
         playerDataList = new PlayerData[numPlayers];
         playerReadyStates = new bool[numPlayers];
 
+        int AIPlayerIndex = -1;
         for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++)
         {
             playerDataList[playerIndex] = PlayerManager.Instance.GetPlayerData(playerIndex);
+
+            // All other players other than Player 1 will have "AI Player" selected by default.
+            // Search for the index of "AI Player" before setting it using PlayerSelectedInputDevice
+            // This is currently overkill since "AI Player" is currently guaranteed to be the last
+            // entry in each Dropdown menu, but provides flexibility in case this changes.
+            if (playerIndex > 0)
+            {
+                // Input device lists are guaranteed to be indexed the same for each Dropdown, so AIPlayerIndex can be stored for use
+                // FindIndex also returns -1 if not found, which will correctly throw an exception when PlayerSelectedInputDevice is called
+                // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.findindex?view=netframework-4.7.2#system-collections-generic-list-1-findindex(system-predicate((-0)))
+                if (AIPlayerIndex == -1)
+                {
+                    // Finds index by taking in each "option" of "options" as input into a Lambda function, which tests
+                    // for equality against "AI Player" and returns the result.
+                    // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator
+                    AIPlayerIndex = inputSelectors[playerIndex].options.FindIndex(option => option.text == "AI Player");
+                }
+
+                inputSelectors[playerIndex].value = AIPlayerIndex;
+            }
+
+            // Player 1 will always select input device in first entry of Dropdown, so no index change needed
+            else
+            {
+                PlayerSelectedInputDevice(playerIndex);
+            }
         }
     }
 
@@ -57,7 +83,7 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
         playerReadyToggles[playerNumber].interactable = true;
 
         // Store element data in PlayerData1
-        playerDataList[playerNumber].ElementalAffinity = elementSelectors[playerNumber].GetSelectedElement();
+        playerDataList[playerNumber].SetElementalAffinity(elementSelectors[playerNumber].GetSelectedElement());
     }
 
 
@@ -111,15 +137,15 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
 
         if (selectedOption == "AI Player")
         {
-            playerDataList[playerNumber].pairedDevice = null;
+            playerDataList[playerNumber].SetPairedDevice(null);
         }
 
         else
         {
-            playerDataList[playerNumber].pairedDevice = availableDevices[selectedOption];
+            playerDataList[playerNumber].SetPairedDevice(availableDevices[selectedOption]);
         }
 
-        Debug.Log($"PLAYER {playerNumber + 1} SELECTED DEVICE: {playerDataList[playerNumber].pairedDevice}");
+        Debug.Log($"PLAYER {playerNumber + 1} SELECTED DEVICE: {playerDataList[playerNumber].PairedDevice}");
     }
 
 
@@ -148,6 +174,7 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
                 output.Add($"Keyboard {++keyboardCounter}", device);
             }
         }
+        output.Add("AI Player", null);
 
         return output;
     }
