@@ -35,6 +35,17 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
             inputSelector.AddOptions(new List<string>(availableDevices.Keys));
             inputSelector.AddOptions(new List<string> { "AI Player" });
         }
+
+        //Set up the player data for the PlayerManager
+        PlayerManager.Instance.SetNumberOfPlayers(numPlayers);
+
+        playerDataList = new PlayerData[numPlayers];
+        playerReadyStates = new bool[numPlayers];
+
+        for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++)
+        {
+            playerDataList[playerIndex] = PlayerManager.Instance.GetPlayerData(playerIndex);
+        }
     }
 
 

@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 //This class will manage the players and their data
 public class PlayerManager : MonoBehaviour
 {
-    private const int NUMBER_OF_PLAYERS = 2; // Maximum number of players in the game
     public const int PLAYER_1 = 0; // array index of player 1
     public const int PLAYER_2 = 1; // array index of player 2
 
@@ -19,9 +18,7 @@ public class PlayerManager : MonoBehaviour
     //for spawning the players
     [SerializeField] private GameObject playerPrefab;  // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private Vector3 spawnOffset = new Vector3(5, 0, 0); // The offset from the spawnPoint the players will spawn
-                                                                         // Player 2 spawns at playerSpawnPoint + spawnOffset
-                                                                         // Player 2 spawns at playerSpawnPoint - spawnOffset
+    [SerializeField] private Vector3[] spawnOffset;  // The offset from the spawnPoint the players will spawn
 
     // Make the player manager a Singleton
     public static PlayerManager Instance
@@ -30,22 +27,31 @@ public class PlayerManager : MonoBehaviour
         private set;
     }
 
+    public void SetNumberOfPlayers(int numberOfPlayers)
+    {
+        playerCount = numberOfPlayers;
+
+        // Initialize the player data SOs
+        playerData = new PlayerData[playerCount];
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+        {
+            playerData[playerIndex] = new PlayerData(); // create SO instance for player 1
+        }
+
+        // Initialize the player game objects array
+        playerGameObject = new Player[playerCount];
+    }
+
+    public int GetNumberOfPlayers()
+    {
+        return playerCount;
+    }
 
 
     private void Awake()
     {
         // Set up Instance
         Instance = this;
-
-        // Initialize the player data SOs
-        playerData = new PlayerData[NUMBER_OF_PLAYERS];
-        for (int playerIndex = 0; playerIndex < NUMBER_OF_PLAYERS; playerIndex++)
-        {
-            playerData[playerIndex] = new PlayerData(); // create SO instance for player 1
-        }
-
-        // Initialize the player game objects array
-        playerGameObject = new Player[NUMBER_OF_PLAYERS];
     }
 
 
@@ -59,33 +65,7 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
-        playerCount = 0; // Counts up the number of players spawned
-
-        // Check for unused players
-        if (playerData[PLAYER_2].pairedDevice == null)
-        {
-            playerGameObject[PLAYER_2].gameObject.SetActive(false);
-
-            // keep player one no matter what, so there is at least one player in the game
-            playerCount++;
-        }
-        else
-        {
-            // Count player two
-            playerCount++;
-
-            if (playerData[PLAYER_1].pairedDevice == null)
-            {
-                playerGameObject[PLAYER_1].gameObject.SetActive(false);
-            }
-            else
-            {
-                // count player one
-                playerCount++;
-            }
-        }
-
-        for (int playerIndex = 0; playerIndex < playerCount; playerCount++)
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             // Spawn both players
             playerGameObject[playerIndex] = PlayerInput.Instantiate(playerPrefab, playerIndex: playerIndex, pairWithDevice: playerData[playerIndex].pairedDevice).GetComponent<Player>();
@@ -94,7 +74,7 @@ public class PlayerManager : MonoBehaviour
             // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
             // player index and pairWithDevice in PlayerInput) I could not pass in the spawn point transform to spawn
             // the players at the right location. As a result they must be moved manually.
-            playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset;
+            playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset[playerIndex];
             playerGameObject[playerIndex].transform.rotation = playerSpawnPoint.rotation;
 
             // Set player's elemental affinity, assign delegates to player's health bar
@@ -103,28 +83,13 @@ public class PlayerManager : MonoBehaviour
             // Set player identification numbers
             playerGameObject[playerIndex].PlayerNumber = playerIndex;
 
-            // Check for unused players
-            if (playerData[PLAYER_2].pairedDevice == null)
+            //Activate the AI for AI players
+            if (playerData[playerIndex].pairedDevice == null)
             {
-                playerGameObject[PLAYER_2].gameObject.SetActive(false);
+                playerGameObject[playerIndex].GetComponent<CoopAIBehavior>().enabled = true;
 
-                // keep player one no matter what, so there is at least one player in the game
-                playerCount++;
-            }
-            else
-            {
-                // Count player two
-                playerCount++;
-
-                if (playerData[PLAYER_1].pairedDevice == null)
-                {
-                    playerGameObject[PLAYER_1].gameObject.SetActive(false);
-                }
-                else
-                {
-                    // count player one
-                    playerCount++;
-                }
+                //disable controls
+                playerGameObject[playerIndex].GetComponent<PlayerInput>().enabled = false;
             }
         }
 
@@ -148,6 +113,8 @@ public class PlayerManager : MonoBehaviour
 
     public Player GetPlayer(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerGameObject[player];
     }
 
@@ -155,6 +122,8 @@ public class PlayerManager : MonoBehaviour
     // A getter function for retrieving the player data
     public PlayerData GetPlayerData(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerData[player];
     }
 
@@ -163,6 +132,8 @@ public class PlayerManager : MonoBehaviour
     // To access Player 1, pass 0. To access Player 2, pass 1.
     public Transform GetPlayerLocation(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerGameObject[player].transform;
     }
 
@@ -183,7 +154,6 @@ public class PlayerManager : MonoBehaviour
             Destroy(playerGameObject[playerIndex].gameObject);
         }
     }
-
 
     // This function returns a reference to the dead player if there is one.
     // If there is no dead player it will return null instead. Note that if both
@@ -215,6 +185,7 @@ public class PlayerData
 {
     public Element ElementalAffinity;
     public InputDevice pairedDevice;
+    public bool AI = false;
 
     public PlayerData()
     {

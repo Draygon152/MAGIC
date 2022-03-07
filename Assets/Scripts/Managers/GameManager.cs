@@ -83,14 +83,9 @@ public class GameManager : MonoBehaviour
         PlayerManager.Instance.InitializeHUD();
 
         // Set the camera to follow the player
-        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_1).gameObject.activeSelf)
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
-            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        }
-
-        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_2).gameObject.activeSelf)
-        {
-            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
         }
 
         //Set the camera to its starting position.
@@ -203,8 +198,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         // Reset camera frame
-        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+        for (int playerIndex = 0; playerIndex < PlayerManager.Instance.GetNumberOfPlayers(); playerIndex++)
+        {
+            CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
+        }
 
         PlayerManager.Instance.ResetPlayers();
     }
