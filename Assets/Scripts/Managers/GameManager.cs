@@ -195,6 +195,9 @@ public class GameManager : MonoBehaviour
             CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
         }
 
+        //Resets the minimap
+        MinimapCameraSystem.Instance.ResetMinimap();
+
         PlayerManager.Instance.ResetPlayers();
     }
 }
