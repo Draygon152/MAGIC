@@ -21,8 +21,6 @@ public class EventManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("EventManager Awake");
-
         if (Instance != null)
             Destroy(gameObject);
 
@@ -38,8 +36,6 @@ public class EventManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("EventManager Destroyed");
-
         Instance = null;
     }
 

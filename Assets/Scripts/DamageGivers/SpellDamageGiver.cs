@@ -11,8 +11,6 @@ public class SpellDamageGiver : DamageGiver
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log($"{currentSpell.name} applying damage to {collision.name}");
-
         if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
         {
             HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();

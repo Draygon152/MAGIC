@@ -14,8 +14,6 @@ public abstract class HealthManager : MonoBehaviour
     protected virtual void Start()
     {
         currentHealth = maxHealth;
-
-        Debug.Log($"Current {gameObject.name} Health: {currentHealth}");
     }
 
 
@@ -29,6 +27,12 @@ public abstract class HealthManager : MonoBehaviour
 
 
     public abstract void LoseHealth(int damageAmount);
+
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
 
 
     //The following functions are for checking if the health of an object is

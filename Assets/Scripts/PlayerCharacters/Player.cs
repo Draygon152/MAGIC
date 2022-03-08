@@ -13,6 +13,20 @@ public class Player : MonoBehaviour
     private PlayerHealthManager healthManager;
     private int playerNumber;
 
+    // Liz's modification
+    // Grabs Player game object's number
+    public int PlayerNumber
+    {
+        get
+        {
+            return playerNumber;
+        }
+        set
+        {
+            playerNumber = value;
+        }
+    }
+
 
 
     private void Awake()
@@ -28,29 +42,14 @@ public class Player : MonoBehaviour
     }
 
 
-    // Liz's modification
-    // Grabs Player game object's number
-    public int PlayerNumber
-    {
-        get
-        {
-            return playerNumber;
-        }
-        set 
-        {
-            playerNumber = value;
-        }
-    }
-
-
     public MagicCasting GetCaster()
     {
         return magicCaster;
     }
 
 
-    public void SetHealthBarDelegates(Action<int> setHealthBarValue, Action<int> setHealthBarMax)
+    public void SetHealthBarDelegates(Action<int, int> setHealthBarValue, Action<int, int> setHealthBarMax)
     {
-        healthManager.SetHealthBarDelegates(setHealthBarValue, setHealthBarMax);
+        healthManager.SetHealthBarDelegates(playerNumber, setHealthBarValue, setHealthBarMax);
     }
 }

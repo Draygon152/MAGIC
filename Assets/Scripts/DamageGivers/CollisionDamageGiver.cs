@@ -14,8 +14,6 @@ public class CollisionDamageGiver : DamageGiver
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Collided With Player");
-
             PlayerHealthManager player = collision.gameObject.GetComponentInParent<PlayerHealthManager>();
 
             if (player != null)
@@ -23,10 +21,12 @@ public class CollisionDamageGiver : DamageGiver
         }
     }
 
+
     public int currentDamage()
     {
         return damageDealt;
     }
+
 
     public void changeDamage(int newdamage)
     {

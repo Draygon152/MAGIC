@@ -11,14 +11,14 @@ public class MenuManager : MonoBehaviour
     public OptionsMenu optionsMenuPrefab;
     public VideoOptions videoOptionsPrefab;
     public SoundOptions soundOptionsPrefab;
-    public LobbyMenu lobbyMenuPrefab;
+    public SingleplayerLobbyMenu singleplayerLobbyPrefab;
+    public MultiplayerLobbyMenu multiplayerLobbyPrefab;
     public HUD hudPrefab;
     public PauseMenu pauseMenuPrefab;
     public VictoryGameOver victoryMenuPrefab;
     public DefeatGameOver defeatMenuPrefab;
 
     private Stack<Menu> menuStack = new Stack<Menu>();
-
 
     public static MenuManager Instance
     {
@@ -27,12 +27,11 @@ public class MenuManager : MonoBehaviour
     }
 
 
+
     // Fine to use private here, since nothing should inherit from MenuManager
     // and no other classes should be calling Awake() and OnDestroy()
     private void Awake()
     {
-        Debug.Log("MenuManager Awake");
-
         if (Instance != null)
             Destroy(gameObject);
 
@@ -48,8 +47,6 @@ public class MenuManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("MenuManager Destroyed");
-
         Instance = null;
     }
 
@@ -94,8 +91,6 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenu(Menu openedMenu)
     {
-        Debug.Log("Opening Menu " + openedMenu.GetType());
-
         if (menuStack.Count > 0)
         {
             // Deactivate topmost menu if it exists
@@ -116,17 +111,15 @@ public class MenuManager : MonoBehaviour
     // Attempts to close requested menu type
     public void CloseMenu(Menu closedMenu)
     {
-        Debug.Log("Closing Menu " + closedMenu.GetType());
-
         if (menuStack.Count == 0)
         {
-            Debug.LogErrorFormat(closedMenu, "cannot close {0}, menu stack empty", closedMenu.GetType());
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, menu stack empty");
             return;
         }
 
         if (menuStack.Peek() != closedMenu)
         {
-            Debug.LogErrorFormat(closedMenu, "cannot close {0}, not at top of menu stack", closedMenu.GetType());
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, not at top of menu stack");
             return;
         }
 
@@ -149,8 +142,6 @@ public class MenuManager : MonoBehaviour
     // Closes all open menus
     public void CloseAllMenus()
     {
-        Debug.Log("Closing All Menus");
-
         int openMenus = menuStack.Count;
 
         for (int i = 0; i < openMenus; i++)

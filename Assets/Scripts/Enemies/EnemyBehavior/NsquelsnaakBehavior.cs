@@ -30,7 +30,7 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
 
 
 
-    protected override void PerformBehavior()
+    protected override void PerformEnemyBehavior()
     {
         // Get the distance from the target
         targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;

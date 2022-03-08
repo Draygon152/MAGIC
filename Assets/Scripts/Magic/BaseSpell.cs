@@ -58,7 +58,8 @@ public class BaseSpell : MonoBehaviour
 
         // Destroy spell after certain time if it does not hit anything
         StartCoroutine(SpellDuration(spellToCast.spellLifetime));
-        if(spellToCast.expand == true)
+
+        if (spellToCast.expand == true)
         {
             StartCoroutine(Expansion(.5f));
         }
@@ -89,6 +90,7 @@ public class BaseSpell : MonoBehaviour
         Destroy(gameObject);
     }
 
+
     private IEnumerator Expansion(float time)
     {
         for (int i = 0; i < 3; i++)
@@ -102,20 +104,21 @@ public class BaseSpell : MonoBehaviour
     // TODO: Set the player number to the player that was collided with
     private void OnTriggerEnter(Collider collision)
     {
-        if(spellToCast.continious == false)
+        if (spellToCast.continious == false)
         {
             // Destroy the spell when it collides
             Destroy(gameObject);
 
             // Apply spell effect at the collision's gameobject
-            Debug.Log($"Spell of element '{spellToCast.element}' collided");
             effectCall.Invoke(player, collision.gameObject, this);
         }
+        
         else 
         {
             effectCall.Invoke(player, collision.gameObject, this);
         }
     }
+
 
     public void EarlyCast()
     {

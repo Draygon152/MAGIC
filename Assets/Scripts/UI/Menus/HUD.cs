@@ -1,83 +1,65 @@
 // Written by Kevin Chao
 // Modified by Angel and Lawson
 
-using System;
 using TMPro;
 using UnityEngine;
 
 public class HUD : Menu<HUD>
 {
+    // Player 1 = index 0, Player 2 = index 1, etc.
+    [SerializeField] private HealthBar[] playerHealthBars;
+    [SerializeField] private SelectedSpellUI[] playerSpellUIs;
 
-    [SerializeField] private HealthBar player1HealthBar;
-    [SerializeField] private HealthBar player2HealthBar;
-    [SerializeField] private SelectedSpellUI player1SpellUI;
-    [SerializeField] private SelectedSpellUI player2SpellUI;
     [SerializeField] private TextMeshProUGUI enemyCounter;
 
 
 
-
-    public void SetP1CurHealth(int newHealth)
+    public void EnablePlayerHUDElements(int playerNum)
     {
-        player1HealthBar.SetCurHealth(newHealth);
+        playerHealthBars[playerNum].gameObject.SetActive(true);
+        playerSpellUIs[playerNum].gameObject.SetActive(true);
     }
 
 
-    public void SetP1MaxHealth(int maxHealth)
+    public void DisablePlayerHUDElements(int playerNum)
     {
-        player1HealthBar.SetMaxHealth(maxHealth);
+        playerHealthBars[playerNum].gameObject.SetActive(false);
+        playerSpellUIs[playerNum].gameObject.SetActive(false);
     }
 
 
-    public void SetP2CurHealth(int newHealth)
+    public void SetPlayerCurHealth(int playerNum, int newHealth)
     {
-        player2HealthBar.SetCurHealth(newHealth);
+        playerHealthBars[playerNum].SetCurHealth(newHealth);
     }
 
 
-    public void SetP2MaxHealth(int maxHealth)
+    public void SetPlayerMaxHealth(int playerNum, int newHealth)
     {
-        player2HealthBar.SetMaxHealth(maxHealth);
+        playerHealthBars[playerNum].SetMaxHealth(newHealth);
     }
 
 
-    public void SetP1SpellCaster(MagicCasting caster)
+    public void SetPlayerSpellCaster(int playerNum, MagicCasting caster)
     {
-        player1SpellUI.InitializeSpellUI(caster);
+        playerSpellUIs[playerNum].InitializeSpellUI(caster);
     }
 
 
-    public void SetP2SpellCaster(MagicCasting caster)
+    public void SetPlayerMaxCooldown(int playerNum, float newCooldown)
     {
-        player2SpellUI.InitializeSpellUI(caster);
-    }
-
-    public void SetP1MaxCooldown(float newCooldown)
-    {
-        player1SpellUI.changeSpellCooldown(newCooldown);
-    }
-
-    public void SetP2MaxCooldown(float newCooldown)
-    {
-        player2SpellUI.changeSpellCooldown(newCooldown);
+        playerSpellUIs[playerNum].ChangeSpellCooldown(newCooldown);
     }
 
 
-    public void SetEnemyCouter(int enemiesRemaining)
+    public void SetEnemyCounter(int enemiesRemaining)
     {
-        enemyCounter.text = "Enemies Remaining: " + Convert.ToString(enemiesRemaining);
+        enemyCounter.text = $"Enemies Remaining: {enemiesRemaining}";
     }
+
 
     public float ReturnCooldown(int playerNumber)
     {
-        if(playerNumber == 0)
-        {
-            return player1SpellUI.CheckSpellCooldownValue();
-        }
-        else
-        {
-            return player2SpellUI.CheckSpellCooldownValue();
-        }
+        return playerSpellUIs[playerNumber].CheckSpellCooldownValue();
     }
-
 }

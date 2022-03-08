@@ -1,83 +1,108 @@
 // Written by Kevin Chao
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
-public class LobbyMenu : Menu<LobbyMenu>
+public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
 {
-    [SerializeField] private Toggle player1Ready;
-    [SerializeField] private Toggle player2Ready;
-    [SerializeField] private ElementSelector p1ElementSelector; // UI elements for players to select Elemental Affinity
-    [SerializeField] private ElementSelector p2ElementSelector;
-    [SerializeField] private Dropdown p1InputSelector;
-    [SerializeField] private Dropdown p2InputSelector;
-    [SerializeField] private Button mainMenuButton;
-    [SerializeField] private CountdownTimer timer; // Timer, provides countdown, game starts when countdown reaches 0
+    // Player 1 is stored at index 0, Player 2 stored at index 1, etc.
+    [SerializeField] protected Toggle[] playerReadyToggles;
+    [SerializeField] protected ElementSelector[] elementSelectors;
+    [SerializeField] protected Dropdown[] inputSelectors;
 
-    private bool player1IsReady;
-    private bool player2IsReady;
-
-    private PlayerData p1Data;
-    private PlayerData p2Data;
+    [SerializeField] protected Button mainMenuButton;
+    [SerializeField] protected CountdownTimer timer;
 
     // Contains assigned device names and references to the actual InputDevice objects
-    private Dictionary<string, InputDevice> availableDevices;
+    protected Dictionary<string, InputDevice> availableDevices;
+
+    protected int numPlayers;
+    protected bool[] playerReadyStates;
+
+    protected PlayerData[] playerDataList;
 
 
 
-    private void Start()
+    protected virtual void Start()
     {
-        p1Data = PlayerManager.Instance.GetPlayerData(PlayerManager.PLAYER_1);
-        p2Data = PlayerManager.Instance.GetPlayerData(PlayerManager.PLAYER_2);
-
-        player1IsReady = false;
-        player2IsReady = false;
-
         availableDevices = FilterInputDevices();
 
-        p1InputSelector.AddOptions(new List<string> { "Select Input Device" });
-        p2InputSelector.AddOptions(new List<string> { "Select Input Device" });
-        p1InputSelector.AddOptions(new List<string>(availableDevices.Keys));
-        p2InputSelector.AddOptions(new List<string>(availableDevices.Keys));
+        foreach (Dropdown inputSelector in inputSelectors)
+        {
+            inputSelector.AddOptions(new List<string>(availableDevices.Keys));
+        }
+
+        //Set up the player data for the PlayerManager
+        PlayerManager.Instance.SetNumberOfPlayers(numPlayers);
+
+        playerDataList = new PlayerData[numPlayers];
+        playerReadyStates = new bool[numPlayers];
+
+        int AIPlayerIndex = -1;
+        for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++)
+        {
+            playerDataList[playerIndex] = PlayerManager.Instance.GetPlayerData(playerIndex);
+
+            // All other players other than Player 1 will have "AI Player" selected by default.
+            // Search for the index of "AI Player" before setting it using PlayerSelectedInputDevice
+            // This is currently overkill since "AI Player" is currently guaranteed to be the last
+            // entry in each Dropdown menu, but provides flexibility in case this changes.
+            if (playerIndex > 0)
+            {
+                // Input device lists are guaranteed to be indexed the same for each Dropdown, so AIPlayerIndex can be stored for use
+                // FindIndex also returns -1 if not found, which will correctly throw an exception when PlayerSelectedInputDevice is called
+                // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.findindex?view=netframework-4.7.2#system-collections-generic-list-1-findindex(system-predicate((-0)))
+                if (AIPlayerIndex == -1)
+                {
+                    // Finds index by taking in each "option" of "options" as input into a Lambda function, which tests
+                    // for equality against "AI Player" and returns the result.
+                    // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator
+                    AIPlayerIndex = inputSelectors[playerIndex].options.FindIndex(option => option.text == "AI Player");
+                }
+
+                inputSelectors[playerIndex].value = AIPlayerIndex;
+            }
+
+            // Player 1 will always select input device in first entry of Dropdown, so no index change needed
+            else
+            {
+                PlayerSelectedInputDevice(playerIndex);
+            }
+        }
     }
 
 
-    // For use by GUI buttons
-    public void Player1SelectedElement()
+    public void PlayerSelectedElement(int playerNumber)
     {
-        player1Ready.interactable = true;
+        if (playerNumber < 0 || playerNumber > numPlayers - 1)
+            Debug.LogException(new Exception($"PlayerSelectedElement: Invalid player number ({playerNumber})"));
+
+        playerReadyToggles[playerNumber].interactable = true;
 
         // Store element data in PlayerData1
-        p1Data.ElementalAffinity = p1ElementSelector.GetSelectedElement();
+        playerDataList[playerNumber].SetElementalAffinity(elementSelectors[playerNumber].GetSelectedElement());
     }
 
 
-    // For use by GUI buttons
-    public void Player2SelectedElement()
+    public void PlayerReadyPressed(int playerNumber)
     {
-        player2Ready.interactable = true;
+        if (playerNumber < 0 || playerNumber > numPlayers - 1)
+            Debug.LogException(new Exception($"PlayerTogglePressed: Invalid player number ({playerNumber})"));
 
-        // Store element data in PlayerData2
-        p2Data.ElementalAffinity = p2ElementSelector.GetSelectedElement();
-    }
-
-
-    // For use by GUI toggle
-    public void Player1TogglePressed()
-    {
         // If the toggle has just been activated
-        if (player1Ready.isOn == true)
+        if (playerReadyToggles[playerNumber].isOn == true)
         {
-            p1ElementSelector.DisableAllElementButtons();
+            elementSelectors[playerNumber].DisableAllElementButtons();
 
-            // Set Player1 readystate to true
-            player1IsReady = true;
-            p1InputSelector.interactable = false;
+            // Set player readystate to true
+            playerReadyStates[playerNumber] = true;
+            inputSelectors[playerNumber].interactable = false;
 
-            // If Player2 is also ready, start countdown
-            if (player2IsReady)
+            // If all players are ready, start countdown
+            if (AllPlayersReady())
             {
                 timer.BeginCountDown();
                 mainMenuButton.interactable = false;
@@ -85,49 +110,10 @@ public class LobbyMenu : Menu<LobbyMenu>
         }
 
         // If the toggle has just been deactivated
-        else if (player1Ready.isOn == false)
+        else if (playerReadyToggles[playerNumber].isOn == false)
         {
-            p1ElementSelector.EnableAllElementButtons();
-            p1InputSelector.interactable = true;
-
-            // If countdown is currently occurring, cancel countdown
-            if (timer.TimerStarted())
-            {
-                timer.StopCountDown();
-                mainMenuButton.interactable = true;   
-            }
-
-            // Set Player1's readystate to false
-            player1IsReady = false;
-        }
-    }
-
-
-    // For use by GUI toggle
-    public void Player2TogglePressed()
-    {
-        // If the toggle has just been activated
-        if (player2Ready.isOn == true)
-        {
-            p2ElementSelector.DisableAllElementButtons();
-
-            // Set Player2 readystate to true
-            player2IsReady = true;
-            p2InputSelector.interactable = false;
-
-            // If Player1 is also ready, start countdown
-            if (player1IsReady)
-            {
-                timer.BeginCountDown();
-                mainMenuButton.interactable = false;
-            }
-        }
-
-        // If the toggle has just been deactivated
-        else if (player2Ready.isOn == false)
-        {
-            p2ElementSelector.EnableAllElementButtons();
-            p2InputSelector.interactable = true;
+            elementSelectors[playerNumber].EnableAllElementButtons();
+            inputSelectors[playerNumber].interactable = true;
 
             // If countdown is currently occurring, cancel countdown
             if (timer.TimerStarted())
@@ -136,45 +122,30 @@ public class LobbyMenu : Menu<LobbyMenu>
                 mainMenuButton.interactable = true;
             }
 
-            // Set Player2's readystate to false
-            player2IsReady = false;
+            // Set Player1's readystate to false
+            playerReadyStates[playerNumber] = false;
         }
     }
 
 
-    public void Player1InputDeviceSelected()
+    public void PlayerSelectedInputDevice(int playerNumber)
     {
-        string selectedOption = p1InputSelector.options[p1InputSelector.value].text;
+        if (playerNumber < 0 || playerNumber > numPlayers - 1)
+            Debug.LogException(new Exception($"PlayerSelectedInputDevice: Invalid player number ({playerNumber})"));
 
-        if (selectedOption == "Select Input Device")
+        string selectedOption = inputSelectors[playerNumber].options[inputSelectors[playerNumber].value].text;
+
+        if (selectedOption == "AI Player")
         {
-            p1Data.pairedDevice = null;
+            playerDataList[playerNumber].SetPairedDevice(null);
         }
 
         else
         {
-            p1Data.pairedDevice = availableDevices[selectedOption];
+            playerDataList[playerNumber].SetPairedDevice(availableDevices[selectedOption]);
         }
 
-        Debug.Log($"P1 SELECTED: {p1Data.pairedDevice}");
-    }
-
-
-    public void Player2InputDeviceSelected()
-    {
-        string selectedOption = p2InputSelector.options[p2InputSelector.value].text;
-
-        if (selectedOption == "Select Input Device")
-        {
-            p2Data.pairedDevice = null;
-        }
-
-        else
-        {
-            p2Data.pairedDevice = availableDevices[selectedOption];
-        }
-
-        Debug.Log($"P2 SELECTED: {p2Data.pairedDevice}");
+        Debug.Log($"PLAYER {playerNumber + 1} SELECTED DEVICE: {playerDataList[playerNumber].PairedDevice}");
     }
 
 
@@ -197,13 +168,26 @@ public class LobbyMenu : Menu<LobbyMenu>
             {
                 output.Add($"Gamepad {++gamepadCounter}", device);
             }
-            
+
             else if (device is Keyboard)
             {
                 output.Add($"Keyboard {++keyboardCounter}", device);
             }
         }
+        output.Add("AI Player", null);
 
         return output;
+    }
+
+
+    private bool AllPlayersReady()
+    {
+        foreach (bool playerReady in playerReadyStates)
+        {
+            if (!playerReady)
+                return false;
+        }
+
+        return true;
     }
 }
