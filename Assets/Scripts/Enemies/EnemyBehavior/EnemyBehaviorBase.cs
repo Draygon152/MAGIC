@@ -9,7 +9,6 @@ using System.Collections;
 public class EnemyBehaviorBase : BehaviorBase
 {
     // Advanced following variables
-    [SerializeField] protected NavMeshAgent agent;
     [SerializeField] private float detectionRadius; // Enemy's detection radius
     [SerializeField] private float timeBetweenCheckPlayers; // How many seconds should the enemy check for players
     [SerializeField] private LayerMask layerMask; // Detect colliders within layerMask
@@ -87,14 +86,6 @@ public class EnemyBehaviorBase : BehaviorBase
             }
         }
     }
-
-
-    // Enemy follows to assigned location
-    protected void Follow(Vector3 targetLocation)
-    {
-        agent.SetDestination(targetLocation);
-    }
-
 
     private IEnumerator Wander()
     {
@@ -189,14 +180,6 @@ public class EnemyBehaviorBase : BehaviorBase
             }
         }
     }
-
-
-    protected void Flee(Vector3 location)
-    {
-        Vector3 fleeVector = location - this.gameObject.transform.position;
-        agent.SetDestination(this.transform.position - fleeVector);
-    }
-
 
     protected virtual void PerformEnemyBehavior()
     {

@@ -1,6 +1,7 @@
 // Written by Lawson
 
 using UnityEngine;
+using UnityEngine.AI;
 
 // This script would need to be adjusted later
 public abstract class BehaviorBase : MonoBehaviour
@@ -12,6 +13,8 @@ public abstract class BehaviorBase : MonoBehaviour
     [SerializeField] protected LayerMask enemyLayerMask; // Detect enemies layer
     [SerializeField] protected LayerMask objectLayerMask; // Detect objects layer
     [SerializeField] protected LayerMask playerLayerMask; // Detect players layer
+    [SerializeField] protected LayerMask pickupLayerMask; // Detect pickups layer
+    [SerializeField] protected NavMeshAgent agent; //The NavMeshAgent who has this behavior
 
     //Performs this behavior every frame
     private void FixedUpdate()
@@ -22,5 +25,23 @@ public abstract class BehaviorBase : MonoBehaviour
 
     //The behavior of the AI
     protected abstract void PerformBehavior();
+
+    protected Collider[] DetectLayerWithinRadius(Vector3 center, float detectRadius, LayerMask layer)
+    {
+        return Physics.OverlapSphere(center, detectRadius, layer);  
+    }
+
+    //BEHAVIORS
+
+    protected void Flee(Vector3 location)
+    {
+        Vector3 fleeVector = location - this.gameObject.transform.position;
+        agent.SetDestination(this.transform.position - fleeVector);
+    }
+
+    protected void Follow(Vector3 targetLocation)
+    {
+        agent.SetDestination(targetLocation);
+    }
 }
   
