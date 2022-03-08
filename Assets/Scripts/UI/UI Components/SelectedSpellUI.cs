@@ -41,4 +41,9 @@ public class SelectedSpellUI : MonoBehaviour
     {
         cooldownSlider.maxValue = newCooldown;
     }
+
+    public float CheckSpellCooldownValue()
+    {
+        return cooldownSlider.value;
+    }
 }

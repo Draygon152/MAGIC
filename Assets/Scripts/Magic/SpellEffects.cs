@@ -41,8 +41,7 @@ public class SpellEffects : MonoBehaviour
 
     public void HealEffect(Player player, GameObject target, BaseSpell spell)
     {
-        if (target != null)
-            player.GetComponent<PlayerHealthManager>().GainHealth(spell.GetSpell().damage);
+        player.GetComponent<PlayerHealthManager>().GainHealth(spell.GetSpell().damage);
     }
 
 
@@ -89,5 +88,32 @@ public class SpellEffects : MonoBehaviour
         catch
         {
         }
+    }
+
+
+    public void BounceDamage(Player player, GameObject target, BaseSpell spell)
+    {
+        try
+        {
+            GameObject currenttarget = target;
+            while (currenttarget != null)
+            {
+                currenttarget = ReturnEnemyinRange(3f, currenttarget);
+                if(currenttarget != null)
+                {
+                    spellDamageGiver.UseDamage(currenttarget, spell.GetSpell().damage);
+                }
+
+            }
+        }
+        catch
+        {
+        }
+    }
+    
+
+    private GameObject ReturnEnemyinRange(float range, GameObject currenttarget)
+    {
+        return null;
     }
 }

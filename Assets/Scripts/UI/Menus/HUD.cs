@@ -56,4 +56,10 @@ public class HUD : Menu<HUD>
     {
         enemyCounter.text = $"Enemies Remaining: {enemiesRemaining}";
     }
+
+
+    public float ReturnCooldown(int playerNumber)
+    {
+        return playerSpellUIs[playerNumber].CheckSpellCooldownValue();
+    }
 }

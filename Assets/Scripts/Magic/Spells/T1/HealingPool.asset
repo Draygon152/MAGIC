@@ -20,5 +20,6 @@ MonoBehaviour:
   spellLifetime: 5
   effectDuration: 0
   radius: 2
+  continious: 1
   self: 0
   element: 2

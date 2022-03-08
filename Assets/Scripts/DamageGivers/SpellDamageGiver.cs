@@ -1,6 +1,7 @@
 // Written by Angel
 // Modified by Kevin Chao
 
+using System;
 using UnityEngine;
 
 public class SpellDamageGiver : DamageGiver
@@ -17,5 +18,11 @@ public class SpellDamageGiver : DamageGiver
             if (target != null)
                 DamageTarget(target, currentSpell.GetSpell().damage);
         }
+    }
+
+    public void UseDamage(GameObject subject, int damage)
+    {
+        HealthManager subjecthealth = subject.GetComponentInParent<HealthManager>();
+        DamageTarget(subjecthealth, damage);
     }
 }
