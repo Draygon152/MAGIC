@@ -7,12 +7,14 @@ public class MainMenu : Menu<MainMenu>
     public void SingleplayerPressed()
     {
         SingleplayerLobbyMenu.Open();
+        MinimapCameraSystem.Instance.OpenSinglePlayerMinimap();
     }
 
 
     public void MultiplayerPressed()
     {
         MultiplayerLobbyMenu.Open();
+        MinimapCameraSystem.Instance.OpenMultiplayerMinimap();
     }
 
 

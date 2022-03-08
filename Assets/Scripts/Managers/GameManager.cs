@@ -196,5 +196,6 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerManager.Instance.ResetPlayers();
+        MinimapCameraSystem.Instance.CloseMinimap();
     }
 }
