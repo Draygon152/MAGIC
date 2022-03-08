@@ -112,19 +112,12 @@ public class EnemyBehaviorBase : MonoBehaviour
         Vector3 fleeVector = this.transform.position - distance;
 
         NavMeshHit hit;
-        bool test = NavMesh.SamplePosition(fleeVector, out hit, 10.0f, NavMesh.AllAreas);
+        bool validLocation = NavMesh.SamplePosition(fleeVector, out hit, 10.0f, NavMesh.AllAreas);
 
 
-        if (test)
+        if (validLocation)
         {
             agent.SetDestination(fleeVector);
-            Debug.Log($"Destination set! {agent.SetDestination(fleeVector)}");
-        }
-
-        else
-        {
-            // TODO: Remove before Playtest 3
-            Debug.Log("Cant find shit!");
         }
     }
 
