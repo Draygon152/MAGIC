@@ -41,6 +41,8 @@ public class MeleeBehavior : EnemyBehaviorBase
         attackPower = damageGiver.CurrentDamage();
         attackCooldown = damageGiver.GetDamageOverTime();
         readyToApplyDamage = true;
+
+        // Set Flee variables
         readyToFlee = true;
     }
 

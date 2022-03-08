@@ -17,7 +17,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     // Flee variables
     [SerializeField] protected bool hasFleeBehavior; // flag which indicates the enemy will flee at some distance
     [SerializeField] protected float fleeCooldown = 5f;
-    [SerializeField] private float fleeDistance; // Enemy runs away if player is within fleeDistance
+    [SerializeField] protected float fleeDistance; // Enemy runs away if player is within fleeDistance
 
     // Wander variables
     [SerializeField] private float wanderMinRadius;
@@ -27,7 +27,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     [SerializeField] private float charge; // Increase the charge temporarily when enemy cannot find player for a while
 
     // Attack variables
-    [SerializeField] private float attackDistance = 1; // Distance betweeen the enemy itself and target
+    [SerializeField] protected float attackDistance = 1; // Distance betweeen the enemy itself and target
 
     protected PlayerManager playerManager;
     protected Collider[] foundPlayers; // List of players' colliders
@@ -114,7 +114,7 @@ public class EnemyBehaviorBase : MonoBehaviour
         NavMeshHit hit;
         bool test = NavMesh.SamplePosition(fleeVector, out hit, 10.0f, NavMesh.AllAreas);
 
-        
+
         if (test)
         {
             agent.SetDestination(fleeVector);
@@ -144,7 +144,7 @@ public class EnemyBehaviorBase : MonoBehaviour
         }
 
         else
-        { 
+        {
             // Select a wander target at random around the enemy
             Vector2 point = Random.insideUnitCircle.normalized * Random.Range(wanderMinRadius, wanderMaxRadius);
             wanderTarget = new Vector3(point.x, 0, point.y) + this.transform.position;
@@ -201,12 +201,12 @@ public class EnemyBehaviorBase : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenCheckPlayers);
         checkForPlayers = true;
     }
-    
+
 
     // Assign enemy's target to the nearst player detected
     private void TargetNearestPlayer()
     {
-        Vector3 shorterPosition = Vector3.positiveInfinity; 
+        Vector3 shorterPosition = Vector3.positiveInfinity;
         foreach (Collider player in foundPlayers)
         {
             Player currentPlayer = player.gameObject.GetComponent<Player>();
@@ -285,7 +285,6 @@ public class EnemyBehaviorBase : MonoBehaviour
     {
         return agent.speed;
     }
-    
     
     private void DisableBehavior()
     {

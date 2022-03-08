@@ -186,8 +186,9 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
-  attackDistance: 1
+  attackDistance: 15
   stopAtDistance: 6
+  attackDistanceOffset: 1
 --- !u!1001 &6621056438072503434
 PrefabInstance:
   m_ObjectHideFlags: 0

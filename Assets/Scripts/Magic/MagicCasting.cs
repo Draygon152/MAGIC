@@ -1,5 +1,5 @@
 // Written by Angel
-// Modified by Kevin Chao and Lawson
+// Modified by Kevin Chao, Lawson, and Lizbeth
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,8 +20,17 @@ public class MagicCasting : MonoBehaviour
 
     private void Awake()
     {
-        // Set playerNumber
-        playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
+
+        if (this.gameObject.tag != "Player")
+        {
+            // Set playerNumber as null (-1)
+            playerNumber = -1;
+        }
+        else
+        {
+            // Set playerNumber
+            playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
+        }
     }
 
 

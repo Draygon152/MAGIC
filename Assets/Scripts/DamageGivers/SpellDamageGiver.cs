@@ -12,6 +12,7 @@ public class SpellDamageGiver : DamageGiver
     {
         Debug.Log($"{currentSpell.name} applying damage to {collision.name}");
 
+        // If collided with objects or enemies:
         if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
         {
             HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
@@ -19,6 +20,8 @@ public class SpellDamageGiver : DamageGiver
             if (target != null)
                 DamageTarget(target, currentSpell.GetSpell().damage);
         }
+
+        // If collided with players:
         if(collision.gameObject.layer == 7)
         {
             HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();

@@ -147,18 +147,6 @@ NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_PrefabInstance: {fileID: 3046401428500070686}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3027572500043408075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6233107874321950843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9b0f96e761a89e40bc0bc0ad575b8a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3053407030367434907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,8 +187,9 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
-  attackDistance: 1
+  attackDistance: 15
   stopAtDistance: 10
+  attackDistanceOffset: 1
 --- !u!1001 &8533923410113613370
 PrefabInstance:
   m_ObjectHideFlags: 0
