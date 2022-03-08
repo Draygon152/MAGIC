@@ -615,7 +615,7 @@ PrefabInstance:
     - target: {fileID: -8855250619208960111, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: waves.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 5a5124bd5df2a9b4d8131db17f88960d, type: 2}
+      objectReference: {fileID: 11400000, guid: 60767877d81b34c5b90d93fd36c58411, type: 2}
     - target: {fileID: 816934397636797242, guid: b6958e83bafb8e3eea2bf8562337f921, type: 3}
       propertyPath: m_Name
       value: GameManager
