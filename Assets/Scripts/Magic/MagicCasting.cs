@@ -1,5 +1,5 @@
 // Written by Angel
-// Modified by Kevin Chao and Lawson
+// Modified by Kevin Chao, Lawson, and Lizbeth
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +8,7 @@ public class MagicCasting : MonoBehaviour
 {
     [SerializeField] private Transform castLocation; // Location where the spell is cast from
 
-    private BaseSpell spellToCast;
+    [SerializeField]private BaseSpell spellToCast;
     private Element selectedElement;
 
     private bool casting = false; // Default state of casting magic is false
@@ -20,8 +20,17 @@ public class MagicCasting : MonoBehaviour
 
     private void Awake()
     {
-        // Set playerNumber
-        playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
+
+        if (this.gameObject.tag != "Player")
+        {
+            // Set playerNumber as null (-1)
+            playerNumber = -1;
+        }
+        else
+        {
+            // Set playerNumber
+            playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
+        }
     }
 
 
@@ -113,6 +122,15 @@ public class MagicCasting : MonoBehaviour
 
         // If the player is not casting
         if (!casting)
+        {
+            casting = true;
+            CastCurrentSpell();
+        }
+    }
+
+    public void EnemyCast()
+    {
+        if(!casting)
         {
             casting = true;
             CastCurrentSpell();

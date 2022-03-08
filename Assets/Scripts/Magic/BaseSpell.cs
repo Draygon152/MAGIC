@@ -1,5 +1,5 @@
 // Written by Angel
-// Modified by Kevin Chao
+// Modified by Kevin Chao and Lizbeth
 
 using UnityEngine;
 using System.Collections;
@@ -34,9 +34,13 @@ public class BaseSpell : MonoBehaviour
     {
         //Create the spell
         BaseSpell castedSpell = Instantiate(spellToCreate, locationOfCreation, rotationOfCreation);
-
-        //Set the player who cast the spell
-        castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
+        
+        // If playerNumber is not null (-1):
+        if (playerNumber != -1)
+        {
+            //Set the player who cast the spell
+            castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
+        }
     }
 
 

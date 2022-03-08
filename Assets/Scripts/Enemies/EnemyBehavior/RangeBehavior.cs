@@ -5,24 +5,38 @@ using UnityEngine;
 
 public class RangeBehavior : EnemyBehaviorBase
 {
-    [SerializeField] private float stopAtDistance = 1f; // Enemy will stop when it is at a certain distance from target
+    [SerializeField] private float stopAtDistance = 10f; // Enemy will stop when it is at a certain distance from target
+    [SerializeField] private float attackDistanceOffset = 1f;
+    [SerializeField] private float turnSpeed = 900f;
 
+    private CollisionDamageGiver damageGiver; // A reference to the damage giver class for applying damage
+    private float attackCooldown; // Cooldown time between melee attacks
+    private bool readyToCastSpell; // A bool to flag whether or not the enemy is ready to attack again
     private bool readyToFlee;
 
     private enum RangeState
     {
-        followTarget,
+        followAndAttackTarget,
         fleeFromTarget
     }
     private RangeState state;
-
 
 
     protected override void Awake()
     {
         base.Awake();
 
-        state = RangeState.followTarget;
+        state = RangeState.followAndAttackTarget;
+
+        // Ensure that ranged enemies are able to attack before stopping or fleeing
+        if (attackDistance <= stopAtDistance)
+        {
+            attackDistance = stopAtDistance + attackDistanceOffset;
+            if (hasFleeBehavior && (stopAtDistance <= fleeDistance))
+            {
+                attackDistance = fleeDistance + attackDistanceOffset;
+            }
+        }
     }
 
 
@@ -30,6 +44,15 @@ public class RangeBehavior : EnemyBehaviorBase
     {
         base.Start();
 
+        // TODO: Rename CollisionDamageGiver class for accuracy
+        // Grab enemy's EnemyDamageGiver
+        damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>();
+
+        // Set attack Variables
+        attackCooldown = damageGiver.GetDamageOverTime();
+        readyToCastSpell = true;
+
+        // Set Flee variables
         agent.stoppingDistance = stopAtDistance;
         readyToFlee = true;
     }
@@ -42,15 +65,34 @@ public class RangeBehavior : EnemyBehaviorBase
         Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
         switch (state)
         {
-            case RangeState.followTarget:
-                
+            case RangeState.followAndAttackTarget:
                 // Grab targeted player's location
                 Follow(targetLocation);
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    agent.updateRotation = false;
+
+                    Vector3 relativePosition = targetLocation - this.transform.position;
+                    Quaternion rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up);
+                    this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, rotationAngle, turnSpeed);
+                }
+                else
+                {
+                    agent.updateRotation = true;
+                }
+
+                // If in attackDistance, begin casting spells
+                if (IsWithinAttackDistance() && readyToCastSpell)
+                {
+                    StartCoroutine(ShootMagic());
+                }
 
                 // If range enemy has flee behavior enabled, it will run away if in flee distance
                 if (IsWithinFleeDistance())
                 {
                     state = RangeState.fleeFromTarget;
+                    agent.updateRotation = true;
                 }
                 break;
 
@@ -68,6 +110,15 @@ public class RangeBehavior : EnemyBehaviorBase
         }
     }
 
+    private IEnumerator ShootMagic()
+    {
+        readyToCastSpell = false;
+
+        this.gameObject.GetComponent<MagicCasting>().EnemyCast(); // Cast spell
+
+        yield return new WaitForSeconds(attackCooldown);
+        readyToCastSpell = true;
+    }
 
     private IEnumerator RangeIsFleeing()
     {
@@ -81,7 +132,7 @@ public class RangeBehavior : EnemyBehaviorBase
         if (!IsWithinFleeDistance())
         {
             agent.stoppingDistance = stopAtDistance; // Reset enemy's stopping distance
-            state = RangeState.followTarget; // Change state
+            state = RangeState.followAndAttackTarget; // Change state
         }
 
         readyToFlee = true;
