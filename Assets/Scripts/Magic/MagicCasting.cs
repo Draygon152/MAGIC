@@ -58,7 +58,17 @@ public class MagicCasting : MonoBehaviour
 
     public float GetSpellRange()
     {
-        return spellToCast.GetSpell().spellSpeed * spellToCast.GetSpell().spellLifetime;
+        float range;
+
+        if (spellToCast.GetSpell().spellSpeed != 0)
+        {
+            range = spellToCast.GetSpell().spellSpeed * spellToCast.GetSpell().spellLifetime;
+        }
+        else
+        {
+            range = -1.0f; //denoting a stationary spell;
+        }
+        return range;
     }
 
     private void ChangeTransform()

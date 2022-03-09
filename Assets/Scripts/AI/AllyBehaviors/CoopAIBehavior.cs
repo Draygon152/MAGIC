@@ -8,17 +8,23 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     // it shares similar traits to my RangeBehavior script in my branch (UpgradeAttackingBehaviors).
     // I say take a look at it!
 
-    [SerializeField] private const float MAX_LOOK_AT_ANGLE = 1.0f; //The max angle between the direction
+    [SerializeField] private const float MAX_LOOK_AT_ANGLE = 5.0f; //The max angle between the direction
                                                                    //of the target and the direction the AI
                                                                    //is looking can be for the AI to be consider
                                                                    //looking at the target 
     [SerializeField] private LayerMask environment;
+
+    // [SerializeField] private float
 
     [SerializeField] private float healthCriticalTheshold = 0.2f; //The percentage that teammate's must drop below for the AI to assist
     [SerializeField] private float timeBetweenCheckingOnTeammate = 10.0f; //How often does the AI check how its teammate is doing
     private bool timeToCheckOnTeammate;
     private int otherPlayerIndex; //and integer to store the index of the other player for a multiplayer game
 
+    [SerializeField] private float placeDistanceForStationarySpells = 3.0f; //How far away from the enemy should a stationary spell be placed
+
+    [SerializeField] private float minAttackingDistance = 1.0f;
+    [SerializeField] private float safeDistanceToBeginAttackingAgain = 5.0f;
 
     private bool readyToScanEnemies; // A flag that indicates whether or not to scan enemies
     private Collider[] foundEnemies;
@@ -33,6 +39,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     private enum CoopAiState
     {
         attackEnemies,
+        fleeFromNearbyEnemy,
         defendPlayer,
     }
     private CoopAiState playerAiState;
@@ -93,29 +100,51 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                 //Check for a target
                 TargetNearestEnemy(selfTransform.position);
 
-                //Check if the spell is on cooldown
-                Debug.Log($"magic.GetTimeSinceLastCast {magic.GetTimeSinceLastCast() == 0}");
-                if (magic.GetTimeSinceLastCast() == 0)
+                if (target != null)
                 {
-                    //Spell is off cooldown, Charge into the fray
+                    //Check if the spell is on cooldown
+                    Debug.Log($"magic.GetTimeSinceLastCast {magic.GetTimeSinceLastCast() == 0}");
+                    if (magic.GetTimeSinceLastCast() == 0)
+                    {
+                        //Spell is off cooldown, Charge into the fray
 
-                    //The target must die
-                    KillTheTarget();
+                        //The target must die
+                        KillTheTarget();
+                    }
+                    else
+                    {
+                        //Spell is on cooldown, flee for you life                     
+                        Flee(target.position);
+                    }
+
+                    if (DistacneToTarget() < minAttackingDistance)
+                    {
+                        playerAiState = CoopAiState.fleeFromNearbyEnemy;
+                    }
+
+                    // //Periodically check how the other player is doing
+                    // if (timeToCheckOnTeammate && PlayerManager.Instance.GetNumberOfPlayers() != 1)
+                    // {
+                    //     StartCoroutine(CheckOnTeammate());
+                    // }
+                }//end if (target != null)
+
+                break;
+
+            case CoopAiState.fleeFromNearbyEnemy:
+
+                TargetNearestEnemy(selfTransform.position);
+
+                if (target == null || DistacneToTarget() > safeDistanceToBeginAttackingAgain)
+                {
+                    //safe to start attacking enemies again
+                    playerAiState = CoopAiState.attackEnemies;
                 }
                 else
                 {
-                    //Spell is on cooldown, flee for you life
-                    if (target != null)
-                    {
-                        Flee(target.position);
-                    }
+                    //not safe, FLEE!!!!
+                    Flee(target.position);
                 }
-
-                // //Periodically check how the other player is doing
-                // if (timeToCheckOnTeammate && PlayerManager.Instance.GetNumberOfPlayers() != 1)
-                // {
-                //     StartCoroutine(CheckOnTeammate());
-                // }
 
                 break;
 
@@ -143,13 +172,6 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
     private void KillTheTarget()
     {
-        Debug.Log("Killing the target");
-        if (target == null)
-        {
-            //No target to kill, return broken hearted
-            return;
-        }
-
         Debug.Log("Target is not null");
 
         //Begin the attack
@@ -193,7 +215,18 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
     private bool TargetInRange()
     {
-        return DistacneToTarget() <= magic.GetSpellRange();
+        bool inRange;
+
+        if (magic.GetSpellRange() == -1)
+        {
+            inRange = DistacneToTarget() <= placeDistanceForStationarySpells;
+        }
+        else
+        {
+            inRange = DistacneToTarget() <= magic.GetSpellRange();
+        }
+
+        return inRange;
     }
 
     private bool LookingAtTarget()
