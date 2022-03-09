@@ -129,4 +129,16 @@ public class BaseSpell : MonoBehaviour
         effectCall.Invoke(player, null, this);
         Destroy(gameObject);
     }
+
+
+    public bool IsPlayer()
+    {
+        bool isCasterPlayer = false;
+        if (player != null)
+        {
+            isCasterPlayer = true;
+        }
+
+        return isCasterPlayer;
+    }
 }

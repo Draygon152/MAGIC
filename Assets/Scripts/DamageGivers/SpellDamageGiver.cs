@@ -11,22 +11,29 @@ public class SpellDamageGiver : DamageGiver
 
     private void OnTriggerEnter(Collider collision)
     {
-        // If collided with objects or enemies:
-        if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
+        if (currentSpell.IsPlayer())
         {
-            HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
+            //Caster is player
+            // If collided with objects or enemies:
+            if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
+            {
+                HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
 
-            if (target != null)
-                DamageTarget(target, currentSpell.GetSpell().damage);
+                if (target != null)
+                    DamageTarget(target, currentSpell.GetSpell().damage);
+            }
         }
-
-        // If collided with players:
-        if(collision.gameObject.layer == 7)
+        else
         {
-            HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
+            //Caster is enemy
+            // If collided with players:
+            if (collision.gameObject.layer == 7)
+            {
+                HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
 
-            if (target != null)
-                DamageTarget(target, currentSpell.GetSpell().damage);
+                if (target != null)
+                    DamageTarget(target, currentSpell.GetSpell().damage);
+            }
         }
     }
 

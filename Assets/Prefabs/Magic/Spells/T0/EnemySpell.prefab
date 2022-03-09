@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 926478391319009902}
   - component: {fileID: 926478391319009903}
   - component: {fileID: 926478391319009900}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: EnemySpell
   m_TagString: Spell
   m_Icon: {fileID: 0}
