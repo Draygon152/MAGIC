@@ -1,9 +1,6 @@
-//Written by Marc Hagoriles
+// Written by Marc Hagoriles
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MinimapCameraSystem : MonoBehaviour
 {
@@ -15,12 +12,14 @@ public class MinimapCameraSystem : MonoBehaviour
 
     private RectTransform rt;
 
-    //Make this a singleton.
+    // Make this a singleton.
     public static MinimapCameraSystem Instance
     {
         get;
         private set;
     }
+
+
 
     private void Awake()
     {
@@ -28,6 +27,7 @@ public class MinimapCameraSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         else
         {
             Instance = this;
@@ -35,10 +35,12 @@ public class MinimapCameraSystem : MonoBehaviour
         }
     }
 
+
     private void Start()
     {
         rt = Minimap.GetComponent<RectTransform>();
     }
+
 
     //Opens the Singleplayer Render of the minimap.
     public void OpenSinglePlayerMinimap()
@@ -46,6 +48,7 @@ public class MinimapCameraSystem : MonoBehaviour
         Minimap.SetActive(true);
     }
     
+
     //Opens the Multiplayer Render of the minimap.
     public void OpenMultiplayerMinimap()
     {
@@ -53,6 +56,7 @@ public class MinimapCameraSystem : MonoBehaviour
         rt.anchoredPosition = new Vector2(mpTargetX, rt.anchoredPosition.y);
         Minimap.SetActive(true);
     }
+
 
     //Resets both minimap renders to NOT active, for when the game is over / reset.
     public void ResetMinimap()
