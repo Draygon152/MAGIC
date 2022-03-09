@@ -58,9 +58,9 @@ public class RangeBehavior : EnemyBehaviorBase
     }
 
 
-    protected override void PerformBehavior()
+    protected override void PerformEnemyBehavior()
     {
-        base.PerformBehavior();
+        base.PerformEnemyBehavior();
 
         Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
         switch (state)

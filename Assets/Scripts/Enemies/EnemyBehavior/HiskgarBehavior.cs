@@ -55,7 +55,7 @@ public class HiskgarBehavior : MeleeBehavior
                     hiskgarState = HiskgarState.fleeingAndHealing;
                 }
                 // Perform regular melee behavior
-                base.PerformBehavior();
+                base.PerformEnemyBehavior();
                 break;
                 
                 // Check if health is below flee health percentage

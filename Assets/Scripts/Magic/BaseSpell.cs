@@ -41,9 +41,6 @@ public class BaseSpell : MonoBehaviour
             //Set the player who cast the spell
             castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
         }
-
-        //Set the player who cast the spell
-        //castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
         
         if(castedSpell.spellToCast.self == true) //now aoe sticks to the player
         {

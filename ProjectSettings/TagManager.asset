@@ -3,20 +3,26 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Spell
+  - Object
+  - Fire
+  - pickups
+  - Crate
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Spell
+  - Player
+  - Pickups
+  - Environment
+  - Object
+  - Minimap Icons
   - 
   - 
   - 

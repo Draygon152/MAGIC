@@ -39,8 +39,6 @@ public class EnemyBehaviorBase : BehaviorBase
     private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
                            // minions from causing a game end after a player wins
 
-
-
     protected virtual void Awake()
     {
         EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
@@ -259,7 +257,7 @@ public class EnemyBehaviorBase : BehaviorBase
     }
 
 
-    protected virtual void PerformBehavior()
+    protected virtual void PerformEnemyBehavior()
     {
         if (agent.speed != enemyOriginalSpeed)
         {
