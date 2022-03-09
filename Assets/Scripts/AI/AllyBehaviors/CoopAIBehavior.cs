@@ -20,6 +20,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     [SerializeField] private float timeBetweenCheckingOnTeammate = 10.0f; //How often does the AI check how its teammate is doing
     private bool timeToCheckOnTeammate;
     private int otherPlayerIndex; //and integer to store the index of the other player for a multiplayer game
+    private HealthManager otherPlayerHealthManager;
 
     [SerializeField] private float placeDistanceForStationarySpells = 3.0f; //How far away from the enemy should a stationary spell be placed
 
@@ -78,6 +79,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
             //if this is player 0, 0 + 1 is 1 and 1 % 2 is 1
             //if this is player 1, 1 + 1 is 2 and 2 % 2 is 0
             otherPlayerIndex = (otherPlayerIndex + 1) % PlayerManager.Instance.GetNumberOfPlayers();
+            otherPlayerHealthManager = PlayerManager.Instance.GetPlayer(otherPlayerIndex).GetComponent<HealthManager>();
         }
     }
 
@@ -122,11 +124,11 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                         playerAiState = CoopAiState.fleeFromNearbyEnemy;
                     }
 
-                    // //Periodically check how the other player is doing
-                    // if (timeToCheckOnTeammate && PlayerManager.Instance.GetNumberOfPlayers() != 1)
-                    // {
-                    //     StartCoroutine(CheckOnTeammate());
-                    // }
+                    //Periodically check how the other player is doing
+                    if (timeToCheckOnTeammate && PlayerManager.Instance.GetNumberOfPlayers() != 1)
+                    {
+                        StartCoroutine(CheckOnTeammate());
+                    }
                 }//end if (target != null)
 
                 break;
@@ -149,22 +151,32 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                 break;
 
             case CoopAiState.defendPlayer:
-                //Target enemy nearest other player
-                TargetNearestEnemy(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
-
-                //Check if the spell is on cooldown
-                if (magic.GetTimeSinceLastCast() == 0)
+                //Check if teammate is dead or healed
+                if (PlayerManager.Instance.GetDeadPlayer() != null && otherPlayerHealthManager.HealthBelowPercentageThreshold(healthCriticalTheshold))
                 {
-                    //Spell is off cooldown, Charge into the fray
+                    //Target enemy nearest other player
+                    TargetNearestEnemy(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
 
-                    //The target must die
-                    KillTheTarget();
+                    //Check if the spell is on cooldown and there is a target
+                    if (magic.GetTimeSinceLastCast() == 0 && target != null)
+                    {
+                        //Spell is off cooldown, Charge into the fray
+
+                        //The target must die
+                        KillTheTarget();
+                    }
+                    else
+                    {
+                        //Spell is on cooldown, focus on staying close to the other player
+
+                        Follow(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
+                    }
                 }
                 else
                 {
-                    //Spell is on cooldown, focus on staying close to the other player
-
-                    Follow(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
+                    //no longer need to protect teammate, so go back to killing 
+                    //enemies in your own way
+                    playerAiState = CoopAiState.attackEnemies;
                 }
                 break;
         }
@@ -279,7 +291,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
         //check if other player's health is low
         otherPlayer = PlayerManager.Instance.GetPlayer(otherPlayerIndex).gameObject;
-        if (otherPlayer.GetComponent<PlayerHealthManager>().HealthBelowPercentageThreshold(healthCriticalTheshold))
+        if (otherPlayerHealthManager.HealthBelowPercentageThreshold(healthCriticalTheshold))
         {
             //The other player's health is low, assit them
             playerAiState = CoopAiState.defendPlayer;
