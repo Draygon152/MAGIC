@@ -141,8 +141,8 @@ MonoBehaviour:
   wanderTowardsPlayerInterval: 5
   charge: 1.5
   attackDistance: 0
-  distanceToMaintain: 15
-  maintainDistanceError: 8
+  distanceToMaintain: 20
+  maintainDistanceError: 10
   larvaPrefab: {fileID: 4942251179604567321, guid: 57e5c155b04c76b31915915be219a196, type: 3}
   spawnTime: 6
   spawnAmount: 2

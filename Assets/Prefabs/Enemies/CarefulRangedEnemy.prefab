@@ -191,8 +191,8 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
-  attackDistance: 15
-  stopAtDistance: 10
+  attackDistance: 18
+  stopAtDistance: 12
   attackDistanceOffset: 1
   turnSpeed: 900
 --- !u!1001 &8533923410113613370

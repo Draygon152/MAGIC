@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class NsquelsnaakBehavior : EnemyBehaviorBase
 {
-    [SerializeField] private float distanceToMaintain = 15.0f;   // The distance the Nsquelsnaak will maintain between itself and the player
-    [SerializeField] private float maintainDistanceError = 5.0f; // The error from the correct maintain distance that is allowed
+    [SerializeField] private float distanceToMaintain = 20.0f;   // The distance the Nsquelsnaak will maintain between itself and the player
+    [SerializeField] private float maintainDistanceError = 9.0f; // The error from the correct maintain distance that is allowed
 
     [SerializeField] private EnemyBehaviorBase larvaPrefab; // The prefab for spawning the larvae
     [SerializeField] private int spawnTime = 3;             // The time between spawning of larvae
@@ -29,6 +29,13 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
     }
     private MaintainDistanceState state;
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        state = MaintainDistanceState.moveTowardPlayer;
+    }
 
 
     protected override void PerformEnemyBehavior()
@@ -66,18 +73,21 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
 
             case MaintainDistanceState.idle:
                 // Do nothing but the distance check
+                agent.isStopped = true;
 
                 // Check if outside the error range
-                if (distanceFromTarget > distanceFromTarget + maintainDistanceError)
+                if (distanceFromTarget > distanceToMaintain)
                 {
                     // too far away, get closer
                     state = MaintainDistanceState.moveTowardPlayer;
+                    agent.isStopped = false;
                 }
 
-                else if (distanceToMaintain < distanceFromTarget - maintainDistanceError)
+                else if (distanceFromTarget < maintainDistanceError)
                 {
                     // too close, get farther away
                     state = MaintainDistanceState.moveAwayFromPlayer;
+                    agent.isStopped = false;
                 }
                 break;
         } // end switch (state)

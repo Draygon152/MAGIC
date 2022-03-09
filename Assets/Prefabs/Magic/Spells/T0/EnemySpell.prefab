@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 926478391319009902}
   - component: {fileID: 926478391319009903}
   - component: {fileID: 926478391319009900}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: EnemySpell
   m_TagString: Spell
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 926478392431384097}
   - component: {fileID: 926478392431384099}
   - component: {fileID: 926478392431384096}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
