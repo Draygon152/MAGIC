@@ -27,23 +27,6 @@ public class EnemyBehaviorBase : BehaviorBase
     private float enemyOriginalSpeed;
     private bool checkForPlayers;
     private bool isWanderTime;
-    private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
-                           // minions from causing a game end after a player wins
-
-
-
-    protected virtual void Awake()
-    {
-        EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
-        gameOver = false;
-    }
-
-
-    private void OnDestroy()
-    {
-        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableBehavior);
-    }
-
 
     // Initializes enemy's agent
     protected override void Start()
@@ -60,29 +43,26 @@ public class EnemyBehaviorBase : BehaviorBase
 
     protected override void PerformBehavior()
     {
-        if (!gameOver)
+        // Checks for players in radius and waits a while before checking again.
+        if (checkForPlayers)
         {
-            // Checks for players in radius and waits a while before checking again.
-            if (checkForPlayers)
-            {
-                StartCoroutine(FindPlayersWithinRadius());
-            }
+            StartCoroutine(FindPlayersWithinRadius());
+        }
 
-            // If there is a current player target, enemy would process to follow the chosen player
-            // If not, enemy would begin to wander
-            if (currentTargetNumber != -1)
-            {
-                // Perform the behavior for this enemy, the base function will just follow, but it
-                // can be overriden for different behaviors
-                PerformEnemyBehavior();
-            }
+        // If there is a current player target, enemy would process to follow the chosen player
+        // If not, enemy would begin to wander
+        if (currentTargetNumber != -1)
+        {
+            // Perform the behavior for this enemy, the base function will just follow, but it
+            // can be overriden for different behaviors
+            PerformEnemyBehavior();
+        }
 
-            else
+        else
+        {
+            if (isWanderTime)
             {
-                if (isWanderTime)
-                {
-                    StartCoroutine(Wander());
-                }
+                StartCoroutine(Wander());
             }
         }
     }
@@ -191,14 +171,7 @@ public class EnemyBehaviorBase : BehaviorBase
         // Grab targeted player's location
         Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
         Follow(targetLocation);
-    }
-
-
-    private void DisableBehavior()
-    {
-        gameOver = true;
-    }
-    
+    }    
 
     public void changeSpeed(float newspeed)
     {

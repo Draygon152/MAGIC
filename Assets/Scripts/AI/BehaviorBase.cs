@@ -15,11 +15,22 @@ public abstract class BehaviorBase : MonoBehaviour
     [SerializeField] protected LayerMask playerLayerMask; // Detect players layer
     [SerializeField] protected LayerMask pickupLayerMask; // Detect pickups layer
     protected NavMeshAgent agent; //The NavMeshAgent who has this behavior
+    private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
+                           // minions from causing a game end after a player wins
 
     //Performs this behavior every frame
     private void FixedUpdate()
     {
-        PerformBehavior();
+        if (!gameOver)
+        {
+            PerformBehavior();
+        }
+    }
+
+    protected virtual void Awake()
+    {
+        EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
+        gameOver = false;
     }
 
     virtual protected void Start()
@@ -33,6 +44,16 @@ public abstract class BehaviorBase : MonoBehaviour
     protected Collider[] DetectLayerWithinRadius(Vector3 center, float detectRadius, LayerMask layer)
     {
         return Physics.OverlapSphere(center, detectRadius, layer);  
+    }
+
+    private void DisableBehavior()
+    {
+        gameOver = true;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableBehavior);
     }
 
     //BEHAVIORS
