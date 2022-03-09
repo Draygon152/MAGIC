@@ -16,6 +16,8 @@ public class MagicCasting : MonoBehaviour
     private float timeSinceLastCast;
     private int playerNumber; // Stores player number so it can be referenced when casting a spell
 
+    private BaseSpell shellofSpell;
+
 
 
     private void Awake()
@@ -65,14 +67,26 @@ public class MagicCasting : MonoBehaviour
 
     private void ChangeTransform()
     {
-        if (spellToCast.GetSpell().spellSpeed == 0)
-        {
-            castLocation.localPosition = new Vector3(0, -0.5f, 0);
-        }
+        float cooldownRemaining = HUD.Instance.ReturnCooldown(playerNumber);
 
-        else
+        if (cooldownRemaining == 0)
         {
-            castLocation.localPosition = new Vector3(0, 0, 0);
+            if (spellToCast.GetSpell().spellSpeed == 0)
+            {
+                castLocation.localPosition = new Vector3(0, -0.5f, 0);
+            }
+
+            else
+            {
+                if (spellToCast.GetSpell().spellSpeed < .5)
+                {
+                    castLocation.localPosition = new Vector3(0, 0, 1);
+                }
+                else
+                {
+                    castLocation.localPosition = new Vector3(0, 0, 0);
+                }
+            }
         }
     }
 
@@ -80,7 +94,7 @@ public class MagicCasting : MonoBehaviour
     private void CastCurrentSpell()
     {
         // Create spell at castLocation
-        BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
+        shellofSpell = BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
     }
 
 
@@ -90,26 +104,15 @@ public class MagicCasting : MonoBehaviour
     }
 
 
-    // TODO: Add code that will update the correct player's HUD text with new spell name
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.GetComponent<Collider>().tag == "pickups")
         {
-            Debug.Log($"Picking up SpellItem {collision.name}");
-
             spellToCast = collision.GetComponent<SpellItem>().GetSpell();
             castCooldown = spellToCast.GetSpell().timeBetweenCasts;
-            if (playerNumber == PlayerManager.PLAYER_1)
-            {
-                HUD.Instance.SetP1SpellCaster(this);
-                HUD.Instance.SetP1MaxCooldown(spellToCast.GetSpell().timeBetweenCasts);
-            }
-
-            else if (playerNumber == PlayerManager.PLAYER_2)
-            {
-                HUD.Instance.SetP2SpellCaster(this);
-                HUD.Instance.SetP2MaxCooldown(spellToCast.GetSpell().timeBetweenCasts);
-             }
+            
+            HUD.Instance.SetPlayerSpellCaster(playerNumber, this);
+            HUD.Instance.SetPlayerMaxCooldown(playerNumber, spellToCast.GetSpell().timeBetweenCasts);
         }
     }
 
@@ -128,12 +131,22 @@ public class MagicCasting : MonoBehaviour
         }
     }
 
+
     public void EnemyCast()
     {
-        if(!casting)
+        if (!casting)
         {
             casting = true;
             CastCurrentSpell();
+        }
+    }
+
+
+    private void OnActivate()
+    {
+        if (shellofSpell != null)
+        {
+            shellofSpell.EarlyCast();
         }
     }
 }

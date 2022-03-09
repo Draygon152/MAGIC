@@ -1,13 +1,22 @@
 // Written by Kevin Chao
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MainMenu : Menu<MainMenu>
 {
-    public void PlayGamePressed()
+    public void SingleplayerPressed()
     {
-        LobbyMenu.Open();
+        SingleplayerLobbyMenu.Open();
+        //Opens the Singleplayer Minimap Render, added by Marc Hagoriles
+        MinimapCameraSystem.Instance.OpenSinglePlayerMinimap();
+    }
+
+
+    public void MultiplayerPressed()
+    {
+        MultiplayerLobbyMenu.Open();
+        //Opens the Multiplayer Minimap Render, added by Marc Hagoriles
+        MinimapCameraSystem.Instance.OpenMultiplayerMinimap();
     }
 
 

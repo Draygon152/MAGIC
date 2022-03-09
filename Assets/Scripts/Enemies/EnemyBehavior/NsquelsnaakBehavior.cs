@@ -31,7 +31,7 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
 
 
 
-    protected override void PerformBehavior()
+    protected override void PerformEnemyBehavior()
     {
         // Liz's small modification:
         base.PerformBehavior();

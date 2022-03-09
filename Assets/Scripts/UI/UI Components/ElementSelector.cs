@@ -26,9 +26,6 @@ public class ElementSelector : MonoBehaviour
     {
         this.selectedElement = selectedElement;
         selectedElementText.text = $"CURRENTLY SELECTED: {selectedElement.GetElementName()}";
-        print(selectedElement.GetElementName());
-
-        // TODO: Add event/delegate notification code to notify other objects which element a player selected
     }
 
 

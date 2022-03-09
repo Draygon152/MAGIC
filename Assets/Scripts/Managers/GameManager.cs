@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -66,26 +65,24 @@ public class GameManager : MonoBehaviour
     // A function to start the game
     public void StartGame()
     {
-        Debug.Log("Starting Game");
-        
         // spawn in the players
         playerCount = PlayerManager.Instance.SpawnPlayers();
 
-        LobbyMenu.Close();
+        if (LobbyMenu<SingleplayerLobbyMenu>.Instance != null)
+            LobbyMenu<SingleplayerLobbyMenu>.Close();
+
+        else if (LobbyMenu<MultiplayerLobbyMenu>.Instance != null)
+            LobbyMenu<MultiplayerLobbyMenu>.Close();
+
         HUD.Open();
 
         // Initialize the HUD's player data
         PlayerManager.Instance.InitializeHUD();
 
         // Set the camera to follow the player
-        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_1).gameObject.activeSelf)
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
-            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        }
-
-        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_2).gameObject.activeSelf)
-        {
-            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
         }
 
         //Set the camera to its starting position.
@@ -97,7 +94,7 @@ public class GameManager : MonoBehaviour
         waveNumber++;
 
         //Set the enemy counter on the HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
     }
 
 
@@ -109,16 +106,12 @@ public class GameManager : MonoBehaviour
         // and update the game state
         if (WinOrLose)
         {
-            Debug.Log("Player Victorious");
-
-            VictoryGameOver.Open(); // Activates the Victory Screen UI.
+            VictoryGameOver.Open();
         }
 
         else
         {
-            Debug.Log("Player Defeated");
-
-            DefeatGameOver.Open(); // Activates the Defeat Screen UI.
+            DefeatGameOver.Open();
         }
 
         EventManager.Instance.Notify(EventTypes.Events.GameOver);
@@ -130,7 +123,6 @@ public class GameManager : MonoBehaviour
     {
         // decrement playerCount
         playerCount--;
-
 
         // Check if players are still alive
         if (playerCount <= 0)
@@ -154,7 +146,7 @@ public class GameManager : MonoBehaviour
         enemyCount--;
 
         // update enemy counter on HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
 
         // check if final wave
         if (waveNumber >= waves.Count)
@@ -182,7 +174,7 @@ public class GameManager : MonoBehaviour
         }//end else of (if (waveNumber >= waves.Count))
 
         // update enemy counter on HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
     }
 
 
@@ -198,8 +190,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         // Reset camera frame
-        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+        for (int playerIndex = 0; playerIndex < PlayerManager.Instance.GetNumberOfPlayers(); playerIndex++)
+        {
+            CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
+        }
+
+        //Resets the minimap
+        MinimapCameraSystem.Instance.ResetMinimap();
 
         PlayerManager.Instance.ResetPlayers();
     }

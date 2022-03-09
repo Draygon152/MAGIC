@@ -8,8 +8,9 @@ public class PlayerHealthManager : HealthManager
 {
     [SerializeField] protected int startingHealth; // Health the player starts at after resurrection, not yet implemented
 
-    private Action<int> setHealthBarValue; // Contains pointer to function responsible for setting HealthBar's current value
-    private Action<int> setHealthBarMax;   // Contains pointer to function responsible for setting HealthBar max
+    private Action<int, int> setHealthBarValue; // Contains pointer to function responsible for setting HealthBar's current value
+    private Action<int, int> setHealthBarMax;   // Contains pointer to function responsible for setting HealthBar max
+    private int playerNumber;
 
 
 
@@ -23,8 +24,8 @@ public class PlayerHealthManager : HealthManager
 
     private void InitializeHealthBar()
     {
-        setHealthBarMax(maxHealth);
-        setHealthBarValue(currentHealth);
+        setHealthBarMax(playerNumber, maxHealth);
+        setHealthBarValue(playerNumber, currentHealth);
     }
 
 
@@ -32,20 +33,19 @@ public class PlayerHealthManager : HealthManager
     {
         base.GainHealth(healAmount);
 
-        setHealthBarValue(currentHealth);
+        setHealthBarValue(playerNumber, currentHealth);
     }
 
 
     public override void LoseHealth(int damageAmount)
     {
         currentHealth -= damageAmount;
-        Debug.Log($"Health of {gameObject.name} after damage: {currentHealth}");
 
         // If health becomes 0 or less, player dies
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            setHealthBarValue(currentHealth);
+            setHealthBarValue(playerNumber, currentHealth);
 
             // If the player runs out of hp, disable the player instead of destroying, allows for resurrection
             gameObject.SetActive(false);
@@ -55,12 +55,13 @@ public class PlayerHealthManager : HealthManager
 
         // If health is not yet empty, just update HealthBar
         else
-            setHealthBarValue(currentHealth);
+            setHealthBarValue(playerNumber, currentHealth);
     }
 
 
-    public void SetHealthBarDelegates(Action<int> setHBValue, Action<int> setHBValueMax)
+    public void SetHealthBarDelegates(int playerNum, Action<int, int> setHBValue, Action<int, int> setHBValueMax)
     {
+        playerNumber = playerNum;
         setHealthBarValue = setHBValue;
         setHealthBarMax = setHBValueMax;
     }

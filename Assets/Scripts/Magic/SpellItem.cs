@@ -28,8 +28,6 @@ public class SpellItem : MonoBehaviour
     {
         containedSpell = SpellList.Instance.GetRandomSpell();
         // containedSpell = SpellList.Instance.GetTestSpell();
-
-        Debug.Log($"SPELL IN ITEM: {containedSpell}");
     }
 
 

@@ -1,6 +1,7 @@
 // Written by Angel
 // Modified by Kevin Chao
 
+using System;
 using UnityEngine;
 
 public class SpellDamageGiver : DamageGiver
@@ -10,8 +11,6 @@ public class SpellDamageGiver : DamageGiver
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log($"{currentSpell.name} applying damage to {collision.name}");
-
         // If collided with objects or enemies:
         if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
         {
@@ -29,5 +28,11 @@ public class SpellDamageGiver : DamageGiver
             if (target != null)
                 DamageTarget(target, currentSpell.GetSpell().damage);
         }
+    }
+
+    public void UseDamage(GameObject subject, int damage)
+    {
+        HealthManager subjecthealth = subject.GetComponentInParent<HealthManager>();
+        DamageTarget(subjecthealth, damage);
     }
 }

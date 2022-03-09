@@ -44,7 +44,7 @@ public class HiskgarBehavior : MeleeBehavior
     }
 
 
-    protected override void PerformBehavior()
+    protected override void PerformEnemyBehavior()
     {
         switch (hiskgarState)
         {

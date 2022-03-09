@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using System.Collections;
 
 // This class serve as the base for all enemies. Each has the ability to follow/flee, wonder, and attack within radius
-public class EnemyBehaviorBase : MonoBehaviour
+public class EnemyBehaviorBase : BehaviorBase
 {
     // Advanced following variables
     [SerializeField] protected NavMeshAgent agent;
@@ -69,7 +69,7 @@ public class EnemyBehaviorBase : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    protected override void PerformBehavior()
     {
         if (!gameOver)
         {
@@ -85,7 +85,7 @@ public class EnemyBehaviorBase : MonoBehaviour
             {
                 // Perform the behavior for this enemy, the base function will just follow, but it
                 // can be overriden for different behaviors
-                PerformBehavior();
+                PerformEnemyBehavior();
             }
 
             else
