@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // Base class for all menus, Singleton
 public abstract class Menu<T> : Menu where T : Menu<T>
 {
-    [SerializeField] Button defaultSelected;
+    [SerializeField] private Button defaultSelected;
 
     // Property with public read-access, private write-access
     // Properties are treated like fields but can have behaviors execute on read/write

@@ -1,8 +1,5 @@
 // Written by Kevin Chao
 
-using UnityEngine;
-using UnityEngine.UI;
-
 public class PauseMenu : Menu<PauseMenu>
 {
     public void OnOptionsPress()

@@ -34,20 +34,21 @@ public class MinimapCameraSystem : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        //reset the minimap when the game restarts
-        EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ResetMinimap);
     }
 
 
     private void Start()
     {
         rt = Minimap.GetComponent<RectTransform>();
+        //reset the minimap when the game restarts
+        EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ResetMinimap);
     }
 
 
     //Opens the Singleplayer Render of the minimap.
     public void OpenSinglePlayerMinimap()
     {
+        Debug.Log("Singplayer button is pressed, minimap should be at top-right");
         Minimap.SetActive(true);
     }
     
@@ -55,6 +56,8 @@ public class MinimapCameraSystem : MonoBehaviour
     //Opens the Multiplayer Render of the minimap.
     public void OpenMultiplayerMinimap()
     {
+        Debug.Log("Multiplayer button is pressed, minimap should be at top-middle");
+
         //Set the minimap render's x position to the target position.
         rt.anchoredPosition = new Vector2(mpTargetX, rt.anchoredPosition.y);
         Minimap.SetActive(true);
@@ -64,6 +67,7 @@ public class MinimapCameraSystem : MonoBehaviour
     //Resets both minimap renders to NOT active, for when the game is over / reset.
     public void ResetMinimap()
     {
+        Debug.Log("Game is reset, minimap should return back to Singleplayer position");
         rt.anchoredPosition = new Vector2(spTargetX, rt.anchoredPosition.y);
         Minimap.SetActive(false);
     }
