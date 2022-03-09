@@ -33,6 +33,9 @@ public class MinimapCameraSystem : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        //reset the minimap when the game restarts
+        EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ResetMinimap);
     }
 
 
