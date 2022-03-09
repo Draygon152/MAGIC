@@ -14,7 +14,7 @@ public abstract class BehaviorBase : MonoBehaviour
     [SerializeField] protected LayerMask objectLayerMask; // Detect objects layer
     [SerializeField] protected LayerMask playerLayerMask; // Detect players layer
     [SerializeField] protected LayerMask pickupLayerMask; // Detect pickups layer
-    [SerializeField] protected NavMeshAgent agent; //The NavMeshAgent who has this behavior
+    protected NavMeshAgent agent; //The NavMeshAgent who has this behavior
 
     //Performs this behavior every frame
     private void FixedUpdate()
@@ -22,6 +22,10 @@ public abstract class BehaviorBase : MonoBehaviour
         PerformBehavior();
     }
 
+    virtual protected void Start()
+    {
+        agent = this.GetComponent<NavMeshAgent>();
+    }
 
     //The behavior of the AI
     protected abstract void PerformBehavior();

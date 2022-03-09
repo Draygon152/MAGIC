@@ -93,6 +93,7 @@ public class PlayerManager : MonoBehaviour
             if (playerData[playerIndex].PairedDevice == null)
             {
                 playerGameObject[playerIndex].GetComponent<CoopAIBehavior>().enabled = true;
+                playerGameObject[playerIndex].GetComponent<NavMeshAgent>().enabled = true;
 
                 // disable manual controls
                 playerGameObject[playerIndex].GetComponent<PlayerInput>().enabled = false;

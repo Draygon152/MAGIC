@@ -46,9 +46,9 @@ public class EnemyBehaviorBase : BehaviorBase
 
 
     // Initializes enemy's agent
-    protected virtual void Start()
+    protected override void Start()
     {
-        agent = this.GetComponent<NavMeshAgent>();
+        base.Start();
         playerManager = PlayerManager.Instance;
         currentTargetNumber = -1;
         wanderInterval = 0;
