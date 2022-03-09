@@ -22,6 +22,7 @@ public class RangeBehavior : EnemyBehaviorBase
     private RangeState state;
 
 
+
     protected override void Awake()
     {
         base.Awake();
@@ -77,6 +78,7 @@ public class RangeBehavior : EnemyBehaviorBase
                     Quaternion rotationAngle = Quaternion.LookRotation(relativePosition, Vector3.up);
                     this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, rotationAngle, turnSpeed);
                 }
+
                 else
                 {
                     agent.updateRotation = true;
@@ -110,6 +112,7 @@ public class RangeBehavior : EnemyBehaviorBase
         }
     }
 
+
     private IEnumerator ShootMagic()
     {
         readyToCastSpell = false;
@@ -119,6 +122,7 @@ public class RangeBehavior : EnemyBehaviorBase
         yield return new WaitForSeconds(attackCooldown);
         readyToCastSpell = true;
     }
+
 
     private IEnumerator RangeIsFleeing()
     {

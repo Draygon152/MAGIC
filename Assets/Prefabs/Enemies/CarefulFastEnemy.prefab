@@ -104,6 +104,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8961594199354966123, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: fleeDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961594199354966123, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: detectionRadius
       value: 20
       objectReference: {fileID: 0}

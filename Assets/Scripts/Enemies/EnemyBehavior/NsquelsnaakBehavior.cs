@@ -19,7 +19,6 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
 
     private bool spawningLarva = false; // A bool to mark if the Nsquelsnaak is currently spawning larvae
 
-
     // An enum for keeping track of states for maintaining a certain distance
     private enum MaintainDistanceState
     {
@@ -28,6 +27,7 @@ public class NsquelsnaakBehavior : EnemyBehaviorBase
         idle
     }
     private MaintainDistanceState state;
+
 
 
     protected override void Awake()
