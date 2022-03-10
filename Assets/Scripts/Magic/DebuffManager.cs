@@ -14,7 +14,7 @@ public class DebuffManager : MonoBehaviour
 
 
 
-    private void Awake()
+    private void Start()
     {
         navMesh = this.GetComponent<NavMeshAgent>();
         storedDamage = this.GetComponent<CollisionDamageGiver>().currentDamage();

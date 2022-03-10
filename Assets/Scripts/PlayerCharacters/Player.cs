@@ -3,14 +3,19 @@
 
 using UnityEngine;
 using System;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerHealthManager))]
 [RequireComponent(typeof(MagicCasting))]
+[RequireComponent(typeof(NavMeshAgent))] //for AI COOP
 public class Player : MonoBehaviour
 {
+    [SerializeField] private PlayersStats stats; //The static stats of the player
+
     private MagicCasting magicCaster;
     private PlayerHealthManager healthManager;
+    private NavMeshAgent navMeshAgent;
     private int playerNumber;
 
     // Liz's modification
@@ -33,6 +38,11 @@ public class Player : MonoBehaviour
     {
         magicCaster = GetComponent<MagicCasting>();
         healthManager = GetComponent<PlayerHealthManager>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        //initialize approriate fields with player stats
+        navMeshAgent.speed = stats.speed;
+        navMeshAgent.angularSpeed = stats.turnSpeed;
     }
 
 

@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 //This class will manage the players and their data
 public class PlayerManager : MonoBehaviour
@@ -77,7 +78,9 @@ public class PlayerManager : MonoBehaviour
             // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
             // player index and pairWithDevice in PlayerInput) I could not pass in the spawn point transform to spawn
             // the players at the right location. As a result they must be moved manually.
-            playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset[playerIndex];
+            playerGameObject[playerIndex].GetComponent<NavMeshAgent>().Warp(playerSpawnPoint.position + spawnOffset[playerIndex]); //The wierd function call is to make
+                                                                                                                                  //sure the AI player's can find the NavMesh
+            // playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset[playerIndex];
             playerGameObject[playerIndex].transform.rotation = playerSpawnPoint.rotation;
 
             // Set player's elemental affinity, assign delegates to player's health bar
@@ -90,6 +93,7 @@ public class PlayerManager : MonoBehaviour
             if (playerData[playerIndex].PairedDevice == null)
             {
                 playerGameObject[playerIndex].GetComponent<CoopAIBehavior>().enabled = true;
+                playerGameObject[playerIndex].GetComponent<NavMeshAgent>().enabled = true;
 
                 // disable manual controls
                 playerGameObject[playerIndex].GetComponent<PlayerInput>().enabled = false;

@@ -56,6 +56,21 @@ public class MagicCasting : MonoBehaviour
     }
 
 
+    public float GetSpellRange()
+    {
+        float range;
+
+        if (spellToCast.GetSpell().spellSpeed != 0)
+        {
+            range = spellToCast.GetSpell().spellSpeed * spellToCast.GetSpell().spellLifetime;
+        }
+        else
+        {
+            range = -1.0f; //denoting a stationary spell;
+        }
+        return range;
+    }
+
     private void ChangeTransform()
     {
         float cooldownRemaining = HUD.Instance.ReturnCooldown(playerNumber);
@@ -128,5 +143,17 @@ public class MagicCasting : MonoBehaviour
         {
             shellofSpell.EarlyCast();
         }
+    }
+
+    //A simple function to allow an AI to cast the spell
+    //There might be a better way to do this, but for I 
+    //am going with this becasue of time constraint
+    public void AIOnCast()
+    {
+        //pass on the function call to OnCast
+        //if any preprocessing needs to be done
+        //for an AI to cast a spell the it should
+        //be done here
+        OnCast();
     }
 }
