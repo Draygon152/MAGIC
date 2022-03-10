@@ -152,7 +152,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
             case CoopAiState.defendPlayer:
                 //Check if teammate is dead or healed
-                if (PlayerManager.Instance.GetDeadPlayer() != null && otherPlayerHealthManager.HealthBelowPercentageThreshold(healthCriticalTheshold))
+                if (PlayerManager.Instance.GetDeadPlayer() == null && otherPlayerHealthManager.HealthBelowPercentageThreshold(healthCriticalTheshold))
                 {
                     //Target enemy nearest other player
                     TargetNearestEnemy(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
@@ -167,6 +167,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                     }
                     else
                     {
+                        Debug.Log("Going to teammate");
                         //Spell is on cooldown, focus on staying close to the other player
 
                         Follow(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
