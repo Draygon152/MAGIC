@@ -1,16 +1,17 @@
 // Written by Kevin Chao
+//Modified by Marc Hagoriles
 
 public class OptionsMenu : Menu<OptionsMenu>
 {
     public void VideoOptionsPressed()
     {
-        // Add code to open submenu, to modify window size values here
+        VideoOptions.Open();
     }
 
 
     public void SoundOptionsPressed()
     {
-        // Add code to open submenu, to modify sound system values here
+        SoundOptions.Open();
     }
 
 
