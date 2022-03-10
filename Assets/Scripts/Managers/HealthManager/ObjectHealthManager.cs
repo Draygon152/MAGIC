@@ -8,7 +8,11 @@ public class ObjectHealthManager : HealthManager
 {
     [SerializeField] private SpellItem spellItem;
 
-
+    protected override void Start()
+    {
+        base.Start();
+        EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, RespawnCrate);
+    }
 
     public override void LoseHealth(int damageAmount)
     {
@@ -22,12 +26,21 @@ public class ObjectHealthManager : HealthManager
         }
     }
 
-
     private void SpawnSpellItem()
     {
         if (gameObject.tag == "Crate")
         {
             Instantiate(spellItem, gameObject.transform.position, gameObject.transform.rotation);
         }
+    }
+
+    public void RespawnCrate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.Unsubscribe(EventTypes.Events.ResetGame, RespawnCrate);
     }
 }

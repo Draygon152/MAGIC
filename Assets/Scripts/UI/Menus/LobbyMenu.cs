@@ -35,7 +35,7 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
             inputSelector.AddOptions(new List<string>(availableDevices.Keys));
         }
 
-        //Set up the player data for the PlayerManager
+        // Set up the player data for the PlayerManager
         PlayerManager.Instance.SetNumberOfPlayers(numPlayers);
 
         playerDataList = new PlayerData[numPlayers];

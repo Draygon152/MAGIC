@@ -9,15 +9,14 @@ using System.Collections;
 public class EnemyBehaviorBase : BehaviorBase
 {
     // Advanced following variables
-    [SerializeField] protected NavMeshAgent agent;
     [SerializeField] private float detectionRadius; // Enemy's detection radius
     [SerializeField] private float timeBetweenCheckPlayers; // How many seconds should the enemy check for players
     [SerializeField] private LayerMask layerMask; // Detect colliders within layerMask
 
     // Flee variables
     [SerializeField] protected bool hasFleeBehavior; // flag which indicates the enemy will flee at some distance
-    [SerializeField] private float fleeMinRadius = 30f;
-    [SerializeField] private float fleeMaxRadius = 40f;
+    // [SerializeField] private float fleeMinRadius = 30f;
+    // [SerializeField] private float fleeMaxRadius = 40f;
     [SerializeField] protected float fleeCooldown = 5f;
     [SerializeField] protected float fleeDistance; // Enemy runs away if player is within fleeDistance
 
@@ -38,28 +37,11 @@ public class EnemyBehaviorBase : BehaviorBase
     private float enemyOriginalSpeed;
     private bool checkForPlayers;
     private bool isWanderTime;
-    private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
-                           // minions from causing a game end after a player wins
-
-
-
-    protected virtual void Awake()
-    {
-        EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
-        gameOver = false;
-    }
-
-
-    private void OnDestroy()
-    {
-        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableBehavior);
-    }
-
 
     // Initializes enemy's agent
-    protected virtual void Start()
+    protected override void Start()
     {
-        agent = this.GetComponent<NavMeshAgent>();
+        base.Start();
         playerManager = PlayerManager.Instance;
 
         currentTargetNumber = -1;
@@ -73,13 +55,11 @@ public class EnemyBehaviorBase : BehaviorBase
 
     protected override void PerformBehavior()
     {
-        if (!gameOver)
+        // Checks for players in radius and waits a while before checking again.
+        if (checkForPlayers)
         {
-            // Checks for players in radius and waits a while before checking again.
-            if (checkForPlayers)
-            {
-                StartCoroutine(FindPlayersWithinRadius());
-            }
+            StartCoroutine(FindPlayersWithinRadius());
+        }
 
             // If there is a current player target, enemy would proceed to follow the chosen player
             // If not, enemy would begin to wander
@@ -90,12 +70,11 @@ public class EnemyBehaviorBase : BehaviorBase
                 PerformEnemyBehavior();
             }
 
-            else
+        else
+        {
+            if (isWanderTime)
             {
-                if (isWanderTime)
-                {
-                    StartCoroutine(Wander());
-                }
+                StartCoroutine(Wander());
             }
         }
     }
@@ -109,55 +88,21 @@ public class EnemyBehaviorBase : BehaviorBase
         }
     }
 
+    // private Vector3 FindValidLocation(Vector3 fleeVector)
+    // {
+    //     NavMeshPath path = new NavMeshPath();
+    //     agent.CalculatePath(fleeVector, path);
 
-    // Enemy follows to assigned location
-    protected void Follow(Vector3 targetLocation)
-    {
-        agent.SetDestination(targetLocation);
-    }
-
-
-    protected void Flee(Vector3 location)
-    {
-        Vector3 fleeLocation = Vector3.zero;
-        Vector3 fleeDistance = this.transform.position - (location - this.gameObject.transform.position);
-        Vector3 fleeVector = fleeDistance;
-        bool foundFleeLocation = false;
-
-        // Find a reachable and valid flee location
-        while (!foundFleeLocation)
-        {
-            fleeLocation = FindValidLocation(fleeVector);
-            bool test = fleeLocation.x != Mathf.Infinity;
-            if (fleeLocation.x != Mathf.Infinity)
-            {
-                foundFleeLocation = true;
-            }
-            else
-            {
-                fleeVector = CalculateRandomPointInCircle(fleeDistance, fleeMinRadius, fleeMaxRadius);
-            }
-        }
-
-        agent.SetDestination(fleeLocation);
-    }
-
-
-    private Vector3 FindValidLocation(Vector3 fleeVector)
-    {
-        NavMeshPath path = new NavMeshPath();
-        agent.CalculatePath(fleeVector, path);
-
-        // If path is unreachable or invalid:
-        if (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid)
-        {
-            return Vector3.positiveInfinity;
-        }
-        else
-        {
-            return fleeVector;
-        }
-    }
+    //     // If path is unreachable or invalid:
+    //     if (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid)
+    //     {
+    //         return Vector3.positiveInfinity;
+    //     }
+    //     else
+    //     {
+    //         return fleeVector;
+    //     }
+    // }
 
 
     private IEnumerator Wander()
@@ -253,12 +198,12 @@ public class EnemyBehaviorBase : BehaviorBase
         }
     }
 
-    // Calculate a random point in a circle between minRange and maxRange
-    private Vector3 CalculateRandomPointInCircle(Vector3 circleCenter, float minRange, float maxRange)
-    {
-        Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRange, maxRange);
-        return new Vector3(point.x, 0, point.y) + circleCenter;
-    }
+    // // Calculate a random point in a circle between minRange and maxRange
+    // private Vector3 CalculateRandomPointInCircle(Vector3 circleCenter, float minRange, float maxRange)
+    // {
+    //     Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRange, maxRange);
+    //     return new Vector3(point.x, 0, point.y) + circleCenter;
+    // }
 
 
     // Returns a boolean that states whether current target is within attack distance
@@ -312,10 +257,5 @@ public class EnemyBehaviorBase : BehaviorBase
     public float ReturnSpeed()
     {
         return agent.speed;
-    }
-    
-    private void DisableBehavior()
-    {
-        gameOver = true;
     }
 }

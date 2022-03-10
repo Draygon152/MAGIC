@@ -190,13 +190,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         // Reset camera frame
-        for (int playerIndex = 0; playerIndex < PlayerManager.Instance.GetNumberOfPlayers(); playerIndex++)
-        {
-            CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
-        }
-
-        //Resets the minimap
-        MinimapCameraSystem.Instance.ResetMinimap();
+        CameraSystem.Instance.ClearCameraFrame();
 
         PlayerManager.Instance.ResetPlayers();
     }

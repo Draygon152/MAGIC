@@ -130,7 +130,8 @@ GameObject:
   - component: {fileID: 811485582123301815}
   - component: {fileID: 2141222732}
   - component: {fileID: -380955239945461657}
-  - component: {fileID: -7563355088914685920}
+  - component: {fileID: 3830824808688402299}
+  - component: {fileID: -9113751766295463458}
   m_Layer: 7
   m_Name: PlayerCharacter (Cube)
   m_TagString: Player
@@ -245,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6722f07ae57e8458f2ec3db6c56f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 1d78cc954e60a58bebee517bb86d92ae, type: 2}
 --- !u!114 &5203983517893298919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +344,7 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &-7563355088914685920
+--- !u!114 &3830824808688402299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,6 +356,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5f41118a8212a308fa0957ca90b638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadiusBehavior: 400
+  timeBetweenDetection: 3
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  pickupLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  environment:
+    serializedVersion: 2
+    m_Bits: 512
+  healthCriticalTheshold: 0.2
+  timeBetweenCheckingOnTeammate: 10
+  placeDistanceForStationarySpells: 3
+  minAttackingDistance: 1
+  safeDistanceToBeginAttackingAgain: 5
+--- !u!195 &-9113751766295463458
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8107796699639736997}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &4399164284720576818
 PrefabInstance:
   m_ObjectHideFlags: 0

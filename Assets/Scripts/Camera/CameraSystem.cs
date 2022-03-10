@@ -116,6 +116,11 @@ public class CameraSystem : MonoBehaviour
         targetList.Remove(removedTarget);
     }
 
+    public void ClearCameraFrame()
+    {
+        targetList.Clear();
+    }
+
 
     private float FindZoomSize()
     {

@@ -254,6 +254,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""577e39e8-fa42-4e95-ad15-7803a5bdb748"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Activate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""699d9507-0858-45ad-9dea-9604913b0145"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
