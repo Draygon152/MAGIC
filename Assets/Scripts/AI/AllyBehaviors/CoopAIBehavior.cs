@@ -46,8 +46,10 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     private CoopAiState playerAiState;
 
     // Change this later when BehaviorBase has Awake() and Start()...
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         playerAiState = CoopAiState.attackEnemies;
 
         //Initiate the power of your own magic, 
