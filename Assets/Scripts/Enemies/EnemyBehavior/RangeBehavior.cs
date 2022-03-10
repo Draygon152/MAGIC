@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RangeBehavior : EnemyBehaviorBase
 {
+    [SerializeField] private bool isPacifist = false;
     [SerializeField] private float stopAtDistance = 10f; // Enemy will stop when it is at a certain distance from target
     [SerializeField] private float attackDistanceOffset = 1f;
     [SerializeField] private float turnSpeed = 900f;
@@ -82,8 +83,8 @@ public class RangeBehavior : EnemyBehaviorBase
                     agent.updateRotation = true;
                 }
 
-                // If in attackDistance, begin casting spells
-                if (IsWithinAttackDistance() && readyToCastSpell)
+                // If in attackDistance and not a pacifist, begin casting spells
+                if (IsWithinAttackDistance() && readyToCastSpell && !isPacifist)
                 {
                     StartCoroutine(ShootMagic());
                 }

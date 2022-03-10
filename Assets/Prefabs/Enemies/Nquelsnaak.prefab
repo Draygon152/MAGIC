@@ -29,7 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Speed
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4686425504793351957, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_RootOrder
@@ -132,17 +136,21 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  hasFleeBehavior: 0
+  hasFleeBehavior: 1
+  fleeMinRadius: 30
+  fleeMaxRadius: 40
   fleeCooldown: 5
-  fleeDistance: 0
+  fleeDistance: 10
   wanderMinRadius: 20
   wanderMaxRadius: 40
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
   attackDistance: 0
-  distanceToMaintain: 20
-  maintainDistanceError: 10
+  isPacifist: 1
+  stopAtDistance: 20
+  attackDistanceOffset: 1
+  turnSpeed: 900
   larvaPrefab: {fileID: 4942251179604567321, guid: 57e5c155b04c76b31915915be219a196, type: 3}
   spawnTime: 6
   spawnAmount: 2
