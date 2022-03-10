@@ -12,9 +12,6 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                                                                    //of the target and the direction the AI
                                                                    //is looking can be for the AI to be consider
                                                                    //looking at the target 
-    [SerializeField] private LayerMask environment;
-
-    // [SerializeField] private float
 
     [SerializeField] private float healthCriticalTheshold = 0.2f; //The percentage that teammate's must drop below for the AI to assist
     [SerializeField] private float timeBetweenCheckingOnTeammate = 10.0f; //How often does the AI check how its teammate is doing

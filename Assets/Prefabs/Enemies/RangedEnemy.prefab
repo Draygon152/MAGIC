@@ -42,6 +42,10 @@ PrefabInstance:
       value: Range Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_StoppingDistance
       value: 4
       objectReference: {fileID: 0}
@@ -146,11 +150,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_PrefabInstance: {fileID: 6122605545685614019}
   m_PrefabAsset: {fileID: 0}
---- !u!195 &5587665921730406331 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 1836551393782438520, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
-  m_PrefabInstance: {fileID: 6122605545685614019}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &-503398401187023413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +176,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96202faef4d03c541891c916fce1daa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 5587665921730406331}
+  detectionRadiusBehavior: 0
+  timeBetweenDetection: 0
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  environment:
+    serializedVersion: 2
+    m_Bits: 512
+  fleeMinRadius: 30
+  fleeMaxRadius: 40
+  wallLookAhead: 40
+  angelIncrementSteps: 5
   detectionRadius: 10
   timeBetweenCheckPlayers: 1
   layerMask:
@@ -192,6 +208,7 @@ MonoBehaviour:
   wanderTowardsPlayerInterval: 5
   charge: 1.5
   attackDistance: 15
+  isPacifist: 0
   stopAtDistance: 6
   attackDistanceOffset: 1
   turnSpeed: 900
