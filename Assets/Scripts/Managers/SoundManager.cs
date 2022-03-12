@@ -48,24 +48,23 @@ public class SoundManager : MonoBehaviour
         EventManager.Instance.Subscribe(EventTypes.Events.Victory, PlayVictoryMusic);
         EventManager.Instance.Subscribe(EventTypes.Events.Defeat, PlayDefeatMusic);
         EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ResetMusic);
-        EventManager.Instance.Subscribe(EventTypes.Events.GamePaused, PauseMusic);
-        EventManager.Instance.Subscribe(EventTypes.Events.GameUnpaused, UnpauseMusic);
+        //EventManager.Instance.Subscribe(EventTypes.Events.GamePaused, PauseMusic);
+        //EventManager.Instance.Subscribe(EventTypes.Events.GameUnpaused, UnpauseMusic);
 
         bgMusic.outputAudioMixerGroup = audioMixer;
 
-        bgMusic.clip = menuMusic;
-        bgMusic.loop = true;
-        bgMusic.Play();
+        PlayMusicWithLoop(menuMusic);
 
     }
 
-    /*private void PlayMusic(AudioClip audio)
+    private void PlayMusic(AudioClip audio)
     {
         if (bgMusic.isPlaying)
         {
             bgMusic.Stop();
         }
         bgMusic.clip = audio;
+        bgMusic.loop = false;
         bgMusic.Play();
     }
 
@@ -73,58 +72,33 @@ public class SoundManager : MonoBehaviour
     {
         PlayMusic(audio);
         bgMusic.loop = true;
-    }*/
+    }
 
     //Play the in-game music when the GameStart event is triggered.
     private void PlayInGameMusic()
     {
-        if(bgMusic.isPlaying)
-        {
-            bgMusic.Stop();
-        }
-        bgMusic.clip = inGameMusic;
-        bgMusic.loop = true;
-        bgMusic.Play();
-
+        PlayMusicWithLoop(inGameMusic);
     }
 
     //Play the victory music when the Victory event is triggered.
     private void PlayVictoryMusic()
     {
-        if (bgMusic.isPlaying)
-        {
-            bgMusic.Stop();
-        }
-        bgMusic.clip = victoryMusic;
-        bgMusic.loop = false;
-        bgMusic.Play();
+        PlayMusic(victoryMusic);
     }
 
     //Play the defeat music when the Defeat event is triggered.
     private void PlayDefeatMusic()
     {
-        if (bgMusic.isPlaying)
-        {
-            bgMusic.Stop();
-        }
-        bgMusic.clip = defeatMusic;
-        bgMusic.loop = false;
-        bgMusic.Play();
+        PlayMusic(defeatMusic);
     }
 
     //When the ResetGame event is triggered, play the menu music again.
     private void ResetMusic()
     {
-        if (bgMusic.isPlaying)
-        {
-            bgMusic.Stop();
-        }
-        bgMusic.clip = menuMusic;
-        bgMusic.loop = true;
-        bgMusic.Play();
+        PlayMusicWithLoop(menuMusic);
     }
 
-    private void PauseMusic()
+    /*private void PauseMusic()
     {
         bgMusic.Pause();
     }
@@ -132,6 +106,6 @@ public class SoundManager : MonoBehaviour
     private void UnpauseMusic()
     {
         bgMusic.UnPause();
-    }
+    }*/
 
 }
