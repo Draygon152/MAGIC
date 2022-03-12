@@ -44,17 +44,20 @@ public class VideoOptions : Menu<VideoOptions>
 
     }
 
+    //Set the resolution using the dropdown menu.
     public void SetResolution (int resolutionIndex)
     {
         Resolution resolution = resolutionOptions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    //Set the game to fullscreen mode.
     public void SetFullScreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
 
+    //When the return button is pressed, close this menu.
     public void ReturnPressed()
     {
         Close();
