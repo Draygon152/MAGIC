@@ -1,4 +1,5 @@
 // Written by Lizbeth
+// Modified by Kevin Chao
 
 using System.Collections;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class MeleeBehavior : EnemyBehaviorBase
     protected MeleeState meleeState;
 
 
+
     protected override void Awake()
     {
         base.Awake();
@@ -31,7 +33,6 @@ public class MeleeBehavior : EnemyBehaviorBase
     {
         base.Start();
 
-        // TODO: Rename CollisionDamageGiver class for accuracy
         // Grab enemy's EnemyDamageGiver
         damageGiver = this.gameObject.GetComponent<MeleeDamageGiver>(); 
 
@@ -62,7 +63,8 @@ public class MeleeBehavior : EnemyBehaviorBase
                 }
 
                 break;
-            
+
+
             case MeleeState.attackTarget:
                 // If target not within radius, change state
                 if (!IsWithinAttackDistance())
@@ -81,7 +83,9 @@ public class MeleeBehavior : EnemyBehaviorBase
                         meleeState = MeleeState.fleeFromTarget;
                     }
                 }
+
                 break;
+
 
             case MeleeState.fleeFromTarget:
                 if (readyToFlee)
@@ -93,6 +97,7 @@ public class MeleeBehavior : EnemyBehaviorBase
                 {
                     Flee(targetLocation);
                 }
+
                 break;
         }
     }

@@ -3,13 +3,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class RangeBehavior : EnemyBehaviorBase
+public class RangedBehavior : EnemyBehaviorBase
 {
     [SerializeField] private bool isPacifist = false;
     [SerializeField] private float stopAtDistance = 10f; // Enemy will stop when it is at a certain distance from target
     [SerializeField] private float attackDistanceOffset = 1f;
     [SerializeField] private float turnSpeed = 900f;
 
+    // Attack related variables
     private MeleeDamageGiver damageGiver; // A reference to the damage giver class for applying damage
     private float attackCooldown; // Cooldown time between melee attacks
     private bool readyToCastSpell; // A bool to flag whether or not the enemy is ready to attack again
@@ -46,7 +47,6 @@ public class RangeBehavior : EnemyBehaviorBase
     {
         base.Start();
 
-        // TODO: Rename CollisionDamageGiver class for accuracy
         // Grab enemy's EnemyDamageGiver
         damageGiver = this.gameObject.GetComponent<MeleeDamageGiver>();
 
@@ -97,7 +97,9 @@ public class RangeBehavior : EnemyBehaviorBase
                     state = RangeState.fleeFromTarget;
                     agent.updateRotation = true;
                 }
+
                 break;
+
 
             case RangeState.fleeFromTarget:
                 if (readyToFlee)
@@ -109,6 +111,7 @@ public class RangeBehavior : EnemyBehaviorBase
                 {
                     Flee(targetLocation);
                 }
+
                 break;
         }
     }

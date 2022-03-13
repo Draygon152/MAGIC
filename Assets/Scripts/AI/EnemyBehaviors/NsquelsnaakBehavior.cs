@@ -4,7 +4,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class NsquelsnaakBehavior : RangeBehavior
+public class NsquelsnaakBehavior : RangedBehavior
 {
     [SerializeField] private EnemyBehaviorBase larvaPrefab; // The prefab for spawning the larvae
     [SerializeField] private int spawnTime = 3;             // The time between spawning of larvae
@@ -12,6 +12,7 @@ public class NsquelsnaakBehavior : RangeBehavior
     [SerializeField] private float spawnRange = 3.0f;       // The maximum range for spawning the larvae
 
     private bool spawningLarva = false; // A bool to mark if the Nsquelsnaak is currently spawning larvae
+
 
 
     protected override void Awake()
@@ -30,7 +31,7 @@ public class NsquelsnaakBehavior : RangeBehavior
         {
             StartCoroutine(SpawnLarva());
         }
-    } // end PerformBehavior
+    }
 
 
     private IEnumerator SpawnLarva()
@@ -60,7 +61,7 @@ public class NsquelsnaakBehavior : RangeBehavior
 
             // Instantiate the larva
             Instantiate(larvaPrefab, spawnPoint, this.gameObject.transform.rotation);
-        }// end for (int index = 0; index < spawnAmount; index++)
+        }
 
         // Wait for cooldown then mark as not spawning
         yield return new WaitForSeconds(spawnTime);

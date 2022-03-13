@@ -56,13 +56,16 @@ public class HiskgarBehavior : MeleeBehavior
                 }
                 // Perform regular melee behavior
                 base.PerformEnemyBehavior();
+
                 break;
                 
+
                 // Check if health is below flee health percentage
                 // if so switch to fleeing
             case HiskgarState.fleeingAndHealing:
                 // when fleeing from the player, flee from closest player and heal
                 Flee(playerManager.GetPlayerLocation(currentTargetNumber).position);
+
                 // heal since you are fleeing
                 if (!hasHealed && !healing)
                 {
@@ -76,8 +79,9 @@ public class HiskgarBehavior : MeleeBehavior
                     hiskgarState = HiskgarState.attackPlayer;
                     hasHealed = true;
                 }
+
                 break;
-        } // end swtich (state)
+        }
     }
 
 

@@ -10,11 +10,11 @@ public abstract class BehaviorBase : MonoBehaviour
     // Detection Variables
     [SerializeField] protected float detectionRadiusBehavior; // AI's detection radius
     [SerializeField] protected float timeBetweenDetection;
-    [SerializeField] protected LayerMask enemyLayerMask; // Detect enemies layer
+    [SerializeField] protected LayerMask enemyLayerMask;  // Detect enemies layer
     [SerializeField] protected LayerMask objectLayerMask; // Detect objects layer
     [SerializeField] protected LayerMask playerLayerMask; // Detect players layer
     [SerializeField] protected LayerMask pickupLayerMask; // Detect pickups layer
-    [SerializeField] protected NavMeshAgent agent; //The NavMeshAgent who has this behavior
+    [SerializeField] protected NavMeshAgent agent; // The NavMeshAgent who has this behavior
     
     // Flee variables
     [SerializeField] private float fleeMinRadius = 30f;
@@ -24,6 +24,8 @@ public abstract class BehaviorBase : MonoBehaviour
     private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
                            // minions from causing a game end after a player wins
 
+
+
     protected virtual void Awake()
     {
         EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
@@ -31,7 +33,7 @@ public abstract class BehaviorBase : MonoBehaviour
     }
 
 
-    //Performs this behavior every frame
+    // Performs this behavior every frame
     private void FixedUpdate()
     {
         if (!gameOver)
@@ -41,25 +43,29 @@ public abstract class BehaviorBase : MonoBehaviour
     }
 
 
-    //The behavior of the AI
+    // The behavior of the AI, overridden by child classes extending BehaviorBase
     protected abstract void PerformBehavior();
+
 
     protected Collider[] DetectLayerWithinRadius(Vector3 center, float detectRadius, LayerMask layer)
     {
         return Physics.OverlapSphere(center, detectRadius, layer);  
     }
 
+
     private void DisableBehavior()
     {
         gameOver = true;
     }
+
 
     private void OnDestroy()
     {
         EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableBehavior);
     }
 
-    //BEHAVIORS
+
+    // GENERIC BEHAVIORS
     protected void Follow(Vector3 targetLocation)
     {
         agent.SetDestination(targetLocation);
@@ -91,6 +97,7 @@ public abstract class BehaviorBase : MonoBehaviour
         agent.SetDestination(fleeLocation);
     }
 
+
     private Vector3 FindValidLocation(Vector3 fleeVector)
     {
         NavMeshPath path = new NavMeshPath();
@@ -106,6 +113,7 @@ public abstract class BehaviorBase : MonoBehaviour
             return fleeVector;
         }
     }
+
     
     // Calculate a random point in a circle between minRange and maxRange
     protected Vector3 CalculateRandomPointInCircle(Vector3 circleCenter, float minRange, float maxRange)
@@ -120,4 +128,3 @@ public abstract class BehaviorBase : MonoBehaviour
         return agent.speed;
     }
 }
-  
