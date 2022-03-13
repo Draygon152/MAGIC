@@ -1,12 +1,12 @@
 // Written by Angel
 // Modified by Kevin Chao
 
-using System;
 using UnityEngine;
 
 public class SpellDamageGiver : DamageGiver
 {
     [SerializeField] private BaseSpell currentSpell;
+
 
 
     private void OnTriggerEnter(Collider collision)
@@ -23,6 +23,7 @@ public class SpellDamageGiver : DamageGiver
                     DamageTarget(target, currentSpell.GetSpell().damage);
             }
         }
+
         else
         {
             //Caster is enemy
@@ -36,6 +37,7 @@ public class SpellDamageGiver : DamageGiver
             }
         }
     }
+
 
     public void UseDamage(GameObject subject, int damage)
     {
