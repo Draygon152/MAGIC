@@ -10,14 +10,12 @@ public class CameraSystem : MonoBehaviour
     [SerializeField] private float minCamSize = 5f;       // This is to limit the camera to have a minimum ortho cam size for the zoom.
     [SerializeField] private float screenEdgeBuffer = 6f; // Space between the top/bottom most target and the screen edge.
     
-    
     private float zoomSpeed;            // For SmoothDamp function.
     private Vector3 camSpeed;           // For SmoothDamp function, velocity of Camera moving.
     private Camera cam;                 // Reference to the Camera component
     private List<Transform> targetList; // This list should contain all the player targets in the scene.
 
-
-    //Make the CameraSystem a Singleton.
+    // Make the CameraSystem a Singleton.
     public static CameraSystem Instance
     {
         get;
@@ -25,10 +23,13 @@ public class CameraSystem : MonoBehaviour
     }
 
 
+
     private void Awake()
     {
         if (Instance != null)
+        {
             Destroy(gameObject);
+        }
 
         else
         {
@@ -38,6 +39,7 @@ public class CameraSystem : MonoBehaviour
             targetList = new List<Transform>();
         }
     }
+
 
     private void OnDestroy()
     {
@@ -52,7 +54,6 @@ public class CameraSystem : MonoBehaviour
             MoveCamera();
             Zoom();
         }
-
     }
 
 
@@ -62,12 +63,13 @@ public class CameraSystem : MonoBehaviour
         Vector3 avgPos = new Vector3();
         int numTargets = 0;
 
-
         // If there is only one player, just return its position and fixate the Camera on it, per usual.
         if (targetList.Count == 1)
         {
             avgPos = targetList[0].position;
         }
+
+        // Otherwise, calculate camera position based on all players
         else
         {
             // Depending on how many players there are, calculate its average position
@@ -83,9 +85,6 @@ public class CameraSystem : MonoBehaviour
             {
                 avgPos /= numTargets;
             }
-
-            // Keep the same y value (frozen y movement).
-            // avgPos.y = transform.position.y;
         }
         
         return avgPos;
@@ -133,14 +132,15 @@ public class CameraSystem : MonoBehaviour
         Vector3 camLocalPos = transform.InverseTransformPoint(GetCenterPos());
 
         float size = 0f; // Initialize the calculation of camera's zoom size to be 0.
+        Vector3 targetLocalPos, camToTarget;
 
         for (int i = 0; i < targetList.Count; i++)
         {
             // Find the target's position in the camera's local space.
-            Vector3 targetLocalPos = transform.InverseTransformPoint(targetList[i].position);
+            targetLocalPos = transform.InverseTransformPoint(targetList[i].position);
 
             // Find the position of the target from the desired position of the camera's local space.
-            Vector3 camToTarget = targetLocalPos - camLocalPos;
+            camToTarget = targetLocalPos - camLocalPos;
 
             // Choose the largest out of the current size and the distance of the tank in the y direction (up or down).
             size = Mathf.Max(size, Mathf.Abs(camToTarget.y));
