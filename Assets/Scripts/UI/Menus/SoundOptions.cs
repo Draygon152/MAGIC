@@ -1,33 +1,36 @@
 // Written by Marc Hagoriles
+// Modified by Kevin Chao
 
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SoundOptions : Menu<SoundOptions>
 {
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider audioSlider;
-    private static float curVolume = -1.0f;
 
 
 
     private void Start()
     {
-        if (curVolume < 0)
+        if (!PlayerPrefs.HasKey("curVolume"))
         {
-            curVolume = AudioListener.volume;
+            PlayerPrefs.SetFloat("curVolume", audioSlider.value);
         }
 
-        audioSlider.value = curVolume;
+        else
+        {
+            audioSlider.value = PlayerPrefs.GetFloat("curVolume");
+        }
     }
 
 
     // Using the audioMixer, set the game volume relative to the value in the slider.
     public void SetVolume(float volume)
     {
-        //audioMixer.SetFloat("gameVolume", volume);
-        AudioListener.volume = volume;
+        audioMixer.SetFloat("musicVolume", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("curVolume", volume);
     }
 
 
