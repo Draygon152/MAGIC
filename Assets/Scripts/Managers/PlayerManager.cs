@@ -48,11 +48,11 @@ public class PlayerManager : MonoBehaviour
     {
         playerCount = numberOfPlayers;
 
-        // Initialize the player data SOs
+        // Initialize the player data objects
         playerData = new PlayerData[playerCount];
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
-            playerData[playerIndex] = new PlayerData(); // create SO instance for player 1
+            playerData[playerIndex] = new PlayerData();
         }
 
         // Initialize the player game objects array
@@ -78,8 +78,8 @@ public class PlayerManager : MonoBehaviour
             // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
             // player index and pairWithDevice in PlayerInput) I could not pass in the spawn point transform to spawn
             // the players at the right location. As a result they must be moved manually.
-            playerGameObject[playerIndex].GetComponent<NavMeshAgent>().Warp(playerSpawnPoint.position + spawnOffset[playerIndex]); //The wierd function call is to make
-                                                                                                                                  //sure the AI player's can find the NavMesh
+            playerGameObject[playerIndex].GetComponent<NavMeshAgent>().Warp(playerSpawnPoint.position + spawnOffset[playerIndex]); //The weird function call is to make
+                                                                                                                                   //sure the AI player's can find the NavMesh
             // playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset[playerIndex];
             playerGameObject[playerIndex].transform.rotation = playerSpawnPoint.rotation;
 
@@ -183,6 +183,7 @@ public class PlayerManager : MonoBehaviour
         {
             deadPlayer = playerGameObject[PLAYER_1];
         }
+
         // Check if player 2 is dead
         else if (!playerGameObject[PLAYER_2].gameObject.activeSelf)
         {

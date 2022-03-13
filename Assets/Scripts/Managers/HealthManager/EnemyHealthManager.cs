@@ -1,4 +1,4 @@
-// Written by Liz
+// Written by Lizbeth
 // Modified by Lawson and Kevin Chao
 
 using UnityEngine;

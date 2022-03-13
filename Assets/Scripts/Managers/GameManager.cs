@@ -1,12 +1,11 @@
 // Written by Lawson
-// Modified by Angel, Kevin, Liz, and Marc
+// Modified by Angel, Kevin, Lizbeth, and Marc
 
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through
     [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 1; // The number of enemies remaining that will
                                                                                // trigger the next wave, if it is two then
                                                                                // the next wave will spawn when two enemies 
@@ -20,7 +19,7 @@ public class GameManager : MonoBehaviour
     private int waveNumber;  // A variable for keeping track of the wave number in the game
 
     // Make the game manager a singleton
-    static public GameManager Instance
+    public static GameManager Instance
     {
         get;
         private set;
@@ -69,10 +68,14 @@ public class GameManager : MonoBehaviour
         playerCount = PlayerManager.Instance.SpawnPlayers();
 
         if (LobbyMenu<SingleplayerLobbyMenu>.Instance != null)
+        {
             LobbyMenu<SingleplayerLobbyMenu>.Close();
+        }
 
         else if (LobbyMenu<MultiplayerLobbyMenu>.Instance != null)
+        {
             LobbyMenu<MultiplayerLobbyMenu>.Close();
+        }
 
         HUD.Open();
 
@@ -172,8 +175,8 @@ public class GameManager : MonoBehaviour
                 // ready to spawn next wave
                 enemyCount += waves[waveNumber].SpawnWave(CameraSystem.Instance.GetTransform());
                 waveNumber++;
-            } //end if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
-        }//end else of (if (waveNumber >= waves.Count))
+            }
+        }
 
         // update enemy counter on HUD
         HUD.Instance.SetEnemyCounter(enemyCount);

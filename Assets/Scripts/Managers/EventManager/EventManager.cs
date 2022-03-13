@@ -10,7 +10,6 @@ public class EventManager : MonoBehaviour
 {
     private static Dictionary<EventTypes.Events, Action> subscriberDict;
 
-
     public static EventManager Instance
     {
         get;
@@ -22,7 +21,9 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {
         if (Instance != null)
+        {
             Destroy(gameObject);
+        }   
 
         else
         {

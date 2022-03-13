@@ -1,4 +1,4 @@
-// Written by Liz
+// Written by Lizbeth
 // Modified by Kevin Chao and Angel Rubio
 
 using UnityEngine;
@@ -55,7 +55,9 @@ public class PlayerHealthManager : HealthManager
 
         // If health is not yet empty, just update HealthBar
         else
+        {
             setHealthBarValue(playerNumber, currentHealth);
+        }
     }
 
 

@@ -33,7 +33,9 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         if (Instance != null)
+        {
             Destroy(gameObject);
+        }
 
         else
         {
@@ -82,7 +84,10 @@ public class MenuManager : MonoBehaviour
 
             // Check that prefab exists before returning
             if (prefab != null)
+            {
                 return prefab;
+            }
+                
         }
 
         throw new MissingReferenceException("Could not find prefab for menu: " + typeof(T));
@@ -135,7 +140,9 @@ public class MenuManager : MonoBehaviour
 
         // Reactivate menu that is now at top of stack if it exists
         if (menuStack.Count > 0)
+        {
             menuStack.Peek().gameObject.SetActive(true);
+        }
     }
 
 
@@ -145,6 +152,8 @@ public class MenuManager : MonoBehaviour
         int openMenus = menuStack.Count;
 
         for (int i = 0; i < openMenus; i++)
+        {
             CloseTopMenu();
+        }
     }
 }
