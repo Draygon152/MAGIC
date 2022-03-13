@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
+// Implementation using PlayerPrefs is due to a lack of time, future builds
+// would set up a system of loading/saving this information without the
+// use of hardcoded strings
 public class SoundOptions : Menu<SoundOptions>
 {
     [SerializeField] private AudioMixer audioMixer;
