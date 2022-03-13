@@ -1,34 +1,29 @@
-// Written by Liz
+// Written by Lizbeth
 // Modified by Kevin Chao and Angel Rubio
 
 using UnityEngine;
 
+// Request to change this function in a different and appropriate name
 public class CollisionDamageGiver : DamageGiver
 {
-    // Damage that will be dealt to entities colliding with this object
-    [SerializeField] private int damageDealt;
+    [SerializeField] private int damageDealt; // Attack power
+    [SerializeField] private float damageOverTime; // Attack player in X seconds overtime
 
 
 
-    private void OnCollisionEnter(Collision collision)
+    public float GetDamageOverTime()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            PlayerHealthManager player = collision.gameObject.GetComponentInParent<PlayerHealthManager>();
-
-            if (player != null)
-                DamageTarget(player, damageDealt);
-        }
+        return damageOverTime;
     }
 
 
-    public int currentDamage()
+    public int CurrentDamage()
     {
         return damageDealt;
     }
 
 
-    public void changeDamage(int newdamage)
+    public void ChangeDamage(int newdamage)
     {
         damageDealt = newdamage;
     }

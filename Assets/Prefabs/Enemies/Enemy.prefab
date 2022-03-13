@@ -599,10 +599,10 @@ GameObject:
   - component: {fileID: 5763893213597020719}
   - component: {fileID: 5763893213597020717}
   - component: {fileID: 1872983717}
-  - component: {fileID: -2686184855805433103}
   - component: {fileID: 1836551393782438520}
-  - component: {fileID: 6005707754632276139}
-  - component: {fileID: -1652378705339584564}
+  - component: {fileID: 8961594199354966123}
+  - component: {fileID: -6773967326612829247}
+  - component: {fileID: 6992770909259289521}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -741,19 +741,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: {fileID: 7145550566800696035}
   typeName: 
---- !u!114 &-2686184855805433103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8991031362452138341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d192b729b42964f47ae5c9180228c2e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageDealt: 3
 --- !u!195 &1836551393782438520
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -767,7 +754,7 @@ NavMeshAgent:
   m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 600
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -776,7 +763,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6005707754632276139
+--- !u!114 &8961594199354966123
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -785,21 +772,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 8991031362452138341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802c56215b74eb04690e25e24f34f75a, type: 3}
+  m_Script: {fileID: 11500000, guid: 35b8787aeb99b474e9cd0b7904668d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1836551393782438520}
-  detectionRadius: 10
-  timeBetweenCheckPlayers: 1
-  layerMask:
+  detectionRadiusBehavior: 20
+  timeBetweenDetection: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  pickupLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  agent: {fileID: 1836551393782438520}
+  fleeMinRadius: 30
+  fleeMaxRadius: 40
+  hasFleeBehavior: 0
+  fleeCooldown: 5
+  fleeDistance: 1
   wanderMinRadius: 20
   wanderMaxRadius: 40
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
---- !u!114 &-1652378705339584564
+  attackDistance: 1
+--- !u!114 &-6773967326612829247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8991031362452138341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d192b729b42964f47ae5c9180228c2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealt: 2
+  damageOverTime: 2
+--- !u!114 &6992770909259289521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

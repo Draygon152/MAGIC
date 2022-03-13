@@ -1,17 +1,16 @@
-// Written by Liz
+// Written by Lizbeth
 // Modified by Lawson and Angel
 
 using UnityEngine;
-using UnityEngine.AI;
 using System.Collections;
 
-// This class currently set the enemy's basic behavior to follow the nearest player within radius
+// This class serve as the base for all enemies. Each has the ability to follow/flee, wonder, and attack within radius
 public class EnemyBehaviorBase : BehaviorBase
 {
-    // Advanced following variables
-    [SerializeField] private float detectionRadius; // Enemy's detection radius
-    [SerializeField] private float timeBetweenCheckPlayers; // How many seconds should the enemy check for players
-    [SerializeField] private LayerMask layerMask; // Detect colliders within layerMask
+    // Flee variables
+    [SerializeField] protected bool hasFleeBehavior; // flag which indicates the enemy will flee at some distance
+    [SerializeField] protected float fleeCooldown = 5f;
+    [SerializeField] protected float fleeDistance; // Enemy runs away if player is within fleeDistance
 
     // Wander variables
     [SerializeField] private float wanderMinRadius;
@@ -19,6 +18,9 @@ public class EnemyBehaviorBase : BehaviorBase
     [SerializeField] private float timeBetweenWander; // How many seconds should the enemy wander
     [SerializeField] private float wanderTowardsPlayerInterval;
     [SerializeField] private float charge; // Increase the charge temporarily when enemy cannot find player for a while
+
+    // Attack variables
+    [SerializeField] protected float attackDistance = 1; // Distance betweeen the enemy itself and target
 
     protected PlayerManager playerManager;
     protected Collider[] foundPlayers; // List of players' colliders
@@ -28,14 +30,17 @@ public class EnemyBehaviorBase : BehaviorBase
     private bool checkForPlayers;
     private bool isWanderTime;
 
+
+
     // Initializes enemy's agent
-    protected override void Start()
+    protected virtual void Start()
     {
-        base.Start();
         playerManager = PlayerManager.Instance;
+
         currentTargetNumber = -1;
         wanderInterval = 0;
         enemyOriginalSpeed = agent.speed;
+
         checkForPlayers = true;
         isWanderTime = true;
     }
@@ -43,13 +48,13 @@ public class EnemyBehaviorBase : BehaviorBase
 
     protected override void PerformBehavior()
     {
-        // Checks for players in radius and waits a while before checking again.
+        // Check for players in radius and wait a while before checking again.
         if (checkForPlayers)
         {
             StartCoroutine(FindPlayersWithinRadius());
         }
 
-        // If there is a current player target, enemy would process to follow the chosen player
+        // If there is a current player target, enemy would proceed to follow the chosen player
         // If not, enemy would begin to wander
         if (currentTargetNumber != -1)
         {
@@ -57,7 +62,6 @@ public class EnemyBehaviorBase : BehaviorBase
             // can be overriden for different behaviors
             PerformEnemyBehavior();
         }
-
         else
         {
             if (isWanderTime)
@@ -67,6 +71,62 @@ public class EnemyBehaviorBase : BehaviorBase
         }
     }
 
+
+    // Checks for players within radius
+    private IEnumerator FindPlayersWithinRadius()
+    {
+        checkForPlayers = false;
+        Vector3 enemyCenter = this.gameObject.transform.position;
+        foundPlayers = DetectLayerWithinRadius(enemyCenter, detectionRadiusBehavior, playerLayerMask); // Enemy's detection radius within playerLayerMask
+
+        // If player(s) are nearby, set the closest player to the enemy's target.
+        if (foundPlayers.Length != 0)
+        {
+            TargetNearestPlayer();
+        }
+
+        else
+        {
+            currentTargetNumber = -1; // No target
+        }
+
+        yield return new WaitForSeconds(timeBetweenDetection);
+        checkForPlayers = true;
+    }
+
+
+    // Assign enemy's target to the nearst player detected
+    private void TargetNearestPlayer()
+    {
+        Vector3 shorterPosition = Vector3.positiveInfinity;
+        foreach (Collider player in foundPlayers)
+        {
+            Player currentPlayer = player.gameObject.GetComponent<Player>();
+            int playerNum = currentPlayer.PlayerNumber;
+
+            float currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
+            Transform playerLocation = playerManager.GetPlayerLocation(playerNum);
+            float newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
+
+            if (newDistance <= currentDistance && player.gameObject.activeInHierarchy)
+            {
+                shorterPosition = playerLocation.position; // Found shortest position
+                currentTargetNumber = playerNum; // Set enemy's target
+            }
+        }
+    }
+
+
+    protected virtual void PerformEnemyBehavior()
+    {
+        if (agent.speed != enemyOriginalSpeed)
+        {
+            agent.speed = enemyOriginalSpeed;
+        }
+    }
+
+
+    // ENEMY WANDER BEHAVIOR
     private IEnumerator Wander()
     {
         isWanderTime = false;
@@ -82,10 +142,9 @@ public class EnemyBehaviorBase : BehaviorBase
         }
 
         else
-        { 
+        {
             // Select a wander target at random around the enemy
-            Vector2 point = Random.insideUnitCircle.normalized * Random.Range(wanderMinRadius, wanderMaxRadius);
-            wanderTarget = new Vector3(point.x, 0, point.y) + this.transform.position;
+            wanderTarget = CalculateRandomPointInCircle(this.transform.position, wanderMinRadius, wanderMaxRadius);
             wanderInterval++;
         }
 
@@ -97,7 +156,7 @@ public class EnemyBehaviorBase : BehaviorBase
     }
 
 
-    // WanderEnemyFindClosestTarget() finds the closest player within distance
+    // Finds the closest player despite distance
     private Vector3 WanderEnemyFindClosestTarget()
     {
         Player[] playerList = playerManager.GetFullPlayerList();
@@ -108,7 +167,7 @@ public class EnemyBehaviorBase : BehaviorBase
             Transform playerLocation = playerManager.GetPlayerLocation(player.PlayerNumber);
             float newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
 
-            if (newDistance <= currentDistance)
+            if (newDistance <= currentDistance && player.gameObject.activeInHierarchy)
             {
                 shorterPosition = playerLocation.position; // Found shortest position
             }
@@ -118,69 +177,52 @@ public class EnemyBehaviorBase : BehaviorBase
     }
 
 
-    // Checks for Player Objects within radius
-    private IEnumerator FindPlayersWithinRadius()
+    // HELPER FUNCTIONS
+
+    // Returns a boolean that states whether current target is within attack distance
+    protected bool IsWithinAttackDistance()
     {
-        checkForPlayers = false;
-        Vector3 enemyCenter = this.gameObject.transform.position;
-        foundPlayers = Physics.OverlapSphere(enemyCenter, detectionRadius, layerMask); // Enemy's detection radius within layerMask
+        bool isWithinRadius = false;
 
-        // If player(s) are nearby, set the closest player to the enemy's target.
-        if (foundPlayers.Length != 0)
+        // Checks if there is a current target. If not, then it is not within attack distance
+        if (currentTargetNumber != -1)
         {
-            TargetNearestPlayer();
-        }
+            Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
+            float distance = Vector3.Distance(this.transform.position, targetLocation);
 
-        else
-        {
-            currentTargetNumber = -1; // No target
-        }
-
-        yield return new WaitForSeconds(timeBetweenCheckPlayers);
-        checkForPlayers = true;
-    }
-    
-
-    // Assign enemy's target to the nearst player detected
-    private void TargetNearestPlayer()
-    {
-        Vector3 shorterPosition = Vector3.positiveInfinity; 
-        foreach (Collider player in foundPlayers)
-        {
-            Player currentPlayer = player.gameObject.GetComponent<Player>();
-            int playerNum = currentPlayer.PlayerNumber;
-
-            float currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
-            float newDistance = Vector3.Distance(this.transform.position, playerManager.GetPlayerLocation(playerNum).position);
-
-            if (newDistance <= currentDistance)
+            if (distance <= attackDistance)
             {
-                shorterPosition = playerManager.GetPlayerLocation(playerNum).position; // Found shortest position
-                currentTargetNumber = playerNum; // Set enemy's target
+                isWithinRadius = true;
             }
         }
+
+        return isWithinRadius;
     }
 
-    protected virtual void PerformEnemyBehavior()
+
+    // Returns a boolean that states whether current target is within flee distance
+    // If enemy does not have flee behavior enabled, this function automatically returns false
+    protected bool IsWithinFleeDistance()
     {
-        if (agent.speed != enemyOriginalSpeed)
+        bool isWithinDistance = false;
+
+        if (hasFleeBehavior && currentTargetNumber != -1)
         {
-            agent.speed = enemyOriginalSpeed;
+            Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
+            float distance = Vector3.Distance(this.transform.position, targetLocation);
+
+            if (distance <= fleeDistance)
+            {
+                isWithinDistance = true;
+            }
         }
 
-        // Grab targeted player's location
-        Vector3 targetLocation = playerManager.GetPlayerLocation(currentTargetNumber).position;
-        Follow(targetLocation);
-    }    
-
-    public void changeSpeed(float newspeed)
-    {
-        enemyOriginalSpeed = newspeed;
+        return isWithinDistance;
     }
 
 
-    public float returnSpeed()
+    public void ChangeSpeed(float newspeed)
     {
-        return agent.speed;
+        enemyOriginalSpeed = newspeed;
     }
 }

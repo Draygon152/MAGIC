@@ -47,6 +47,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
 
 
+
     // Change this later when BehaviorBase has Awake() and Start()...
     protected override void Awake()
     {
@@ -66,10 +67,8 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     }
 
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-
         readyToScanEnemies = true;
         timeToCheckOnTeammate = true;
 

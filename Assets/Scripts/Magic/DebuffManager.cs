@@ -17,8 +17,8 @@ public class DebuffManager : MonoBehaviour
     private void Start()
     {
         navMesh = this.GetComponent<NavMeshAgent>();
-        storedDamage = this.GetComponent<CollisionDamageGiver>().currentDamage();
-        storedSpeed = this.GetComponent<EnemyBehaviorBase>().returnSpeed();
+        storedDamage = this.GetComponent<CollisionDamageGiver>().CurrentDamage();
+        storedSpeed = this.GetComponent<EnemyBehaviorBase>().ReturnSpeed();
     }
 
 
@@ -31,7 +31,7 @@ public class DebuffManager : MonoBehaviour
 
         else
         {
-            this.GetComponent<EnemyBehaviorBase>().changeSpeed(storedSpeed * change);
+            this.GetComponent<EnemyBehaviorBase>().ChangeSpeed(storedSpeed * change);
         }
 
         StartCoroutine(EffectDuration(time));
@@ -40,7 +40,7 @@ public class DebuffManager : MonoBehaviour
 
     public void DamageChange(float time)
     {
-        this.GetComponent<CollisionDamageGiver>().changeDamage(0);
+        this.GetComponent<CollisionDamageGiver>().ChangeDamage(0);
         StartCoroutine(EffectDuration(time));
     }
 
@@ -72,13 +72,13 @@ public class DebuffManager : MonoBehaviour
 
     private void RevertSpeed()
     {
-        this.GetComponent<EnemyBehaviorBase>().changeSpeed(storedSpeed);
+        this.GetComponent<EnemyBehaviorBase>().ChangeSpeed(storedSpeed);
         this.GetComponent<NavMeshAgent>().isStopped = false;
     }
 
 
     private void RevertDamage()
     {
-        this.GetComponent<CollisionDamageGiver>().changeDamage(storedDamage);
+        this.GetComponent<CollisionDamageGiver>().ChangeDamage(storedDamage);
     }
 }

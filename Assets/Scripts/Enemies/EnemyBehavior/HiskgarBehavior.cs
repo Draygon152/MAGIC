@@ -1,10 +1,10 @@
 // Written by Lawson
-// Modified by Kevin Chao
+// Modified by Kevin Chao and Lizbeth
 
 using System.Collections;
 using UnityEngine;
 
-public class HiskgarBehavior : EnemyBehaviorBase
+public class HiskgarBehavior : MeleeBehavior
 {
     [SerializeField] private int healAmount = 5; // The amount the Hiskgar heals with each tick while fleeing
     [SerializeField] private int healTime = 1;   // The amount of time between heal ticks while fleeing
@@ -17,13 +17,13 @@ public class HiskgarBehavior : EnemyBehaviorBase
     private bool healing = false;    // A bool to flag whether or not the Hiskgar is currently healing
     private bool hasHealed = false;  // Bool flag to determine if the Hiskgar has already healed once
 
-
     private enum HiskgarState
     {
+        followPlayer,
         attackPlayer,
         fleeingAndHealing
     }
-    private HiskgarState state;
+    private HiskgarState hiskgarState;
 
 
 
@@ -31,14 +31,14 @@ public class HiskgarBehavior : EnemyBehaviorBase
     {
         base.Awake();
 
-        state = HiskgarState.attackPlayer;
+        hiskgarState = HiskgarState.attackPlayer;
     }
 
 
     protected override void Start()
     {
         base.Start();
-
+        
         // Set the reference to the health manager
         self = this.gameObject.GetComponent<EnemyHealthManager>();
     }
@@ -46,20 +46,20 @@ public class HiskgarBehavior : EnemyBehaviorBase
 
     protected override void PerformEnemyBehavior()
     {
-        switch (state)
+        switch (hiskgarState)
         {
             case HiskgarState.attackPlayer:
-                // when attacking the player follow the closest player 
-                Follow(playerManager.GetPlayerLocation(currentTargetNumber).position);
-
-                // Check if health is below flee health percentage
-                // if so switch to fleeing
+                // Check if health is low first
                 if (self.HealthBelowPercentageThreshold(fleeHealthPercentage))
                 {
-                    state = HiskgarState.fleeingAndHealing;
+                    hiskgarState = HiskgarState.fleeingAndHealing;
                 }
+                // Perform regular melee behavior
+                base.PerformEnemyBehavior();
                 break;
-
+                
+                // Check if health is below flee health percentage
+                // if so switch to fleeing
             case HiskgarState.fleeingAndHealing:
                 // when fleeing from the player, flee from closest player and heal
                 Flee(playerManager.GetPlayerLocation(currentTargetNumber).position);
@@ -73,7 +73,7 @@ public class HiskgarBehavior : EnemyBehaviorBase
                 // if so switch to attacking
                 if (self.HealthAbovePercentageThreshold(attackHealthPercentage))
                 {
-                    state = HiskgarState.attackPlayer;
+                    hiskgarState = HiskgarState.attackPlayer;
                     hasHealed = true;
                 }
                 break;
