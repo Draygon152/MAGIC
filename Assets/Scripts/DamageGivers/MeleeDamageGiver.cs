@@ -4,7 +4,7 @@
 using UnityEngine;
 
 // Request to change this function in a different and appropriate name
-public class CollisionDamageGiver : DamageGiver
+public class MeleeDamageGiver : DamageGiver
 {
     [SerializeField] private int damageDealt; // Attack power
     [SerializeField] private float damageOverTime; // Attack player in X seconds overtime

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6623571715296438637}
   - component: {fileID: 2367033974136401423}
   m_Layer: 6
-  m_Name: StaticShock!
+  m_Name: StaticShock
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

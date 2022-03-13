@@ -108,7 +108,7 @@ public class BaseSpell : MonoBehaviour
     // TODO: Set the player number to the player that was collided with
     private void OnTriggerEnter(Collider collision)
     {
-        if (spellToCast.continious == false)
+        if (spellToCast.continuous == false)
         {
             // Destroy the spell when it collides
             Destroy(gameObject);

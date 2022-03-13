@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: -8311044243572400147}
   - component: {fileID: -806056753554315578}
   m_Layer: 6
-  m_Name: Wooden Wall!
+  m_Name: Wooden Wall
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

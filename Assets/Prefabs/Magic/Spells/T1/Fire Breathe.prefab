@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4937104871463978589}
   - component: {fileID: 6264442754731968788}
   m_Layer: 6
-  m_Name: Fire Breathe!
+  m_Name: Fire Breathe
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

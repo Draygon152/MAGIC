@@ -17,7 +17,7 @@ public class DebuffManager : MonoBehaviour
     private void Start()
     {
         navMesh = this.GetComponent<NavMeshAgent>();
-        storedDamage = this.GetComponent<CollisionDamageGiver>().CurrentDamage();
+        storedDamage = this.GetComponent<MeleeDamageGiver>().CurrentDamage();
         storedSpeed = this.GetComponent<EnemyBehaviorBase>().ReturnSpeed();
     }
 
@@ -40,7 +40,7 @@ public class DebuffManager : MonoBehaviour
 
     public void DamageChange(float time)
     {
-        this.GetComponent<CollisionDamageGiver>().ChangeDamage(0);
+        this.GetComponent<MeleeDamageGiver>().ChangeDamage(0);
         StartCoroutine(EffectDuration(time));
     }
 
@@ -79,6 +79,6 @@ public class DebuffManager : MonoBehaviour
 
     private void RevertDamage()
     {
-        this.GetComponent<CollisionDamageGiver>().ChangeDamage(storedDamage);
+        this.GetComponent<MeleeDamageGiver>().ChangeDamage(storedDamage);
     }
 }

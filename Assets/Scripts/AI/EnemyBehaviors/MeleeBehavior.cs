@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MeleeBehavior : EnemyBehaviorBase
 {
-    private CollisionDamageGiver damageGiver; // A reference to the damage giver class for applying damage
+    private MeleeDamageGiver damageGiver; // A reference to the damage giver class for applying damage
     private float attackCooldown; // Cooldown time between melee attacks
     private bool readyToApplyDamage; // A bool to flag whether or not the enemy is ready to attack again
     private bool readyToFlee;
@@ -33,7 +33,7 @@ public class MeleeBehavior : EnemyBehaviorBase
 
         // TODO: Rename CollisionDamageGiver class for accuracy
         // Grab enemy's EnemyDamageGiver
-        damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>(); 
+        damageGiver = this.gameObject.GetComponent<MeleeDamageGiver>(); 
 
         // Set attack Variables
         attackCooldown = damageGiver.GetDamageOverTime();

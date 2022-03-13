@@ -11,7 +11,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))] //for AI COOP
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayersStats stats; //The static stats of the player
+    [SerializeField] private PlayerStats stats; //The static stats of the player
 
     private MagicCasting magicCaster;
     private PlayerHealthManager healthManager;
