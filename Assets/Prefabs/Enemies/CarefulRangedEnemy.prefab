@@ -177,12 +177,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96202faef4d03c541891c916fce1daa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 3691333447182965606}
-  detectionRadius: 30
-  timeBetweenCheckPlayers: 1
-  layerMask:
+  detectionRadiusBehavior: 30
+  timeBetweenDetection: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  objectLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  pickupLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  agent: {fileID: 3691333447182965606}
+  fleeMinRadius: 30
+  fleeMaxRadius: 40
   hasFleeBehavior: 1
   fleeCooldown: 5
   fleeDistance: 5
@@ -192,6 +203,7 @@ MonoBehaviour:
   wanderTowardsPlayerInterval: 5
   charge: 1.5
   attackDistance: 18
+  isPacifist: 0
   stopAtDistance: 12
   attackDistanceOffset: 1
   turnSpeed: 900

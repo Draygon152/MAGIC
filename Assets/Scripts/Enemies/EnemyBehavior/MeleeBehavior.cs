@@ -20,7 +20,6 @@ public class MeleeBehavior : EnemyBehaviorBase
     protected MeleeState meleeState;
 
 
-
     protected override void Awake()
     {
         base.Awake();
