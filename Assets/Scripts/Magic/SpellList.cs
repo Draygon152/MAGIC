@@ -9,13 +9,12 @@ public class SpellList : MonoBehaviour
 {
     [SerializeField] private List<BaseSpell> listOfSpells;
 
-
-
     public static SpellList Instance
     {
         get;
         private set;
     }
+
 
 
     private void Awake()

@@ -15,8 +15,8 @@ public class SpellTemplate : ScriptableObject
     public float spellSpeed;       // The speed the spell travels at
     public float spellLifetime;    // How long the spell will exist before fading out of existance (if it does not hit anything)
     public float effectDuration;
-    public float radius; // Radius of spell effect
-    public bool continuous;
+    public float radius;    // Radius of spell effect
+    public bool continuous; // Whether spell should be destroyed on-hit or not
 
     // Determines whether spell should be cast centered on self or not
     public bool self;

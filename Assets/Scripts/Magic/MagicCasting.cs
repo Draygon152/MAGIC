@@ -16,7 +16,7 @@ public class MagicCasting : MonoBehaviour
     private float timeSinceLastCast;
     private int playerNumber; // Stores player number so it can be referenced when casting a spell
 
-    private BaseSpell shellofSpell;
+    private BaseSpell instantiatedSpell;
 
 
 
@@ -28,6 +28,7 @@ public class MagicCasting : MonoBehaviour
             // Set playerNumber as null (-1)
             playerNumber = -1;
         }
+
         else
         {
             // Set playerNumber
@@ -73,10 +74,12 @@ public class MagicCasting : MonoBehaviour
         {
             range = spellToCast.GetSpell().spellSpeed * spellToCast.GetSpell().spellLifetime;
         }
+
         else
         {
-            range = -1.0f; //denoting a stationary spell;
+            range = -1.0f; // denoting a stationary spell;
         }
+
         return range;
     }
 
@@ -97,6 +100,7 @@ public class MagicCasting : MonoBehaviour
                 {
                     castLocation.localPosition = new Vector3(0, 0, 1);
                 }
+
                 else
                 {
                     castLocation.localPosition = new Vector3(0, 0, 0);
@@ -109,7 +113,7 @@ public class MagicCasting : MonoBehaviour
     private void CastCurrentSpell()
     {
         // Create spell at castLocation
-        shellofSpell = BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
+        instantiatedSpell = BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
     }
 
 
@@ -159,21 +163,21 @@ public class MagicCasting : MonoBehaviour
 
     private void OnActivate()
     {
-        if (shellofSpell != null)
+        if (instantiatedSpell != null)
         {
-            shellofSpell.EarlyCast();
+            instantiatedSpell.EarlyCast();
         }
     }
 
-    //A simple function to allow an AI to cast the spell
-    //There might be a better way to do this, but for I 
-    //am going with this becasue of time constraint
+    // A simple function to allow an AI to cast spells
+    // There might be a better way to do this, but for I 
+    // am going with this becasue of time constraint
     public void AIOnCast()
     {
-        //pass on the function call to OnCast
-        //if any preprocessing needs to be done
-        //for an AI to cast a spell the it should
-        //be done here
+        // pass on the function call to OnCast
+        // if any preprocessing needs to be done
+        // for an AI to cast a spell the it should
+        // be done here
         OnCast();
     }
 }

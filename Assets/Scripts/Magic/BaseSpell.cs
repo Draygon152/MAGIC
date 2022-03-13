@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using System.Collections;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -30,19 +29,19 @@ public class BaseSpell : MonoBehaviour
         rotationOfCreation - A Quaternion providing the rotation of the spell
         playerNumber - The player number of the player who casted the spell
     */
-    static public BaseSpell Instantiate(BaseSpell spellToCreate, Vector3 locationOfCreation, Quaternion rotationOfCreation, int playerNumber)
+    public static BaseSpell Instantiate(BaseSpell spellToCreate, Vector3 locationOfCreation, Quaternion rotationOfCreation, int playerNumber)
     {
-        //Create the spell
+        // Create the spell
         BaseSpell castedSpell = Instantiate(spellToCreate, locationOfCreation, rotationOfCreation);
 
         // If playerNumber is not null (-1):
         if (playerNumber != -1)
         {
-            //Set the player who cast the spell
+            // Set the player who cast the spell
             castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
         }
         
-        if(castedSpell.spellToCast.self == true) //now aoe sticks to the player
+        if (castedSpell.spellToCast.self == true) // now aoe sticks to the player
         {
             castedSpell.transform.parent = castedSpell.player.transform;
         }

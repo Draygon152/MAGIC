@@ -22,17 +22,21 @@ public class SpellEffects : MonoBehaviour
             if (target != null || target.GetComponent<Rigidbody>() != null)
             {
                 Vector3 direction = target.transform.position - player.transform.position;
+
                 if(direction[0] > 1 || direction[0] < -1)
                 {
                     direction[0] *= 5;
                 }
+
                 if(direction[2] > 1 || direction[2] < -1)
                 {
                     direction[2] *= 5;
                 }
+
                 target.GetComponent<Rigidbody>().AddForce(direction * 250);
             }
         }
+
         catch
         {
         }
@@ -55,6 +59,7 @@ public class SpellEffects : MonoBehaviour
                 target.GetComponent<DebuffManager>().SpeedChange(spell.GetSpell().effectDuration, 0f);
             }
         }
+
         catch
         { 
         }
@@ -70,6 +75,7 @@ public class SpellEffects : MonoBehaviour
                 target.GetComponent<DebuffManager>().SustainedDamage(spell.GetSpell().effectDuration, spell.GetSpell().damage);
             }
         }
+
         catch
         {
         }
@@ -85,6 +91,7 @@ public class SpellEffects : MonoBehaviour
                 target.GetComponent<DebuffManager>().SpeedChange(spell.GetSpell().effectDuration, 0.5f);
             }
         }
+
         catch
         {
         }
@@ -103,15 +110,16 @@ public class SpellEffects : MonoBehaviour
                 {
                     spellDamageGiver.UseDamage(currenttarget, spell.GetSpell().damage);
                 }
-
             }
         }
+
         catch
         {
         }
     }
     
 
+    // TODO: Finish implementation
     private GameObject ReturnEnemyinRange(float range, GameObject currenttarget)
     {
         return null;
