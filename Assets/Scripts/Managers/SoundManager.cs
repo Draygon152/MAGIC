@@ -1,12 +1,11 @@
 // Written by Marc Hagoriles
+// Modified by Kevin Chao
 
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource bgMusic;
-    [SerializeField] private AudioMixerGroup audioMixer;
+    [SerializeField] private AudioSource audioPlayer;
 
     [SerializeField] private AudioClip inGameMusic;
     [SerializeField] private AudioClip menuMusic;
@@ -45,14 +44,15 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        bgMusic = gameObject.AddComponent<AudioSource>();
-
         EventManager.Instance.Subscribe(EventTypes.Events.GameStart, PlayInGameMusic);
         EventManager.Instance.Subscribe(EventTypes.Events.Victory, PlayVictoryMusic);
         EventManager.Instance.Subscribe(EventTypes.Events.Defeat, PlayDefeatMusic);
         EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ResetMusic);
-
-        bgMusic.outputAudioMixerGroup = audioMixer;
+        
+        if (PlayerPrefs.HasKey("curVolume"))
+        {
+            audioPlayer.outputAudioMixerGroup.audioMixer.SetFloat("musicVolume", Mathf.Log10(PlayerPrefs.GetFloat("curVolume")) * 20);
+        }
 
         PlayMusicWithLoop(menuMusic);
     }
@@ -60,21 +60,21 @@ public class SoundManager : MonoBehaviour
 
     private void PlayMusic(AudioClip audio)
     {
-        if (bgMusic.isPlaying)
+        if (audioPlayer.isPlaying)
         {
-            bgMusic.Stop();
+            audioPlayer.Stop();
         }
 
-        bgMusic.clip = audio;
-        bgMusic.loop = false;
-        bgMusic.Play();
+        audioPlayer.clip = audio;
+        audioPlayer.loop = false;
+        audioPlayer.Play();
     }
 
 
     private void PlayMusicWithLoop(AudioClip audio)
     {
         PlayMusic(audio);
-        bgMusic.loop = true;
+        audioPlayer.loop = true;
     }
 
 
