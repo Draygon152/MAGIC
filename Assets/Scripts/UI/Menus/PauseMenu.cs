@@ -2,6 +2,12 @@
 
 public class PauseMenu : Menu<PauseMenu>
 {
+    public void OnResumePress()
+    {
+        EventManager.Instance.Notify(EventTypes.Events.GameUnpaused);
+    }
+
+
     public void OnOptionsPress()
     {
         OptionsMenu.Open();

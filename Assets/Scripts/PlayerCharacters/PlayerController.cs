@@ -24,12 +24,14 @@ public class PlayerController : MonoBehaviour
         playerControls = this.GetComponent<PlayerInput>();
 
         EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableControls);
+        EventManager.Instance.Subscribe(EventTypes.Events.GameUnpaused, OnMenuPauseToggle);
     }
 
 
     private void OnDestroy()
     {
         EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableControls);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameUnpaused, OnMenuPauseToggle);
     }
 
 
