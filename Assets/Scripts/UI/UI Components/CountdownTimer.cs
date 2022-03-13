@@ -68,7 +68,9 @@ public class CountdownTimer : MonoBehaviour
         {
             // Reset value of timeRemaining to length of timer
             for (timeRemaining = timerLength; timeRemaining > 0;)
+            {
                 await TimerTick(ctkn);
+            }
         }
 
         catch

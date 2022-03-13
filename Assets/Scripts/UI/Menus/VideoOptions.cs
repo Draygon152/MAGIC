@@ -30,10 +30,11 @@ public class VideoOptions : Menu<VideoOptions>
         // Before we start looping through, get our current resolution index.
         int currResIndex = 0;
 
+        string option;
         // For each available resolution option, store it in options list
         for (int i = 0; i < resolutionOptions.Length; i++)
         {
-            string option = resolutionOptions[i].width + "x" + resolutionOptions[i].height + "@" + resolutionOptions[i].refreshRate + "Hz";
+            option = resolutionOptions[i].width + "x" + resolutionOptions[i].height + "@" + resolutionOptions[i].refreshRate + "Hz";
             dropdownOptions.Add(option);
 
             // If our current resolution matches one of the available resolution options, make that our default resolution shown in the dropdown menu.

@@ -22,7 +22,9 @@ public class SelectedSpellUI : MonoBehaviour
     private void Update()
     {
         if (cooldownSlider != null)
+        {
             cooldownSlider.value = playerCastSystem.GetTimeSinceLastCast();
+        }
     }
 
 

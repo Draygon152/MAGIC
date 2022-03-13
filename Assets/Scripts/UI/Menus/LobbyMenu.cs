@@ -78,7 +78,10 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
     public void PlayerSelectedElement(int playerNumber)
     {
         if (playerNumber < 0 || playerNumber > numPlayers - 1)
+        {
             Debug.LogException(new Exception($"PlayerSelectedElement: Invalid player number ({playerNumber})"));
+        }
+            
 
         playerReadyToggles[playerNumber].interactable = true;
 
@@ -90,7 +93,9 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
     public void PlayerReadyPressed(int playerNumber)
     {
         if (playerNumber < 0 || playerNumber > numPlayers - 1)
+        {
             Debug.LogException(new Exception($"PlayerTogglePressed: Invalid player number ({playerNumber})"));
+        }
 
         // If the toggle has just been activated
         if (playerReadyToggles[playerNumber].isOn == true)
@@ -131,7 +136,9 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
     public void PlayerSelectedInputDevice(int playerNumber)
     {
         if (playerNumber < 0 || playerNumber > numPlayers - 1)
+        {
             Debug.LogException(new Exception($"PlayerSelectedInputDevice: Invalid player number ({playerNumber})"));
+        }
 
         string selectedOption = inputSelectors[playerNumber].options[inputSelectors[playerNumber].value].text;
 
@@ -145,7 +152,7 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
             playerDataList[playerNumber].SetPairedDevice(availableDevices[selectedOption]);
         }
 
-        Debug.Log($"PLAYER {playerNumber + 1} SELECTED DEVICE: {playerDataList[playerNumber].PairedDevice}");
+        // Debug.Log($"PLAYER {playerNumber + 1} SELECTED DEVICE: {playerDataList[playerNumber].PairedDevice}");
     }
 
 
@@ -174,6 +181,7 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
                 output.Add($"Keyboard {++keyboardCounter}", device);
             }
         }
+
         output.Add("AI Player", null);
 
         return output;
@@ -185,7 +193,9 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
         foreach (bool playerReady in playerReadyStates)
         {
             if (!playerReady)
+            {
                 return false;
+            }
         }
 
         return true;

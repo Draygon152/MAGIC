@@ -16,7 +16,9 @@ public class ElementSelector : MonoBehaviour
     public Element GetSelectedElement()
     {
         if (selectedElement == null)
+        {
             Debug.LogException(new Exception("No element selected."));
+        }
         
         return selectedElement;
     }
@@ -32,13 +34,17 @@ public class ElementSelector : MonoBehaviour
     public void EnableAllElementButtons()
     {
         foreach (Button button in buttonList)
+        {
             button.interactable = true;
+        }
     }
 
 
     public void DisableAllElementButtons()
     {
         foreach (Button button in buttonList)
+        {
             button.interactable = false;
+        }
     }
 }

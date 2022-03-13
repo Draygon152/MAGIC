@@ -1,5 +1,5 @@
 // Written by Kevin Chao
-//Modified by Marc Hagoriles
+// Modified by Marc Hagoriles
 
 public class OptionsMenu : Menu<OptionsMenu>
 {

@@ -11,8 +11,12 @@ public class PauseMenu : Menu<PauseMenu>
     public void OnMainMenuPress()
     {
         EventManager.Instance.Notify(EventTypes.Events.ResetGame);
+
         if (Instance != null)
+        {
             Close();
+        }
+            
         MainMenu.Open();
     }
 }
