@@ -107,11 +107,13 @@ public class GameManager : MonoBehaviour
         if (WinOrLose)
         {
             VictoryGameOver.Open();
+            EventManager.Instance.Notify(EventTypes.Events.Victory);
         }
 
         else
         {
             DefeatGameOver.Open();
+            EventManager.Instance.Notify(EventTypes.Events.Defeat);
         }
 
         EventManager.Instance.Notify(EventTypes.Events.GameOver);

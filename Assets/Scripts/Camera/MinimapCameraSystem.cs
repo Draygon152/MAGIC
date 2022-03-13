@@ -36,6 +36,10 @@ public class MinimapCameraSystem : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
 
     private void Start()
     {

@@ -1,4 +1,4 @@
-// Written by Marc
+// Written by Marc Hagoriles
 // Modified by Kevin Chao
 
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ public class CameraSystem : MonoBehaviour
     private List<Transform> targetList; // This list should contain all the player targets in the scene.
 
 
-
+    //Make the CameraSystem a Singleton.
     public static CameraSystem Instance
     {
         get;
@@ -37,6 +37,11 @@ public class CameraSystem : MonoBehaviour
             cam = GetComponentInChildren<Camera>();
             targetList = new List<Transform>();
         }
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
 

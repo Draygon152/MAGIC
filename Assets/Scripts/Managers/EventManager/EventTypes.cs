@@ -1,4 +1,5 @@
 // Written by Kevin Chao
+// Modified by Marc Hagoriles
 
 public sealed class EventTypes
 {
@@ -10,6 +11,8 @@ public sealed class EventTypes
         PlayerDeath,
         EnemyDeath,
         GameOver,
+        Victory,
+        Defeat,
         ResetGame
     }
 }
