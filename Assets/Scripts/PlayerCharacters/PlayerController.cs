@@ -108,8 +108,20 @@ public class PlayerController : MonoBehaviour
             playerControls.SwitchCurrentActionMap("Gameplay");
             Time.timeScale = 1;
 
+            if (VideoOptions.Instance != null)
+            {
+                VideoOptions.Close();
+            }
+
+            if (SoundOptions.Instance != null)
+            {
+                SoundOptions.Close();
+            }
+
             if (OptionsMenu.Instance != null)
+            {
                 OptionsMenu.Close();
+            }
 
             PauseMenu.Close();
         }
