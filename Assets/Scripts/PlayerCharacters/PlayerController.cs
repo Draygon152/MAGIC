@@ -1,4 +1,4 @@
-// Written by Marc
+// Written by Marc Hagoriles
 // Modified by Kevin Chao and Lawson
 
 using UnityEngine;
