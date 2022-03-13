@@ -1,5 +1,5 @@
 // Written by Lawson
-// Modified by Liz and Kevin Chao
+// Modified by Lizbeth and Kevin Chao
 
 using UnityEngine;
 using UnityEngine.InputSystem;

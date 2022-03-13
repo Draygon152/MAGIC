@@ -1,5 +1,5 @@
 // Written by Kevin Chao
-// Modified by Lizbeth A
+// Modified by Lizbeth
 
 using UnityEngine;
 using System;
