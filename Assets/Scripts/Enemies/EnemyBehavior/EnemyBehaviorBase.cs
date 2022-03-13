@@ -30,10 +30,11 @@ public class EnemyBehaviorBase : BehaviorBase
     private bool checkForPlayers;
     private bool isWanderTime;
 
+
+
     // Initializes enemy's agent
-    protected override void Start()
+    protected virtual void Start()
     {
-        base.Start();
         playerManager = PlayerManager.Instance;
 
         currentTargetNumber = -1;

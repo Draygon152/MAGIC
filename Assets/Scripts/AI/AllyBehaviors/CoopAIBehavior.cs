@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoopAIBehavior : FriendlyBehaviorBase
@@ -45,6 +44,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     }
     private CoopAiState playerAiState;
 
+
     // Change this later when BehaviorBase has Awake() and Start()...
     protected override void Awake()
     {
@@ -63,10 +63,9 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         selfTransform = this.gameObject.transform;
     }
 
-    protected override void Start()
-    {
-        base.Start();
 
+    private void Start()
+    {
         readyToScanEnemies = true;
         timeToCheckOnTeammate = true;
 
@@ -85,7 +84,8 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         }
     }
 
-    override protected void PerformBehavior()
+
+    protected override void PerformBehavior()
     {
         base.PerformBehavior();
 

@@ -30,10 +30,6 @@ public abstract class BehaviorBase : MonoBehaviour
         gameOver = false;
     }
 
-    virtual protected void Start()
-    {
-        //agent = this.GetComponent<NavMeshAgent>();
-    }
 
     //Performs this behavior every frame
     private void FixedUpdate()

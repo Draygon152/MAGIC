@@ -370,6 +370,9 @@ MonoBehaviour:
   pickupLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  agent: {fileID: -9113751766295463458}
+  fleeMinRadius: 30
+  fleeMaxRadius: 40
   environment:
     serializedVersion: 2
     m_Bits: 512
