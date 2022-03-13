@@ -132,15 +132,14 @@ public class CameraSystem : MonoBehaviour
         Vector3 camLocalPos = transform.InverseTransformPoint(GetCenterPos());
 
         float size = 0f; // Initialize the calculation of camera's zoom size to be 0.
-        Vector3 targetLocalPos, camToTarget;
 
         for (int i = 0; i < targetList.Count; i++)
         {
             // Find the target's position in the camera's local space.
-            targetLocalPos = transform.InverseTransformPoint(targetList[i].position);
+            Vector3 targetLocalPos = transform.InverseTransformPoint(targetList[i].position);
 
             // Find the position of the target from the desired position of the camera's local space.
-            camToTarget = targetLocalPos - camLocalPos;
+            Vector3 camToTarget = targetLocalPos - camLocalPos;
 
             // Choose the largest out of the current size and the distance of the tank in the y direction (up or down).
             size = Mathf.Max(size, Mathf.Abs(camToTarget.y));

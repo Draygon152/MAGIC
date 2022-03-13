@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
         {
             return playerNumber;
         }
+
         set
         {
             playerNumber = value;

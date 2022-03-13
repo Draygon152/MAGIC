@@ -83,11 +83,12 @@ public abstract class BehaviorBase : MonoBehaviour
         while (!foundFleeLocation)
         {
             fleeLocation = FindValidLocation(fleeVector);
-            bool test = fleeLocation.x != Mathf.Infinity;
+
             if (fleeLocation.x != Mathf.Infinity)
             {
                 foundFleeLocation = true;
             }
+
             else
             {
                 fleeVector = CalculateRandomPointInCircle(fleeDistance, fleeMinRadius, fleeMaxRadius);
@@ -108,6 +109,7 @@ public abstract class BehaviorBase : MonoBehaviour
         {
             return Vector3.positiveInfinity;
         }
+
         else
         {
             return fleeVector;
@@ -119,6 +121,7 @@ public abstract class BehaviorBase : MonoBehaviour
     protected Vector3 CalculateRandomPointInCircle(Vector3 circleCenter, float minRange, float maxRange)
     {
         Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRange, maxRange);
+
         return new Vector3(point.x, 0, point.y) + circleCenter;
     }
 

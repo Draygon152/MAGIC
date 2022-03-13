@@ -13,7 +13,7 @@ public class SpellDamageGiver : DamageGiver
     {
         if (currentSpell.IsPlayer())
         {
-            //Caster is player
+            // Caster is player
             // If collided with objects or enemies:
             if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
             {
@@ -26,7 +26,7 @@ public class SpellDamageGiver : DamageGiver
 
         else
         {
-            //Caster is enemy
+            // Caster is enemy
             // If collided with players:
             if (collision.gameObject.layer == 7)
             {

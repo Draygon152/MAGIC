@@ -298,12 +298,9 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     // on health instead of conducting a periodic check.
     private IEnumerator CheckOnTeammate()
     {
-        GameObject otherPlayer;
-
         timeToCheckOnTeammate = false;
 
         // check if other player's health is low
-        otherPlayer = PlayerManager.Instance.GetPlayer(otherPlayerIndex).gameObject;
         if (otherPlayerHealthManager.HealthBelowPercentageThreshold(healthCriticalTheshold))
         {
             // The other player's health is low, assist them
@@ -319,7 +316,6 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     private void TargetNearestEnemy(Vector3 sourcePoint)
     {
         Vector3 minDistance = Vector3.positiveInfinity; 
-        Vector3 distanceToCurrentEnemy;
 
         if (foundEnemies != null)
         {
@@ -328,7 +324,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                 // enemy might be null if the enemy died since the last scan
                 if (enemy != null)
                 {
-                    distanceToCurrentEnemy =  enemy.gameObject.transform.position - sourcePoint;
+                    Vector3 distanceToCurrentEnemy =  enemy.gameObject.transform.position - sourcePoint;
 
                     if (distanceToCurrentEnemy.magnitude < minDistance.magnitude)
                     {
@@ -336,8 +332,8 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                         target = enemy.gameObject.transform;
                         minDistance = distanceToCurrentEnemy;
                     }
-                } // end if (enemy != null)
-            } // end foreach (Collider enemy in foundEnemies)
-        } // end if (foundEnemies != null)
+                }
+            }
+        }
     }
 }

@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
     {
         if (inputDirection != Vector3.zero)
         {
-
             // This is to have our W,S keys point upwards and downwards in Orthographic view; A,S keys point diagonal.
             Matrix4x4 matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
             Vector3 changedInputDirection = matrix.MultiplyPoint3x4(inputDirection);

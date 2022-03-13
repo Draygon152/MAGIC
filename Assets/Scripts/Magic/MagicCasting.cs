@@ -169,6 +169,7 @@ public class MagicCasting : MonoBehaviour
         }
     }
 
+
     // A simple function to allow an AI to cast spells
     // There might be a better way to do this, but for I 
     // am going with this becasue of time constraint

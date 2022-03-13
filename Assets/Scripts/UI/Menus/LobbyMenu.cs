@@ -80,8 +80,7 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
         if (playerNumber < 0 || playerNumber > numPlayers - 1)
         {
             Debug.LogException(new Exception($"PlayerSelectedElement: Invalid player number ({playerNumber})"));
-        }
-            
+        }   
 
         playerReadyToggles[playerNumber].interactable = true;
 

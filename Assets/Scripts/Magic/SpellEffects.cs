@@ -23,12 +23,12 @@ public class SpellEffects : MonoBehaviour
             {
                 Vector3 direction = target.transform.position - player.transform.position;
 
-                if(direction[0] > 1 || direction[0] < -1)
+                if (direction[0] > 1 || direction[0] < -1)
                 {
                     direction[0] *= 5;
                 }
 
-                if(direction[2] > 1 || direction[2] < -1)
+                if (direction[2] > 1 || direction[2] < -1)
                 {
                     direction[2] *= 5;
                 }
@@ -98,17 +98,19 @@ public class SpellEffects : MonoBehaviour
     }
 
 
+    // TODO: Finish implementation
     public void BounceDamage(Player player, GameObject target, BaseSpell spell)
     {
         try
         {
-            GameObject currenttarget = target;
-            while (currenttarget != null)
+            GameObject currentTarget = target;
+
+            while (currentTarget != null)
             {
-                currenttarget = ReturnEnemyinRange(3f, currenttarget);
-                if(currenttarget != null)
+                currentTarget = ReturnEnemyinRange(3f, currentTarget);
+                if (currentTarget != null)
                 {
-                    spellDamageGiver.UseDamage(currenttarget, spell.GetSpell().damage);
+                    spellDamageGiver.UseDamage(currentTarget, spell.GetSpell().damage);
                 }
             }
         }

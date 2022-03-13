@@ -100,20 +100,16 @@ public class EnemyBehaviorBase : BehaviorBase
     // Assign enemy's target to the nearst player detected
     private void TargetNearestPlayer()
     {
-        int playerNum;
-        float currentDistance, newDistance;
-        Player currentPlayer;
-        Transform playerLocation;
         Vector3 shorterPosition = Vector3.positiveInfinity;
 
         foreach (Collider player in foundPlayers)
         {
-            currentPlayer = player.gameObject.GetComponent<Player>();
-            playerNum = currentPlayer.PlayerNumber;
+            Player currentPlayer = player.gameObject.GetComponent<Player>();
+            int playerNum = currentPlayer.PlayerNumber;
 
-            currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
-            playerLocation = playerManager.GetPlayerLocation(playerNum);
-            newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
+            float currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
+            Transform playerLocation = playerManager.GetPlayerLocation(playerNum);
+            float newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
 
             if (newDistance <= currentDistance && player.gameObject.activeInHierarchy)
             {
@@ -166,16 +162,14 @@ public class EnemyBehaviorBase : BehaviorBase
     // Finds the closest player despite distance
     private Vector3 WanderEnemyFindClosestTarget()
     {
-        float currentDistance, newDistance;
-        Transform playerLocation;
         Player[] playerList = playerManager.GetFullPlayerList();
         Vector3 shorterPosition = Vector3.positiveInfinity;
 
         foreach (Player player in playerList)
         {
-            currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
-            playerLocation = playerManager.GetPlayerLocation(player.PlayerNumber);
-            newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
+            float currentDistance = Vector3.Distance(this.transform.position, shorterPosition);
+            Transform playerLocation = playerManager.GetPlayerLocation(player.PlayerNumber);
+            float newDistance = Vector3.Distance(this.transform.position, playerLocation.position);
 
             if (newDistance <= currentDistance && player.gameObject.activeInHierarchy)
             {
