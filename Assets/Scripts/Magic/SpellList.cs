@@ -20,8 +20,6 @@ public class SpellList : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("SpellList Awake");
-
         if (Instance != null)
             Destroy(gameObject);
 
@@ -34,8 +32,6 @@ public class SpellList : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("SpellList Destroyed");
-
         Instance = null;
     }
 

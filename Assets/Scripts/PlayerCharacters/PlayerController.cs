@@ -23,11 +23,6 @@ public class PlayerController : MonoBehaviour
         // set the reference to the PlayerInput component
         playerControls = this.GetComponent<PlayerInput>();
 
-        for (int i = 0; i < Gamepad.all.Count; i++)
-        {
-            Debug.Log(Gamepad.all[i].name);
-        }
-
         EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableControls);
     }
 

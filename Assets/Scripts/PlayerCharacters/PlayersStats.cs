@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+// Written by Lawson McCoy
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "PlayerStats")]

@@ -1,3 +1,6 @@
+// Written by Lawson McCoy
+// Modified by Lizbeth
+
 using System.Collections;
 using UnityEngine;
 
@@ -7,21 +10,19 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     // it shares similar traits to my RangeBehavior script in my branch (UpgradeAttackingBehaviors).
     // I say take a look at it!
 
-    [SerializeField] private const float MAX_LOOK_AT_ANGLE = 5.0f; //The max angle between the direction
-                                                                   //of the target and the direction the AI
-                                                                   //is looking can be for the AI to be consider
-                                                                   //looking at the target 
+    [SerializeField] private const float MAX_LOOK_AT_ANGLE = 5.0f; // The max angle between the direction
+                                                                   // of the target and the direction the AI
+                                                                   // is looking can be for the AI to be consider
+                                                                   // looking at the target 
     [SerializeField] private LayerMask environment;
 
-    // [SerializeField] private float
-
-    [SerializeField] private float healthCriticalTheshold = 0.2f; //The percentage that teammate's must drop below for the AI to assist
-    [SerializeField] private float timeBetweenCheckingOnTeammate = 10.0f; //How often does the AI check how its teammate is doing
+    [SerializeField] private float healthCriticalTheshold = 0.2f; // The percentage that teammate's must drop below for the AI to assist
+    [SerializeField] private float timeBetweenCheckingOnTeammate = 10.0f; // How often does the AI check how its teammate is doing
     private bool timeToCheckOnTeammate;
-    private int otherPlayerIndex; //and integer to store the index of the other player for a multiplayer game
+    private int otherPlayerIndex; // and integer to store the index of the other player for a multiplayer game
     private HealthManager otherPlayerHealthManager;
 
-    [SerializeField] private float placeDistanceForStationarySpells = 3.0f; //How far away from the enemy should a stationary spell be placed
+    [SerializeField] private float placeDistanceForStationarySpells = 3.0f; // How far away from the enemy should a stationary spell be placed
 
     [SerializeField] private float minAttackingDistance = 1.0f;
     [SerializeField] private float safeDistanceToBeginAttackingAgain = 5.0f;
@@ -30,19 +31,21 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     private Collider[] foundEnemies;
     private Collider[] foundObjects;
 
-    private MagicCasting magic; //one's own magic
+    private MagicCasting magic; // one's own magic
 
-    private Transform selfTransform; //one's own transform
+    private Transform selfTransform; // one's own transform
 
-    private Transform target; //The current target to kill
+    private Transform target; // The current target to kill
 
-    private enum CoopAiState
+    private enum CoopAIState
     {
         attackEnemies,
         fleeFromNearbyEnemy,
         defendPlayer,
     }
-    private CoopAiState playerAiState;
+    private CoopAIState playerAIState;
+
+
 
 
     // Change this later when BehaviorBase has Awake() and Start()...
@@ -50,16 +53,16 @@ public class CoopAIBehavior : FriendlyBehaviorBase
     {
         base.Awake();
 
-        playerAiState = CoopAiState.attackEnemies;
+        playerAIState = CoopAIState.attackEnemies;
 
-        //Initiate the power of your own magic, 
-        //so that it may tell you its strengths and limitations
+        // Initiate the power of your own magic, 
+        // so that it may tell you its strengths and limitations
         magic = this.gameObject.GetComponent<MagicCasting>();
 
-        //start with no target
+        // start with no target
         target = null;
 
-        //set own transform
+        // set own transform
         selfTransform = this.gameObject.transform;
     }
 
@@ -69,16 +72,16 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         readyToScanEnemies = true;
         timeToCheckOnTeammate = true;
 
-        //for a multiplayer game
+        // for a multiplayer game
         if (PlayerManager.Instance.GetNumberOfPlayers() == 2)
         {
-            //get the index of the other player
+            // get the index of the other player
 
-            otherPlayerIndex = this.gameObject.GetComponent<Player>().PlayerNumber; //AI's player index
+            otherPlayerIndex = this.gameObject.GetComponent<Player>().PlayerNumber; // AI's player index
 
-            //Converts to other player's index
-            //if this is player 0, 0 + 1 is 1 and 1 % 2 is 1
-            //if this is player 1, 1 + 1 is 2 and 2 % 2 is 0
+            // Converts to other player's index
+            // if this is player 0, 0 + 1 is 1 and 1 % 2 is 1
+            // if this is player 1, 1 + 1 is 2 and 2 % 2 is 0
             otherPlayerIndex = (otherPlayerIndex + 1) % PlayerManager.Instance.GetNumberOfPlayers();
             otherPlayerHealthManager = PlayerManager.Instance.GetPlayer(otherPlayerIndex).GetComponent<HealthManager>();
         }
@@ -92,41 +95,41 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         // Grab current center position
         Vector3 playerAiCenter = selfTransform.position;
 
-        //Scan for nearby enemies
+        // Scan for nearby enemies
         if (readyToScanEnemies)
         {
             StartCoroutine(ScanForEnemies(selfTransform.position));
         }
 
-        switch (playerAiState)
+        switch (playerAIState)
         {
-            case CoopAiState.attackEnemies:
-                //Check for a target
+            case CoopAIState.attackEnemies:
+                // Check for a target
                 TargetNearestEnemy(selfTransform.position);
 
                 if (target != null)
                 {
-                    //Check if the spell is on cooldown
+                    // Check if the spell is on cooldown
                     Debug.Log($"magic.GetTimeSinceLastCast {magic.GetTimeSinceLastCast() == 0}");
                     if (magic.GetTimeSinceLastCast() == 0)
                     {
-                        //Spell is off cooldown, Charge into the fray
+                        // Spell is off cooldown, Charge into the fray
 
-                        //The target must die
+                        // The target must die
                         KillTheTarget();
                     }
                     else
                     {
-                        //Spell is on cooldown, flee for you life                     
+                        // Spell is on cooldown, flee for you life                     
                         Flee(target.position);
                     }
 
-                    if (DistacneToTarget() < minAttackingDistance)
+                    if (DistanceToTarget() < minAttackingDistance)
                     {
-                        playerAiState = CoopAiState.fleeFromNearbyEnemy;
+                        playerAIState = CoopAIState.fleeFromNearbyEnemy;
                     }
 
-                    //Periodically check how the other player is doing
+                    // Periodically check how the other player is doing
                     if (timeToCheckOnTeammate && PlayerManager.Instance.GetNumberOfPlayers() != 1)
                     {
                         StartCoroutine(CheckOnTeammate());
@@ -135,79 +138,80 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
                 break;
 
-            case CoopAiState.fleeFromNearbyEnemy:
+            case CoopAIState.fleeFromNearbyEnemy:
 
                 TargetNearestEnemy(selfTransform.position);
 
-                if (target == null || DistacneToTarget() > safeDistanceToBeginAttackingAgain)
+                if (target == null || DistanceToTarget() > safeDistanceToBeginAttackingAgain)
                 {
-                    //safe to start attacking enemies again
-                    playerAiState = CoopAiState.attackEnemies;
+                    // safe to start attacking enemies again
+                    playerAIState = CoopAIState.attackEnemies;
                 }
                 else
                 {
-                    //not safe, FLEE!!!!
+                    // not safe, FLEE!!!!
                     Flee(target.position);
                 }
 
                 break;
 
-            case CoopAiState.defendPlayer:
-                //Check if teammate is dead or healed
+            case CoopAIState.defendPlayer:
+                // Check if teammate is dead or healed
                 if (PlayerManager.Instance.GetDeadPlayer() == null && otherPlayerHealthManager.HealthBelowPercentageThreshold(healthCriticalTheshold))
                 {
-                    //Target enemy nearest other player
+                    // Target enemy nearest other player
                     TargetNearestEnemy(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
 
-                    //Check if the spell is on cooldown and there is a target
+                    // Check if the spell is on cooldown and there is a target
                     if (magic.GetTimeSinceLastCast() == 0 && target != null)
                     {
-                        //Spell is off cooldown, Charge into the fray
+                        // Spell is off cooldown, Charge into the fray
 
-                        //The target must die
+                        // The target must die
                         KillTheTarget();
                     }
                     else
                     {
                         Debug.Log("Going to teammate");
-                        //Spell is on cooldown, focus on staying close to the other player
+                        // Spell is on cooldown, focus on staying close to the other player
 
                         Follow(PlayerManager.Instance.GetPlayerLocation(otherPlayerIndex).position);
                     }
                 }
                 else
                 {
-                    //no longer need to protect teammate, so go back to killing 
-                    //enemies in your own way
-                    playerAiState = CoopAiState.attackEnemies;
+                    // no longer need to protect teammate, so go back to killing 
+                    // enemies in your own way
+                    playerAIState = CoopAIState.attackEnemies;
                 }
                 break;
         }
     }
 
+
     private void KillTheTarget()
     {
         Debug.Log("Target is not null");
 
-        //Begin the attack
+        // Begin the attack
         if (TargetInRange())
         {
             Debug.Log("Target is in range");
-            //No need to get closer
+            // No need to get closer
             agent.SetDestination(selfTransform.position);
 
             if (LookingAtTarget())
             {   
                 Debug.Log("Looking at target");
-                //Check the line of sight on the target
+                // Check the line of sight on the target
                 if (CheckLineOfSight())
                 {
-                    //something is blocking the line of sight of the enemy
+                    // something is blocking the line of sight of the enemy
                     Follow(target.position);
                 }
                 else
                 {
-                    //Looking at target, Cast the spell and watch the target suffer
+                    // Looking at target, Cast the spell and watch the target suffer
                     magic.AIOnCast();
                 }
             }
@@ -215,18 +219,19 @@ public class CoopAIBehavior : FriendlyBehaviorBase
             {
                 Debug.Log("Not looking at target");
                 Debug.Log(target.position - selfTransform.position);
-                //need to look at the target
+                // need to look at the target
                 selfTransform.LookAt(target);
             }
         }
         else
         {
             Debug.Log("Target is not in range");
-            //too far away
-            //CHARGE FORWARD
+            // too far away
+            // CHARGE FORWARD
             Follow(target.position);
         }
     }
+
 
     private bool TargetInRange()
     {
@@ -234,15 +239,16 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
         if (magic.GetSpellRange() == -1)
         {
-            inRange = DistacneToTarget() <= placeDistanceForStationarySpells;
+            inRange = DistanceToTarget() <= placeDistanceForStationarySpells;
         }
         else
         {
-            inRange = DistacneToTarget() <= magic.GetSpellRange();
+            inRange = DistanceToTarget() <= magic.GetSpellRange();
         }
 
         return inRange;
     }
+
 
     private bool LookingAtTarget()
     {
@@ -251,19 +257,22 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         return Vector3.Angle(directionOfTarget, lookDirection) <= MAX_LOOK_AT_ANGLE;
     }
 
-    private float DistacneToTarget()
+
+    private float DistanceToTarget()
     {
         Vector3 distance = target.position - selfTransform.position;
         return distance.magnitude;
     }
 
+
     private bool CheckLineOfSight()
     {
         Debug.Log($"Line of sight {Physics.Raycast(selfTransform.position, selfTransform.forward, out RaycastHit hitInfoLog, magic.GetSpellRange(), environment)}");
         Debug.Log($"Raycast hit: {hitInfoLog.collider}");
-        //use a raycast to see if an envornment object is in the way
+        // use a raycast to see if an envornment object is in the way
         return Physics.Raycast(selfTransform.position, selfTransform.forward, out RaycastHit hitInfo, magic.GetSpellRange(), environment);
     }
+
 
     private IEnumerator ScanForEnemies(Vector3 playerAiCenter)
     {
@@ -277,6 +286,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         Debug.Log($"Found {foundEnemies.Length} enemies");
     }
 
+
     private IEnumerator ScanForObjects(Vector3 playerAiCenter)
     {
         readyToScanEnemies = false;
@@ -286,25 +296,29 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         readyToScanEnemies = true;
     }
 
+
+    // Future builds could use the EventManager to notify the Coop AI that the human player is low
+    // on health instead of conducting a periodic check.
     private IEnumerator CheckOnTeammate()
     {
         GameObject otherPlayer;
 
         timeToCheckOnTeammate = false;
 
-        //check if other player's health is low
+        // check if other player's health is low
         otherPlayer = PlayerManager.Instance.GetPlayer(otherPlayerIndex).gameObject;
         if (otherPlayerHealthManager.HealthBelowPercentageThreshold(healthCriticalTheshold))
         {
-            //The other player's health is low, assit them
-            playerAiState = CoopAiState.defendPlayer;
+            // The other player's health is low, assist them
+            playerAIState = CoopAIState.defendPlayer;
         }
 
         yield return new WaitForSeconds(timeBetweenCheckingOnTeammate);
         timeToCheckOnTeammate = true;
     }
 
-    //Target the nearest enemy to the sourcePoint
+
+    // Target the nearest enemy to the sourcePoint
     private void TargetNearestEnemy(Vector3 sourcePoint)
     {
         Vector3 minDistance = Vector3.positiveInfinity; 
@@ -314,19 +328,19 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         {
             foreach (Collider enemy in foundEnemies)
             {
-                //enemy might be null if the enemy died since the last scan
+                // enemy might be null if the enemy died since the last scan
                 if (enemy != null)
                 {
                     distanceToCurrentEnemy =  enemy.gameObject.transform.position - sourcePoint;
 
                     if (distanceToCurrentEnemy.magnitude < minDistance.magnitude)
                     {
-                        //found a closer enemy, update target and min distance
+                        // found a closer enemy, update target and min distance
                         target = enemy.gameObject.transform;
                         minDistance = distanceToCurrentEnemy;
                     }
-                } //end if (enemy != null)
-            } //end foreach (Collider enemy in foundEnemies)
-        } //end if (foundEnemies != null)
+                } // end if (enemy != null)
+            } // end foreach (Collider enemy in foundEnemies)
+        } // end if (foundEnemies != null)
     }
-} 
+}
