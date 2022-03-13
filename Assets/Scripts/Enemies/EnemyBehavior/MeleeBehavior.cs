@@ -6,7 +6,6 @@ using UnityEngine;
 public class MeleeBehavior : EnemyBehaviorBase
 {
     private CollisionDamageGiver damageGiver; // A reference to the damage giver class for applying damage
-    private int attackPower;
     private float attackCooldown; // Cooldown time between melee attacks
     private bool readyToApplyDamage; // A bool to flag whether or not the enemy is ready to attack again
     private bool readyToFlee;
@@ -37,7 +36,6 @@ public class MeleeBehavior : EnemyBehaviorBase
         damageGiver = this.gameObject.GetComponent<CollisionDamageGiver>(); 
 
         // Set attack Variables
-        attackPower = damageGiver.CurrentDamage();
         attackCooldown = damageGiver.GetDamageOverTime();
         readyToApplyDamage = true;
 
@@ -107,7 +105,7 @@ public class MeleeBehavior : EnemyBehaviorBase
         PlayerHealthManager targetHealthManager = playerManager.GetPlayer(currentTargetNumber).gameObject.GetComponent<PlayerHealthManager>();
         if (targetHealthManager != null && damageGiver != null)
         {
-            damageGiver.DamageTarget(targetHealthManager, attackPower); 
+            damageGiver.DamageTarget(targetHealthManager, damageGiver.CurrentDamage()); 
         }
 
         yield return new WaitForSeconds(attackCooldown);
