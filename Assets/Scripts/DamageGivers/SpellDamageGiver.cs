@@ -24,9 +24,6 @@ public class SpellDamageGiver : DamageGiver
         {
             // Caster is player
             // If collided with objects or enemies:
-            Debug.Log($"COLLIDED OBJECT LAYER: {collisionObjectLayer}");
-            Debug.Log($"Enemy or object LAYER: {enemyOrObjectMask}");
-            Debug.Log($"Logical AND LAYER: {collisionObjectLayer & enemyOrObjectMask}");
 
             //check if gameObject is in the enmey or object layers
             if ((collisionObjectLayer & enemyOrObjectMask) != 0)
