@@ -123,7 +123,7 @@ public class BaseSpell : MonoBehaviour
     }
 
 
-    public void EarlyCast()
+    public void EarlyCast() 
     {
         effectCall.Invoke(player, null, this);
         Destroy(gameObject);
