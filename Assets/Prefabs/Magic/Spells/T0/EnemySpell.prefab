@@ -95,6 +95,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpell: {fileID: 926478391319009903}
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &926478392431384102
 GameObject:
   m_ObjectHideFlags: 0

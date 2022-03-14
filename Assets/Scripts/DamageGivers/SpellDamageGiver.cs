@@ -1,11 +1,15 @@
 // Written by Angel
 // Modified by Kevin Chao
 
+using System;
 using UnityEngine;
 
 public class SpellDamageGiver : DamageGiver
 {
     [SerializeField] private BaseSpell currentSpell;
+    [SerializeField] private LayerMask objectLayer;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask playerLayer;
 
 
 
@@ -15,7 +19,11 @@ public class SpellDamageGiver : DamageGiver
         {
             // Caster is player
             // If collided with objects or enemies:
-            if (collision.gameObject.layer == 10 || collision.gameObject.layer == 3)
+            Debug.Log($"COLLIDED OBJECT LAYER: {collision.gameObject.layer}");
+            Debug.Log($"OBJECT LAYER: {Convert.ToInt32(objectLayer.value)}");
+            Debug.Log($"ENEMY LAYER: {Convert.ToInt32(enemyLayer.value)}");
+
+            if (collision.gameObject.layer == objectLayer.value || collision.gameObject.layer == enemyLayer.value)
             {
                 HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
 
@@ -28,7 +36,7 @@ public class SpellDamageGiver : DamageGiver
         {
             // Caster is enemy
             // If collided with players:
-            if (collision.gameObject.layer == 7)
+            if (collision.gameObject.layer == playerLayer.value)
             {
                 HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
 

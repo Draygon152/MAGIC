@@ -92,8 +92,8 @@ GameObject:
   - component: {fileID: 8826824650060408117}
   - component: {fileID: 4340044990302965715}
   - component: {fileID: 5440809600669924990}
-  - component: {fileID: 8675322996785990500}
   - component: {fileID: 4168642566499989740}
+  - component: {fileID: 8675322996785990500}
   m_Layer: 6
   m_Name: Icicle
   m_TagString: Spell
@@ -145,19 +145,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8675322996785990500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6270072419756479238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentSpell: {fileID: 4168642566499989740}
 --- !u!114 &4168642566499989740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,3 +175,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8675322996785990500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270072419756479238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpell: {fileID: 4168642566499989740}
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
