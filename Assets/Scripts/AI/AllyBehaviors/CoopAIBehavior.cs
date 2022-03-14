@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class CoopAIBehavior : FriendlyBehaviorBase
 {
-    // Message to Lawson: One thing I recognize as I started to build the player ai script is that
-    // it shares similar traits to my RangeBehavior script in my branch (UpgradeAttackingBehaviors).
-    // I say take a look at it!
-
     [SerializeField] private const float MAX_LOOK_AT_ANGLE = 5.0f; // The max angle between the direction
                                                                    // of the target and the direction the AI
                                                                    // is looking can be for the AI to be consider
