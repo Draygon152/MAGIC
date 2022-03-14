@@ -1,7 +1,6 @@
 // Written by Angel
-// Modified by Kevin Chao
+// Modified by Kevin Chao and Lawson McCoy
 
-using System;
 using UnityEngine;
 
 public class SpellDamageGiver : DamageGiver
@@ -15,17 +14,18 @@ public class SpellDamageGiver : DamageGiver
 
     private void OnTriggerEnter(Collider collision)
     {
-        int collisionObjectLayer = 1 << collision.gameObject.layer; //layers are bit indices in a bitstring, if a layer x is allowed
-                                                                    //by a mask then there is a 1 in the xth index of the bit string
-                                                                    //That can be found by shift 1 (a 1 in the 0th index) left by x
-        int enemyOrObjectMask = enemyLayer.value | objectLayer.value; //A mask that includes both enemy and object layers
+        int collisionObjectLayer = 1 << collision.gameObject.layer;   // layers are bit indices in a bitstring, if a layer x is allowed
+                                                                      // by a mask then there is a 1 in the xth index of the bit string
+                                                                      // That can be found by shift 1 (a 1 in the 0th index) left by x
+
+        int enemyOrObjectMask = enemyLayer.value | objectLayer.value; // A mask that includes both enemy and object layers
 
         if (currentSpell.IsPlayer())
         {
             // Caster is player
             // If collided with objects or enemies:
 
-            //check if gameObject is in the enmey or object layers
+            // check if gameObject is in the enemy or object layers
             if ((collisionObjectLayer & enemyOrObjectMask) != 0)
             {
                 HealthManager target = collision.gameObject.GetComponentInParent<HealthManager>();
@@ -34,9 +34,10 @@ public class SpellDamageGiver : DamageGiver
                     DamageTarget(target, currentSpell.GetSpell().damage);
             }
         }
+
+        // Caster is enemy
         else
         {
-            // Caster is enemy
             // If collided with players:
             if ((collisionObjectLayer & playerLayer.value) != 0)
             {
