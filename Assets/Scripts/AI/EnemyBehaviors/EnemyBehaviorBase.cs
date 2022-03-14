@@ -129,6 +129,7 @@ public class EnemyBehaviorBase : BehaviorBase
     }
 
 
+
     // ENEMY WANDER BEHAVIOR
     private IEnumerator Wander()
     {

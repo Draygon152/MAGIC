@@ -102,8 +102,9 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
                     // If spell is on cooldown, flee
                     else
-                    {                    
+                    {
                         Flee(target.position);
+                        // playerAIState = CoopAIState.fleeFromNearbyEnemy;
                     }
 
                     // If target is too close, gain distance from enemy

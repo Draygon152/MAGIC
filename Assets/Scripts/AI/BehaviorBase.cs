@@ -43,6 +43,12 @@ public abstract class BehaviorBase : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableBehavior);
+    }
+
+
     // The behavior of the AI, overridden by child classes extending BehaviorBase
     protected abstract void PerformBehavior();
 
@@ -59,12 +65,6 @@ public abstract class BehaviorBase : MonoBehaviour
     }
 
 
-    private void OnDestroy()
-    {
-        EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableBehavior);
-    }
-
-
     // GENERIC BEHAVIORS
     protected void Follow(Vector3 targetLocation)
     {
@@ -74,33 +74,28 @@ public abstract class BehaviorBase : MonoBehaviour
 
     protected void Flee(Vector3 location)
     {
-        Vector3 fleeLocation = Vector3.zero;
-        Vector3 fleeDistance = this.transform.position - (location - this.gameObject.transform.position);
-        Vector3 fleeVector = fleeDistance;
+        Vector3 fleeVector = this.transform.position - (location - this.transform.position);
         bool foundFleeLocation = false;
 
-        // Find a reachable and valid flee location
+        // Find a reachable flee location
         while (!foundFleeLocation)
         {
-            fleeLocation = FindValidLocation(fleeVector);
-
-            if (fleeLocation.x != Mathf.Infinity)
+            if (FindValidLocation(fleeVector))
             {
                 foundFleeLocation = true;
             }
 
             else
             {
-                fleeVector = CalculateRandomPointInCircle(fleeDistance, fleeMinRadius, fleeMaxRadius);
+                fleeVector = CalculateRandomPointInCircle(fleeVector, fleeMinRadius, fleeMaxRadius);
             }
         }
 
-        agent.SetDestination(fleeLocation);
-        // agent.SetDestination(fleeDistance);
+        agent.SetDestination(fleeVector);
     }
 
 
-    private Vector3 FindValidLocation(Vector3 fleeVector)
+    private bool FindValidLocation(Vector3 fleeVector)
     {
         NavMeshPath path = new NavMeshPath();
         agent.CalculatePath(fleeVector, path);
@@ -108,13 +103,10 @@ public abstract class BehaviorBase : MonoBehaviour
         // If path is unreachable or invalid:
         if (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid)
         {
-            return Vector3.positiveInfinity;
+            return false;
         }
 
-        else
-        {
-            return fleeVector;
-        }
+        return true;
     }
 
     
