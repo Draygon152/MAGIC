@@ -179,6 +179,7 @@ public class MagicCasting : MonoBehaviour
         // if any preprocessing needs to be done
         // for an AI to cast a spell the it should
         // be done here
+
         OnCast();
     }
 }

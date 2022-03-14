@@ -169,6 +169,10 @@ public class CoopAIBehavior : FriendlyBehaviorBase
                 }
 
                 break;
+
+
+            default:
+                break;
         }
     }
 

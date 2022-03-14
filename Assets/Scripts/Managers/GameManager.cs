@@ -150,9 +150,6 @@ public class GameManager : MonoBehaviour
         // decrement enemyCount
         enemyCount--;
 
-        // update enemy counter on HUD
-        HUD.Instance.SetEnemyCounter(enemyCount);
-
         // check if final wave
         if (waveNumber >= waves.Count)
         {

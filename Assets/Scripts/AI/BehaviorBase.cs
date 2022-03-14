@@ -96,6 +96,7 @@ public abstract class BehaviorBase : MonoBehaviour
         }
 
         agent.SetDestination(fleeLocation);
+        // agent.SetDestination(fleeDistance);
     }
 
 

@@ -19,7 +19,7 @@ public class SpellEffects : MonoBehaviour
     {
         try
         {
-            if (target != null || target.GetComponent<Rigidbody>() != null)
+            if (target != null && target.GetComponent<Rigidbody>() != null && target.GetComponent<HealthManager>().GetHealth() > 0)
             {
                 Vector3 direction = target.transform.position - player.transform.position;
 
@@ -70,7 +70,7 @@ public class SpellEffects : MonoBehaviour
     {
         try
         {
-            if (target != null || target.GetComponent<DebuffManager>() != null)
+            if (target != null && target.GetComponent<HealthManager>().GetHealth() > 0 && target.GetComponent<DebuffManager>() != null)
             {
                 target.GetComponent<DebuffManager>().SustainedDamage(spell.GetSpell().effectDuration, spell.GetSpell().damage);
             }
@@ -86,7 +86,7 @@ public class SpellEffects : MonoBehaviour
     {
         try
         {
-            if (target != null || target.GetComponent<DebuffManager>() != null)
+            if (target != null && target.GetComponent<HealthManager>().GetHealth() > 0 && target.GetComponent<DebuffManager>() != null)
             {
                 target.GetComponent<DebuffManager>().SpeedChange(spell.GetSpell().effectDuration, 0.5f);
             }
