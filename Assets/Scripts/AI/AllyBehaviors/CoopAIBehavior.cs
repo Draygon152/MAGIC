@@ -49,6 +49,9 @@ public class CoopAIBehavior : FriendlyBehaviorBase
         magic = this.gameObject.GetComponent<MagicCasting>();
         target = null;
         selfTransform = this.gameObject.transform;
+
+        //debug
+        type = "COOP";
     }
 
 
