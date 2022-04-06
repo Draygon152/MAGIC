@@ -34,9 +34,6 @@ public class EnemyBehaviorBase : BehaviorBase
     protected override void Awake()
     {
         base.Awake();
-
-        //debug
-        type = "Enemy Base";
     }
 
     // Initializes enemy's agent

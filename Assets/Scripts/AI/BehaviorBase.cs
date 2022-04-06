@@ -20,9 +20,6 @@ public abstract class BehaviorBase : MonoBehaviour
     [SerializeField] private float fleeMinRadius = 30f;
     [SerializeField] private float fleeMaxRadius = 40f;
 
-    //Debug
-    protected string type;
-
     private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
                            // minions from causing a game end after a player wins
 
@@ -32,9 +29,6 @@ public abstract class BehaviorBase : MonoBehaviour
     {
         EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableBehavior);
         gameOver = false;
-
-        //debug
-        type = "Behavior Base";
     }
 
 
@@ -79,18 +73,13 @@ public abstract class BehaviorBase : MonoBehaviour
 
     protected void Flee(Vector3 location)
     {
-        //debug variables
-        const uint MAX_ITERATIONS = 1000;
-        uint loopIteration = 0; //counter for the number of iteration the loops does
-        bool breakOutOfLoop = false; //bool to break out of the loop, I don't want to restart my computer after every test
-
         Vector3 fleeLocation = Vector3.zero;
         Vector3 fleeDistance = this.transform.position - (location - this.gameObject.transform.position);
         Vector3 fleeVector = fleeDistance;
         bool foundFleeLocation = false;
 
         // Find a reachable and valid flee location
-        while (!foundFleeLocation && !breakOutOfLoop)
+        while (!foundFleeLocation)
         {
             fleeLocation = FindValidLocation(fleeVector);
 
@@ -103,32 +92,17 @@ public abstract class BehaviorBase : MonoBehaviour
             {
                 fleeVector = CalculateRandomPointInCircle(fleeDistance, fleeMinRadius, fleeMaxRadius);
             }
-
-            if (loopIteration < MAX_ITERATIONS)
-            {
-                loopIteration++;
-            }
-            else
-            {
-                breakOutOfLoop = true;
-                Debug.Log("Max loop iteration reach, breaking to prevent infinite looping");
-                Debug.Log($"An {type} AI failed to find a valid location");
-            }
         }
 
         agent.SetDestination(fleeVector);
-        // agent.SetDestination(fleeDistance);
     }
 
 
     private Vector3 FindValidLocation(Vector3 fleeVector)
     {
         NavMeshPath path = new NavMeshPath();
-        // Debug.Log($"Calc path return value {agent.CalculatePath(fleeVector, path)}");
-        // Debug.Log($"{type} AI has {path.status} path status");
 
         // If path is unreachable or invalid:
-        // if (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid)
         if (!agent.CalculatePath(fleeVector, path))
         {
             return Vector3.positiveInfinity;
