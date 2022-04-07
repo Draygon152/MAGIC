@@ -20,7 +20,6 @@ public abstract class BehaviorBase : MonoBehaviour
     [SerializeField] private float fleeMinRadius = 30f;
     [SerializeField] private float fleeMaxRadius = 40f;
 
-
     private bool gameOver; // If false, behavior will execute. Set to true when a game ends to prevent
                            // minions from causing a game end after a player wins
 
@@ -95,18 +94,16 @@ public abstract class BehaviorBase : MonoBehaviour
             }
         }
 
-        agent.SetDestination(fleeLocation);
-        // agent.SetDestination(fleeDistance);
+        agent.SetDestination(fleeVector);
     }
 
 
     private Vector3 FindValidLocation(Vector3 fleeVector)
     {
         NavMeshPath path = new NavMeshPath();
-        agent.CalculatePath(fleeVector, path);
 
         // If path is unreachable or invalid:
-        if (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid)
+        if (!agent.CalculatePath(fleeVector, path))
         {
             return Vector3.positiveInfinity;
         }

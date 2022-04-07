@@ -31,6 +31,10 @@ public class EnemyBehaviorBase : BehaviorBase
     private bool isWanderTime;
 
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     // Initializes enemy's agent
     protected virtual void Start()
