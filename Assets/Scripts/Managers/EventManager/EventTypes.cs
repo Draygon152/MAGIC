@@ -6,6 +6,7 @@ public sealed class EventTypes
     public enum Events
     {
         GameStart,
+        GameSetUp,
         GamePaused,
         GameUnpaused,
         PlayerDeath,

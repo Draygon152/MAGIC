@@ -35,16 +35,13 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
             inputSelector.AddOptions(new List<string>(availableDevices.Keys));
         }
 
-        // Set up the player data for the PlayerManager
-        PlayerManager.Instance.SetNumberOfPlayers(numPlayers);
-
         playerDataList = new PlayerData[numPlayers];
         playerReadyStates = new bool[numPlayers];
 
         int AIPlayerIndex = -1;
         for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++)
         {
-            playerDataList[playerIndex] = PlayerManager.Instance.GetPlayerData(playerIndex);
+            playerDataList[playerIndex] = new PlayerData();
 
             // All other players other than Player 1 will have "AI Player" selected by default.
             // Search for the index of "AI Player" before setting it using PlayerSelectedInputDevice
@@ -198,5 +195,10 @@ public abstract class LobbyMenu<T> : Menu<LobbyMenu<T>>
         }
 
         return true;
+    }
+
+    public virtual void SetUpPlayerManager()
+    {
+        PlayerManager.Instance.AcceptPlayerData(playerDataList);
     }
 }

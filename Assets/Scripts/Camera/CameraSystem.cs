@@ -34,7 +34,9 @@ public class CameraSystem : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //I (Lawson) don't see a reason why we want the camera system
+            //in scenes where there are only menus
+            // DontDestroyOnLoad(gameObject);
             cam = GetComponentInChildren<Camera>();
             targetList = new List<Transform>();
         }

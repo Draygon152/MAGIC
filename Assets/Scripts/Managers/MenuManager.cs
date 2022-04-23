@@ -124,7 +124,7 @@ public class MenuManager : MonoBehaviour
 
         if (menuStack.Peek() != closedMenu)
         {
-            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, not at top of menu stack");
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, not at top of menu stack. {menuStack.Peek().GetType()} the top of the stack");
             return;
         }
 

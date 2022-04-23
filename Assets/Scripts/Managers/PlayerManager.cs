@@ -44,19 +44,18 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    public void SetNumberOfPlayers(int numberOfPlayers)
+    public void AcceptPlayerData(PlayerData[] data)
     {
-        playerCount = numberOfPlayers;
+        //set player data
+        playerData = data;
 
-        // Initialize the player data objects
-        playerData = new PlayerData[playerCount];
-        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
-        {
-            playerData[playerIndex] = new PlayerData();
-        }
+        //Set number of players
+        playerCount = playerData.Length;
 
         // Initialize the player game objects array
         playerGameObject = new Player[playerCount];
+
+        Debug.Log("PlayerManager ready");
     }
 
 
@@ -69,6 +68,7 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
+        Debug.Log("Spawning players");
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             // Spawn both players

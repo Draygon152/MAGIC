@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
 
         // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
+
+        //Perserve game manager across scenes
+        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         // Subscribe to events
         EventManager.Instance.Subscribe(EventTypes.Events.GameStart, StartGame);
+        EventManager.Instance.Subscribe(EventTypes.Events.GameSetUp, SetUpGameScene);
         EventManager.Instance.Subscribe(EventTypes.Events.PlayerDeath, OnPlayerDeath);
         EventManager.Instance.Subscribe(EventTypes.Events.EnemyDeath, OnEnemyDeath);
         EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, OnReset);
@@ -64,18 +68,64 @@ public class GameManager : MonoBehaviour
     // A function to start the game
     public void StartGame()
     {
-        // spawn in the players
-        playerCount = PlayerManager.Instance.SpawnPlayers();
+        //Load the game scene
+        GameSceneManager.Instance.LoadScene(GameSceneManager.Scenes.GAME_SCENE, GameSceneManager.NetworkSceneMode.LOCAL);
 
+        //notify the game that the scene has been loaded and the game is ready to be setted up
+        //maybe move this is OnSceneLoaded later on, idk if putting here completely avoids race conditions
+        // EventManager.Instance.Notify(EventTypes.Events.GameSetUp);
+
+        // // spawn in the players
+        // playerCount = PlayerManager.Instance.SpawnPlayers();
+
+        // if (LobbyMenu<SingleplayerLobbyMenu>.Instance != null)
+        // {
+        //     LobbyMenu<SingleplayerLobbyMenu>.Close();
+        // }
+
+        // else if (LobbyMenu<MultiplayerLobbyMenu>.Instance != null)
+        // {
+        //     LobbyMenu<MultiplayerLobbyMenu>.Close();
+        // }
+
+        // HUD.Open();
+
+        // // Initialize the HUD's player data
+        // PlayerManager.Instance.InitializeHUD();
+
+        // // Set the camera to follow the player
+        // for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+        // {
+        //     CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
+        // }
+
+        // //Set the camera to its starting position.
+        // CameraSystem.Instance.StartingCamPos();
+
+        // // spawn in the first wave
+        // // Might change later to start a countdown to the first wave
+        // enemyCount += waves[waveNumber].SpawnWave(CameraSystem.Instance.GetTransform());
+        // waveNumber++;
+
+        // //Set the enemy counter on the HUD
+        // HUD.Instance.SetEnemyCounter(enemyCount);
+    }
+
+    public void SetUpGameScene()
+    {
+        //start by telling lobbyMenu to set up player manager
         if (LobbyMenu<SingleplayerLobbyMenu>.Instance != null)
         {
-            LobbyMenu<SingleplayerLobbyMenu>.Close();
+            LobbyMenu<SingleplayerLobbyMenu>.Instance.SetUpPlayerManager();
         }
 
         else if (LobbyMenu<MultiplayerLobbyMenu>.Instance != null)
         {
-            LobbyMenu<MultiplayerLobbyMenu>.Close();
+            LobbyMenu<MultiplayerLobbyMenu>.Instance.SetUpPlayerManager();
         }
+
+        // spawn in the players
+        playerCount = PlayerManager.Instance.SpawnPlayers();
 
         HUD.Open();
 
@@ -90,6 +140,9 @@ public class GameManager : MonoBehaviour
 
         //Set the camera to its starting position.
         CameraSystem.Instance.StartingCamPos();
+
+        //open the minimap
+        MinimapCameraSystem.Instance.OpenMiniMap(isSinglePlayer: playerCount == 1);
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
