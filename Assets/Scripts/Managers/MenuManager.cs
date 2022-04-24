@@ -32,12 +32,7 @@ public class MenuManager : MonoBehaviour
     // and no other classes should be calling Awake() and OnDestroy()
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-
-        else
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);

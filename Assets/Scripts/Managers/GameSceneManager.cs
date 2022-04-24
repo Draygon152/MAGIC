@@ -36,12 +36,15 @@ public class GameSceneManager : MonoBehaviour
         private set;
     }
 
+
+
     private void Awake()
     {
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
     }
+
 
     private void Start()
     {
@@ -51,6 +54,7 @@ public class GameSceneManager : MonoBehaviour
         //subscribe event manager events
         EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ReturnToMainMenu); //event might change during photon implementation
     }
+
 
     public void LoadScene(Scenes scene, NetworkSceneMode loadMode)
     {
@@ -64,8 +68,8 @@ public class GameSceneManager : MonoBehaviour
             case NetworkSceneMode.NETWORK:
                 break;
         }
-
     }
+
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -76,11 +80,13 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+
     private void OnDestroy()
     {
         //marking the GameSceneManager as nonexistent
         Instance = null;
     }
+
 
     public void ReturnToMainMenu()
     {
