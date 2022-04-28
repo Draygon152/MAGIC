@@ -32,12 +32,7 @@ public class MenuManager : MonoBehaviour
     // and no other classes should be calling Awake() and OnDestroy()
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-
-        else
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -124,7 +119,7 @@ public class MenuManager : MonoBehaviour
 
         if (menuStack.Peek() != closedMenu)
         {
-            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, not at top of menu stack");
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, not at top of menu stack. {menuStack.Peek().GetType()} the top of the stack");
             return;
         }
 

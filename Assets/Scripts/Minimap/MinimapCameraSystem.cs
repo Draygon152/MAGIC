@@ -31,7 +31,9 @@ public class MinimapCameraSystem : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //same as camera system, also why should this not be 
+            // part of camera system?
+            // DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -78,5 +80,20 @@ public class MinimapCameraSystem : MonoBehaviour
 
         rt.anchoredPosition = new Vector2(spTargetX, rt.anchoredPosition.y);
         Minimap.SetActive(false);
+    }
+
+    public void OpenMiniMap(bool isSinglePlayer)
+    {
+        if (isSinglePlayer)
+        {
+            //only a single player
+            OpenSinglePlayerMinimap();
+        }
+        else
+        {
+            //multiplayer
+            OpenMultiplayerMinimap();
+        }
+
     }
 }

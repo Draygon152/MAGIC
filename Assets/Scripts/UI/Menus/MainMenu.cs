@@ -7,15 +7,19 @@ public class MainMenu : Menu<MainMenu>
 {
     public void SingleplayerPressed()
     {
+        //load lobby scene
+        GameSceneManager.Instance.LoadScene(GameSceneManager.Scenes.LOBBY_SCENE, GameSceneManager.NetworkSceneMode.LOCAL);
+
         SingleplayerLobbyMenu.Open();
-        MinimapCameraSystem.Instance.OpenSinglePlayerMinimap();
     }
 
 
     public void MultiplayerPressed()
     {
+        //load lobby scene
+        GameSceneManager.Instance.LoadScene(GameSceneManager.Scenes.LOBBY_SCENE, GameSceneManager.NetworkSceneMode.LOCAL);
+
         MultiplayerLobbyMenu.Open();
-        MinimapCameraSystem.Instance.OpenMultiplayerMinimap();
     }
 
 
