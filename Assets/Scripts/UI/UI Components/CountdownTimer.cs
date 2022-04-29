@@ -77,9 +77,10 @@ public class CountdownTimer : MonoBehaviour
         {
         }
 
-        if (timeRemaining == 0)
+        if (timeRemaining <= 0)
         {
             countDownText.text = $"{timeRemaining}";
+
             EventManager.Instance.Notify(eventToNotify);
         }
     }

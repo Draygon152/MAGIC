@@ -29,8 +29,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Set up Instance
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         // Initialize the counting variables
         // They can be init to 0, since they will be
@@ -40,9 +43,6 @@ public class GameManager : MonoBehaviour
 
         // Initialize wave number to 0, will be set to one in StartGame
         waveNumber = 0;
-
-        //Perserve game manager across scenes
-        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -60,8 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Marking the GameManager as nonexistent
-        Instance = null;
+        // Instance = null;
     }
 
 

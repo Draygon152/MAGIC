@@ -38,13 +38,13 @@ public class MenuManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             MainMenu.Open();
-        }
+        }   
     }
 
 
     private void OnDestroy()
     {
-        Instance = null;
+        // Instance = null;
     }
 
 

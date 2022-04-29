@@ -54,8 +54,6 @@ public class PlayerManager : MonoBehaviour
 
         // Initialize the player game objects array
         playerGameObject = new Player[playerCount];
-
-        Debug.Log("PlayerManager ready");
     }
 
 

@@ -40,9 +40,11 @@ public class GameSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
 
@@ -53,6 +55,12 @@ public class GameSceneManager : MonoBehaviour
 
         //subscribe event manager events
         EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ReturnToMainMenu); //event might change during photon implementation
+    }
+
+
+    private void OnDestroy()
+    {
+        // Instance = null;
     }
 
 
@@ -78,13 +86,6 @@ public class GameSceneManager : MonoBehaviour
         {
             EventManager.Instance.Notify(EventTypes.Events.GameSetUp);
         }
-    }
-
-
-    private void OnDestroy()
-    {
-        //marking the GameSceneManager as nonexistent
-        Instance = null;
     }
 
 

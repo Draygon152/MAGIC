@@ -23,14 +23,13 @@ public class MinimapCameraSystem : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-
-        else
+        if (Instance == null)
         {
             Instance = this;
+
+            if (rt == null)
+                rt = Minimap.GetComponent<RectTransform>();
+
             //same as camera system, also why should this not be 
             // part of camera system?
             // DontDestroyOnLoad(gameObject);
@@ -40,14 +39,14 @@ public class MinimapCameraSystem : MonoBehaviour
 
     private void OnDestroy()
     {
+        EventManager.Instance.Unsubscribe(EventTypes.Events.ResetGame, ResetMinimap);
+
         Instance = null;
     }
 
 
     private void Start()
     {
-        rt = Minimap.GetComponent<RectTransform>();
-
         // Subscribe function to reset the minimap when the game restarts
         EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, ResetMinimap);
     }
@@ -86,14 +85,13 @@ public class MinimapCameraSystem : MonoBehaviour
     {
         if (isSinglePlayer)
         {
-            //only a single player
+            // only a single player
             OpenSinglePlayerMinimap();
         }
         else
         {
-            //multiplayer
+            // multiplayer
             OpenMultiplayerMinimap();
         }
-
     }
 }

@@ -25,19 +25,11 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     // virtual to allow for overloading and specifying functionality in children
     protected virtual void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(this.gameObject);
-        }
+        // Set Instance to refer to current instance
+        Instance = (T)this;
 
-        else
-        {
-            // Set Instance to refer to current instance
-            Instance = (T)this;
-
-            if (defaultSelected != null)
-                defaultSelected.Select();
-        }
+        if (defaultSelected != null)
+            defaultSelected.Select();
     }
 
 
@@ -53,7 +45,6 @@ public abstract class Menu<T> : Menu where T : Menu<T>
         // If an instance of this menu does not already exist, create one
         if (Instance == null)
         {
-            Debug.Log($"SANITY CHECK: {MenuManager.Instance}");
             MenuManager.Instance.CreateMenuInstance<T>();
         }   
 
