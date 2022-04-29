@@ -45,7 +45,6 @@ public abstract class Menu<T> : Menu where T : Menu<T>
         // If an instance of this menu does not already exist, create one
         if (Instance == null)
         {
-            Debug.Log($"SANITY CHECK: {MenuManager.Instance}");
             MenuManager.Instance.CreateMenuInstance<T>();
         }   
 

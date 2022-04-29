@@ -24,12 +24,7 @@ public class ElementList : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-
-        else
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -38,7 +33,7 @@ public class ElementList : MonoBehaviour
 
     private void OnDestroy()
     {
-        Instance = null;
+        // Instance = null;
     }
 
 

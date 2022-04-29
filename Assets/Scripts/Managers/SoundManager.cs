@@ -23,12 +23,7 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-
-        else
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -38,7 +33,11 @@ public class SoundManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Instance = null; 
+        // Instance = null; 
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameStart, PlayInGameMusic);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.Victory, PlayVictoryMusic);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.Defeat, PlayDefeatMusic);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.ResetGame, ResetMusic);
     }
 
 

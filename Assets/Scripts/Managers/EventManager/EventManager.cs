@@ -15,6 +15,7 @@ public class EventManager : MonoBehaviour
         get;
         private set;
     }
+    public int ID;
 
 
 
@@ -26,6 +27,8 @@ public class EventManager : MonoBehaviour
             subscriberDict = new Dictionary<EventTypes.Events, Action>();
 
             DontDestroyOnLoad(gameObject);
+
+            ID = gameObject.GetInstanceID();
         }
     }
 
