@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
   m_Name: IceWave
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 65
   numInstances: 0
-  timeBetweenCasts: 3
+  timeBetweenCasts: 5
   castSpeed: 0.1
   spellSpeed: 12
   spellLifetime: 3
-  effectDuration: 5
+  effectDuration: 7
   radius: 0.5
-  continious: 0
+  continuous: 0
   self: 0
   expand: 0
   element: 2

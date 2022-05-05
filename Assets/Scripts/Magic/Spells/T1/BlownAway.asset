@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
   m_Name: BlownAway
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 25
   numInstances: -1
   timeBetweenCasts: 2
   castSpeed: 0.1

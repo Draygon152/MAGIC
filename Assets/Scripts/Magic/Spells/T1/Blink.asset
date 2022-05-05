@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
   m_Name: Blink
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 20
   numInstances: 1
-  timeBetweenCasts: 2
+  timeBetweenCasts: 3
   castSpeed: 0.1
   spellSpeed: 0.1
   spellLifetime: 4
-  effectDuration: 1
+  effectDuration: 1.5
   radius: 0.5
+  continuous: 0
   self: 0
+  expand: 0
   element: 0

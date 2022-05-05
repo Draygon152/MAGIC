@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
   m_Name: FireBreathe
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 55
   numInstances: 0
-  timeBetweenCasts: 1
+  timeBetweenCasts: 3.5
   castSpeed: 0.1
   spellSpeed: 0.1
   spellLifetime: 0.1

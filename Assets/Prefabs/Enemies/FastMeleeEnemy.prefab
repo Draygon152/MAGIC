@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8a248c0c707ad8e42a1ffa12d0cfd7c5, type: 2}
+    - target: {fileID: 5763893213597020717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: maxHealth
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 5819798027175314403, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

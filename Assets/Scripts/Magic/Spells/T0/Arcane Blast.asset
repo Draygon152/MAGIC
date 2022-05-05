@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
   m_Name: Arcane Blast
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 25
   numInstances: -1
-  timeBetweenCasts: 2
+  timeBetweenCasts: 3
   castSpeed: 0.1
   spellSpeed: 10
   spellLifetime: 0.6
-  effectDuration: 3
+  effectDuration: 1.5
   radius: 1
+  continuous: 0
   self: 0
+  expand: 0
   element: 0

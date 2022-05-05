@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
   m_Name: StaticShock
   m_EditorClassIdentifier: 
-  damage: 6
+  damage: 35
   numInstances: 0
-  timeBetweenCasts: 5
+  timeBetweenCasts: 6
   castSpeed: 0.1
   spellSpeed: 0
   spellLifetime: 3
-  effectDuration: 1.5
+  effectDuration: 3
   radius: 1
   continuous: 1
   self: 1
