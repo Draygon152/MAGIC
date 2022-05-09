@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6773967326612829247, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: damageDealt
-      value: 3
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -6773967326612829247, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: attackCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -2686184855805433103, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: damageDealt
@@ -147,10 +151,10 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
-  attackDistance: 1
-  healAmount: 1
+  attackDistance: 1.1
+  healAmount: 3
   healTime: 1
-  fleeHealthPercentage: 0.2
+  fleeHealthPercentage: 0.34
   attackHealthPercentage: 0.8
 --- !u!1001 &8987550263655795101
 PrefabInstance:
