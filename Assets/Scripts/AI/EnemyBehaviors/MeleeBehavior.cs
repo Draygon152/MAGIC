@@ -37,7 +37,7 @@ public class MeleeBehavior : EnemyBehaviorBase
         damageGiver = this.gameObject.GetComponent<MeleeDamageGiver>(); 
 
         // Set attack Variables
-        attackCooldown = damageGiver.GetDamageOverTime();
+        attackCooldown = damageGiver.GetAttackCooldown();
         readyToApplyDamage = true;
 
         // Set Flee variables
