@@ -30,13 +30,13 @@ public class HUD : Menu<HUD>
 
     public void SetPlayerCurHealth(int playerNum, int newHealth)
     {
-        playerHealthBars[playerNum].SetCurHealth(newHealth);
+        playerHealthBars[playerNum].SetHealth(newHealth);
     }
 
 
     public void SetPlayerMaxHealth(int playerNum, int newHealth)
     {
-        playerHealthBars[playerNum].SetMaxHealth(newHealth);
+        playerHealthBars[playerNum].SetHealth(newHealth);
     }
 
 

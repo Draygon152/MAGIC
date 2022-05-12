@@ -66,7 +66,6 @@ public class PlayerManager : MonoBehaviour
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
-        Debug.Log("Spawning players");
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             // Spawn both players
@@ -102,11 +101,13 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    // A function to tell PlayerManager when the HUD is ready to accept player data
+    // Update Player HUD information
     public void InitializeHUD()
     {
+        
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
+            /*
             // For each player, enable their HUD elements
             HUD.Instance.EnablePlayerHUDElements(playerIndex);
 
@@ -115,6 +116,8 @@ public class PlayerManager : MonoBehaviour
 
             // Displays player's base spell
             HUD.Instance.SetPlayerSpellCaster(playerIndex, playerGameObject[playerIndex].GetCaster());
+            */
+
         }
     }
 
