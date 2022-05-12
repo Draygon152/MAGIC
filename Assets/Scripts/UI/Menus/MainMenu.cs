@@ -22,6 +22,10 @@ public class MainMenu : Menu<MainMenu>
         MultiplayerLobbyMenu.Open();
     }
 
+    public void HowToPlayPressed()
+    {
+        HowToPlayMenu.Open();
+    }
 
     public void OptionsPressed()
     {

@@ -8,6 +8,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public MainMenu mainMenuPrefab;
+    public HowToPlayMenu howToPlayMenuPrefab;
     public OptionsMenu optionsMenuPrefab;
     public VideoOptions videoOptionsPrefab;
     public SoundOptions soundOptionsPrefab;

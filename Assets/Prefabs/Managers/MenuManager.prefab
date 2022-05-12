@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuPrefab: {fileID: 1453953993, guid: e7a1d7b5033b0f14493ddd61a7f13c7d, type: 3}
+  howToPlayMenuPrefab: {fileID: 6973996586488325663, guid: 03ac6e652c64aff459ec2663d600b33a, type: 3}
   optionsMenuPrefab: {fileID: 3760760129832242299, guid: 6b459b0e52609d245bdc92206160f1cc, type: 3}
   videoOptionsPrefab: {fileID: 4983270238131247502, guid: 847373f52e58e2d44bd2c633571e5f7f, type: 3}
   soundOptionsPrefab: {fileID: 2613748719393926783, guid: 1b3acab1ecaf9824cb5055daab551996, type: 3}
