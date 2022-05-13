@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Image gemColor;
 
     private MagicCasting magicCaster;
+    private SelectedSpellUI spellUI;
+
     private NavMeshAgent navMeshAgent;
     private int playerNumber;
 
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         magicCaster = GetComponent<MagicCasting>();
+        spellUI = GetComponentInChildren<SelectedSpellUI>();
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         // initialize approriate fields with player stats
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
     {
         magicCaster.InitializeSpell(elem);
         gemColor.color = elem.GetElementColor();
+        spellUI.InitializeSpellUI(magicCaster);
     }
 
 

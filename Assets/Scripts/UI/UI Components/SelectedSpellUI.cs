@@ -8,7 +8,7 @@ public class SelectedSpellUI : MonoBehaviour
 {
     [SerializeField] private Text selectedSpellText;
     [SerializeField] private Slider cooldownSlider;
-    [SerializeField] private MagicCasting playerCastSystem;
+    private MagicCasting playerCastSystem;
 
 
 
@@ -27,10 +27,12 @@ public class SelectedSpellUI : MonoBehaviour
 
         cooldownSlider.maxValue = caster.GetSpell().timeBetweenCasts;
         cooldownSlider.value = 0.0f;
+
+        playerCastSystem = caster;
     }
 
 
-    public void ChangeSpellCooldown(float newCooldown)
+    public void ChangeSpellMaxCooldown(float newCooldown)
     {
         cooldownSlider.maxValue = newCooldown;
     }

@@ -17,12 +17,12 @@ public abstract class Element : MonoBehaviour
 
     protected Dictionary<ElementTypes.Elements, Color> elementColorDict = new Dictionary<ElementTypes.Elements, Color>()
     {
-        { ElementTypes.Elements.Arcane, new Color(228, 10, 241)},
-        { ElementTypes.Elements.Fire, new Color(255, 106, 25) },
-        { ElementTypes.Elements.Ice, new Color(81, 209, 245) },
-        { ElementTypes.Elements.Nature, new Color(27, 220, 8) },
-        { ElementTypes.Elements.Lightning, new Color(255, 248, 45) },
-        { ElementTypes.Elements.Wind, new Color(226, 226, 226) }
+        { ElementTypes.Elements.Arcane, new Color(0.8941f, 0.0392f, 0.9451f)},
+        { ElementTypes.Elements.Fire, new Color(1.0f, 0.4157f, 0.098f) },
+        { ElementTypes.Elements.Ice, new Color(0.3176f, 0.8196f, 0.9608f) },
+        { ElementTypes.Elements.Nature, new Color(0.1059f, 0.8627f, 0.0314f) },
+        { ElementTypes.Elements.Lightning, new Color(1.0f, 0.9725f, 0.1765f) },
+        { ElementTypes.Elements.Wind, new Color(0.8863f, 0.8863f, 0.8863f) }
     };
 
 
