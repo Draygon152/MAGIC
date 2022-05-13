@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField] private Transform castLocation; // Location where the spell is cast from
-
     [SerializeField]private BaseSpell spellToCast;
     private Element selectedElement;
 

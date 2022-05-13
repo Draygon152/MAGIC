@@ -101,27 +101,6 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    // Update Player HUD information
-    public void InitializeHUD()
-    {
-        
-        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
-        {
-            /*
-            // For each player, enable their HUD elements
-            HUD.Instance.EnablePlayerHUDElements(playerIndex);
-
-            // Set health bars
-            playerGameObject[playerIndex].SetHealthBarDelegates(HUD.Instance.SetPlayerCurHealth, HUD.Instance.SetPlayerMaxHealth);
-
-            // Displays player's base spell
-            HUD.Instance.SetPlayerSpellCaster(playerIndex, playerGameObject[playerIndex].GetCaster());
-            */
-
-        }
-    }
-
-
     public Player GetPlayer(int player)
     {
         Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
@@ -163,9 +142,6 @@ public class PlayerManager : MonoBehaviour
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
             Destroy(playerGameObject[playerIndex].gameObject);
-
-            // Disable HUD Elements
-            HUD.Instance.DisablePlayerHUDElements(playerIndex);
         }
     }
 

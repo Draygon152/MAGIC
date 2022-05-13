@@ -128,9 +128,6 @@ public class GameManager : MonoBehaviour
 
         HUD.Open();
 
-        // Initialize the HUD's player data
-        PlayerManager.Instance.InitializeHUD();
-
         // Set the camera to follow the player
         for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {

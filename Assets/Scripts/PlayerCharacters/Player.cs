@@ -2,19 +2,19 @@
 // Modified by Lizbeth
 
 using UnityEngine;
-using System;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerHealthManager))]
 [RequireComponent(typeof(MagicCasting))]
-[RequireComponent(typeof(NavMeshAgent))] // for AI COOP
+[RequireComponent(typeof(NavMeshAgent))] // for co-op AI
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerStats stats; // The static stats of the player
+    [SerializeField] private Image gemColor;
 
     private MagicCasting magicCaster;
-    private PlayerHealthManager healthManager;
     private NavMeshAgent navMeshAgent;
     private int playerNumber;
 
@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         magicCaster = GetComponent<MagicCasting>();
-        healthManager = GetComponent<PlayerHealthManager>();
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         // initialize approriate fields with player stats
@@ -50,17 +49,12 @@ public class Player : MonoBehaviour
     public void SetElement(Element elem)
     {
         magicCaster.InitializeSpell(elem);
+        gemColor.color = elem.GetElementColor();
     }
 
 
     public MagicCasting GetCaster()
     {
         return magicCaster;
-    }
-
-
-    public void SetHealthBarDelegates(Action<int, int> setHealthBarValue, Action<int, int> setHealthBarMax)
-    {
-        healthManager.SetHealthBarDelegates(playerNumber, setHealthBarValue, setHealthBarMax);
     }
 }
