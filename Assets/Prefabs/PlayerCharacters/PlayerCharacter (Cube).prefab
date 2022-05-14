@@ -977,6 +977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 1d78cc954e60a58bebee517bb86d92ae, type: 2}
   gemColor: {fileID: 5462922849863103887}
+  playerID: {fileID: 4009027388023913702}
 --- !u!114 &5203983517893298919
 MonoBehaviour:
   m_ObjectHideFlags: 0

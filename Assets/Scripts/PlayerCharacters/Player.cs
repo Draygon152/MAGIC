@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerHealthManager))]
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerStats stats; // The static stats of the player
     [SerializeField] private Image gemColor;
+    [SerializeField] private TMP_Text playerID;
 
     private MagicCasting magicCaster;
     private SelectedSpellUI spellUI;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
         set
         {
             playerNumber = value;
+            playerID.text = $"Player {playerNumber + 1}";
         }
     }
 
