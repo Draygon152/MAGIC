@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 60
   numInstances: 0
-  timeBetweenCasts: 3
+  timeBetweenCasts: 4.5
   castSpeed: 0.1
   spellSpeed: 20
   spellLifetime: 2
