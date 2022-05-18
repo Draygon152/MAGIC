@@ -4,7 +4,7 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 public class BaseSpell : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class BaseSpell : MonoBehaviour
     [SerializeField] private SpellEffects spellEffect;
     [SerializeField] private EffectEvent effectCall;
 
-    private SphereCollider spellCollider;
+    private CapsuleCollider spellCollider;
     private Rigidbody spellBody;
     
 
@@ -52,7 +52,7 @@ public class BaseSpell : MonoBehaviour
 
     private void Awake()
     {
-        spellCollider = GetComponent<SphereCollider>();
+        spellCollider = GetComponent<CapsuleCollider>();
         spellCollider.isTrigger = true;
         spellCollider.radius = spellToCast.radius;
 

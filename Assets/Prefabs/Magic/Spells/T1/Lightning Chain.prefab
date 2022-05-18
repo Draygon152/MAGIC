@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1168589751168966405}
-  - component: {fileID: -3621782435919253092}
   - component: {fileID: -4889522474357962964}
   - component: {fileID: -2944406223500383022}
   - component: {fileID: -4706322675945721065}
+  - component: {fileID: 2006540588475109478}
   m_Layer: 6
   m_Name: Lightning Chain
   m_TagString: Spell
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &-3621782435919253092
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612801762167470135}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &-4889522474357962964
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,6 +103,20 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!136 &2006540588475109478
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612801762167470135}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8537387751334749717
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +128,6 @@ GameObject:
   - component: {fileID: 7628986076864667363}
   - component: {fileID: 1339708736663855414}
   - component: {fileID: 7084137460006567824}
-  - component: {fileID: 2723718422265679207}
   m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
@@ -198,16 +198,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2723718422265679207
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8537387751334749717}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
