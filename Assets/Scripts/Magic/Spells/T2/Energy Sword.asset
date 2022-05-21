@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
-  m_Name: BlownAway
+  m_Name: Energy Sword
   m_EditorClassIdentifier: 
-  damage: 25
-  numInstances: -1
-  timeBetweenCasts: 2
+  damage: 80
+  numInstances: 0
+  timeBetweenCasts: 5
   castSpeed: 0.1
-  spellSpeed: 0
-  spellLifetime: 2
-  effectDuration: 1
+  spellSpeed: 0.1
+  spellLifetime: 1
+  effectDuration: 0
   radius: 1
   continuous: 1
   self: 1
-  expand: 1
-  element: 5
+  expand: 0
+  element: 0

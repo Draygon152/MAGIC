@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4706322675945721065}
   - component: {fileID: 2006540588475109478}
   m_Layer: 6
-  m_Name: Lightning Chain
+  m_Name: Chain Lightning
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

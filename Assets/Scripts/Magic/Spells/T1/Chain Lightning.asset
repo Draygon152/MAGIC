@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de0cbf162d5b3a4f8151a700857030c, type: 3}
-  m_Name: FireBreathe
+  m_Name: Chain Lightning
   m_EditorClassIdentifier: 
-  damage: 55
+  damage: 60
   numInstances: 0
-  timeBetweenCasts: 3.5
+  timeBetweenCasts: 4.5
   castSpeed: 0.1
-  spellSpeed: 0.1
-  spellLifetime: 0.1
-  effectDuration: 0.5
-  radius: 1
-  continuous: 1
-  self: 1
+  spellSpeed: 20
+  spellLifetime: 2
+  effectDuration: 0
+  radius: 0.5
+  continuous: 0
+  self: 0
   expand: 0
-  element: 1
+  element: 4
