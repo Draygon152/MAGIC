@@ -193,3 +193,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}

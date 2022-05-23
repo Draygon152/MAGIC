@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6773967326612829247, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: damageDealt
-      value: 4
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1872983717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: typeName
@@ -86,6 +86,10 @@ PrefabInstance:
     - target: {fileID: 6005707754632276139, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961594199354966123, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: attackDistance
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 8961594199354966123, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: detectionRadius
