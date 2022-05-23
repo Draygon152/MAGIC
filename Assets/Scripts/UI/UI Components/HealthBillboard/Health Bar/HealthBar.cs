@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
 
     // A setup function to set the max health of the enemy
     // and to start the enemy with their max health
-    public virtual void InitializeHealthBar(int maxHealth)
+    public void InitializeHealthBar(int maxHealth)
     {
         // Set max value of healthSlider
         healthSlider.maxValue = maxHealth;
@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
     }
 
 
-    public virtual void SetHealth(int newHealth)
+    public void SetHealth(int newHealth)
     {
         healthSlider.value = newHealth;
     }

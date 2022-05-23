@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1658721137
+--- !u!1 &1697832986
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1658721138}
-  - component: {fileID: 1658721140}
-  - component: {fileID: 1658721139}
+  - component: {fileID: 1697832987}
+  - component: {fileID: 1697832990}
+  - component: {fileID: 1697832989}
   m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
@@ -18,35 +18,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1658721138
+--- !u!4 &1697832987
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658721137}
+  m_GameObject: {fileID: 1697832986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 0.2}
+  m_LocalScale: {x: 2, y: 0.2, z: 2}
   m_Children: []
-  m_Father: {fileID: 2731317438833551877}
+  m_Father: {fileID: 1267827901380547902}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1658721140
+--- !u!33 &1697832990
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658721137}
+  m_GameObject: {fileID: 1697832986}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1658721139
+--- !u!23 &1697832989
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658721137}
+  m_GameObject: {fileID: 1697832986}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 103e7370dec694347bdd80f1bcce3e54, type: 2}
+  - {fileID: 2100000, guid: 8a248c0c707ad8e42a1ffa12d0cfd7c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,7 +81,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &9161587906778294836
+--- !u!1 &2441513849783980272
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,40 +89,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2731317438833551877}
-  - component: {fileID: 2963788575819802337}
-  - component: {fileID: -5611162093021705986}
-  - component: {fileID: 2752145268987394683}
-  - component: {fileID: 4150536719925179886}
+  - component: {fileID: 1267827901380547902}
+  - component: {fileID: -943537224703442151}
+  - component: {fileID: 6623571715296438637}
+  - component: {fileID: 2367033974136401423}
+  - component: {fileID: 9063763193845193079}
   m_Layer: 6
-  m_Name: IceWave
+  m_Name: Static Shock
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2731317438833551877
+--- !u!4 &1267827901380547902
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161587906778294836}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 500, y: 0.84999996, z: 500}
+  m_GameObject: {fileID: 2441513849783980272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 500, y: 0.2, z: 500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1658721138}
+  - {fileID: 1697832987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!54 &2963788575819802337
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &-943537224703442151
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161587906778294836}
+  m_GameObject: {fileID: 2441513849783980272}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -132,19 +132,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-5611162093021705986
+--- !u!114 &6623571715296438637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161587906778294836}
+  m_GameObject: {fileID: 2441513849783980272}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 899e08e487fdd9a4a9a3e0abfd5a147b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellToCast: {fileID: 11400000, guid: f913023f281c9db41a6f5c46f0856c95, type: 2}
+  spellToCast: {fileID: 11400000, guid: 6736dda288b617f4c9be5f9c4d2c32e6, type: 2}
   player: {fileID: 0}
   spellEffect: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
   effectCall:
@@ -152,7 +152,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 623892349912355908, guid: e1e8c35865163d846af3d260c21e3b03, type: 3}
         m_TargetAssemblyTypeName: SpellEffects, Assembly-CSharp
-        m_MethodName: SlowEffect
+        m_MethodName: StunEffect
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -162,19 +162,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2752145268987394683
+--- !u!114 &2367033974136401423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161587906778294836}
+  m_GameObject: {fileID: 2441513849783980272}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fed21493cd0d90e4caba691d54087444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell: {fileID: -5611162093021705986}
+  currentSpell: {fileID: 6623571715296438637}
   objectLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -184,17 +184,17 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
---- !u!136 &4150536719925179886
+--- !u!136 &9063763193845193079
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161587906778294836}
+  m_GameObject: {fileID: 2441513849783980272}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 3
-  m_Direction: 0
+  m_Radius: 1
+  m_Height: 0.1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

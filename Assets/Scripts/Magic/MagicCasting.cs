@@ -85,18 +85,16 @@ public class MagicCasting : MonoBehaviour
 
     private void ChangeTransform()
     {
-        float cooldownRemaining = castCooldown - timeSinceLastCast;
-
-        if (cooldownRemaining <= 0)
+        if (!casting)
         {
-            if (spellToCast.GetSpell().spellSpeed == 0)
+            if (spellToCast.GetSpell().spellSpeed == 0.0f)
             {
-                castLocation.localPosition = new Vector3(0, -0.5f, 0);
+                castLocation.localPosition = new Vector3(0, -1, 0);
             }
 
             else
             {
-                if (spellToCast.GetSpell().spellSpeed < .5)
+                if (spellToCast.GetSpell().spellSpeed < 0.5f)
                 {
                     castLocation.localPosition = new Vector3(0, 0, 1);
                 }
