@@ -7,12 +7,11 @@ using UnityEngine.InputSystem;
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField] private Transform castLocation; // Location where the spell is cast from
-
     [SerializeField]private BaseSpell spellToCast;
     private Element selectedElement;
 
     private bool casting = false; // Default state of casting magic is false
-    private float castCooldown;   // Default time between spellcasts. Need to replace with individual spell casting time, placeholder
+    private float castCooldown;   // Time between spellcasts
     private float timeSinceLastCast;
     private int playerNumber; // Stores player number so it can be referenced when casting a spell
 
@@ -83,11 +82,12 @@ public class MagicCasting : MonoBehaviour
         return range;
     }
 
+
     private void ChangeTransform()
     {
-        float cooldownRemaining = HUD.Instance.ReturnCooldown(playerNumber);
+        float cooldownRemaining = castCooldown - timeSinceLastCast;
 
-        if (cooldownRemaining == 0)
+        if (cooldownRemaining <= 0)
         {
             if (spellToCast.GetSpell().spellSpeed == 0)
             {
@@ -125,13 +125,14 @@ public class MagicCasting : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.GetComponent<Collider>().tag == "pickups")
+        if (this.gameObject.tag == "Player" && collision.GetComponent<Collider>().tag == "pickups")
         {
             spellToCast = collision.GetComponent<SpellItem>().GetSpell();
             castCooldown = spellToCast.GetSpell().timeBetweenCasts;
-            
-            HUD.Instance.SetPlayerSpellCaster(playerNumber, this);
-            HUD.Instance.SetPlayerMaxCooldown(playerNumber, spellToCast.GetSpell().timeBetweenCasts);
+
+            SelectedSpellUI playerSpellUI = this.gameObject.GetComponentInChildren<SelectedSpellUI>();
+            playerSpellUI.InitializeSpellUI(this);
+            playerSpellUI.ChangeSpellMaxCooldown(castCooldown);
         }
     }
 

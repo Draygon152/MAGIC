@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NquelsnaakLarva
       objectReference: {fileID: 0}
+    - target: {fileID: 9032181268822750399, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1223627435701474875}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
 --- !u!1 &4903595711021435927 stripped

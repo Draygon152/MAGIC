@@ -115,6 +115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FastMeleeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 9032181268822750399, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1502106652410104048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
 --- !u!4 &9016590142139760933 stripped
@@ -122,6 +126,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740457956479089308, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_PrefabInstance: {fileID: 4388794753779219385}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1502106652410104048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2896007635633206089, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+  m_PrefabInstance: {fileID: 4388794753779219385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7361926647738595081
 PrefabInstance:
   m_ObjectHideFlags: 0

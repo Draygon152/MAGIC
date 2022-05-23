@@ -1,5 +1,7 @@
 // Written by Kevin Chao
 
+using UnityEngine;
+
 public class Ice : Element
 {
     public override string GetElementName()
@@ -11,5 +13,11 @@ public class Ice : Element
     public override ElementTypes.Elements GetElementType()
     {
         return ElementTypes.Elements.Ice;
+    }
+
+
+    public override Color GetElementColor()
+    {
+        return elementColorDict[ElementTypes.Elements.Ice];
     }
 }
