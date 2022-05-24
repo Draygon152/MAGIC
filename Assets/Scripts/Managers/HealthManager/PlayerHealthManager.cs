@@ -6,11 +6,8 @@ using System;
 
 public class PlayerHealthManager : HealthManager
 {
+    [SerializeField] protected PlayerHealthBar healthBar;
     [SerializeField] protected int startingHealth; // Health the player starts at after resurrection, not yet implemented
-
-    private Action<int, int> setHealthBarValue; // Contains pointer to function responsible for setting HealthBar's current value
-    private Action<int, int> setHealthBarMax;   // Contains pointer to function responsible for setting HealthBar max
-    private int playerNumber;
 
 
 
@@ -18,14 +15,7 @@ public class PlayerHealthManager : HealthManager
     {
         base.Start();
 
-        InitializeHealthBar();
-    }
-
-
-    private void InitializeHealthBar()
-    {
-        setHealthBarMax(playerNumber, maxHealth);
-        setHealthBarValue(playerNumber, currentHealth);
+        healthBar.InitializeHealthBar(maxHealth);
     }
 
 
@@ -33,7 +23,7 @@ public class PlayerHealthManager : HealthManager
     {
         base.GainHealth(healAmount);
 
-        setHealthBarValue(playerNumber, currentHealth);
+        healthBar.SetHealth(currentHealth);
     }
 
 
@@ -45,7 +35,8 @@ public class PlayerHealthManager : HealthManager
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            setHealthBarValue(playerNumber, currentHealth);
+
+            healthBar.SetHealth(currentHealth);
 
             // If the player runs out of hp, disable the player instead of destroying, allows for resurrection
             gameObject.SetActive(false);
@@ -56,16 +47,8 @@ public class PlayerHealthManager : HealthManager
         // If health is not yet empty, just update HealthBar
         else
         {
-            setHealthBarValue(playerNumber, currentHealth);
+            healthBar.SetHealth(currentHealth);
         }
-    }
-
-
-    public void SetHealthBarDelegates(int playerNum, Action<int, int> setHBValue, Action<int, int> setHBValueMax)
-    {
-        playerNumber = playerNum;
-        setHealthBarValue = setHBValue;
-        setHealthBarMax = setHBValueMax;
     }
 
 

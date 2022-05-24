@@ -24,7 +24,7 @@ CONTROLS:
   PLAYER:
     KEYBOARD:
       - W, A, S, D for movement
-      - Press Q to cast a spell in the direction the player is facing
+      - Press Spacebar to cast a spell in the direction the player is facing
       - Press E to activate a spell early.
       - Press Esc to pause the game; press it again to unpause the game.
 
@@ -39,7 +39,7 @@ NOTES:
  - There are multiple spells in the game that cause a "stun" debuff for enemies hit, which means that
    enemies will cease to move and attack for the duration of the stun.
  - There are instances where the enemies will run into walls/borders.
- - The player cube can "hide" under the pine trees and make the enemies unable to reach them. This is due
+ - The player can "hide" under the pine trees and make the enemies unable to reach them. This is due
    to how the NavMesh is generated around our current PineTree models, and requires us to use a new asset
    to fix it
   

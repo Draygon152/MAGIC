@@ -7,6 +7,7 @@ using UnityEngine;
 public class ObjectHealthManager : HealthManager
 {
     [SerializeField] private SpellItem spellItem;
+    [SerializeField] private GameObject healthPotion;
 
 
 
@@ -34,7 +35,15 @@ public class ObjectHealthManager : HealthManager
     {
         if (gameObject.tag == "Crate")
         {
-            Instantiate(spellItem, gameObject.transform.position, gameObject.transform.rotation);
+            float randomNum = Random.Range(0, 10);
+            if(randomNum <= 7)
+            {
+                Instantiate(spellItem, gameObject.transform.position, gameObject.transform.rotation);
+            }
+            else if(randomNum > 7)
+            {
+                Instantiate(healthPotion, gameObject.transform.position, gameObject.transform.rotation);
+            }
         }
     }
 

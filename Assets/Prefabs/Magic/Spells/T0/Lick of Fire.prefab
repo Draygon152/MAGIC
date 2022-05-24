@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1774574639754248654}
-  - component: {fileID: 2136776055221182091}
   - component: {fileID: 9212381763832852993}
   - component: {fileID: 1143649094900738364}
   - component: {fileID: 6965635017178009040}
+  - component: {fileID: 7800800559302746658}
   m_Layer: 6
   m_Name: Lick of Fire
   m_TagString: Spell
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2136776055221182091
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5550427098799325289}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0.3}
 --- !u!54 &9212381763832852993
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,6 +103,20 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!136 &7800800559302746658
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550427098799325289}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.5
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6449931744767961268
 GameObject:
   m_ObjectHideFlags: 0

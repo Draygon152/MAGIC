@@ -7,13 +7,13 @@ using UnityEngine;
 public class MeleeDamageGiver : DamageGiver
 {
     [SerializeField] private int damageDealt; // Attack power
-    [SerializeField] private float damageOverTime; // Attack player in X seconds overtime
+    [SerializeField] private float attackCooldown = 5.0f; // Cooldown between attacks
 
 
 
-    public float GetDamageOverTime()
+    public float GetAttackCooldown()
     {
-        return damageOverTime;
+        return attackCooldown;
     }
 
 

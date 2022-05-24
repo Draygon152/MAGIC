@@ -32,7 +32,7 @@ public class EnemyHealthManager : HealthManager
     {
         base.GainHealth(healAmount);
 
-        healthBar.UpdateHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
     }
 
 
@@ -41,7 +41,7 @@ public class EnemyHealthManager : HealthManager
         currentHealth -= damageAmount;
 
         // Update the health bar
-        healthBar.UpdateHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
 
         // If health becomes 0 or less, enemy destroyed
         if (currentHealth <= 0)

@@ -51,7 +51,7 @@ public class RangedBehavior : EnemyBehaviorBase
         damageGiver = this.gameObject.GetComponent<MeleeDamageGiver>();
 
         // Set attack Variables
-        attackCooldown = damageGiver.GetDamageOverTime();
+        attackCooldown = damageGiver.GetAttackCooldown();
         readyToCastSpell = true;
 
         // Set Flee variables

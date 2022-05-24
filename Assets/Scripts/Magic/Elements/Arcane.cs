@@ -1,5 +1,7 @@
 // Written by Kevin Chao
 
+using UnityEngine;
+
 public class Arcane : Element
 {
     public override string GetElementName()
@@ -11,5 +13,11 @@ public class Arcane : Element
     public override ElementTypes.Elements GetElementType()
     {
         return ElementTypes.Elements.Arcane;
+    }
+
+
+    public override Color GetElementColor()
+    {
+        return elementColorDict[ElementTypes.Elements.Arcane];
     }
 }

@@ -68,7 +68,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""48f46764-7cae-4be9-b7e7-fcee64eef167"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",

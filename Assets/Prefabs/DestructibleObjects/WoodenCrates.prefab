@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}
 --- !u!1 &2466189429352940557
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}
 --- !u!1 &8253897830730490402
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}
 --- !u!1 &8253897830850017683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,6 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}
 --- !u!1 &8253897831434321832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}
 --- !u!1 &8253897832256149502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}
 --- !u!1 &8253897832371265755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   spellItem: {fileID: 9070994594750066361, guid: e3299be19a7af5440b36ea2b2395a835, type: 3}
+  healthPotion: {fileID: 7513373475247925023, guid: 5dac7bf40d5c5c04393ae05b53c86ed8, type: 3}
 --- !u!1001 &273768029350405158
 PrefabInstance:
   m_ObjectHideFlags: 0

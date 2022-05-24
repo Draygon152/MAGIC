@@ -90,10 +90,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 146512776262495366}
-  - component: {fileID: 8496697790604772030}
   - component: {fileID: 86483295079533102}
   - component: {fileID: 1183401574670890039}
   - component: {fileID: 1890200579}
+  - component: {fileID: 4038789717128731239}
   m_Layer: 6
   m_Name: Arcane Blast
   m_TagString: Spell
@@ -116,19 +116,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8496697790604772030
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654103120361798294}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &86483295079533102
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -197,3 +184,17 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!136 &4038789717128731239
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654103120361798294}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

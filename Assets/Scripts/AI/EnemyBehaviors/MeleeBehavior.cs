@@ -37,7 +37,7 @@ public class MeleeBehavior : EnemyBehaviorBase
         damageGiver = this.gameObject.GetComponent<MeleeDamageGiver>(); 
 
         // Set attack Variables
-        attackCooldown = damageGiver.GetDamageOverTime();
+        attackCooldown = damageGiver.GetAttackCooldown();
         readyToApplyDamage = true;
 
         // Set Flee variables
@@ -110,7 +110,7 @@ public class MeleeBehavior : EnemyBehaviorBase
         PlayerHealthManager targetHealthManager = playerManager.GetPlayer(currentTargetNumber).gameObject.GetComponent<PlayerHealthManager>();
         if (targetHealthManager != null && damageGiver != null)
         {
-            damageGiver.DamageTarget(targetHealthManager, damageGiver.CurrentDamage()); 
+            damageGiver.DamageTarget(targetHealthManager, damageGiver.CurrentDamage());
         }
 
         yield return new WaitForSeconds(attackCooldown);
