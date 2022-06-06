@@ -102,7 +102,7 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
                     // If spell is on cooldown, flee
                     else
-                    {                    
+                    {
                         Flee(target.position);
                     }
 
@@ -179,8 +179,6 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
     private void KillTheTarget()
     {
-        // Debug.Log("Target is not null");
-
         // Begin the attack
         if (TargetInRange())
         {
@@ -246,10 +244,16 @@ public class CoopAIBehavior : FriendlyBehaviorBase
 
     private bool LookingAtTarget()
     {
-        Vector3 lookDirection = selfTransform.forward;
-        Vector3 directionOfTarget = target.position - selfTransform.position;
+        // Determine "looking at" state by imagining the check on a 2D plane, disregard
+        // differences between player and target height
 
-        return Vector3.Angle(directionOfTarget, lookDirection) <= MAX_LOOK_AT_ANGLE;
+        Vector2 flattenedAIPos = new Vector2(selfTransform.position.x, selfTransform.position.z);
+        Vector2 flattenedTargetPos = new Vector2(target.position.x, target.position.z);
+
+        Vector2 targetDirection = flattenedTargetPos - flattenedAIPos;
+        Vector2 flattenedForwardDir = new Vector2(selfTransform.forward.x, selfTransform.forward.z);
+
+        return Vector2.Angle(targetDirection, flattenedForwardDir) <= MAX_LOOK_AT_ANGLE;
     }
 
 
