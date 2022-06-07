@@ -166,7 +166,7 @@ MonoBehaviour:
   timeBetweenWander: 4
   wanderTowardsPlayerInterval: 5
   charge: 1.5
-  attackDistance: 1.1
+  attackDistance: 1.5
   healAmount: 3
   healTime: 1
   fleeHealthPercentage: 0.34

@@ -11,7 +11,8 @@ public class SpellEffects : MonoBehaviour
 
     public void TeleportationEffect(Player player, GameObject target, BaseSpell spell)
     {
-        player.transform.position = spell.transform.position;
+        // Teleport player to the 2D location that the spell was placed, while keeping the player's vertical position
+        player.transform.position = new Vector3(spell.transform.position.x, player.transform.position.y, spell.transform.position.z);
     }
 
 
