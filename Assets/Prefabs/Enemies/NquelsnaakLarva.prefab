@@ -22,7 +22,7 @@ PrefabInstance:
     - target: {fileID: -326729198359042743, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 1640683063, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: cameraRef
       value: 
@@ -107,6 +107,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5763893213597020713, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5763893213597020717, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
       propertyPath: isMinion
       value: 1
@@ -143,7 +147,9 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1223627435701474875}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -326729198359042743, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
+    - {fileID: 2122777749146203809, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 319b4aba2553cfd92a57fe7b2cdf4849, type: 3}
 --- !u!1 &4903595711021435927 stripped
 GameObject:
@@ -161,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &4266247259127345560
-SphereCollider:
+--- !u!136 &4566354439790935966
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,6 +177,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
