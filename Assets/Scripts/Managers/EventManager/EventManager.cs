@@ -10,37 +10,32 @@ public class EventManager : MonoBehaviour
 {
     private static Dictionary<EventTypes.Events, Action> subscriberDict;
 
-
     public static EventManager Instance
     {
         get;
         private set;
     }
+    public int ID;
 
 
 
     private void Awake()
     {
-        Debug.Log("EventManager Awake");
-
-        if (Instance != null)
-            Destroy(gameObject);
-
-        else
+        if (Instance == null)
         {
             Instance = this;
             subscriberDict = new Dictionary<EventTypes.Events, Action>();
 
             DontDestroyOnLoad(gameObject);
+
+            ID = gameObject.GetInstanceID();
         }
     }
 
 
     private void OnDestroy()
     {
-        Debug.Log("EventManager Destroyed");
-
-        Instance = null;
+        // Instance = null;
     }
 
 

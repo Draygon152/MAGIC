@@ -1,12 +1,11 @@
 // Written by Lawson
-// Modified by Angel, Kevin, Liz, and Marc
+// Modified by Angel, Kevin, Lizbeth, and Marc
 
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private const int NUMBER_OF_WAVES = 1; // The total number of waves the player will play through
     [SerializeField] private const int ENEMIES_REMAINING_BEFORE_NEXT_WAVE = 1; // The number of enemies remaining that will
                                                                                // trigger the next wave, if it is two then
                                                                                // the next wave will spawn when two enemies 
@@ -20,17 +19,21 @@ public class GameManager : MonoBehaviour
     private int waveNumber;  // A variable for keeping track of the wave number in the game
 
     // Make the game manager a singleton
-    static public GameManager Instance
+    public static GameManager Instance
     {
         get;
         private set;
     }
 
 
+
     private void Awake()
     {
-        // Set up Instance
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         // Initialize the counting variables
         // They can be init to 0, since they will be
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         // Subscribe to events
         EventManager.Instance.Subscribe(EventTypes.Events.GameStart, StartGame);
+        EventManager.Instance.Subscribe(EventTypes.Events.GameSetUp, SetUpGameScene);
         EventManager.Instance.Subscribe(EventTypes.Events.PlayerDeath, OnPlayerDeath);
         EventManager.Instance.Subscribe(EventTypes.Events.EnemyDeath, OnEnemyDeath);
         EventManager.Instance.Subscribe(EventTypes.Events.ResetGame, OnReset);
@@ -56,38 +60,85 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Marking the GameManager as nonexistent
-        Instance = null;
+        // Instance = null;
     }
 
 
     // A function to start the game
     public void StartGame()
     {
-        Debug.Log("Starting Game");
-        
+        //Load the game scene
+        GameSceneManager.Instance.LoadScene(GameSceneManager.Scenes.GAME_SCENE, GameSceneManager.NetworkSceneMode.LOCAL);
+
+        //notify the game that the scene has been loaded and the game is ready to be setted up
+        //maybe move this is OnSceneLoaded later on, idk if putting here completely avoids race conditions
+        // EventManager.Instance.Notify(EventTypes.Events.GameSetUp);
+
+        // // spawn in the players
+        // playerCount = PlayerManager.Instance.SpawnPlayers();
+
+        // if (LobbyMenu<SingleplayerLobbyMenu>.Instance != null)
+        // {
+        //     LobbyMenu<SingleplayerLobbyMenu>.Close();
+        // }
+
+        // else if (LobbyMenu<MultiplayerLobbyMenu>.Instance != null)
+        // {
+        //     LobbyMenu<MultiplayerLobbyMenu>.Close();
+        // }
+
+        // HUD.Open();
+
+        // // Initialize the HUD's player data
+        // PlayerManager.Instance.InitializeHUD();
+
+        // // Set the camera to follow the player
+        // for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+        // {
+        //     CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
+        // }
+
+        // //Set the camera to its starting position.
+        // CameraSystem.Instance.StartingCamPos();
+
+        // // spawn in the first wave
+        // // Might change later to start a countdown to the first wave
+        // enemyCount += waves[waveNumber].SpawnWave(CameraSystem.Instance.GetTransform());
+        // waveNumber++;
+
+        // //Set the enemy counter on the HUD
+        // HUD.Instance.SetEnemyCounter(enemyCount);
+    }
+
+    public void SetUpGameScene()
+    {
+        //start by telling lobbyMenu to set up player manager
+        if (LobbyMenu<SingleplayerLobbyMenu>.Instance != null)
+        {
+            LobbyMenu<SingleplayerLobbyMenu>.Instance.SetUpPlayerManager();
+        }
+
+        else if (LobbyMenu<MultiplayerLobbyMenu>.Instance != null)
+        {
+            LobbyMenu<MultiplayerLobbyMenu>.Instance.SetUpPlayerManager();
+        }
+
         // spawn in the players
         playerCount = PlayerManager.Instance.SpawnPlayers();
 
-        LobbyMenu.Close();
         HUD.Open();
 
-        // Initialize the HUD's player data
-        PlayerManager.Instance.InitializeHUD();
-
         // Set the camera to follow the player
-        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_1).gameObject.activeSelf)
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
-            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        }
-
-        if (PlayerManager.Instance.GetPlayer(PlayerManager.PLAYER_2).gameObject.activeSelf)
-        {
-            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+            CameraSystem.Instance.AddFrameTarget(PlayerManager.Instance.GetPlayerLocation(playerIndex));
         }
 
         //Set the camera to its starting position.
         CameraSystem.Instance.StartingCamPos();
+
+        //open the minimap
+        MinimapCameraSystem.Instance.OpenMiniMap(isSinglePlayer: playerCount == 1);
 
         // spawn in the first wave
         // Might change later to start a countdown to the first wave
@@ -95,7 +146,7 @@ public class GameManager : MonoBehaviour
         waveNumber++;
 
         //Set the enemy counter on the HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
     }
 
 
@@ -107,16 +158,14 @@ public class GameManager : MonoBehaviour
         // and update the game state
         if (WinOrLose)
         {
-            Debug.Log("Player Victorious");
-
-            VictoryGameOver.Open(); // Activates the Victory Screen UI.
+            VictoryGameOver.Open();
+            EventManager.Instance.Notify(EventTypes.Events.Victory);
         }
 
         else
         {
-            Debug.Log("Player Defeated");
-
-            DefeatGameOver.Open(); // Activates the Defeat Screen UI.
+            DefeatGameOver.Open();
+            EventManager.Instance.Notify(EventTypes.Events.Defeat);
         }
 
         EventManager.Instance.Notify(EventTypes.Events.GameOver);
@@ -128,7 +177,6 @@ public class GameManager : MonoBehaviour
     {
         // decrement playerCount
         playerCount--;
-
 
         // Check if players are still alive
         if (playerCount <= 0)
@@ -150,9 +198,6 @@ public class GameManager : MonoBehaviour
     {
         // decrement enemyCount
         enemyCount--;
-
-        // update enemy counter on HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
 
         // check if final wave
         if (waveNumber >= waves.Count)
@@ -176,25 +221,27 @@ public class GameManager : MonoBehaviour
                 // ready to spawn next wave
                 enemyCount += waves[waveNumber].SpawnWave(CameraSystem.Instance.GetTransform());
                 waveNumber++;
-            } //end if (enemyCount <= ENEMIES_REMAINING_BEFORE_NEXT_WAVE)
-        }//end else of (if (waveNumber >= waves.Count))
+            }
+        }
 
         // update enemy counter on HUD
-        HUD.Instance.SetEnemyCouter(enemyCount);
+        HUD.Instance.SetEnemyCounter(enemyCount);
     }
 
 
     // Reset the game state when a ResetGame event is notified
     private void OnReset()
     {
-        // reset the game state
+        // Reset the game state
         enemyCount = 0;
         playerCount = 0;
         waveNumber = 0;
 
-        //reset camera frame
-        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_1));
-        CameraSystem.Instance.RemoveFrameTarget(PlayerManager.Instance.GetPlayerLocation(PlayerManager.PLAYER_2));
+        // Guarantees gameplay can continue if restarted from pause state
+        Time.timeScale = 1;
+
+        // Reset camera frame
+        CameraSystem.Instance.ClearCameraFrame();
 
         PlayerManager.Instance.ResetPlayers();
     }

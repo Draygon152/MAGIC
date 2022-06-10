@@ -47,7 +47,7 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 60767877d81b34c5b90d93fd36c58411, type: 2}
   - {fileID: 11400000, guid: ebfae3234e281ee44952c733d0c8ca16, type: 2}
-  gameCamera: {fileID: 0}
+  - {fileID: 11400000, guid: dee83d89dc42f1d4fa7c02e619b16d25, type: 2}
 --- !u!1001 &223376988
 PrefabInstance:
   m_ObjectHideFlags: 0

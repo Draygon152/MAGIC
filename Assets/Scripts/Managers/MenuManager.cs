@@ -11,14 +11,14 @@ public class MenuManager : MonoBehaviour
     public OptionsMenu optionsMenuPrefab;
     public VideoOptions videoOptionsPrefab;
     public SoundOptions soundOptionsPrefab;
-    public LobbyMenu lobbyMenuPrefab;
+    public SingleplayerLobbyMenu singleplayerLobbyPrefab;
+    public MultiplayerLobbyMenu multiplayerLobbyPrefab;
     public HUD hudPrefab;
     public PauseMenu pauseMenuPrefab;
     public VictoryGameOver victoryMenuPrefab;
     public DefeatGameOver defeatMenuPrefab;
 
     private Stack<Menu> menuStack = new Stack<Menu>();
-
 
     public static MenuManager Instance
     {
@@ -27,30 +27,24 @@ public class MenuManager : MonoBehaviour
     }
 
 
+
     // Fine to use private here, since nothing should inherit from MenuManager
     // and no other classes should be calling Awake() and OnDestroy()
     private void Awake()
     {
-        Debug.Log("MenuManager Awake");
-
-        if (Instance != null)
-            Destroy(gameObject);
-
-        else
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
             MainMenu.Open();
-        }
+        }   
     }
 
 
     private void OnDestroy()
     {
-        Debug.Log("MenuManager Destroyed");
-
-        Instance = null;
+        // Instance = null;
     }
 
 
@@ -85,7 +79,10 @@ public class MenuManager : MonoBehaviour
 
             // Check that prefab exists before returning
             if (prefab != null)
+            {
                 return prefab;
+            }
+                
         }
 
         throw new MissingReferenceException("Could not find prefab for menu: " + typeof(T));
@@ -94,8 +91,6 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenu(Menu openedMenu)
     {
-        Debug.Log("Opening Menu " + openedMenu.GetType());
-
         if (menuStack.Count > 0)
         {
             // Deactivate topmost menu if it exists
@@ -116,17 +111,15 @@ public class MenuManager : MonoBehaviour
     // Attempts to close requested menu type
     public void CloseMenu(Menu closedMenu)
     {
-        Debug.Log("Closing Menu " + closedMenu.GetType());
-
         if (menuStack.Count == 0)
         {
-            Debug.LogErrorFormat(closedMenu, "cannot close {0}, menu stack empty", closedMenu.GetType());
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, menu stack empty");
             return;
         }
 
         if (menuStack.Peek() != closedMenu)
         {
-            Debug.LogErrorFormat(closedMenu, "cannot close {0}, not at top of menu stack", closedMenu.GetType());
+            Debug.LogErrorFormat(closedMenu, $"cannot close {closedMenu.GetType()}, not at top of menu stack. {menuStack.Peek().GetType()} the top of the stack");
             return;
         }
 
@@ -142,18 +135,20 @@ public class MenuManager : MonoBehaviour
 
         // Reactivate menu that is now at top of stack if it exists
         if (menuStack.Count > 0)
+        {
             menuStack.Peek().gameObject.SetActive(true);
+        }
     }
 
 
     // Closes all open menus
     public void CloseAllMenus()
     {
-        Debug.Log("Closing All Menus");
-
         int openMenus = menuStack.Count;
 
         for (int i = 0; i < openMenus; i++)
+        {
             CloseTopMenu();
+        }
     }
 }

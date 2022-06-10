@@ -1,4 +1,4 @@
-// Written by Marc
+// Written by Marc Hagoriles
 // Modified by Kevin Chao
 
 using System.Collections.Generic;
@@ -10,14 +10,12 @@ public class CameraSystem : MonoBehaviour
     [SerializeField] private float minCamSize = 5f;       // This is to limit the camera to have a minimum ortho cam size for the zoom.
     [SerializeField] private float screenEdgeBuffer = 6f; // Space between the top/bottom most target and the screen edge.
     
-    
     private float zoomSpeed;            // For SmoothDamp function.
     private Vector3 camSpeed;           // For SmoothDamp function, velocity of Camera moving.
     private Camera cam;                 // Reference to the Camera component
     private List<Transform> targetList; // This list should contain all the player targets in the scene.
 
-
-
+    // Make the CameraSystem a Singleton.
     public static CameraSystem Instance
     {
         get;
@@ -25,18 +23,29 @@ public class CameraSystem : MonoBehaviour
     }
 
 
+
     private void Awake()
     {
         if (Instance != null)
+        {
             Destroy(gameObject);
+        }
 
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //I (Lawson) don't see a reason why we want the camera system
+            //in scenes where there are only menus
+            // DontDestroyOnLoad(gameObject);
             cam = GetComponentInChildren<Camera>();
             targetList = new List<Transform>();
         }
+    }
+
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
 
@@ -47,7 +56,6 @@ public class CameraSystem : MonoBehaviour
             MoveCamera();
             Zoom();
         }
-
     }
 
 
@@ -57,12 +65,13 @@ public class CameraSystem : MonoBehaviour
         Vector3 avgPos = new Vector3();
         int numTargets = 0;
 
-
         // If there is only one player, just return its position and fixate the Camera on it, per usual.
         if (targetList.Count == 1)
         {
             avgPos = targetList[0].position;
         }
+
+        // Otherwise, calculate camera position based on all players
         else
         {
             // Depending on how many players there are, calculate its average position
@@ -78,9 +87,6 @@ public class CameraSystem : MonoBehaviour
             {
                 avgPos /= numTargets;
             }
-
-            // Keep the same y value (frozen y movement).
-            // avgPos.y = transform.position.y;
         }
         
         return avgPos;
@@ -114,6 +120,11 @@ public class CameraSystem : MonoBehaviour
     public void RemoveFrameTarget(Transform removedTarget)
     {
         targetList.Remove(removedTarget);
+    }
+
+    public void ClearCameraFrame()
+    {
+        targetList.Clear();
     }
 
 

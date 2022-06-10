@@ -9,8 +9,6 @@ public class SpellList : MonoBehaviour
 {
     [SerializeField] private List<BaseSpell> listOfSpells;
 
-
-
     public static SpellList Instance
     {
         get;
@@ -18,10 +16,9 @@ public class SpellList : MonoBehaviour
     }
 
 
+
     private void Awake()
     {
-        Debug.Log("SpellList Awake");
-
         if (Instance != null)
             Destroy(gameObject);
 
@@ -34,16 +31,20 @@ public class SpellList : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("SpellList Destroyed");
-
         Instance = null;
     }
 
 
     public BaseSpell GetRandomSpell()
     {
-        int randnum = Random.Range(0, listOfSpells.Count);
+        int randnum = Random.Range(6, listOfSpells.Count);
 
         return listOfSpells[randnum];
+    }
+
+
+    public BaseSpell GetTestSpell()
+    {
+        return listOfSpells[6];
     }
 }

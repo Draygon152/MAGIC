@@ -16,7 +16,9 @@ public class ElementSelector : MonoBehaviour
     public Element GetSelectedElement()
     {
         if (selectedElement == null)
+        {
             Debug.LogException(new Exception("No element selected."));
+        }
         
         return selectedElement;
     }
@@ -26,22 +28,23 @@ public class ElementSelector : MonoBehaviour
     {
         this.selectedElement = selectedElement;
         selectedElementText.text = $"CURRENTLY SELECTED: {selectedElement.GetElementName()}";
-        print(selectedElement.GetElementName());
-
-        // TODO: Add event/delegate notification code to notify other objects which element a player selected
     }
 
 
     public void EnableAllElementButtons()
     {
         foreach (Button button in buttonList)
+        {
             button.interactable = true;
+        }
     }
 
 
     public void DisableAllElementButtons()
     {
         foreach (Button button in buttonList)
+        {
             button.interactable = false;
+        }
     }
 }

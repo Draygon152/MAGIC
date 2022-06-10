@@ -14,8 +14,6 @@ public class ElementList : MonoBehaviour
     [SerializeField] private BaseSpell iceSpell;
     [SerializeField] private BaseSpell lightningSpell;
 
-
-
     public static ElementList Instance
     {
         get;
@@ -23,14 +21,10 @@ public class ElementList : MonoBehaviour
     }
 
 
+
     private void Awake()
     {
-        Debug.Log("ElementList Awake");
-
-        if (Instance != null)
-            Destroy(gameObject);
-
-        else
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -39,9 +33,7 @@ public class ElementList : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("ElementList Destroyed");
-
-        Instance = null;
+        // Instance = null;
     }
 
 

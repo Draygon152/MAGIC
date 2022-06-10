@@ -1,10 +1,13 @@
 // Written by Kevin Chao
 
 using UnityEngine;
+using UnityEngine.UI;
 
 // Base class for all menus, Singleton
 public abstract class Menu<T> : Menu where T : Menu<T>
 {
+    [SerializeField] private Button defaultSelected;
+
     // Property with public read-access, private write-access
     // Properties are treated like fields but can have behaviors execute on read/write
     // Static keyword means this property belongs to the Menu class rather than a specific
@@ -17,12 +20,16 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     }
 
 
+
     // Awake() and OnDestroy() are protected to still allow for their use by child classes,
     // virtual to allow for overloading and specifying functionality in children
     protected virtual void Awake()
     {
         // Set Instance to refer to current instance
         Instance = (T)this;
+
+        if (defaultSelected != null)
+            defaultSelected.Select();
     }
 
 
@@ -37,8 +44,9 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     {
         // If an instance of this menu does not already exist, create one
         if (Instance == null)
+        {
             MenuManager.Instance.CreateMenuInstance<T>();
-            
+        }   
 
         // If an instance of this menu exists, enable it
         else
@@ -52,7 +60,7 @@ public abstract class Menu<T> : Menu where T : Menu<T>
     {
         if (Instance == null)
         {
-            Debug.LogErrorFormat("Cannot close {0}, Instance is null", typeof(T));
+            Debug.LogErrorFormat($"Cannot close {typeof(T)}, Instance is null");
             return;
         }
 

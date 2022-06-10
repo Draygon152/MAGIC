@@ -1,4 +1,4 @@
-// Written by Liz
+// Written by Lizbeth
 // Modified by Kevin Chao and Lawson
 
 using UnityEngine;
@@ -14,25 +14,31 @@ public abstract class HealthManager : MonoBehaviour
     protected virtual void Start()
     {
         currentHealth = maxHealth;
-
-        Debug.Log($"Current {gameObject.name} Health: {currentHealth}");
     }
 
 
-    virtual public void GainHealth(int healAmount)
+    public virtual void GainHealth(int healAmount)
     {
         currentHealth += healAmount;
 
         if (currentHealth > maxHealth)
+        {
             currentHealth = maxHealth;
+        }
     }
 
 
     public abstract void LoseHealth(int damageAmount);
 
 
-    //The following functions are for checking if the health of an object is
-    //above/below a certain threshold
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+
+    // The following functions are for checking if the health of an object is
+    // above/below a certain threshold
     public bool HealthAboveAmountThreshold(int threshold)
     {
         return currentHealth > threshold;

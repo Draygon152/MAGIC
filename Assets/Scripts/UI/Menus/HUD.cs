@@ -1,60 +1,16 @@
 // Written by Kevin Chao
 // Modified by Angel and Lawson
 
-using System;
 using TMPro;
 using UnityEngine;
 
 public class HUD : Menu<HUD>
 {
-
-    [SerializeField] private HealthBar player1HealthBar;
-    [SerializeField] private HealthBar player2HealthBar;
-    [SerializeField] private SelectedSpellUI player1SpellUI;
-    [SerializeField] private SelectedSpellUI player2SpellUI;
     [SerializeField] private TextMeshProUGUI enemyCounter;
 
 
-
-
-    public void SetP1CurHealth(int newHealth)
+    public void SetEnemyCounter(int enemiesRemaining)
     {
-        player1HealthBar.SetCurHealth(newHealth);
-    }
-
-
-    public void SetP1MaxHealth(int maxHealth)
-    {
-        player1HealthBar.SetMaxHealth(maxHealth);
-    }
-
-
-    public void SetP2CurHealth(int newHealth)
-    {
-        player2HealthBar.SetCurHealth(newHealth);
-    }
-
-
-    public void SetP2MaxHealth(int maxHealth)
-    {
-        player2HealthBar.SetMaxHealth(maxHealth);
-    }
-
-
-    public void SetP1SpellCaster(MagicCasting caster)
-    {
-        player1SpellUI.InitializeSpellUI(caster);
-    }
-
-
-    public void SetP2SpellCaster(MagicCasting caster)
-    {
-        player2SpellUI.InitializeSpellUI(caster);
-    }
-
-
-    public void SetEnemyCouter(int enemiesRemaining)
-    {
-        enemyCounter.text = "Enemies Remaining: " + Convert.ToString(enemiesRemaining);
+        enemyCounter.text = $"Enemies Remaining: {enemiesRemaining}";
     }
 }

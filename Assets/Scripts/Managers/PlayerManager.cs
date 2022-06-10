@@ -1,28 +1,28 @@
 // Written by Lawson
-// Modified by Liz and Kevin Chao
+// Modified by Lizbeth and Kevin Chao
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 //This class will manage the players and their data
 public class PlayerManager : MonoBehaviour
 {
-    private const int NUMBER_OF_PLAYERS = 2; // Total number of players in the game
     public const int PLAYER_1 = 0; // array index of player 1
     public const int PLAYER_2 = 1; // array index of player 2
+
+    private int playerCount;
 
     private PlayerData[] playerData; // Simple array of length 2 to store the player data 
     private Player[] playerGameObject; // Simple array of length 2 to store references to the player game objects
 
-    //for spawning the players
+    // for spawning the players
     [SerializeField] private GameObject playerPrefab;  // The prefab for the player
     [SerializeField] private Transform playerSpawnPoint; // The transform for where to spawn the player
-    [SerializeField] private Vector3 spawnOffset = new Vector3(5, 0, 0); // The offset from the spawnPoint the players will spawn
-                                                                         // Player 2 spawns at playerSpawnPoint + spawnOffset
-                                                                         // Player 2 spawns at playerSpawnPoint - spawnOffset
+    [SerializeField] private Vector3[] spawnOffset;  // The offset from the spawnPoint the players will spawn
 
     // Make the player manager a Singleton
-    static public PlayerManager Instance
+    public static PlayerManager Instance
     {
         get;
         private set;
@@ -32,18 +32,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Player Manager Awake");
-
         // Set up Instance
         Instance = this;
-
-        // Initialize the player data SOs
-        playerData = new PlayerData[NUMBER_OF_PLAYERS];
-        playerData[PLAYER_1] = ScriptableObject.CreateInstance<PlayerData>(); // create SO instance for player 1
-        playerData[PLAYER_2] = ScriptableObject.CreateInstance<PlayerData>(); // create SO instance for player 2
-
-        // Initialize the player game objects array
-        playerGameObject = new Player[NUMBER_OF_PLAYERS];
     }
 
 
@@ -54,56 +44,56 @@ public class PlayerManager : MonoBehaviour
     }
 
 
+    public void AcceptPlayerData(PlayerData[] data)
+    {
+        //set player data
+        playerData = data;
+
+        //Set number of players
+        playerCount = playerData.Length;
+
+        // Initialize the player game objects array
+        playerGameObject = new Player[playerCount];
+    }
+
+
+    public int GetNumberOfPlayers()
+    {
+        return playerCount;
+    }
+
+
     // Spawn the players in the game, return the number of players spawned
     public int SpawnPlayers()
     {
-        int playerCount = 0; //Counts up the number of players spawned
-
-        // Spawn both players
-        playerGameObject[PLAYER_1] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_1, pairWithDevice: playerData[PLAYER_1].GetInputDevice()).GetComponent<Player>();
-        playerGameObject[PLAYER_2] = PlayerInput.Instantiate(playerPrefab, playerIndex: PLAYER_2, pairWithDevice: playerData[PLAYER_2].GetInputDevice()).GetComponent<Player>();
-        
-        // Move players to their spawn point
-        // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
-        // player index and pairWithDevice in PlayerInput) I could not pass in the spawn point transform to spawn
-        // the players at the right location. As a result they must be moved manually.
-        playerGameObject[PLAYER_1].transform.position = playerSpawnPoint.position + spawnOffset;
-        playerGameObject[PLAYER_1].transform.rotation = playerSpawnPoint.rotation;
-        playerGameObject[PLAYER_2].transform.position = playerSpawnPoint.position - spawnOffset;
-        playerGameObject[PLAYER_2].transform.rotation = playerSpawnPoint.rotation;
-
-        // Set player's elemental affinity, assign delegates to player's health bar
-        playerGameObject[PLAYER_1].SetElement(playerData[PLAYER_1].GetElement());
-        playerGameObject[PLAYER_2].SetElement(playerData[PLAYER_2].GetElement());
-
-        // Set player identification numbers
-        playerGameObject[PLAYER_1].PlayerNumber = PLAYER_1;
-        playerGameObject[PLAYER_2].PlayerNumber = PLAYER_2;
-
-        Debug.Log($"Player one device {playerData[PLAYER_1].GetInputDevice()}");
-        Debug.Log($"Player two device {playerData[PLAYER_2].GetInputDevice()}");
-
-        //Check for unused players
-        if (playerData[PLAYER_2].GetInputDevice() == null)
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
         {
-            playerGameObject[PLAYER_2].gameObject.SetActive(false);
+            // Spawn both players
+            playerGameObject[playerIndex] = PlayerInput.Instantiate(playerPrefab, playerIndex: playerIndex, pairWithDevice: playerData[playerIndex].PairedDevice).GetComponent<Player>();
+            
+            // Move players to their spawn point
+            // Note: Because of the use of PlayerInput.Instantiate instead of GameObject.Instantiate (for setting the 
+            // player index and pairWithDevice in PlayerInput) I could not pass in the spawn point transform to spawn
+            // the players at the right location. As a result they must be moved manually.
+            playerGameObject[playerIndex].GetComponent<NavMeshAgent>().Warp(playerSpawnPoint.position + spawnOffset[playerIndex]); //The weird function call is to make
+                                                                                                                                   //sure the AI player's can find the NavMesh
+            // playerGameObject[playerIndex].transform.position = playerSpawnPoint.position + spawnOffset[playerIndex];
+            playerGameObject[playerIndex].transform.rotation = playerSpawnPoint.rotation;
 
-            //keep player one no matter what, so there is at least one player in the game
-            playerCount++;
-        }
-        else
-        {
-            //Count player two
-            playerCount++;
+            // Set player's elemental affinity, assign delegates to player's health bar
+            playerGameObject[playerIndex].SetElement(playerData[playerIndex].ElementalAffinity);
 
-            if (playerData[PLAYER_1].GetInputDevice() == null)
+            // Set player identification numbers
+            playerGameObject[playerIndex].PlayerNumber = playerIndex;
+
+            // Activate the AI for AI players
+            if (playerData[playerIndex].PairedDevice == null)
             {
-                playerGameObject[PLAYER_1].gameObject.SetActive(false);
-            }
-            else
-            {
-                //count player one
-                playerCount++;
+                playerGameObject[playerIndex].GetComponent<CoopAIBehavior>().enabled = true;
+                playerGameObject[playerIndex].GetComponent<NavMeshAgent>().enabled = true;
+
+                // disable manual controls
+                playerGameObject[playerIndex].GetComponent<PlayerInput>().enabled = false;
             }
         }
 
@@ -111,21 +101,10 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    // A function to tell PlayerManager when the HUD is ready to accept player data
-    public void InitializeHUD()
-    {
-        // Set health bars
-        playerGameObject[PLAYER_1].SetHealthBarDelegates(HUD.Instance.SetP1CurHealth, HUD.Instance.SetP1MaxHealth);
-        playerGameObject[PLAYER_2].SetHealthBarDelegates(HUD.Instance.SetP2CurHealth, HUD.Instance.SetP2MaxHealth);
-
-        // Displays player's base spell
-        HUD.Instance.SetP1SpellCaster(playerGameObject[PLAYER_1].GetCaster());
-        HUD.Instance.SetP2SpellCaster(playerGameObject[PLAYER_2].GetCaster());
-    }
-
-
     public Player GetPlayer(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerGameObject[player];
     }
 
@@ -133,6 +112,8 @@ public class PlayerManager : MonoBehaviour
     // A getter function for retrieving the player data
     public PlayerData GetPlayerData(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerData[player];
     }
 
@@ -141,6 +122,8 @@ public class PlayerManager : MonoBehaviour
     // To access Player 1, pass 0. To access Player 2, pass 1.
     public Transform GetPlayerLocation(int player)
     {
+        Debug.Assert(player >= 0 && player < playerCount, $"Invalid player number: {player}");
+
         return playerGameObject[player].transform;
     }
 
@@ -156,8 +139,10 @@ public class PlayerManager : MonoBehaviour
     public void ResetPlayers()
     {
         // Destroy players
-        Destroy(playerGameObject[PLAYER_1].gameObject);
-        Destroy(playerGameObject[PLAYER_2].gameObject);
+        for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+        {
+            Destroy(playerGameObject[playerIndex].gameObject);
+        }
     }
 
 
@@ -183,5 +168,56 @@ public class PlayerManager : MonoBehaviour
         }
 
         return deadPlayer;
+    }
+}
+
+
+
+public class PlayerData
+{
+    public Element ElementalAffinity
+    {
+        get;
+        private set;
+    }
+
+    public InputDevice PairedDevice
+    {
+        get;
+        private set;
+    }
+
+    public bool AI
+    {
+        get;
+        private set;
+    }
+
+
+
+    public PlayerData()
+    {
+        ElementalAffinity = null;
+        PairedDevice = null;
+        AI = false;
+    }
+
+
+    // Explicit setters to reduce likelihood of accidentally overwriting fields
+    public void SetElementalAffinity(Element newAffinity)
+    {
+        ElementalAffinity = newAffinity;
+    }
+
+
+    public void SetPairedDevice(InputDevice newDevice)
+    {
+        PairedDevice = newDevice;
+    }
+
+
+    public void SetAIStatus(bool newAIStatus)
+    {
+        AI = newAIStatus;
     }
 }

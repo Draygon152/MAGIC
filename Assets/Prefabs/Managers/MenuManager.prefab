@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4068057553741342568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4905281, y: -0.42882192, z: -0.94619775}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,10 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuPrefab: {fileID: 1453953993, guid: e7a1d7b5033b0f14493ddd61a7f13c7d, type: 3}
   optionsMenuPrefab: {fileID: 3760760129832242299, guid: 6b459b0e52609d245bdc92206160f1cc, type: 3}
-  videoOptionsPrefab: {fileID: 0}
-  soundOptionsPrefab: {fileID: 0}
-  lobbyMenuPrefab: {fileID: 1430357344395387687, guid: ecb04d465a223cc478cb7376f629b9cd, type: 3}
+  videoOptionsPrefab: {fileID: 4983270238131247502, guid: 847373f52e58e2d44bd2c633571e5f7f, type: 3}
+  soundOptionsPrefab: {fileID: 2613748719393926783, guid: 1b3acab1ecaf9824cb5055daab551996, type: 3}
+  singleplayerLobbyPrefab: {fileID: 5299562228449419651, guid: 0d30732db4b2eaf41bdbcce9cc578bdf, type: 3}
+  multiplayerLobbyPrefab: {fileID: 1430357344395387687, guid: ecb04d465a223cc478cb7376f629b9cd, type: 3}
   hudPrefab: {fileID: 5071869309287445843, guid: 07d6bce025642ca4a8d2d5b38638fedd, type: 3}
-  pauseMenuPrefab: {fileID: 0}
+  pauseMenuPrefab: {fileID: 3631275487555975023, guid: c4c589cf1d5aaa543be570e40e5ed49c, type: 3}
   victoryMenuPrefab: {fileID: 7165132019708756955, guid: 0d8e16afe900c12478d9f3c2ec2d74f3, type: 3}
   defeatMenuPrefab: {fileID: 8775308228494136343, guid: f6ef7c11496392c419060d7c7086bfa3, type: 3}

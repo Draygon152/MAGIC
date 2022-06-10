@@ -1,4 +1,4 @@
-// Written by Marc
+// Written by Marc Hagoriles
 // Modified by Kevin Chao and Lawson
 
 using UnityEngine;
@@ -18,25 +18,20 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("PlayerController Awake");
-
         gameOver = false;
 
         // set the reference to the PlayerInput component
         playerControls = this.GetComponent<PlayerInput>();
 
-        for (int i = 0; i < Gamepad.all.Count; i++)
-        {
-            Debug.Log(Gamepad.all[i].name);
-        }
-
         EventManager.Instance.Subscribe(EventTypes.Events.GameOver, DisableControls);
+        EventManager.Instance.Subscribe(EventTypes.Events.GameUnpaused, OnMenuPauseToggle);
     }
 
 
     private void OnDestroy()
     {
         EventManager.Instance.Unsubscribe(EventTypes.Events.GameOver, DisableControls);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.GameUnpaused, OnMenuPauseToggle);
     }
 
 
@@ -50,8 +45,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //Update the inputDirection vector only when the controls of
-    //the apporiate control scheme are changed
+    // Update the inputDirection vector only when the controls of
+    // the apporiate control scheme are changed
     private void OnMove(InputValue value)
     {
         // Gathers our input from WASD Keys, set in the Input Manager system in Unity.
@@ -73,7 +68,6 @@ public class PlayerController : MonoBehaviour
     {
         if (inputDirection != Vector3.zero)
         {
-
             // This is to have our W,S keys point upwards and downwards in Orthographic view; A,S keys point diagonal.
             Matrix4x4 matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
             Vector3 changedInputDirection = matrix.MultiplyPoint3x4(inputDirection);
@@ -94,5 +88,43 @@ public class PlayerController : MonoBehaviour
     private void DisableControls()
     {
         gameOver = true;
+    }
+
+
+    private void OnRuntimePauseToggle()
+    {
+        if (PauseMenu.Instance == null)
+        {
+            playerControls.SwitchCurrentActionMap("UI");
+            Time.timeScale = 0;
+            PauseMenu.Open();
+        }
+    }
+
+
+    private void OnMenuPauseToggle()
+    {
+        if (PauseMenu.Instance != null)
+        {
+            playerControls.SwitchCurrentActionMap("Gameplay");
+            Time.timeScale = 1;
+
+            if (VideoOptions.Instance != null)
+            {
+                VideoOptions.Close();
+            }
+
+            if (SoundOptions.Instance != null)
+            {
+                SoundOptions.Close();
+            }
+
+            if (OptionsMenu.Instance != null)
+            {
+                OptionsMenu.Close();
+            }
+
+            PauseMenu.Close();
+        }
     }
 }

@@ -54,8 +54,6 @@ public class CountdownTimer : MonoBehaviour
     // Async entry point
     public async void BeginCountDown()
     {
-        Debug.Log("Countdown Started");
-
         // Reset CountDownText to the length of the timer
         countDownText.text = $"{timerLength}";
 
@@ -70,17 +68,18 @@ public class CountdownTimer : MonoBehaviour
         {
             // Reset value of timeRemaining to length of timer
             for (timeRemaining = timerLength; timeRemaining > 0;)
+            {
                 await TimerTick(ctkn);
+            }
         }
 
         catch
         {
-            Debug.Log("Countdown Cancelled");
         }
 
-        if (timeRemaining == 0)
+        if (timeRemaining <= 0)
         {
-            Debug.Log("Countdown Finished");
+            countDownText.text = $"{timeRemaining}";
 
             EventManager.Instance.Notify(eventToNotify);
         }

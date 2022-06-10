@@ -1,18 +1,19 @@
 // Written by Angel
-// Modified by Kevin Chao
+// Modified by Kevin Chao and Lizbeth
 
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 public class BaseSpell : MonoBehaviour
 {
     [SerializeField] private SpellTemplate spellToCast;
     [SerializeField] private Player player;
     [SerializeField] private SpellEffects spellEffect;
+    [SerializeField] private EffectEvent effectCall;
 
-    private SphereCollider spellCollider;
+    private CapsuleCollider spellCollider;
     private Rigidbody spellBody;
     
 
@@ -28,19 +29,30 @@ public class BaseSpell : MonoBehaviour
         rotationOfCreation - A Quaternion providing the rotation of the spell
         playerNumber - The player number of the player who casted the spell
     */
-    static public void Instantiate(BaseSpell spellToCreate, Vector3 locationOfCreation, Quaternion rotationOfCreation, int playerNumber)
+    public static BaseSpell Instantiate(BaseSpell spellToCreate, Vector3 locationOfCreation, Quaternion rotationOfCreation, int playerNumber)
     {
-        //Create the spell
+        // Create the spell
         BaseSpell castedSpell = Instantiate(spellToCreate, locationOfCreation, rotationOfCreation);
 
-        //Set the player who cast the spell
-        castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
+        // If playerNumber is not null (-1):
+        if (playerNumber != -1)
+        {
+            // Set the player who cast the spell
+            castedSpell.player = PlayerManager.Instance.GetPlayer(playerNumber);
+        }
+        
+        if (castedSpell.spellToCast.self == true) // now aoe sticks to the player
+        {
+            castedSpell.transform.parent = castedSpell.player.transform;
+        }
+
+        return castedSpell;
     }
 
 
     private void Awake()
     {
-        spellCollider = GetComponent<SphereCollider>();
+        spellCollider = GetComponent<CapsuleCollider>();
         spellCollider.isTrigger = true;
         spellCollider.radius = spellToCast.radius;
 
@@ -48,7 +60,12 @@ public class BaseSpell : MonoBehaviour
         spellBody.isKinematic = true;
 
         // Destroy spell after certain time if it does not hit anything
-        StartCoroutine(SpellDuration(spellToCast.spellLifetime)); 
+        StartCoroutine(SpellDuration(spellToCast.spellLifetime));
+
+        if (spellToCast.expand == true)
+        {
+            StartCoroutine(Expansion(.5f));
+        }
     }
     
     
@@ -72,20 +89,55 @@ public class BaseSpell : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        // spellCall.Invoke(player, null, this);
-        spellEffect.BaseEffects(spellToCast.element, player, null, this);
+        effectCall.Invoke(player, null, this);
         Destroy(gameObject);
+    }
+
+
+    private IEnumerator Expansion(float time)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(time);
+            this.transform.localScale += new Vector3(1, 0, 1);
+        }
     }
 
 
     // TODO: Set the player number to the player that was collided with
     private void OnTriggerEnter(Collider collision)
     {
-        // Destroy the spell when it collides
-        Destroy(gameObject);
+        if (spellToCast.continuous == false)
+        {
+            // Destroy the spell when it collides
+            Destroy(gameObject);
 
-        // Apply spell effect at the collision's gameobject
-        Debug.Log($"Spell of element '{spellToCast.element}' collided");
-        spellEffect.BaseEffects(spellToCast.element, player, collision.gameObject, this);
+            // Apply spell effect at the collision's gameobject
+            effectCall.Invoke(player, collision.gameObject, this);
+        }
+        
+        else 
+        {
+            effectCall.Invoke(player, collision.gameObject, this);
+        }
+    }
+
+
+    public void EarlyCast() 
+    {
+        effectCall.Invoke(player, null, this);
+        Destroy(gameObject);
+    }
+
+
+    public bool IsPlayer()
+    {
+        bool isCasterPlayer = false;
+        if (player != null)
+        {
+            isCasterPlayer = true;
+        }
+
+        return isCasterPlayer;
     }
 }

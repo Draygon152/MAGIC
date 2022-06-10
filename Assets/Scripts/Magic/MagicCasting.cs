@@ -1,5 +1,5 @@
 // Written by Angel
-// Modified by Kevin Chao and Lawson
+// Modified by Kevin Chao, Lawson, and Lizbeth
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,21 +7,32 @@ using UnityEngine.InputSystem;
 public class MagicCasting : MonoBehaviour
 {
     [SerializeField] private Transform castLocation; // Location where the spell is cast from
-
-    private BaseSpell spellToCast;
+    [SerializeField]private BaseSpell spellToCast;
     private Element selectedElement;
 
     private bool casting = false; // Default state of casting magic is false
-    private float castCooldown;   // Default time between spellcasts. Need to replace with individual spell casting time, placeholder
+    private float castCooldown;   // Time between spellcasts
     private float timeSinceLastCast;
     private int playerNumber; // Stores player number so it can be referenced when casting a spell
+
+    private BaseSpell instantiatedSpell;
 
 
 
     private void Awake()
     {
-        // Set playerNumber
-        playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
+
+        if (this.gameObject.tag != "Player")
+        {
+            // Set playerNumber as null (-1)
+            playerNumber = -1;
+        }
+
+        else
+        {
+            // Set playerNumber
+            playerNumber = this.gameObject.GetComponent<PlayerInput>().playerIndex;
+        }
     }
 
 
@@ -54,16 +65,45 @@ public class MagicCasting : MonoBehaviour
     }
 
 
-    private void ChangeTransform()
+    public float GetSpellRange()
     {
-        if (spellToCast.GetSpell().spellSpeed == 0)
+        float range;
+
+        if (spellToCast.GetSpell().spellSpeed != 0)
         {
-            castLocation.localPosition = new Vector3(0, -0.5f, 0);
+            range = spellToCast.GetSpell().spellSpeed * spellToCast.GetSpell().spellLifetime;
         }
 
         else
         {
-            castLocation.localPosition = new Vector3(0, 0, 0);
+            range = -1.0f; // denoting a stationary spell;
+        }
+
+        return range;
+    }
+
+
+    private void ChangeTransform()
+    {
+        if (!casting)
+        {
+            if (spellToCast.GetSpell().spellSpeed == 0.0f)
+            {
+                castLocation.localPosition = new Vector3(0, -1, 0);
+            }
+
+            else
+            {
+                if (spellToCast.GetSpell().spellSpeed < 0.5f)
+                {
+                    castLocation.localPosition = new Vector3(0, 0, 1);
+                }
+
+                else
+                {
+                    castLocation.localPosition = new Vector3(0, 0, 0);
+                }
+            }
         }
     }
 
@@ -71,7 +111,7 @@ public class MagicCasting : MonoBehaviour
     private void CastCurrentSpell()
     {
         // Create spell at castLocation
-        BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
+        instantiatedSpell = BaseSpell.Instantiate(spellToCast, castLocation.position, castLocation.rotation, playerNumber);
     }
 
 
@@ -81,20 +121,16 @@ public class MagicCasting : MonoBehaviour
     }
 
 
-    // TODO: Add code that will update the correct player's HUD text with new spell name
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.GetComponent<Collider>().tag == "pickups")
+        if (this.gameObject.tag == "Player" && collision.GetComponent<Collider>().tag == "pickups")
         {
-            Debug.Log($"Picking up SpellItem {collision.name}");
-
             spellToCast = collision.GetComponent<SpellItem>().GetSpell();
+            castCooldown = spellToCast.GetSpell().timeBetweenCasts;
 
-            if (playerNumber == PlayerManager.PLAYER_1)
-                HUD.Instance.SetP1SpellCaster(this);
-
-            else if (playerNumber == PlayerManager.PLAYER_2)
-                HUD.Instance.SetP2SpellCaster(this);
+            SelectedSpellUI playerSpellUI = this.gameObject.GetComponentInChildren<SelectedSpellUI>();
+            playerSpellUI.InitializeSpellUI(this);
+            playerSpellUI.ChangeSpellMaxCooldown(castCooldown);
         }
     }
 
@@ -111,5 +147,38 @@ public class MagicCasting : MonoBehaviour
             casting = true;
             CastCurrentSpell();
         }
+    }
+
+
+    public void EnemyCast()
+    {
+        if (!casting)
+        {
+            casting = true;
+            CastCurrentSpell();
+        }
+    }
+
+
+    private void OnActivate()
+    {
+        if (instantiatedSpell != null)
+        {
+            instantiatedSpell.EarlyCast();
+        }
+    }
+
+
+    // A simple function to allow an AI to cast spells
+    // There might be a better way to do this, but for I 
+    // am going with this becasue of time constraint
+    public void AIOnCast()
+    {
+        // pass on the function call to OnCast
+        // if any preprocessing needs to be done
+        // for an AI to cast a spell the it should
+        // be done here
+
+        OnCast();
     }
 }

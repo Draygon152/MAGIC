@@ -2,6 +2,7 @@
 // Modified by Kevin Chao
 
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -10,7 +11,9 @@ public class SpellItem : MonoBehaviour
     private SphereCollider pickUpCollider;
     private Rigidbody pickUpBody;
     private BaseSpell containedSpell;
-    
+
+    [SerializeField] TextMeshProUGUI m_Object;
+
 
 
     private void Awake()
@@ -27,8 +30,8 @@ public class SpellItem : MonoBehaviour
     private void Start()
     {
         containedSpell = SpellList.Instance.GetRandomSpell();
-
-        Debug.Log($"SPELL IN ITEM: {containedSpell}");
+        // containedSpell = SpellList.Instance.GetTestSpell();
+        m_Object.text = containedSpell.GetSpell().name;
     }
 
 

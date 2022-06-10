@@ -9,6 +9,7 @@ TagManager:
   - Object
   - Fire
   - pickups
+  - Crate
   layers:
   - Default
   - TransparentFX
@@ -20,9 +21,9 @@ TagManager:
   - Player
   - Pickups
   - Environment
-  - 
-  - 
-  - 
+  - Object
+  - Minimap Icons
+  - EnemySpell
   - 
   - 
   - 
